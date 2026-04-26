@@ -27,7 +27,7 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16, filter: 'blur(3px)' },
-  show:   { opacity: 1, y: 0,  filter: 'blur(0px)' },
+  show: { opacity: 1, y: 0, filter: 'blur(0px)' },
 };
 
 const headerVariants = {
@@ -66,6 +66,7 @@ export default function CentrosPage() {
       </div>
     );
   }
+
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
@@ -197,4 +198,5 @@ export default function CentrosPage() {
       <Footer />
     </APIProvider>
   );
+
 }

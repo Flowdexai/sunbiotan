@@ -56,16 +56,30 @@ interface SearchLocation {
 }
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-const VP = { once: true, amount: 0.08 };
+const VP = { once: false, amount: 0 };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 14, filter: 'blur(3px)' },
-  show:   { opacity: 1, y: 0,  filter: 'blur(0px)' },
+  show: { 
+    opacity: 1, 
+    y: 0, 
+    filter: 'blur(0px)', 
+    transition: { 
+      duration: 0.6, 
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
+    } 
+  },
+  exit: { 
+    opacity: 0, 
+    y: -14, 
+    filter: 'blur(3px)', 
+    transition: { duration: 0.4 } 
+  },
 };
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
+  show: { transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
 };
 
 export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout = false }: SidebarProps) {
@@ -250,12 +264,10 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
       {nearbyCenters.length > 0 && (
         <div>
           <motion.div
-            variants={fadeUp}
+            variants={stagger}
             initial="hidden"
-            whileInView="show"
-            viewport={VP}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="flex items-center gap-3 mb-5"
+            animate="show"
+            className="grid md:grid-cols-2 gap-5"
           >
             <div className="h-px w-8 bg-sunbiotan-400/50" />
             <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
@@ -352,7 +364,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={VP}
+            viewport={{ once: false, amount: 0 }}
             className="grid md:grid-cols-2 gap-5"
           >
             {regularCenters.map((center) => (
@@ -374,7 +386,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           initial="hidden"
           animate="show"
           transition={{ duration: 0.6, ease: EASE }}
-          className="text-center py-16"
+          className="flex items-center gap-3 mb-5"
         >
           <MapPin className="h-10 w-10 mx-auto text-sunbiotan-300 mb-4" strokeWidth={1} />
           <p className="font-display font-light text-xl text-sunbiotan-700">
@@ -403,11 +415,10 @@ function NearbyCard({
     <motion.div
       variants={fadeUp}
       onClick={onClick}
-      className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 border ${
-        isSelected
-          ? 'border-sunbiotan-500 bg-sunbiotan-50 shadow-lg shadow-sunbiotan-200/50'
-          : 'border-sunbiotan-200/60 bg-white hover:border-sunbiotan-300 hover:shadow-md hover:shadow-sunbiotan-100/40'
-      }`}
+      className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 border ${isSelected
+        ? 'border-sunbiotan-500 bg-sunbiotan-50 shadow-lg shadow-sunbiotan-200/50'
+        : 'border-sunbiotan-200/60 bg-white hover:border-sunbiotan-300 hover:shadow-md hover:shadow-sunbiotan-100/40'
+        }`}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-start gap-3">
@@ -481,11 +492,10 @@ function FeaturedCenterCard({
     <motion.div
       variants={fadeUp}
       onClick={onClick}
-      className={`rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden border ${
-        isSelected
-          ? 'border-sunbiotan-500 shadow-xl shadow-sunbiotan-200/50 scale-[1.01]'
-          : 'border-sunbiotan-200/60 hover:border-sunbiotan-400/60 hover:shadow-xl hover:shadow-sunbiotan-100/50'
-      }`}
+      className={`rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden border ${isSelected
+        ? 'border-sunbiotan-500 shadow-xl shadow-sunbiotan-200/50 scale-[1.01]'
+        : 'border-sunbiotan-200/60 hover:border-sunbiotan-400/60 hover:shadow-xl hover:shadow-sunbiotan-100/50'
+        }`}
     >
       {center.image_url && (
         <div className="relative w-full h-48 overflow-hidden">
@@ -580,11 +590,10 @@ function RegularCenterCard({
     <motion.div
       variants={fadeUp}
       onClick={onClick}
-      className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 border ${
-        isSelected
-          ? 'border-sunbiotan-500 bg-sunbiotan-50 shadow-lg shadow-sunbiotan-200/50'
-          : 'border-sunbiotan-200/60 bg-white hover:border-sunbiotan-300 hover:shadow-md hover:shadow-sunbiotan-100/30'
-      }`}
+      className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 border ${isSelected
+        ? 'border-sunbiotan-500 bg-sunbiotan-50 shadow-lg shadow-sunbiotan-200/50'
+        : 'border-sunbiotan-200/60 bg-white hover:border-sunbiotan-300 hover:shadow-md hover:shadow-sunbiotan-100/30'
+        }`}
     >
       <div className="flex items-start justify-between gap-2 mb-3">
         <h3 className="font-medium text-sm text-sunbiotan-900">{center.name}</h3>
@@ -624,11 +633,10 @@ function RegularCenterCard({
       </div>
 
       <button
-        className={`w-full mt-4 py-2 text-[10px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 ${
-          isSelected
-            ? 'bg-white text-sunbiotan-700 hover:bg-sunbiotan-100 border border-sunbiotan-300'
-            : 'bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]'
-        }`}
+        className={`w-full mt-4 py-2 text-[10px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 ${isSelected
+          ? 'bg-white text-sunbiotan-700 hover:bg-sunbiotan-100 border border-sunbiotan-300'
+          : 'bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]'
+          }`}
         onClick={(e) => { e.stopPropagation(); onClick(); }}
       >
         Ver no mapa

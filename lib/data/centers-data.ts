@@ -1,44 +1,67 @@
 // lib/data/centers-data.ts
-
-import centersJson from '@/data/centers.json';
+import { supabase } from '@/lib/supabase/client';
 import { Center } from '@/types/center';
 
-// Simula delay de API (para que se sienta más real)
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
 export async function getCenters(): Promise<Center[]> {
-  await delay(300);
-  return centersJson as Center[];
+  const { data, error } = await supabase
+    .from('centers')
+    .select('*')
+    .eq('active', true)
+    .order('featured', { ascending: false })
+    .order('name');
+
+  if (error) {
+    console.error('Error loading centers:', error);
+    return [];
+  }
+
+  return data || [];
 }
 
 export async function getCenterById(id: string): Promise<Center | null> {
-  await delay(200);
-  const center = centersJson.find((c) => c.id === id);
-  return center ? (center as Center) : null;
-}
+  const { data, error } = await supabase
+    .from('centers')
+    .select('*')
+    .eq('id', id)
+    .single();
 
-export async function getCentersByCity(city: string): Promise<Center[]> {
-  await delay(300);
-  return centersJson.filter((c) => c.city === city) as Center[];
+  if (error) return null;
+  return data;
 }
 
 export async function getFeaturedCenters(): Promise<Center[]> {
-  await delay(300);
-  return centersJson.filter((c) => c.featured) as Center[];
+  const { data, error } = await supabase
+    .from('centers')
+    .select('*')
+    .eq('active', true)
+    .eq('featured', true)
+    .order('name');
+
+  if (error) return [];
+  return data || [];
 }
 
 export async function searchCenters(query: string): Promise<Center[]> {
-  await delay(300);
-  const lowerQuery = query.toLowerCase();
-  return centersJson.filter(
-    (c) =>
-      c.name.toLowerCase().includes(lowerQuery) ||
-      c.city.toLowerCase().includes(lowerQuery) ||
-      c.address.toLowerCase().includes(lowerQuery)
-  ) as Center[];
+  const { data, error } = await supabase
+    .from('centers')
+    .select('*')
+    .eq('active', true)
+    .or(`name.ilike.%${query}%,city.ilike.%${query}%`)
+    .order('featured', { ascending: false });
+
+  if (error) return [];
+  return data || [];
 }
 
-export function getAllCities(): string[] {
-  const cities = centersJson.map((c) => c.city);
+export async function getAllCities(): Promise<string[]> {
+  const { data, error } = await supabase
+    .from('centers')
+    .select('city')
+    .eq('active', true);
+
+  if (error) return [];
+
+  const cities = data.map((c: { city: string }) => c.city);
   return Array.from(new Set(cities)).sort();
 }
+
