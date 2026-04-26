@@ -104,4 +104,11 @@ export function Footer() {
           <p className="text-[11px] text-sunbiotan-500/35 tracking-wider font-light">
             © {new Date().getFullYear()} Sunbiotan. Todos os direitos reservados.
           </p>
-          <p className="text-[11px] text-
+          <p className="text-[11px] text-sunbiotan-500/25 tracking-wide font-light italic">
+            Bronzeado natural. Resultados profissionais.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}

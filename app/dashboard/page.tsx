@@ -178,4 +178,26 @@ export default function DashboardPage() {
                                 </span>
                             )}
                         </p>
-         
+                        <p className="text-xs text-sunbiotan-500 mt-1">Gerir aprovações</p>
+                    </a>
+                    <a
+                        href="/dashboard/produtos"
+                        className="bg-white rounded-xl border border-sunbiotan-100 p-5 hover:border-sunbiotan-300 hover:shadow-md transition-all group"
+                    >
+                        <Package className="h-5 w-5 text-sunbiotan-500 mb-3 group-hover:scale-110 transition-transform" />
+                        <p className="text-sm font-medium text-sunbiotan-800">Gerir Produtos</p>
+                        <p className="text-xs text-sunbiotan-500 mt-1">Catálogo de produtos</p>
+                    </a>
+                    <a
+                        href="/dashboard/recursos"
+                        className="bg-white rounded-xl border border-sunbiotan-100 p-5 hover:border-sunbiotan-300 hover:shadow-md transition-all group"
+                    >
+                        <FolderOpen className="h-5 w-5 text-sunbiotan-500 mb-3 group-hover:scale-110 transition-transform" />
+                        <p className="text-sm font-medium text-sunbiotan-800">Gerir Recursos</p>
+                        <p className="text-xs text-sunbiotan-500 mt-1">Materiais do portal de parceiros</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    );
+}

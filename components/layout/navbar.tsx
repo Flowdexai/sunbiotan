@@ -126,4 +126,43 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
             className="fixed top-16 left-0 right-0 z-40 bg-[#1a130a]/96 backdrop-blur-2xl border-b border-sunbiotan-800/30 shadow-2xl"
           >
             <div className="container mx-auto px-6 py-8 flex flex-col gap-5">
-    
+              {links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-sm tracking-[0.2em] uppercase font-light text-sunbiotan-200/80 hover:text-sunbiotan-300 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <Link
+                href="/profissionais"
+                onClick={() => setMobileOpen(false)}
+                className="text-sm tracking-[0.2em] uppercase font-light text-sunbiotan-400/55 hover:text-sunbiotan-400 transition-colors"
+              >
+                Área Profissional
+              </Link>
+              <div className="flex flex-col gap-3 mt-2">
+                <Link
+                  href="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="inline-flex items-center justify-center px-6 py-3 border border-sunbiotan-600/40 text-sunbiotan-300/70 text-xs tracking-[0.18em] uppercase font-light rounded-full"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/centros"
+                  onClick={() => setMobileOpen(false)}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 text-white text-xs tracking-[0.18em] uppercase font-medium rounded-full"
+                >
+                  Encontrar Centro
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

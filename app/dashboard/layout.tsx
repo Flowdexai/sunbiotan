@@ -160,4 +160,10 @@ export default function DashboardLayout({
                 </header>
 
                 {/* Page content */}
-                <
+                <main className="p-6">
+                    {children}
+                </main>
+            </div>
+        </div>
+    );
+}
