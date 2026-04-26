@@ -10,7 +10,6 @@ const links = [
   { label: 'Início', href: '/' },
   { label: 'Sobre', href: '/#sobre' },
   { label: 'Centros', href: '/#centros' },
-  { label: 'Profissionais', href: '/#profissionais' },
 ];
 
 interface NavbarProps {
@@ -68,27 +67,43 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
             </motion.a>
 
             <div className="hidden md:flex items-center gap-8">
-              {links.map((link) => {
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="relative text-[11px] tracking-[0.25em] uppercase font-medium text-sunbiotan-100/70 hover:text-sunbiotan-300 transition-colors duration-300 group"
-                  >
-                    {link.label}
-                    <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-sunbiotan-400 to-sunbiotan-500 group-hover:w-full transition-all duration-300" />
-                  </a>
-                );
-              })}
+              {links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="relative text-[11px] tracking-[0.25em] uppercase font-medium text-sunbiotan-100/70 hover:text-sunbiotan-300 transition-colors duration-300 group"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-sunbiotan-400 to-sunbiotan-500 group-hover:w-full transition-all duration-300" />
+                </a>
+              ))}
+              {/* Área Profissional — discreto */}
+              <Link
+                href="/profissionais"
+                className="relative text-[11px] tracking-[0.25em] uppercase font-light text-sunbiotan-400/50 hover:text-sunbiotan-400 transition-colors duration-300 group"
+              >
+                Profissionais
+                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-sunbiotan-600/50 group-hover:w-full transition-all duration-300" />
+              </Link>
             </div>
 
-            <Link
-              href="/centros"
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[11px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-sunbiotan-500/25 hover:scale-105 group"
-            >
-              Encontrar Centro
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            <div className="hidden md:flex items-center gap-3">
+              {/* Login — ghost discreto */}
+              <Link
+                href="/login"
+                className="inline-flex items-center px-4 py-2 border border-sunbiotan-600/35 text-sunbiotan-300/65 hover:border-sunbiotan-500/55 hover:text-sunbiotan-200 text-[11px] tracking-[0.18em] uppercase font-light rounded-full transition-all duration-300 hover:bg-white/[0.03]"
+              >
+                Login
+              </Link>
+              {/* Encontrar Centro — primario */}
+              <Link
+                href="/centros"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[11px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-sunbiotan-500/25 hover:scale-105 group"
+              >
+                Encontrar Centro
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </div>
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -111,29 +126,4 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
             className="fixed top-16 left-0 right-0 z-40 bg-[#1a130a]/96 backdrop-blur-2xl border-b border-sunbiotan-800/30 shadow-2xl"
           >
             <div className="container mx-auto px-6 py-8 flex flex-col gap-5">
-              {links.map((link) => {
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="text-sm tracking-[0.2em] uppercase font-light text-sunbiotan-200/80 hover:text-sunbiotan-300 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                );
-              })}
-              <Link
-                href="/centros"
-                onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 mt-2 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 text-white text-xs tracking-[0.18em] uppercase font-medium rounded-full"
-              >
-                Encontrar Centro
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
-  );
-}
+    

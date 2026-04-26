@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
-import { MapPin, Users, Package, TrendingUp } from 'lucide-react';
+import { MapPin, Users, Package, TrendingUp, FolderOpen } from 'lucide-react';
 
 interface Stats {
     totalCenters: number;
@@ -11,6 +11,8 @@ interface Stats {
     featuredCenters: number;
     totalProfessionals: number;
     pendingProfessionals: number;
+    totalResources: number;
+    activeResources: number;
 }
 
 export default function DashboardPage() {
@@ -20,6 +22,8 @@ export default function DashboardPage() {
         featuredCenters: 0,
         totalProfessionals: 0,
         pendingProfessionals: 0,
+        totalResources: 0,
+        activeResources: 0,
     });
     const [loading, setLoading] = useState(true);
     const supabase = createBrowserClient(
@@ -35,12 +39,16 @@ export default function DashboardPage() {
                 { count: featuredCenters },
                 { count: totalProfessionals },
                 { count: pendingProfessionals },
+                { count: totalResources },
+                { count: activeResources },
             ] = await Promise.all([
                 supabase.from('centers').select('*', { count: 'exact', head: true }),
                 supabase.from('centers').select('*', { count: 'exact', head: true }).eq('active', true),
                 supabase.from('centers').select('*', { count: 'exact', head: true }).eq('featured', true),
                 supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'professional'),
                 supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'professional').eq('approved', false),
+                supabase.from('resources').select('*', { count: 'exact', head: true }),
+                supabase.from('resources').select('*', { count: 'exact', head: true }).eq('active', true),
             ]);
 
             setStats({
@@ -49,6 +57,8 @@ export default function DashboardPage() {
                 featuredCenters: featuredCenters || 0,
                 totalProfessionals: totalProfessionals || 0,
                 pendingProfessionals: pendingProfessionals || 0,
+                totalResources: totalResources || 0,
+                activeResources: activeResources || 0,
             });
 
             setLoading(false);
@@ -85,6 +95,13 @@ export default function DashboardPage() {
             sub: 'Em breve',
             icon: Package,
             color: 'from-sunbiotan-800 to-sunbiotan-900',
+        },
+        {
+            label: 'Recursos',
+            value: stats.totalResources,
+            sub: `${stats.activeResources} ativos`,
+            icon: FolderOpen,
+            color: 'from-sunbiotan-400 to-sunbiotan-500',
         },
     ];
 
@@ -138,7 +155,7 @@ export default function DashboardPage() {
                 <h2 className="text-lg font-light text-sunbiotan-900 mb-4">
                     Ações Rápidas
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <a
                         href="/dashboard/centros/nuevo"
                         className="bg-white rounded-xl border border-sunbiotan-100 p-5 hover:border-sunbiotan-300 hover:shadow-md transition-all group"
@@ -161,18 +178,4 @@ export default function DashboardPage() {
                                 </span>
                             )}
                         </p>
-                        <p className="text-xs text-sunbiotan-500 mt-1">Gerir aprovações</p>
-                    </a>
-                    <a
-                        href="/dashboard/produtos"
-                        className="bg-white rounded-xl border border-sunbiotan-100 p-5 hover:border-sunbiotan-300 hover:shadow-md transition-all group"
-                    >
-                        <Package className="h-5 w-5 text-sunbiotan-500 mb-3 group-hover:scale-110 transition-transform" />
-                        <p className="text-sm font-medium text-sunbiotan-800">Gerir Produtos</p>
-                        <p className="text-xs text-sunbiotan-500 mt-1">Catálogo de produtos</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-    );
-}
+         

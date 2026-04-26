@@ -1,6 +1,12 @@
+import Link from 'next/link';
 import { Globe, Camera, Mail, Phone, MapPin } from 'lucide-react';
 
-const navLinks = ['Início', 'Sobre nós', 'Centros', 'Profissionais', 'Contacto'];
+const navLinks = [
+  { label: 'Início', href: '/' },
+  { label: 'Sobre nós', href: '/#sobre' },
+  { label: 'Centros', href: '/centros' },
+  { label: 'Área Profissional', href: '/profissionais' },
+];
 
 export function Footer() {
   return (
@@ -54,13 +60,13 @@ export function Footer() {
             </p>
             <ul className="space-y-3">
               {navLinks.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
                     className="text-sm text-sunbiotan-400/50 hover:text-sunbiotan-300 font-light transition-colors duration-300"
                   >
-                    {link}
-                  </a>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -98,11 +104,4 @@ export function Footer() {
           <p className="text-[11px] text-sunbiotan-500/35 tracking-wider font-light">
             © {new Date().getFullYear()} Sunbiotan. Todos os direitos reservados.
           </p>
-          <p className="text-[11px] text-sunbiotan-500/25 tracking-wide font-light italic">
-            Bronzeado natural. Resultados profissionais.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-}
+          <p className="text-[11px] text-

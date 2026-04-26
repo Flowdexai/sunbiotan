@@ -11,6 +11,7 @@ import {
     MapPin,
     Users,
     Package,
+    FolderOpen,
     LogOut,
     Menu,
     X,
@@ -38,6 +39,11 @@ const navItems = [
         label: 'Produtos',
         href: '/dashboard/produtos',
         icon: Package,
+    },
+    {
+        label: 'Recursos',
+        href: '/dashboard/recursos',
+        icon: FolderOpen,
     },
 ];
 
@@ -154,10 +160,4 @@ export default function DashboardLayout({
                 </header>
 
                 {/* Page content */}
-                <main className="p-6">
-                    {children}
-                </main>
-            </div>
-        </div>
-    );
-}
+                <
