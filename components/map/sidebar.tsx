@@ -60,20 +60,20 @@ const VP = { once: false, amount: 0 };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 14, filter: 'blur(3px)' },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    filter: 'blur(0px)', 
-    transition: { 
-      duration: 0.6, 
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.6,
       ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
-    } 
+    }
   },
-  exit: { 
-    opacity: 0, 
-    y: -14, 
-    filter: 'blur(3px)', 
-    transition: { duration: 0.4 } 
+  exit: {
+    opacity: 0,
+    y: -14,
+    filter: 'blur(3px)',
+    transition: { duration: 0.4 }
   },
 };
 
@@ -240,6 +240,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         {locationError && (
           <p className="text-xs text-red-500 text-center tracking-wide">{locationError}</p>
         )}
+
 
         {searchLocation && (
           <div className="flex items-center justify-between bg-sunbiotan-50 border border-sunbiotan-200/60 rounded-full px-4 py-2.5">
