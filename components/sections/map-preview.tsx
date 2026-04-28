@@ -48,7 +48,7 @@ export function MapPreview() {
             </h2>
             <p className="text-sunbiotan-700 text-base font-light tracking-wide max-w-md mx-auto">
               Disponível exclusivamente em salões de beleza autorizados.
-              Mais de 50 centros certificados em Portugal e Espanha.
+              Mais de 80 centros certificados em Portugal e Espanha.
             </p>
           </motion.div>
 
@@ -87,7 +87,7 @@ export function MapPreview() {
               <div className="flex items-center gap-2 bg-white/75 backdrop-blur-sm px-4 py-2 rounded-full border border-sunbiotan-200/60 shadow-sm">
                 <MapPin className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
                 <p className="text-[11px] tracking-[0.18em] uppercase text-sunbiotan-700/80 font-medium">
-                  Mapa interactivo disponível em breve
+                  Mapa interactivo disponível
                 </p>
               </div>
             </div>
@@ -102,7 +102,7 @@ export function MapPreview() {
             className="flex justify-center"
           >
             <a
-              href="mailto:info@sunbiotan.pt"
+              href="/centros"
               className="group inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[11px] tracking-[0.2em] uppercase font-medium rounded-full transition-all duration-300 shadow-xl shadow-sunbiotan-400/20 hover:scale-105"
             >
               Encontrar um Centro

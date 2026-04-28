@@ -89,7 +89,7 @@ export function CtaProfessionals() {
             </div>
 
             <motion.a
-              href="mailto:parceiros@sunbiotan.pt"
+              href="/profissionais"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VP}

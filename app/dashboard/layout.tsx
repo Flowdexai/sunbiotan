@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { createBrowserClient } from '@supabase/ssr';
 import Image from 'next/image';
 import {
@@ -54,14 +54,13 @@ export default function DashboardLayout({
 }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const pathname = usePathname();
-    const router = useRouter();
     const supabase = createBrowserClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
     );
     const handleLogout = async () => {
         await supabase.auth.signOut();
-        router.push('/login');
+        window.location.href = '/login';
     };
 
     return (

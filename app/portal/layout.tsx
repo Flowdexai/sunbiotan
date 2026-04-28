@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { createBrowserClient } from '@supabase/ssr';
 import {
@@ -47,8 +47,6 @@ export default function PortalLayout({
 }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const pathname = usePathname();
-    const router = useRouter();
-
     const supabase = createBrowserClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -56,7 +54,7 @@ export default function PortalLayout({
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
-        router.push('/login');
+        window.location.href = '/login';
     };
 
     return (
