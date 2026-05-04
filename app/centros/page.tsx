@@ -67,11 +67,9 @@ export default function CentrosPage() {
     );
   }
 
-
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>
       <Navbar forceOpaque />
-
       <main className="relative bg-sunbiotan-50 min-h-screen pt-20">
         {/* Decorative layer — overflow-hidden aquí no afecta al sticky del mapa */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">

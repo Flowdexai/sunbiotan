@@ -6,7 +6,6 @@ import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Loader2 } from 'lucide-react';
-import { FileUpload } from '@/components/dashboard/file-upload';
 
 interface ResourceForm {
   title: string;
@@ -15,7 +14,7 @@ interface ResourceForm {
   url: string;
   thumbnail_url: string;
   category: string;
-  order_index: string;
+  order_index: number;
   active: boolean;
 }
 
@@ -26,22 +25,9 @@ const initialForm: ResourceForm = {
   url: '',
   thumbnail_url: '',
   category: 'formacao',
-  order_index: '0',
+  order_index: 0,
   active: true,
 };
-
-const typeOptions = [
-  { value: 'video', label: 'Vídeo' },
-  { value: 'image', label: 'Imagem' },
-  { value: 'document', label: 'Documento' },
-  { value: 'logo', label: 'Logo' },
-];
-
-const categoryOptions = [
-  { value: 'formacao', label: 'Formação' },
-  { value: 'marketing', label: 'Marketing' },
-  { value: 'marca', label: 'Marca' },
-];
 
 export default function NovoRecursoPage() {
   const [form, setForm] = useState<ResourceForm>(initialForm);
@@ -70,31 +56,19 @@ export default function NovoRecursoPage() {
     setLoading(true);
     setError('');
 
-    if (!form.title.trim()) {
-      setError('O título é obrigatório.');
-      setLoading(false);
-      return;
-    }
-
-    if (!form.url.trim()) {
-      setError('O URL é obrigatório.');
-      setLoading(false);
-      return;
-    }
-
-    const { error: supabaseError } = await supabase.from('resources').insert({
-      title: form.title.trim(),
-      description: form.description.trim() || null,
+    const { error } = await supabase.from('resources').insert({
+      title: form.title,
+      description: form.description || null,
       type: form.type,
-      url: form.url.trim(),
-      thumbnail_url: form.thumbnail_url.trim() || null,
+      url: form.url,
+      thumbnail_url: form.thumbnail_url || null,
       category: form.category,
-      order_index: parseInt(form.order_index) || 0,
+      order_index: form.order_index,
       active: form.active,
     });
 
-    if (supabaseError) {
-      setError(supabaseError.message);
+    if (error) {
+      setError('Erro ao criar recurso. Tente novamente.');
       setLoading(false);
       return;
     }
@@ -103,7 +77,8 @@ export default function NovoRecursoPage() {
   };
 
   return (
-    <div className="max-w-2xl space-y-6">
+    <div className="space-y-6 max-w-2xl">
+      {/* Header */}
       <div className="flex items-center gap-4">
         <Link
           href="/dashboard/recursos"
@@ -112,175 +87,188 @@ export default function NovoRecursoPage() {
           <ArrowLeft className="h-4 w-4 text-sunbiotan-600" />
         </Link>
         <div>
-          <h1 className="font-display font-light text-3xl text-sunbiotan-900">Novo Recurso</h1>
-          <p className="text-sunbiotan-600 text-sm font-light">Adicionar material ao portal de parceiros</p>
+          <h1 className="font-display font-light text-3xl text-sunbiotan-900 mb-1">
+            Novo Recurso
+          </h1>
+          <p className="text-sunbiotan-600 text-sm font-light">
+            Adicionar material ao portal profissional
+          </p>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div className="bg-white rounded-xl border border-sunbiotan-100 p-6 space-y-4 shadow-sm">
-          <h2 className="text-sm font-medium text-sunbiotan-900">Informações gerais</h2>
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+          <p className="text-red-700 text-sm">{error}</p>
+        </div>
+      )}
 
-          <div className="space-y-1.5">
-            <label className="text-xs font-medium text-sunbiotan-700 uppercase tracking-wide">
-              Título <span className="text-red-400">*</span>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Info */}
+        <div className="bg-white rounded-xl border border-sunbiotan-100 p-6 shadow-sm space-y-5">
+          <h2 className="text-sm font-medium text-sunbiotan-900 tracking-[0.1em] uppercase">
+            Informação
+          </h2>
+
+          <div>
+            <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">
+              Título *
             </label>
             <input
               type="text"
               name="title"
               value={form.title}
               onChange={handleChange}
-              placeholder="Ex: Formação básica em bronzeamento"
-              className="w-full px-4 py-2.5 rounded-lg border border-sunbiotan-200 text-sm text-sunbiotan-900 placeholder:text-sunbiotan-300 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400 focus:border-transparent transition"
+              required
+              className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sm focus:outline-none focus:border-sunbiotan-500 transition-colors"
             />
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs font-medium text-sunbiotan-700 uppercase tracking-wide">Descrição</label>
+          <div>
+            <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">
+              Descrição
+            </label>
             <textarea
               name="description"
               value={form.description}
               onChange={handleChange}
               rows={3}
-              placeholder="Breve descrição do recurso..."
-              className="w-full px-4 py-2.5 rounded-lg border border-sunbiotan-200 text-sm text-sunbiotan-900 placeholder:text-sunbiotan-300 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400 focus:border-transparent transition resize-none"
+              className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sm focus:outline-none focus:border-sunbiotan-500 transition-colors resize-none"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-medium text-sunbiotan-700 uppercase tracking-wide">Tipo</label>
+            <div>
+              <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">
+                Tipo *
+              </label>
               <select
                 name="type"
                 value={form.type}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 rounded-lg border border-sunbiotan-200 text-sm text-sunbiotan-900 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400 focus:border-transparent transition bg-white"
+                className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sm focus:outline-none focus:border-sunbiotan-500 transition-colors"
               >
-                {typeOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value}>{opt.label}</option>
-                ))}
+                <option value="video">Vídeo</option>
+                <option value="image">Imagem</option>
+                <option value="document">Documento</option>
+                <option value="logo">Logo</option>
               </select>
             </div>
-            <div className="space-y-1.5">
-              <label className="text-xs font-medium text-sunbiotan-700 uppercase tracking-wide">Categoria</label>
+
+            <div>
+              <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">
+                Categoria *
+              </label>
               <select
                 name="category"
                 value={form.category}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 rounded-lg border border-sunbiotan-200 text-sm text-sunbiotan-900 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400 focus:border-transparent transition bg-white"
+                className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sm focus:outline-none focus:border-sunbiotan-500 transition-colors"
               >
-                {categoryOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value}>{opt.label}</option>
-                ))}
+                <option value="formacao">Formação</option>
+                <option value="marketing">Marketing</option>
+                <option value="marca">Marca</option>
               </select>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-sunbiotan-100 p-6 space-y-4 shadow-sm">
-          <h2 className="text-sm font-medium text-sunbiotan-900">
-            Arquivo <span className="text-red-400">*</span>
+        {/* URLs */}
+        <div className="bg-white rounded-xl border border-sunbiotan-100 p-6 shadow-sm space-y-5">
+          <h2 className="text-sm font-medium text-sunbiotan-900 tracking-[0.1em] uppercase">
+            Links
           </h2>
 
-          {form.type === 'video' ? (
-            <div className="space-y-1.5">
-              <label className="text-xs font-medium text-sunbiotan-700 uppercase tracking-wide">URL do vídeo</label>
-              <input
-                type="url"
-                name="url"
-                value={form.url}
-                onChange={handleChange}
-                placeholder="https://youtube.com/watch?v=..."
-                className="w-full px-4 py-2.5 rounded-lg border border-sunbiotan-200 text-sm text-sunbiotan-900 placeholder:text-sunbiotan-300 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400 focus:border-transparent transition"
-              />
-              <p className="text-xs text-sunbiotan-400 font-light">Link do YouTube, Vimeo ou outro serviço de vídeo</p>
-            </div>
-          ) : (
-            <div className="space-y-1.5">
-              <label className="text-xs font-medium text-sunbiotan-700 uppercase tracking-wide">
-                {form.type === 'image' ? 'Imagem' : form.type === 'logo' ? 'Logo' : 'Documento'}
-              </label>
-              <FileUpload
-                bucket="resources"
-                folder={form.type}
-                accept={form.type === 'image' || form.type === 'logo' ? 'image/*' : '.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip'}
-                maxSizeMB={form.type === 'document' ? 50 : 10}
-                imagePreview={form.type === 'image' || form.type === 'logo'}
-                currentUrl={form.url || null}
-                label={form.type === 'image' ? 'Clique para fazer upload da imagem' : form.type === 'logo' ? 'Clique para fazer upload do logo' : 'Clique para fazer upload do documento'}
-                hint={form.type === 'image' || form.type === 'logo' ? 'JPG, PNG, WEBP ou SVG · Máx 10MB' : 'PDF, Word, Excel, PPT ou ZIP · Máx 50MB'}
-                onUpload={(url) => setForm((prev) => ({ ...prev, url }))}
-                onRemove={() => setForm((prev) => ({ ...prev, url: '' }))}
-              />
-            </div>
-          )}
-
-          <div className="space-y-1.5">
-            <label className="text-xs font-medium text-sunbiotan-700 uppercase tracking-wide">
-              Miniatura <span className="text-sunbiotan-400 font-light normal-case">(opcional)</span>
+          <div>
+            <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">
+              URL do Recurso *
             </label>
-            <FileUpload
-              bucket="resources"
-              folder="thumbnails"
-              accept="image/*"
-              maxSizeMB={5}
-              imagePreview
-              currentUrl={form.thumbnail_url || null}
-              label="Clique para adicionar miniatura"
-              hint="JPG, PNG ou WEBP · Máx 5MB"
-              onUpload={(url) => setForm((prev) => ({ ...prev, thumbnail_url: url }))}
-              onRemove={() => setForm((prev) => ({ ...prev, thumbnail_url: '' }))}
+            <input
+              type="url"
+              name="url"
+              value={form.url}
+              onChange={handleChange}
+              required
+              placeholder="https://..."
+              className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sm focus:outline-none focus:border-sunbiotan-500 transition-colors"
             />
+            <p className="text-xs text-sunbiotan-400 mt-1">
+              Link direto para o vídeo, imagem, documento ou ficheiro
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">
+              URL da Miniatura (opcional)
+            </label>
+            <input
+              type="url"
+              name="thumbnail_url"
+              value={form.thumbnail_url}
+              onChange={handleChange}
+              placeholder="https://..."
+              className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sm focus:outline-none focus:border-sunbiotan-500 transition-colors"
+            />
+            <p className="text-xs text-sunbiotan-400 mt-1">
+              Imagem de pré-visualização do recurso
+            </p>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-sunbiotan-100 p-6 space-y-4 shadow-sm">
-          <h2 className="text-sm font-medium text-sunbiotan-900">Opções</h2>
-          <div className="space-y-1.5">
-            <label className="text-xs font-medium text-sunbiotan-700 uppercase tracking-wide">Ordem</label>
+        {/* Config */}
+        <div className="bg-white rounded-xl border border-sunbiotan-100 p-6 shadow-sm space-y-4">
+          <h2 className="text-sm font-medium text-sunbiotan-900 tracking-[0.1em] uppercase">
+            Configurações
+          </h2>
+
+          <div>
+            <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">
+              Ordem
+            </label>
             <input
               type="number"
               name="order_index"
               value={form.order_index}
               onChange={handleChange}
-              min="0"
-              className="w-32 px-4 py-2.5 rounded-lg border border-sunbiotan-200 text-sm text-sunbiotan-900 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400 focus:border-transparent transition"
+              min={0}
+              className="w-24 px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sm focus:outline-none focus:border-sunbiotan-500 transition-colors"
             />
-            <p className="text-xs text-sunbiotan-400 font-light">Posição na listagem (menor número = primeiro)</p>
           </div>
-          <label className="flex items-center gap-3 cursor-pointer">
+
+          <div className="flex items-center gap-3">
             <input
               type="checkbox"
+              id="active"
               name="active"
               checked={form.active}
               onChange={handleChange}
-              className="w-4 h-4 rounded border-sunbiotan-300 text-sunbiotan-500 focus:ring-sunbiotan-400"
+              className="w-4 h-4 accent-sunbiotan-500"
             />
-            <div>
-              <span className="text-sm font-medium text-sunbiotan-900">Ativo</span>
-              <p className="text-xs text-sunbiotan-400 font-light">Visível no portal dos parceiros</p>
-            </div>
-          </label>
+            <label htmlFor="active" className="text-sm text-sunbiotan-800 cursor-pointer">
+              Recurso ativo (visível no portal)
+            </label>
+          </div>
         </div>
 
-        {error && (
-          <div className="bg-red-50 border border-red-200 rounded-xl px-5 py-3">
-            <p className="text-sm text-red-600">{error}</p>
-          </div>
-        )}
-
-        <div className="flex items-center gap-3 pb-6">
+        {/* Buttons */}
+        <div className="flex items-center gap-4">
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-600 hover:to-sunbiotan-700 text-white text-sm rounded-lg transition-all shadow-lg shadow-sunbiotan-500/20 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-600 hover:to-sunbiotan-700 text-white text-sm rounded-lg transition-all shadow-lg shadow-sunbiotan-500/20 disabled:opacity-70"
           >
-            {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-            Guardar recurso
+            {loading ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                A guardar...
+              </>
+            ) : (
+              'Criar Recurso'
+            )}
           </button>
+
           <Link
             href="/dashboard/recursos"
-            className="px-5 py-2.5 text-sm text-sunbiotan-600 hover:text-sunbiotan-800 transition-colors"
+            className="px-6 py-3 border border-sunbiotan-200 text-sunbiotan-700 text-sm rounded-lg hover:bg-sunbiotan-50 transition-colors"
           >
             Cancelar
           </Link>

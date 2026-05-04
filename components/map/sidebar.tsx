@@ -171,11 +171,12 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
     if (inputRef.current) inputRef.current.value = '';
   };
 
-  const filteredCenters = centersWithDistance;
-  const nearbyCenters = searchLocation ? filteredCenters.slice(0, 3) : [];
-  const otherCenters = searchLocation ? filteredCenters.slice(3) : filteredCenters;
-  const featuredCenters = otherCenters.filter((c) => c.featured);
-  const regularCenters = otherCenters.filter((c) => !c.featured);
+  const filteredCenters = searchLocation
+    ? centersWithDistance.slice(0, 15)
+    : centersWithDistance;
+  const searchResults = searchLocation ? filteredCenters : [];
+  const featuredCenters = !searchLocation ? filteredCenters.filter((c) => c.featured) : [];
+  const regularCenters = !searchLocation ? filteredCenters.filter((c) => !c.featured) : [];
 
   return (
     <div className="space-y-10">
@@ -261,28 +262,31 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         )}
       </motion.div>
 
-      {/* Centros mais próximos */}
-      {nearbyCenters.length > 0 && (
+      {/* Con búsqueda: lista plana, máx 15, ordenada por distancia */}
+      {searchLocation && searchResults.length > 0 && (
         <div>
           <motion.div
-            variants={stagger}
+            variants={fadeUp}
             initial="hidden"
             animate="show"
-            className="grid md:grid-cols-2 gap-5"
+            transition={{ duration: 0.6, ease: EASE }}
+            className="flex items-center gap-3 mb-5"
           >
             <div className="h-px w-8 bg-sunbiotan-400/50" />
             <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
               Centros mais próximos
             </h2>
+            <span className="text-xs text-sunbiotan-400 font-light">
+              ({searchResults.length})
+            </span>
           </motion.div>
           <motion.div
             variants={stagger}
             initial="hidden"
-            whileInView="show"
-            viewport={VP}
+            animate="show"
             className="space-y-4"
           >
-            {nearbyCenters.map((center, index) => (
+            {searchResults.map((center, index) => (
               <NearbyCard
                 key={center.id}
                 center={center}
@@ -309,8 +313,8 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         </motion.div>
       )}
 
-      {/* Centros exclusivos */}
-      {featuredCenters.length > 0 && (
+      {/* Sin búsqueda: lógica original */}
+      {!searchLocation && featuredCenters.length > 0 && (
         <div>
           <motion.div
             variants={fadeUp}
@@ -322,7 +326,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           >
             <div className="h-px w-8 bg-sunbiotan-400/50" />
             <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
-              {searchLocation ? 'Outros centros exclusivos' : 'Centros Exclusivos'}
+              Centros Exclusivos
             </h2>
           </motion.div>
           <motion.div
@@ -338,15 +342,14 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
                 center={center}
                 isSelected={selectedCenter?.id === center.id}
                 onClick={() => onCenterClick(center)}
-                showDistance={!!searchLocation}
+                showDistance={false}
               />
             ))}
           </motion.div>
         </div>
       )}
 
-      {/* Centros certificados */}
-      {regularCenters.length > 0 && (
+      {!searchLocation && regularCenters.length > 0 && (
         <div>
           <motion.div
             variants={fadeUp}
@@ -358,7 +361,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           >
             <div className="h-px w-8 bg-sunbiotan-400/30" />
             <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
-              {searchLocation ? 'Outros centros certificados' : 'Centros Certificados'}
+              Centros Certificados
             </h2>
           </motion.div>
           <motion.div
@@ -374,7 +377,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
                 center={center}
                 isSelected={selectedCenter?.id === center.id}
                 onClick={() => onCenterClick(center)}
-                showDistance={!!searchLocation}
+                showDistance={false}
               />
             ))}
           </motion.div>

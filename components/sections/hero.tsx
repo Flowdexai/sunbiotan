@@ -81,7 +81,7 @@ export function Hero() {
         >
           {/* Brand name — visible to crawlers, styled as eyebrow */}
           <motion.div variants={itemVariants} className="mb-2">
-            <p className="font-display font-light text-[clamp(0.85rem,2vw,1.1rem)] tracking-[0.55em] uppercase text-sunbiotan-200/90">
+            <p className="font-display font-light text-[clamp(2rem,3vw,2rem)] tracking-[0.55em] uppercase text-sunbiotan-200/90">
               SUNBIOTAN
             </p>
           </motion.div>
