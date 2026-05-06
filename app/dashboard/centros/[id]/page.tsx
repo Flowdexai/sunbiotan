@@ -145,6 +145,7 @@ export default function EditarCentroPage() {
             setSuccess(false);
             setSaving(false);
         }, 2000);
+        router.push('/dashboard/centros');
     };
 
     const handleDelete = async () => {

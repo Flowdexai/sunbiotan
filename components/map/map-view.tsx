@@ -106,7 +106,7 @@ export function MapView({ centers, onCenterSelect, selectedCenter }: MapViewProp
       defaultCenter={defaultCenter}
       defaultZoom={6.5}
       mapId="sunbiotan-map"
-      gestureHandling="greedy"
+      gestureHandling="cooperative"
       disableDefaultUI={true}
       zoomControl={true}
       streetViewControl={false}

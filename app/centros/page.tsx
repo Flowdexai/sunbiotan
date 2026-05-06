@@ -114,7 +114,7 @@ export default function CentrosPage() {
               className="flex items-center justify-center gap-3 mb-4"
             >
               <div className="h-px w-8 bg-gradient-to-r from-transparent to-sunbiotan-500/60" />
-              <p className="text-[10px] tracking-[0.5em] uppercase text-sunbiotan-600/80 font-medium">
+              <p className="text-[14px] tracking-[1em] uppercase text-sunbiotan-600/80 font-medium">
                 Onde fazer?
               </p>
               <div className="h-px w-8 bg-gradient-to-l from-transparent to-sunbiotan-500/60" />

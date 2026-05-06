@@ -341,7 +341,7 @@ export default function ProfissionaisPage() {
               <div className="h-px w-8 bg-gradient-to-r from-transparent to-sunbiotan-500/50" />
               <div className="flex items-center gap-2">
                 <Sparkles className="h-3 w-3 text-sunbiotan-500/70" strokeWidth={1.5} />
-                <p className="text-[10px] tracking-[0.5em] uppercase text-sunbiotan-400/70 font-light">
+                <p className="text-[14px] tracking-[1em] uppercase text-sunbiotan-400/70 font-light">
                   Área Profissional
                 </p>
               </div>
