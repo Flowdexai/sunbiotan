@@ -118,7 +118,7 @@ export function CtaProfessionals() {
               >
                 <ArrowRight className="h-5 w-5 text-sunbiotan-400 -rotate-45 group-hover:text-sunbiotan-300 transition-colors duration-300" />
                 <div className="w-5 h-px bg-sunbiotan-600/50" />
-                <p className="text-[40px] tracking-[0.4em] uppercase text-sunbiotan-100/70 font-light leading-relaxed">
+                <p className="text-[20px] tracking-[0.4em] uppercase text-sunbiotan-100/70 font-light leading-relaxed">
                   Junte-se<br />à Rede
                 </p>
               </div>

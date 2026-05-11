@@ -86,7 +86,7 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
             </div>
 
             {/* Botones — ancho fijo igual al logo */}
-            <div className="w-[180px] hidden md:flex items-center gap-3 justify-end">
+            <div className="w-[320px] hidden md:flex items-center gap-3 justify-end">
               <Link
                 href="/login"
                 className="inline-flex items-center px-4 py-2 border border-sunbiotan-600/35 text-sunbiotan-300/65 hover:border-sunbiotan-500/55 hover:text-sunbiotan-200 text-[11px] tracking-[0.18em] uppercase font-light rounded-full transition-all duration-300 hover:bg-white/[0.03]"
