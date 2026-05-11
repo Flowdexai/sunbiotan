@@ -320,7 +320,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           >
             <div className="h-px w-8 bg-sunbiotan-400/50" />
             <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
-              Centros Exclusivos
+              Centros Premium
             </h2>
           </motion.div>
           <motion.div
@@ -507,7 +507,7 @@ function FeaturedCenterCard({
           <div className="absolute top-3 right-3">
             <span className="inline-flex items-center gap-1 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 text-white px-3 py-1 rounded-full text-[10px] tracking-[0.12em] uppercase font-medium shadow-lg">
               <Star className="h-3 w-3 fill-white" strokeWidth={0} />
-              Exclusivo
+              Premium
             </span>
           </div>
           {showDistance && center.distance !== undefined && (

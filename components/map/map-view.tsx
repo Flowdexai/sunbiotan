@@ -74,7 +74,7 @@ function MapContent({ centers, onCenterSelect, selectedCenter }: MapViewProps) {
               </h3>
               {infoOpen.featured && (
                 <span className="text-xs bg-sunbiotan-100 text-sunbiotan-700 px-2 py-0.5 rounded-full">
-                  Exclusivo
+                  Premium
                 </span>
               )}
             </div>

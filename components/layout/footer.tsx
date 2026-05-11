@@ -50,6 +50,13 @@ export function Footer() {
               >
                 <Camera className="h-3.5 w-3.5" strokeWidth={1.5} />
               </a>
+              <a
+                href="mailto:info@sunbiotan.pt"
+                aria-label="Email"
+                className="w-8 h-8 border border-sunbiotan-800/60 rounded-full flex items-center justify-center text-sunbiotan-500/60 hover:border-sunbiotan-500/60 hover:text-sunbiotan-400 transition-all duration-300"
+              >
+                <Mail className="h-3.5 w-3.5" strokeWidth={1.5} />
+              </a>
             </div>
           </div>
 
@@ -89,11 +96,11 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="h-3.5 w-3.5 text-sunbiotan-600/70 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span className="text-sm text-sunbiotan-400/50 font-light">+351 XXX XXX XXX</span>
+                <span className="text-sm text-sunbiotan-400/50 font-light">+351 964 031 351</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="h-3.5 w-3.5 text-sunbiotan-600/70 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span className="text-sm text-sunbiotan-400/50 font-light">Portugal &amp; Espanha</span>
+                <span className="text-sm text-sunbiotan-400/50 font-light">Europa</span>
               </li>
             </ul>
           </div>
