@@ -188,12 +188,6 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         animate="show"
         transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
       >
-        <div className="flex items-center gap-3 mb-3">
-          <div className="h-px w-8 bg-sunbiotan-400/50" />
-          <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-600/80 font-medium">
-            {centers.length} centros disponíveis
-          </p>
-        </div>
         <h1 className="font-display font-light text-[clamp(2rem,3.5vw,3rem)] text-sunbiotan-900 leading-[1.05] tracking-tight">
           Encontre o seu{' '}
           <em className="not-italic italic text-sunbiotan-600">Centro</em>

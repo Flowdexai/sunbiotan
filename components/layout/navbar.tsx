@@ -10,6 +10,8 @@ const links = [
   { label: 'Início', href: '/' },
   { label: 'Sobre', href: '/#sobre' },
   { label: 'Centros', href: '/#centros' },
+  { label: 'Profissionais', href: '/#profissionais' },
+  { label: 'Contacto', href: '/#contacto' },
 ];
 
 interface NavbarProps {
@@ -42,30 +44,34 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
         initial={{ y: 0 }}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          opaque
-            ? 'bg-[#1a130a]/95 backdrop-blur-2xl border-b border-sunbiotan-800/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]'
-            : 'bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${opaque
+          ? 'bg-[#1a130a]/95 backdrop-blur-2xl border-b border-sunbiotan-800/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)]'
+          : 'bg-transparent'
+          }`}
       >
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-16 md:h-20">
-            <motion.a
-              href="/"
-              animate={{ scale: isScrolled ? 0.88 : 1 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="origin-left block"
-            >
-              <Image
-                src="/images/logo-sunbiotan.jpg"
-                alt="Sunbiotan"
-                width={180}
-                height={56}
-                className="h-11 w-auto object-contain"
-                priority
-              />
-            </motion.a>
 
+            {/* Logo — ancho fijo */}
+            <div className="w-[180px]">
+              <motion.a
+                href="/"
+                animate={{ scale: isScrolled ? 0.88 : 1 }}
+                transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                className="origin-left block"
+              >
+                <Image
+                  src="/images/logo-sunbiotan.jpg"
+                  alt="Sunbiotan"
+                  width={180}
+                  height={56}
+                  className="h-11 w-auto object-contain"
+                  priority
+                />
+              </motion.a>
+            </div>
+
+            {/* Links — centro */}
             <div className="hidden md:flex items-center gap-8">
               {links.map((link) => (
                 <a
@@ -74,28 +80,19 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
                   className="relative text-[11px] tracking-[0.25em] uppercase font-medium text-sunbiotan-100/70 hover:text-sunbiotan-300 transition-colors duration-300 group"
                 >
                   {link.label}
-                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-sunbiotan-400 to-sunbiotan-500 group-hover:w-full transition-all duration-300" />
+                  < span className="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-sunbiotan-400 to-sunbiotan-500 group-hover:w-full transition-all duration-300" />
                 </a>
               ))}
-              {/* Área Profissional — discreto */}
-              <Link
-                href="/profissionais"
-                className="relative text-[11px] tracking-[0.25em] uppercase font-light text-sunbiotan-400/50 hover:text-sunbiotan-400 transition-colors duration-300 group"
-              >
-                Profissionais
-                <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-sunbiotan-600/50 group-hover:w-full transition-all duration-300" />
-              </Link>
             </div>
 
-            <div className="hidden md:flex items-center gap-3">
-              {/* Login — ghost discreto */}
+            {/* Botones — ancho fijo igual al logo */}
+            <div className="w-[180px] hidden md:flex items-center gap-3 justify-end">
               <Link
                 href="/login"
                 className="inline-flex items-center px-4 py-2 border border-sunbiotan-600/35 text-sunbiotan-300/65 hover:border-sunbiotan-500/55 hover:text-sunbiotan-200 text-[11px] tracking-[0.18em] uppercase font-light rounded-full transition-all duration-300 hover:bg-white/[0.03]"
               >
                 Login
               </Link>
-              {/* Encontrar Centro — primario */}
               <Link
                 href="/centros"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[11px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-sunbiotan-500/25 hover:scale-105 group"
@@ -105,6 +102,7 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
               </Link>
             </div>
 
+            {/* Mobile burger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden text-sunbiotan-200 hover:text-sunbiotan-300 transition-colors p-1"
@@ -112,9 +110,10 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
             >
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
+
           </div>
         </div>
-      </motion.nav>
+      </motion.nav >
 
       <AnimatePresence>
         {mobileOpen && (

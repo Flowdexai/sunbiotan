@@ -7,9 +7,9 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const VP = { once: false, amount: 0.15 };
 
 const perks = [
-  { icon: Users,      title: 'Formação e Apoio Contínuo', description: 'Acesso a formação profissional e acompanhamento pela equipa SUN.' },
-  { icon: TrendingUp, title: 'Faça Crescer o Negócio',    description: 'Serviços premium de alto valor para diferenciar o seu salão no mercado.' },
-  { icon: Award,      title: 'Condições Especiais',       description: 'Rede de profissionais certificados com acesso a benefícios exclusivos.' },
+  { icon: Users, title: 'Formação e Apoio Contínuo', description: 'Acesso a formação profissional e acompanhamento pela equipa SUN.' },
+  { icon: TrendingUp, title: 'Faça Crescer o Negócio', description: 'Serviços premium de alto valor para diferenciar o seu salão no mercado.' },
+  { icon: Award, title: 'Condições Especiais', description: 'Rede de profissionais certificados com acesso a benefícios exclusivos.' },
 ];
 
 export function CtaProfessionals() {
@@ -87,18 +87,6 @@ export function CtaProfessionals() {
                 </motion.div>
               ))}
             </div>
-
-            <motion.a
-              href="/profissionais"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={VP}
-              transition={{ duration: 0.6, delay: 0.45, ease: EASE }}
-              className="group inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[11px] tracking-[0.2em] uppercase font-medium rounded-full transition-all duration-300 shadow-xl shadow-sunbiotan-950/50 hover:shadow-sunbiotan-500/20 hover:scale-105"
-            >
-              Junte-se à Rede
-              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </motion.a>
           </motion.div>
 
           {/* Right: Visual */}
@@ -110,21 +98,31 @@ export function CtaProfessionals() {
             className="flex justify-center lg:justify-end"
           >
             <div className="relative w-72 h-72 md:w-80 md:h-80">
+              {/* Glow exterior */}
               <div
                 className="absolute inset-0 rounded-full"
                 style={{ background: 'radial-gradient(ellipse at center, rgba(193,154,91,0.18) 0%, rgba(193,154,91,0.06) 45%, transparent 70%)', transform: 'scale(1.35)' }}
               />
+              {/* Anillos */}
               <div className="absolute inset-0 rounded-full border border-sunbiotan-700/25" />
               <div className="absolute inset-5 rounded-full border border-sunbiotan-700/15" />
+              {/* Botón circular — va último para quedar encima */}
               <div
-                className="absolute inset-10 rounded-full flex flex-col items-center justify-center text-center gap-1.5"
-                style={{ background: 'radial-gradient(ellipse at top, rgba(193,154,91,0.12) 0%, rgba(26,19,10,0.5) 100%)', border: '1px solid rgba(193,154,91,0.15)', backdropFilter: 'blur(6px)' }}
+                className="absolute inset-10 rounded-full flex flex-col items-center justify-center text-center gap-3 cursor-pointer group transition-all duration-300 hover:scale-105"
+                style={{
+                  background: 'linear-gradient(135deg, #c19a5b 0%, #7d5d2e 100%)',
+                  border: '1px solid rgba(193,154,91,0.4)',
+                  backdropFilter: 'blur(6px)'
+                }}
+                onClick={() => window.location.href = '/profissionais'}
               >
-                <span className="font-display text-5xl md:text-6xl font-light text-sunbiotan-400 leading-none golden-shimmer">50+</span>
-                <div className="w-5 h-px bg-sunbiotan-600/50 my-1" />
-                <p className="text-[10px] tracking-[0.22em] uppercase text-sunbiotan-300/55 font-light">Centros Parceiros</p>
-                <p className="text-[10px] tracking-wider text-sunbiotan-500/40 font-light">PT &amp; ES</p>
+                <ArrowRight className="h-5 w-5 text-sunbiotan-400 -rotate-45 group-hover:text-sunbiotan-300 transition-colors duration-300" />
+                <div className="w-5 h-px bg-sunbiotan-600/50" />
+                <p className="text-[40px] tracking-[0.4em] uppercase text-sunbiotan-100/70 font-light leading-relaxed">
+                  Junte-se<br />à Rede
+                </p>
               </div>
+              {/* Puntitos decorativos — dentro del div relativo */}
               <div className="absolute top-5 right-6 w-1.5 h-1.5 rounded-full bg-sunbiotan-500/45" />
               <div className="absolute bottom-4 left-8 w-1 h-1 rounded-full bg-sunbiotan-400/30" />
               <div className="absolute top-1/2 -left-3 w-1 h-1 rounded-full bg-sunbiotan-600/40" />

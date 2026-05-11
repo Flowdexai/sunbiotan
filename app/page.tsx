@@ -7,6 +7,7 @@ import { HowItWorks } from '@/components/sections/how-it-works';
 import { MapPreview } from '@/components/sections/map-preview';
 import { CtaProfessionals } from '@/components/sections/cta-professionals';
 import { Footer } from '@/components/layout/footer';
+import { Contact } from '@/components/sections/contact';
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <HowItWorks />
         <MapPreview />
         <CtaProfessionals />
+        <Contact />
       </main>
       <Footer />
     </>

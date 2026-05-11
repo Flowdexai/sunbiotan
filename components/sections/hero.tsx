@@ -37,26 +37,23 @@ export function Hero() {
     >
       {/* Video background */}
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover opacity-55"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/images/hero-bg.jpg"
-        style={{ WebkitTransform: 'translateZ(0)' }}
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
+      <div
+        className="absolute inset-0 w-full h-full bg-cover opacity-95"
+        style={{
+          backgroundImage: 'url(/images/hero-bg.jpg)',
+          backgroundPosition: 'center 20%',
+          backgroundSize: 'cover',
+        }}
+      />
 
       {/* Multi-layer gradient overlay */}
       <motion.div
         style={{ opacity: overlayOpacity }}
         className="absolute inset-0 pointer-events-none"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a130a]/85 via-[#3d2e17]/45 to-[#1a130a]/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a130a]/60 via-[#3d2e17]/25 to-[#1a130a]/65" />
         <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(26,19,10,0.55) 100%)',
+          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(26,19,10,0.3) 100%)',
         }} />
       </motion.div>
 
@@ -90,7 +87,7 @@ export function Hero() {
           <motion.div variants={itemVariants} className="flex items-center justify-center gap-3 mb-3 md:mb-5">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sunbiotan-500/60" />
             <p className="text-[10px] md:text-[11px] tracking-[0.5em] uppercase text-sunbiotan-200/80 font-light">
-              Bronzeado Natural · Sem Raios UV
+              Cuidamos da sua pele
             </p>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-sunbiotan-500/60" />
           </motion.div>
@@ -99,10 +96,10 @@ export function Hero() {
           <motion.div variants={itemVariants} className="mb-3 md:mb-4">
             <h1 className="font-display font-light leading-[0.9] tracking-tight">
               <span className="block text-[clamp(2.8rem,9vw,7.5rem)] text-sunbiotan-100/92">
-                Cuidamos
+                Bronzeado Natural
               </span>
               <span className="block text-[clamp(2.8rem,9vw,7.5rem)] golden-shimmer">
-                da sua pele
+                Sem Raios UV
               </span>
             </h1>
           </motion.div>
@@ -140,50 +137,50 @@ export function Hero() {
             </Link>
 
             <a href="#profissionais"
-            className="inline-flex items-center gap-2.5 px-9 py-3.5 border border-sunbiotan-300/40 text-sunbiotan-100/85 hover:border-sunbiotan-300/70 hover:text-white text-[11px] tracking-[0.2em] uppercase font-light rounded-full transition-all duration-300 backdrop-blur-sm hover:bg-white/[0.04]"
-  >
-            Sou Profissional
-          </a>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center items-stretch gap-0 border-t border-sunbiotan-700/20 pt-8"
-        >
-          {stats.map((stat, i) => (
-            <div
-              key={stat.label}
-              className={`flex-1 max-w-[140px] text-center ${i < stats.length - 1 ? 'border-r border-sunbiotan-700/20' : ''}`}
+              className="inline-flex items-center gap-2.5 px-9 py-3.5 border border-sunbiotan-300/40 text-sunbiotan-100/85 hover:border-sunbiotan-300/70 hover:text-white text-[11px] tracking-[0.2em] uppercase font-light rounded-full transition-all duration-300 backdrop-blur-sm hover:bg-white/[0.04]"
             >
-              <div className="font-display text-2xl md:text-3xl font-light text-sunbiotan-200 mb-0.5 tracking-wide">
-                {stat.value}
+              Sou Profissional
+            </a>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            variants={itemVariants}
+            className="flex justify-center items-stretch gap-0 border-t border-sunbiotan-700/20 pt-8"
+          >
+            {stats.map((stat, i) => (
+              <div
+                key={stat.label}
+                className={`flex-1 max-w-[140px] text-center ${i < stats.length - 1 ? 'border-r border-sunbiotan-700/20' : ''}`}
+              >
+                <div className="font-display text-2xl md:text-3xl font-light text-sunbiotan-200 mb-0.5 tracking-wide">
+                  {stat.value}
+                </div>
+                <div className="text-[9px] tracking-[0.22em] uppercase text-sunbiotan-200/60 font-light">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-[9px] tracking-[0.22em] uppercase text-sunbiotan-200/60 font-light">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+            ))}
+          </motion.div>
         </motion.div>
       </motion.div>
-    </motion.div>
 
-      {/* Scroll indicator */ }
-  <motion.button
-    onClick={scrollToNext}
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 2, duration: 1 }}
-    className="absolute bottom-7 left-1/2 -translate-x-1/2 text-sunbiotan-300/35 hover:text-sunbiotan-300/65 transition-colors duration-300 cursor-pointer"
-    aria-label="Scroll"
-  >
-    <motion.div
-      animate={{ y: [0, 7, 0] }}
-      transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
-    >
-      <ChevronDown className="h-5 w-5" />
-    </motion.div>
-  </motion.button>
+      {/* Scroll indicator */}
+      <motion.button
+        onClick={scrollToNext}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute bottom-7 left-1/2 -translate-x-1/2 text-sunbiotan-300/35 hover:text-sunbiotan-300/65 transition-colors duration-300 cursor-pointer"
+        aria-label="Scroll"
+      >
+        <motion.div
+          animate={{ y: [0, 7, 0] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ChevronDown className="h-5 w-5" />
+        </motion.div>
+      </motion.button>
     </section >
   );
 }
