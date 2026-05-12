@@ -51,9 +51,9 @@ export function Hero() {
         style={{ opacity: overlayOpacity }}
         className="absolute inset-0 pointer-events-none"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a130a]/60 via-[#3d2e17]/25 to-[#1a130a]/65" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a130a]/85 via-[#3d2e17]/45 to-[#1a130a]/90" />
         <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(26,19,10,0.3) 100%)',
+          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(26,19,10,0.55) 100%)',
         }} />
       </motion.div>
 

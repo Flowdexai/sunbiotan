@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, Shield, Zap, Leaf, Clock, Award, Check, Users } from 'lucide-react';
+import { Sparkles, Sun, Zap, Leaf, Clock, Award, Check, Users } from 'lucide-react';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const VP = { once: false, amount: 0.08 };
@@ -10,7 +10,7 @@ const benefits = [
   { icon: Sparkles, number: '01', title: 'Bronzeado Natural',    description: 'Homogéneo e uniforme, adaptado ao tom de pele de cada pessoa.' },
   { icon: Zap,      number: '02', title: 'Hidratação Profunda',  description: 'Efeito sedoso imediato com hidratação intensa e duradoura.' },
   { icon: Award,    number: '03', title: 'Efeito Tensor',        description: 'Iluminador e anti-envelhecimento com lifting suave visível.' },
-  { icon: Shield,   number: '04', title: 'Ação Reparadora',      description: 'Antirrugas, anti-olheiras e anti-celulite numa só aplicação.' },
+  { icon: Sun,   number: '04', title: 'Luminosidade Intensa',      description: 'Pele radiante e luminosa com um brilho natural e saudável.' },
   { icon: Clock,    number: '05', title: 'Resultados Imediatos', description: 'Visíveis desde a primeira aplicação, sem esperas.' },
   { icon: Leaf,     number: '06', title: '100% Natural',         description: 'Ingredientes activos à base de plantas de agricultura sustentável.' },
   { icon: Check,    number: '07', title: 'Aplicação Rápida',     description: 'Implementação simples, rápida e eficiente em qualquer centro.' },

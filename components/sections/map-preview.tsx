@@ -42,7 +42,7 @@ export function MapPreview() {
               <em className="not-italic italic text-sunbiotan-600">Centro</em>
             </h2>
             <p className="text-sunbiotan-700/60 text-base font-light max-w-md mx-auto leading-relaxed">
-              Disponível exclusivamente em salões de beleza autorizados em Portugal e Espanha.
+              Disponível exclusivamente em Centros Autorizados Sunbiotan.
             </p>
           </motion.div>
 

@@ -34,8 +34,7 @@ export function Footer() {
               SUNBIOTAN
             </p>
             <p className="text-sunbiotan-400/55 text-sm font-light leading-relaxed mb-6 max-w-xs">
-              Bronzeado natural e profissional. Elegância e expertise
-              ao seu alcance em Portugal e Espanha.
+              Bronzeado natural e profissional. Elegância e expertise ao seu alcance.
             </p>
             <div className="flex gap-3">
               <a
