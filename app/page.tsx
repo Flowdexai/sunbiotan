@@ -2,7 +2,7 @@ import { Navbar } from '@/components/layout/navbar';
 import { Hero } from '@/components/sections/hero';
 import { About } from '@/components/sections/about';
 import { Benefits } from '@/components/sections/benefits';
-import { ScrollVideo } from '@/components/sections/scroll-video';
+import { VideoSection } from '@/components/sections/scroll-video';
 import { HowItWorks } from '@/components/sections/how-it-works';
 import { MapPreview } from '@/components/sections/map-preview';
 import { CtaProfessionals } from '@/components/sections/cta-professionals';
@@ -17,7 +17,7 @@ export default function Home() {
         <Hero />
         <About />
         <Benefits />
-        <ScrollVideo />
+        <VideoSection />
         <HowItWorks />
         <MapPreview />
         <CtaProfessionals />

@@ -2,12 +2,14 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { MapPin, Phone, Mail, AtSign, Star, Navigation, Loader2, X } from 'lucide-react';
+import { MapPin, Phone, Mail, Star, Navigation, Loader2, X } from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Center } from '@/types/center';
 import { useMapsLibrary } from '@vis.gl/react-google-maps';
 import dynamic from 'next/dynamic';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 const MapView = dynamic(
   () => import('./map-view').then(mod => mod.MapView),
@@ -413,9 +415,9 @@ function NearbyCard({
     <motion.div
       variants={fadeUp}
       onClick={onClick}
-      className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 border ${isSelected
+      className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 border flex flex-col ${isSelected
         ? 'border-sunbiotan-500 bg-sunbiotan-50 shadow-lg shadow-sunbiotan-200/50'
-        : 'border-sunbiotan-200/60 bg-white hover:border-sunbiotan-300 hover:shadow-md hover:shadow-sunbiotan-100/40'
+        : 'border-sunbiotan-200/60 bg-white hover:border-sunbiotan-300 hover:shadow-md hover:shadow-sunbiotan-100/30'
         }`}
     >
       <div className="flex items-start justify-between gap-4">
@@ -446,25 +448,47 @@ function NearbyCard({
         {center.phone && (
           <div className="flex items-center gap-1.5">
             <Phone className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-            <span>{center.phone}</span>
+            <a
+              href={`tel:${center.phone.replace(/\s/g, '')}`}
+              className="hover:text-sunbiotan-700 transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {center.phone}
+            </a>
           </div>
         )}
-        <div className="flex items-center gap-1.5">
-          <AtSign className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-          <a
-            href={`https://instagram.com/${center.instagram}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
-            onClick={(e) => e.stopPropagation()}
-          >
-            @{center.instagram}
-          </a>
-        </div>
+        {center.instagram && (
+          <div className="flex items-center gap-1.5">
+            <FontAwesomeIcon icon={faInstagram} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
+            <a
+              href={`https://instagram.com/${center.instagram.replace('@', '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              @{center.instagram.replace('@', '')}
+            </a>
+          </div>
+        )}
+        {center.facebook && (
+          <div className="flex items-center gap-1.5">
+            <FontAwesomeIcon icon={faFacebook} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
+            <a
+              href={center.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Facebook
+            </a>
+          </div>
+        )}
       </div>
 
       <button
-        className="w-full mt-4 py-2.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[10px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]"
+        className="w-full mt-auto py-2.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[10px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]"
         onClick={(e) => { e.stopPropagation(); onClick(); }}
       >
         Ver no mapa
@@ -537,21 +561,43 @@ function FeaturedCenterCard({
           {center.phone && (
             <div className="flex items-center gap-2">
               <Phone className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-              <span>{center.phone}</span>
+              <a
+                href={`tel:${center.phone.replace(/\s/g, '')}`}
+                className="hover:text-sunbiotan-700 transition-colors"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {center.phone}
+              </a>
             </div>
           )}
-          <div className="flex items-center gap-2">
-            <AtSign className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-            <a
-              href={`https://instagram.com/${center.instagram}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
-              onClick={(e) => e.stopPropagation()}
-            >
-              @{center.instagram}
-            </a>
-          </div>
+          {center.instagram && (
+            <div className="flex items-center gap-2">
+              <FontAwesomeIcon icon={faInstagram} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
+              <a
+                href={`https://instagram.com/${center.instagram.replace('@', '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
+                onClick={(e) => e.stopPropagation()}
+              >
+                @{center.instagram.replace('@', '')}
+              </a>
+            </div>
+          )}
+          {center.facebook && (
+            <div className="flex items-center gap-2">
+              <FontAwesomeIcon icon={faFacebook} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
+              <a
+                href={center.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Facebook
+              </a>
+            </div>
+          )}
           {center.email && (
             <div className="flex items-center gap-2">
               <Mail className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
@@ -588,7 +634,7 @@ function RegularCenterCard({
     <motion.div
       variants={fadeUp}
       onClick={onClick}
-      className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 border ${isSelected
+      className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 border flex flex-col ${isSelected
         ? 'border-sunbiotan-500 bg-sunbiotan-50 shadow-lg shadow-sunbiotan-200/50'
         : 'border-sunbiotan-200/60 bg-white hover:border-sunbiotan-300 hover:shadow-md hover:shadow-sunbiotan-100/30'
         }`}
@@ -610,24 +656,49 @@ function RegularCenterCard({
             <p className="font-medium text-sunbiotan-700 mt-0.5">{center.city}</p>
           </div>
         </div>
+
         {center.phone && (
           <div className="flex items-center gap-2">
             <Phone className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-            <span>{center.phone}</span>
+            <a
+              href={`tel:${center.phone.replace(/\s/g, '')}`}
+              className="hover:text-sunbiotan-700 transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {center.phone}
+            </a>
           </div>
         )}
-        <div className="flex items-center gap-2">
-          <AtSign className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-          <a
-            href={`https://instagram.com/${center.instagram}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
-            onClick={(e) => e.stopPropagation()}
-          >
-            @{center.instagram}
-          </a>
-        </div>
+
+        {center.instagram && (
+          <div className="flex items-center gap-2">
+            <FontAwesomeIcon icon={faInstagram} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
+            <a
+              href={`https://instagram.com/${center.instagram.replace('@', '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              @{center.instagram.replace('@', '')}
+            </a>
+          </div>
+        )}
+
+        {center.facebook && (
+          <div className="flex items-center gap-2">
+            <FontAwesomeIcon icon={faFacebook} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
+            <a
+              href={center.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Facebook
+            </a>
+          </div>
+        )}
       </div>
 
       <button

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import { WhatsAppButton } from '@/components/ui/whatsapp-button';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({
         className={`${inter.variable} ${cormorant.variable} font-sans antialiased`}
       >
         {children}
+        <WhatsAppButton />
       </body>
     </html>
   );

@@ -3,45 +3,50 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Send, Loader2, CheckCircle } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const VP = { once: false, amount: 0.15 };
 
-const contactInfo = [
-    {
-        icon: Mail,
-        label: 'Email',
-        value: 'info@sunbiotan.pt',
-        href: 'mailto:info@sunbiotan.pt',
-    },
-    {
-        icon: Phone,
-        label: 'Telefone',
-        value: '+351 920 253 796',
-        href: 'tel:+351920253796',
-    },
-    {
-        icon: () => (
-            <svg viewBox="0 0 24 24" className="h-4 w-4 text-sunbiotan-500" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" strokeWidth="2" />
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
-                <circle cx="17.5" cy="6.5" r="1" />
-            </svg>
-        ),
-        label: 'Instagram',
-        value: '@sunbiotan',
-        href: 'https://instagram.com/sunbiotan',
-    },
-    {
-        icon: () => (
-            <svg viewBox="0 0 24 24" className="h-4 w-4 text-sunbiotan-500" fill="currentColor">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-            </svg>
-        ),
-        label: 'Facebook',
-        value: 'Sunbiotan',
-        href: 'https://www.facebook.com/sunbiotan.eu',
-    },
+type ContactItem = {
+  label: string;
+  value: string;
+  href: string;
+} & (
+  | { isFa: true; icon: import('@fortawesome/fontawesome-svg-core').IconDefinition }
+  | { isFa: false; icon: React.ElementType }
+);
+
+const contactInfo: ContactItem[] = [
+  {
+    isFa: false,
+    icon: Mail,
+    label: 'Email',
+    value: 'info@sunbiotan.pt',
+    href: 'mailto:info@sunbiotan.pt',
+  },
+  {
+    isFa: false,
+    icon: Phone,
+    label: 'Telefone',
+    value: '+351 920 253 796',
+    href: 'tel:+351920253796',
+  },
+  {
+    isFa: true,
+    icon: faInstagram,
+    label: 'Instagram',
+    value: '@sunbiotan',
+    href: 'https://instagram.com/sunbiotan',
+  },
+  {
+    isFa: true,
+    icon: faFacebook,
+    label: 'Facebook',
+    value: 'Sunbiotan',
+    href: 'https://www.facebook.com/sunbiotan.eu',
+  },
 ];
 
 interface FormState {
@@ -256,7 +261,13 @@ export function Contact() {
                                 className="flex items-center gap-5 group"
                             >
                                 <div className="flex-shrink-0 w-14 h-14 border border-sunbiotan-200 rounded-2xl flex items-center justify-center group-hover:border-sunbiotan-400 group-hover:bg-sunbiotan-50 transition-all duration-300">
-                                    <item.icon className="h-6 w-6 text-sunbiotan-500" strokeWidth={1.5} />
+                                    <div className="flex-shrink-0 w-14 h-14 border border-sunbiotan-200 rounded-2xl flex items-center justify-center group-hover:border-sunbiotan-400 group-hover:bg-sunbiotan-50 transition-all duration-300">
+                                        {item.isFa ? (
+                                            <FontAwesomeIcon icon={item.icon} style={{ width: '24px', height: '24px' }} className="text-sunbiotan-500" />
+                                        ) : (
+                                            <item.icon className="h-6 w-6 text-sunbiotan-500" strokeWidth={1.5} />
+                                        )}
+                                    </div>
                                 </div>
                                 <div>
                                     <p className="text-[10px] tracking-[0.2em] uppercase text-sunbiotan-500/60 font-medium mb-1">

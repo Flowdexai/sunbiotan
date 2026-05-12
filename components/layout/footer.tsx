@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
-import { Globe, Camera, Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 const navLinks = [
   { label: 'Início', href: '/' },
@@ -37,18 +39,22 @@ export function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="#"
+                href="https://www.facebook.com/sunbiotan.eu"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="w-8 h-8 border border-sunbiotan-800/60 rounded-full flex items-center justify-center text-sunbiotan-500/60 hover:border-sunbiotan-500/60 hover:text-sunbiotan-400 transition-all duration-300"
               >
-                <Globe className="h-3.5 w-3.5" strokeWidth={1.5} />
+                <FontAwesomeIcon icon={faFacebook} style={{ width: '14px', height: '14px' }} />
               </a>
               <a
-                href="#"
+                href="https://instagram.com/sunbiotan"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="w-8 h-8 border border-sunbiotan-800/60 rounded-full flex items-center justify-center text-sunbiotan-500/60 hover:border-sunbiotan-500/60 hover:text-sunbiotan-400 transition-all duration-300"
               >
-                <Camera className="h-3.5 w-3.5" strokeWidth={1.5} />
+                <FontAwesomeIcon icon={faInstagram} style={{ width: '14px', height: '14px' }} />
               </a>
               <a
                 href="mailto:info@sunbiotan.pt"

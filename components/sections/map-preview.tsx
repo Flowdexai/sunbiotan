@@ -1,21 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const VP = { once: false, amount: 0.15 };
-
-const dots = [
-  { x: '22%', y: '38%', delay: 0 },
-  { x: '35%', y: '55%', delay: 0.07 },
-  { x: '48%', y: '30%', delay: 0.14 },
-  { x: '60%', y: '60%', delay: 0.21 },
-  { x: '72%', y: '42%', delay: 0.28 },
-  { x: '55%', y: '48%', delay: 0.35 },
-  { x: '28%', y: '65%', delay: 0.42 },
-  { x: '80%', y: '55%', delay: 0.49 },
-];
 
 export function MapPreview() {
   return (
@@ -30,66 +20,68 @@ export function MapPreview() {
       />
 
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
+
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 16, filter: 'blur(3px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={VP}
             transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-            className="text-center mb-16"
+            className="text-center mb-14"
           >
-            <p className="text-[10px] tracking-[0.4em] uppercase text-sunbiotan-600 mb-5 font-medium">
-              Onde Fazer?
-            </p>
-            <h2 className="font-display font-light text-5xl md:text-6xl text-sunbiotan-900 mb-5 leading-tight">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="h-px w-8 bg-sunbiotan-400/50" />
+              <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-600/80 font-medium">
+                Onde Fazer?
+              </p>
+              <div className="h-px w-8 bg-sunbiotan-400/50" />
+            </div>
+            <h2 className="font-display font-light text-[clamp(2.2rem,5vw,4rem)] text-sunbiotan-900 leading-[1.05] tracking-tight mb-5">
               Encontre o seu{' '}
               <em className="not-italic italic text-sunbiotan-600">Centro</em>
             </h2>
-            <p className="text-sunbiotan-700 text-base font-light tracking-wide max-w-md mx-auto">
-              Disponível exclusivamente em salões de beleza autorizados.
-              Mais de 80 centros certificados em Portugal e Espanha.
+            <p className="text-sunbiotan-700/60 text-base font-light max-w-md mx-auto leading-relaxed">
+              Disponível exclusivamente em salões de beleza autorizados em Portugal e Espanha.
             </p>
           </motion.div>
 
-          {/* Map */}
+          {/* Mapa */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VP}
-            transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
-            className="relative h-72 md:h-96 rounded-3xl overflow-hidden border border-sunbiotan-200/60 shadow-2xl mb-10"
-            style={{ background: 'linear-gradient(135deg, #f9f5ed 0%, #f1e6d3 60%, #e5d4b5 100%)' }}
+            transition={{ duration: 0.8, delay: 0.25, ease: EASE }}
+            className="relative rounded-3xl overflow-hidden border border-sunbiotan-200/60 shadow-2xl shadow-sunbiotan-300/20 mb-10 max-h-[350px]"
           >
-            <div
-              className="absolute inset-0 opacity-[0.07]"
-              style={{ backgroundImage: 'linear-gradient(#c19a5b 1px, transparent 1px), linear-gradient(90deg, #c19a5b 1px, transparent 1px)', backgroundSize: '48px 48px' }}
+            <Image
+              src="/images/map-preview.png"
+              alt="Mapa de centros Sunbiotan"
+              width={1200}
+              height={600}
+              style={{
+                width: '100%',
+                height: '350px',
+                objectFit: 'cover',
+                objectPosition: 'center 70%'
+              }}
+              className=""
             />
-
-            {dots.map((dot, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={VP}
-                transition={{ duration: 0.4, delay: 0.4 + dot.delay, ease: EASE }}
-                className="absolute"
-                style={{ left: dot.x, top: dot.y }}
+            <div className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'linear-gradient(to right, rgba(249,245,237,0.3) 0%, transparent 10%, transparent 90%, rgba(249,245,237,0.3) 100%), linear-gradient(to bottom, rgba(249,245,237,0.2) 0%, transparent 15%, transparent 85%, rgba(249,245,237,0.4) 100%)'
+              }}
+            />
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
+              <a
+                href="/centros"
+                className="flex items-center gap-2 bg-white/85 backdrop-blur-sm px-5 py-2.5 rounded-full border border-sunbiotan-200/60 shadow-md hover:bg-white hover:shadow-lg transition-all duration-300 group"
               >
-                <div className="relative -translate-x-1/2 -translate-y-1/2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-sunbiotan-500 shadow-md" />
-                  <div className="absolute inset-0 rounded-full bg-sunbiotan-400/25 animate-ping" style={{ animationDuration: `${2.2 + i * 0.25}s` }} />
-                </div>
-              </motion.div>
-            ))}
-
-            <div className="absolute inset-0 flex items-end justify-center pb-8 pointer-events-none">
-              <div className="flex items-center gap-2 bg-white/75 backdrop-blur-sm px-4 py-2 rounded-full border border-sunbiotan-200/60 shadow-sm">
-                <MapPin className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-                <p className="text-[11px] tracking-[0.18em] uppercase text-sunbiotan-700/80 font-medium">
-                  Mapa interactivo disponível
-                </p>
-              </div>
+                <span className="text-[11px] tracking-[0.18em] uppercase text-sunbiotan-700 font-medium">
+                  Ver mapa interactivo
+                </span>
+                <ArrowRight className="h-3.5 w-3.5 text-sunbiotan-500 transition-transform group-hover:translate-x-0.5" />
+              </a>
             </div>
           </motion.div>
 
@@ -109,6 +101,7 @@ export function MapPreview() {
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
             </a>
           </motion.div>
+
         </div>
       </div>
     </section>

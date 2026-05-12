@@ -1,181 +1,204 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { useScrollProgress } from '@/hooks/use-scroll-progress';
+import { useRef, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
-const FRAMES = [
-  '/images/aplicacao/frame-1.png',
-  '/images/aplicacao/frame-2.png',
-  '/images/aplicacao/frame-3.png',
-  '/images/aplicacao/frame-4.png',
-  '/images/aplicacao/frame-5.png',
-  '/images/aplicacao/frame-6.png',
-];
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
-const N = FRAMES.length;
-const OVERLAP = 0.08; // crossfade overlap between frames
-
-function frameKeyframes(i: number): { input: number[]; opacity: number[]; scale: number[] } {
-  if (i === 0) {
-    // First frame: fully visible from the start, fades out as second arrives
-    const fadeEnd = 1 / N + OVERLAP;
-    return {
-      input:   [0,    1 / N - OVERLAP, fadeEnd],
-      opacity: [1,    1,               0],
-      scale:   [1.0,  1.0,             1.03],
-    };
-  }
-  if (i === N - 1) {
-    // Last frame: fades in, stays visible until the very end
-    const fadeStart = (N - 1) / N - OVERLAP;
-    return {
-      input:   [fadeStart,             (N - 1) / N + OVERLAP, 1],
-      opacity: [0,                     1,                     1],
-      scale:   [1.06,                  1.0,                   1.0],
-    };
-  }
-  // Middle frames: fade in and out
-  return {
-    input:   [i / N - OVERLAP, i / N + OVERLAP, (i + 1) / N - OVERLAP, (i + 1) / N + OVERLAP],
-    opacity: [0,               1,               1,                      0],
-    scale:   [1.06,            1.0,             1.0,                    1.03],
-  };
-}
-
-function MobileFrame({ src, i, progress }: { src: string; i: number; progress: ReturnType<typeof useMotionValue<number>> }) {
-  const kf      = frameKeyframes(i);
-  const opacity = useTransform(progress, kf.input, kf.opacity);
-  const scale   = useTransform(progress, kf.input, kf.scale);
-
-  return (
-    <motion.div
-      className="absolute inset-0"
-      style={{ opacity, scale }}
-    >
-      {/* Blurred background fill */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover scale-110"
-        style={{ filter: 'blur(24px)', transform: 'scale(1.15)' }}
-      />
-      {/* Dark overlay on the blur */}
-      <div className="absolute inset-0 bg-sunbiotan-950/40" />
-      {/* Main image — full 16:9, centered */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={`Aplicação passo ${i + 1}`}
-        className="absolute inset-0 w-full h-full object-contain"
-      />
-    </motion.div>
-  );
-}
-
-export function ScrollVideo() {
-  const containerRef = useRef<HTMLDivElement>(null);
+export function VideoSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const progress = useScrollProgress(containerRef);
-  const motionProgress = useMotionValue(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(true);
+  const [started, setStarted] = useState(false); // user pressed play at least once
+  const [showControls, setShowControls] = useState(true);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Autoplay muted when enters viewport
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
+    const section = sectionRef.current;
+    const video = videoRef.current;
+    if (!section || !video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().then(() => setPlaying(true)).catch(() => {});
+        } else {
+          video.pause();
+          setPlaying(false);
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
-  // Keep motionValue in sync with scroll progress
-  useEffect(() => {
-    motionProgress.set(progress);
-  }, [progress, motionProgress]);
-
-  // Desktop: scrub video with scroll
-  useEffect(() => {
-    if (isMobile) return;
+  function handlePlayPause() {
     const video = videoRef.current;
     if (!video) return;
-    const scrub = () => {
-      if (video.readyState >= 2 && video.duration && !isNaN(video.duration)) {
-        video.currentTime = video.duration * progress;
-      }
-    };
-    if (video.readyState >= 2) scrub();
-    else video.addEventListener('loadeddata', scrub, { once: true });
-  }, [progress, isMobile]);
 
-  const textOpacity = progress > 0.05 && progress < 0.92 ? 1 : 0;
+    if (!started) {
+      // First click: unmute and play
+      video.muted = false;
+      setMuted(false);
+      setStarted(true);
+      video.play().then(() => setPlaying(true)).catch(() => {});
+      return;
+    }
+
+    if (video.paused) {
+      video.play().then(() => setPlaying(true)).catch(() => {});
+    } else {
+      video.pause();
+      setPlaying(false);
+    }
+  }
+
+  function handleMute() {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setMuted(video.muted);
+  }
+
+  function handleMouseMove() {
+    setShowControls(true);
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    if (playing && started) {
+      hideTimer.current = setTimeout(() => setShowControls(false), 2500);
+    }
+  }
+
+  useEffect(() => {
+    if (!playing || !started) {
+      setShowControls(true);
+      if (hideTimer.current) clearTimeout(hideTimer.current);
+    }
+  }, [playing, started]);
 
   return (
     <section
-      ref={containerRef}
-      className="relative h-[250vh] bg-sunbiotan-950"
+      ref={sectionRef}
+      className="relative bg-sunbiotan-950 py-16 md:py-24"
     >
-      <div className="sticky top-0 h-screen overflow-hidden">
-
-        {/* Golden progress bar */}
-        <div className="absolute top-0 left-0 right-0 z-20 h-[1.5px] bg-sunbiotan-900/40">
-          <div
-            className="h-full bg-gradient-to-r from-sunbiotan-600 via-sunbiotan-400 to-sunbiotan-300 transition-none"
-            style={{ width: `${progress * 100}%` }}
-          />
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 14, filter: 'blur(3px)' }}
+        whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: EASE }}
+        className="text-center mb-10 px-6"
+      >
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="h-px w-8 bg-sunbiotan-600/50" />
+          <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-500 font-medium">
+            A Arte da Aplicação
+          </p>
+          <div className="h-px w-8 bg-sunbiotan-600/50" />
         </div>
+        <h2 className="font-display font-light text-5xl md:text-7xl text-sunbiotan-100 leading-[1.05] tracking-tight">
+          Aplicação{' '}
+          <em className="not-italic italic text-sunbiotan-400">Profissional</em>
+        </h2>
+      </motion.div>
 
-        {/* Mobile: image sequence */}
-        {isMobile && FRAMES.map((src, i) => (
-          <MobileFrame key={src} src={src} i={i} progress={motionProgress} />
-        ))}
-
-        {/* Desktop: scroll-scrubbed video */}
-        {!isMobile && (
-          // eslint-disable-next-line jsx-a11y/media-has-caption
+      {/* Video container */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
+        className="container mx-auto px-6"
+      >
+        <div
+          className="relative rounded-2xl overflow-hidden aspect-video bg-sunbiotan-900 cursor-pointer group shadow-2xl shadow-sunbiotan-950/80"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => {
+            if (playing && started) {
+              hideTimer.current = setTimeout(() => setShowControls(false), 1000);
+            }
+          }}
+          onClick={handlePlayPause}
+        >
+          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video
             ref={videoRef}
             className="w-full h-full object-cover"
-            preload="auto"
+            preload="metadata"
             muted
             playsInline
+            loop
             style={{ WebkitTransform: 'translateZ(0)' }}
           >
-            <source src="/videos/aplicacao.mp4" type="video/mp4" />
+            <source src="/videos/SUNBIOTAN-musica.mp4" type="video/mp4" />
           </video>
-        )}
 
-        {/* Dark vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-sunbiotan-950/65 via-transparent to-sunbiotan-950/25 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-sunbiotan-950/30 via-transparent to-transparent pointer-events-none" />
+          {/* Vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-sunbiotan-950/40 via-transparent to-transparent pointer-events-none" />
 
-        {/* Text overlay */}
-        <div
-          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-700 z-10"
-          style={{ opacity: textOpacity }}
-        >
-          <motion.div className="text-center px-6">
-            <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-300/60 font-light mb-4">
-              A Arte da Aplicação
-            </p>
-            <h2 className="font-display font-light text-4xl md:text-6xl text-sunbiotan-100/90 leading-tight">
-              Aplicação
-              <br />
-              <em className="not-italic italic text-sunbiotan-400">Profissional</em>
-            </h2>
-          </motion.div>
+          {/* Controls overlay */}
+          <AnimatePresence>
+            {showControls && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                {/* Play/Pause button central */}
+                <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center pointer-events-auto hover:bg-white/20 transition-all duration-300 hover:scale-110">
+                  {playing && started ? (
+                    <Pause className="h-6 w-6 text-white" strokeWidth={1.5} />
+                  ) : (
+                    <Play className="h-6 w-6 text-white ml-0.5" strokeWidth={1.5} />
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* First play hint */}
+          <AnimatePresence>
+            {!started && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                className="absolute bottom-5 left-1/2 -translate-x-1/2 pointer-events-none"
+              >
+                <p className="text-[10px] tracking-[0.3em] uppercase text-white/50 font-light">
+                  Clique para ativar o som
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Mute button — bottom right */}
+          <AnimatePresence>
+            {started && showControls && (
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={e => { e.stopPropagation(); handleMute(); }}
+                className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-black/50 transition-all duration-300"
+              >
+                {muted ? (
+                  <VolumeX className="h-4 w-4" strokeWidth={1.5} />
+                ) : (
+                  <Volume2 className="h-4 w-4" strokeWidth={1.5} />
+                )}
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
-
-        {/* Bottom progress indicator line */}
-        <div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 w-px transition-opacity duration-500"
-          style={{
-            height: '56px',
-            background: 'linear-gradient(to bottom, rgba(193,154,91,0.5), transparent)',
-            opacity: progress < 0.9 ? 0.7 - progress * 0.5 : 0,
-          }}
-        />
-      </div>
+      </motion.div>
     </section>
   );
 }
