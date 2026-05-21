@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -36,7 +36,7 @@ export function About() {
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_2fr] gap-12 items-start">
 
-          <motion.div
+          <m.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
@@ -51,10 +51,10 @@ export function About() {
               </p>
             </div>
             <div className="w-px h-20 bg-gradient-to-b from-sunbiotan-400/50 to-transparent ml-4 mt-2" />
-          </motion.div>
+          </m.div>
 
           <div>
-            <motion.div
+            <m.div
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
@@ -66,9 +66,9 @@ export function About() {
               <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-600/80 font-medium">
                 {t('eyebrow')}
               </p>
-            </motion.div>
+            </m.div>
 
-            <motion.h2
+            <m.h2
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
@@ -79,9 +79,9 @@ export function About() {
               {t('headline')}
               <br />
               <em className="not-italic italic text-sunbiotan-600">{t('headlineItalic')}</em>
-            </motion.h2>
+            </m.h2>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scaleX: 0 }}
               whileInView={{ opacity: 1, scaleX: 1 }}
               viewport={VP}
@@ -91,9 +91,9 @@ export function About() {
               <div className="h-px w-10 bg-sunbiotan-400/60" />
               <div className="w-1 h-1 rounded-full bg-sunbiotan-500/80" />
               <div className="h-px w-6 bg-sunbiotan-400/30" />
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
@@ -112,9 +112,9 @@ export function About() {
               <p className="text-base text-sunbiotan-700/80 font-light leading-relaxed tracking-[0.02em]">
                 {t('p3')}
               </p>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
@@ -131,9 +131,9 @@ export function About() {
                   {d}
                 </span>
               ))}
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
@@ -145,7 +145,7 @@ export function About() {
               <p className="text-sm text-sunbiotan-700 font-light leading-snug max-w-[160px]">
                 {t('naturalIngredients')}
               </p>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </div>

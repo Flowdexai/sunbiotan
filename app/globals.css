@@ -119,6 +119,19 @@
   will-change: transform, opacity, filter;
 }
 
+/* ── Respect prefers-reduced-motion (WCAG 2.3.3) ────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .golden-shimmer {
+    animation: none;
+    background-position: 50% center;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ── Animated draw line (SVG path) ──────────────────────────── */
 @keyframes drawLine {
   from { stroke-dashoffset: 200; }

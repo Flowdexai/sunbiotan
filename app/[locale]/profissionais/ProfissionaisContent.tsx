@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import {
@@ -78,7 +78,7 @@ function CandidatureForm() {
 
   if (success) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: EASE }}
@@ -89,7 +89,7 @@ function CandidatureForm() {
         </div>
         <h3 className="font-display font-light text-2xl text-sunbiotan-100 mb-3">{t('successTitle')}</h3>
         <p className="text-sunbiotan-400/60 text-sm font-light max-w-xs mx-auto leading-relaxed">{t('successDesc')}</p>
-      </motion.div>
+      </m.div>
     );
   }
 
@@ -180,12 +180,12 @@ export function ProfissionaisContent() {
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 55%, rgba(193,154,91,0.09) 0%, transparent 70%)' }} />
 
         <div className="relative container mx-auto px-6 text-center">
-          <motion.div
+          <m.div
             initial="hidden"
             animate="show"
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } } }}
           >
-            <motion.div
+            <m.div
               variants={{ hidden: { opacity: 0, y: 20, filter: 'blur(6px)' }, show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: EASE } } }}
               className="flex items-center justify-center gap-3 mb-6"
             >
@@ -195,33 +195,33 @@ export function ProfissionaisContent() {
                 <p className="text-[14px] tracking-[1em] uppercase text-sunbiotan-400/70 font-light">{t('eyebrow')}</p>
               </div>
               <div className="h-px w-8 bg-gradient-to-l from-transparent to-sunbiotan-500/50" />
-            </motion.div>
+            </m.div>
 
-            <motion.h1
+            <m.h1
               variants={{ hidden: { opacity: 0, y: 24, filter: 'blur(6px)' }, show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.9, ease: EASE } } }}
               className="font-display font-light leading-[0.95] tracking-tight mb-6"
             >
               <span className="block text-[clamp(2.6rem,8vw,7rem)] text-sunbiotan-100/90">{t('headline1')}</span>
               <span className="block text-[clamp(2.6rem,8vw,7rem)] golden-shimmer">{t('headline2')}</span>
-            </motion.h1>
+            </m.h1>
 
-            <motion.div
+            <m.div
               variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.6, delay: 0.2, ease: EASE } } }}
               className="flex items-center justify-center gap-4 mb-6"
             >
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-sunbiotan-600/40" />
               <div className="w-1 h-1 rounded-full bg-sunbiotan-500/50" />
               <div className="h-px w-12 bg-gradient-to-l from-transparent to-sunbiotan-600/40" />
-            </motion.div>
+            </m.div>
 
-            <motion.p
+            <m.p
               variants={{ hidden: { opacity: 0, y: 16, filter: 'blur(4px)' }, show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: EASE } } }}
               className="text-sunbiotan-300/55 text-base md:text-lg font-light tracking-wide max-w-lg mx-auto mb-10 leading-relaxed"
             >
               {t('subtitle')}
-            </motion.p>
+            </m.p>
 
-            <motion.div
+            <m.div
               variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } } }}
               className="flex flex-col sm:flex-row gap-3 justify-center items-center"
             >
@@ -238,11 +238,11 @@ export function ProfissionaisContent() {
               >
                 {t('cta2')}
               </Link>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8, ease: EASE }}
@@ -262,13 +262,13 @@ export function ProfissionaisContent() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </section>
 
       <section className="py-20 md:py-32 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #261b0e 0%, #1a130a 100%)' }}>
         <div className="absolute inset-0 opacity-[0.025] pointer-events-none" style={{ backgroundImage: GRAIN, backgroundSize: '180px 180px' }} />
         <div className="relative container mx-auto px-6">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={VP}
@@ -280,11 +280,11 @@ export function ProfissionaisContent() {
               {t('benefitsHeadline')}{' '}
               <em className="not-italic italic text-sunbiotan-400">{t('benefitsHeadlineItalic')}</em>
             </h2>
-          </motion.div>
+          </m.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-sunbiotan-800/15 rounded-2xl overflow-hidden">
             {benefits.map((b, i) => (
-              <motion.div
+              <m.div
                 key={b.title}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -297,7 +297,7 @@ export function ProfissionaisContent() {
                 </div>
                 <h3 className="text-sunbiotan-100/90 font-medium text-sm mb-2.5 tracking-wide">{b.title}</h3>
                 <p className="text-sunbiotan-400/45 text-sm font-light leading-relaxed">{b.description}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -306,7 +306,7 @@ export function ProfissionaisContent() {
       <section className="py-20 md:py-32 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #1a130a 0%, #211508 100%)' }}>
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #c19a5b 1px, transparent 0)', backgroundSize: '30px 30px' }} />
         <div className="relative container mx-auto px-6">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={VP}
@@ -318,11 +318,11 @@ export function ProfissionaisContent() {
               {t('stepsHeadline')}{' '}
               <em className="not-italic italic text-sunbiotan-400">{t('stepsHeadlineItalic')}</em>
             </h2>
-          </motion.div>
+          </m.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
             {steps.map((step, i) => (
-              <motion.div
+              <m.div
                 key={step.number}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -338,7 +338,7 @@ export function ProfissionaisContent() {
                   <h3 className="text-sunbiotan-100/80 font-medium text-sm mb-2 tracking-wide">{step.title}</h3>
                   <p className="text-sunbiotan-400/40 text-sm font-light leading-relaxed">{step.description}</p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -350,7 +350,7 @@ export function ProfissionaisContent() {
 
         <div className="relative container mx-auto px-6">
           <div className="max-w-2xl mx-auto">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={VP}
@@ -360,9 +360,9 @@ export function ProfissionaisContent() {
               <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-500/70 mb-4 font-medium">{t('formEyebrow')}</p>
               <h2 className="font-display font-light text-[clamp(2rem,5vw,3.5rem)] text-sunbiotan-100 leading-tight tracking-tight mb-4">{t('formHeadline')}</h2>
               <p className="text-sunbiotan-400/50 text-sm font-light leading-relaxed max-w-sm mx-auto">{t('formSubtitle')}</p>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VP}
@@ -374,7 +374,7 @@ export function ProfissionaisContent() {
               <div className="p-8 md:p-10">
                 <CandidatureForm />
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>

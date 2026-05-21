@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Mail, Phone, Send, Loader2, CheckCircle } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -75,7 +75,7 @@ export function Contact() {
       </div>
 
       <div className="container mx-auto px-6">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 14, filter: 'blur(3px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={VP}
@@ -96,11 +96,11 @@ export function Contact() {
           <p className="mt-4 text-sunbiotan-600/60 font-light text-base max-w-lg mx-auto leading-relaxed">
             {t('subtitle')}
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid lg:grid-cols-2 gap-16 max-w-5xl mx-auto items-start">
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -16, filter: 'blur(3px)' }}
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
             viewport={VP}
@@ -108,7 +108,7 @@ export function Contact() {
             className="space-y-4"
           >
             {success ? (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center justify-center gap-4 py-16 text-center"
@@ -126,7 +126,7 @@ export function Contact() {
                 >
                   {t('sendAnother')}
                 </button>
-              </motion.div>
+              </m.div>
             ) : (
               <>
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -200,9 +200,9 @@ export function Contact() {
                 </button>
               </>
             )}
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 16, filter: 'blur(3px)' }}
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
             viewport={VP}
@@ -210,7 +210,7 @@ export function Contact() {
             className="space-y-8 lg:pt-8 lg:pl-8"
           >
             {contactInfo.map((item, i) => (
-              <motion.a
+              <m.a
                 key={item.label}
                 href={item.href}
                 target={item.href.startsWith('http') ? '_blank' : undefined}
@@ -236,9 +236,9 @@ export function Contact() {
                     {item.value}
                   </p>
                 </div>
-              </motion.a>
+              </m.a>
             ))}
-          </motion.div>
+          </m.div>
 
         </div>
       </div>

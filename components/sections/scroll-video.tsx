@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
@@ -82,7 +82,7 @@ export function VideoSection() {
 
   return (
     <section ref={sectionRef} className="relative bg-sunbiotan-950 py-16 md:py-24">
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 14, filter: 'blur(3px)' }}
         whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
         viewport={{ once: false, amount: 0.2 }}
@@ -100,9 +100,9 @@ export function VideoSection() {
           {t('headline')}{' '}
           <em className="not-italic italic text-sunbiotan-400">{t('headlineItalic')}</em>
         </h2>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.2 }}
@@ -136,7 +136,7 @@ export function VideoSection() {
 
           <AnimatePresence>
             {showControls && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -150,13 +150,13 @@ export function VideoSection() {
                     <Play className="h-6 w-6 text-white ml-0.5" strokeWidth={1.5} />
                   )}
                 </div>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
 
           <AnimatePresence>
             {!started && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
@@ -166,13 +166,13 @@ export function VideoSection() {
                 <p className="text-[10px] tracking-[0.3em] uppercase text-white/50 font-light">
                   {t('clickHint')}
                 </p>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
 
           <AnimatePresence>
             {started && showControls && (
-              <motion.button
+              <m.button
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -184,11 +184,11 @@ export function VideoSection() {
                 ) : (
                   <Volume2 className="h-4 w-4" strokeWidth={1.5} />
                 )}
-              </motion.button>
+              </m.button>
             )}
           </AnimatePresence>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

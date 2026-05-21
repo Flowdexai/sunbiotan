@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Zap, Clock, Sparkles, Award } from 'lucide-react';
 
@@ -34,7 +34,7 @@ export function HowItWorks() {
       </div>
 
       <div className="container mx-auto px-6 relative">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16, filter: 'blur(3px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={VP}
@@ -48,13 +48,13 @@ export function HowItWorks() {
             {t('headline')}{' '}
             <em className="not-italic italic text-sunbiotan-400">{t('headlineItalic')}</em>
           </h2>
-        </motion.div>
+        </m.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-6 max-w-6xl relative">
           {STEP_KEYS.map((key, index) => {
             const StepIcon = STEP_ICONS[index];
             return (
-              <motion.div
+              <m.div
                 key={key}
                 initial={{ opacity: 0, y: 16, filter: 'blur(3px)' }}
                 whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -63,7 +63,7 @@ export function HowItWorks() {
                 className="group relative"
               >
                 {index < STEP_KEYS.length - 1 && (
-                  <motion.div
+                  <m.div
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
                     viewport={VP}
@@ -82,7 +82,7 @@ export function HowItWorks() {
                   </div>
                 </div>
 
-                <motion.div
+                <m.div
                   className="h-px mb-5 bg-sunbiotan-500 origin-left"
                   style={{ width: '3rem' }}
                   initial={{ scaleX: 0 }}
@@ -97,7 +97,7 @@ export function HowItWorks() {
                 <p className="text-sm text-sunbiotan-400/60 font-light leading-relaxed">
                   {t(`steps.${key}.description`)}
                 </p>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -43,7 +43,7 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
 
   return (
     <>
-      <motion.nav
+      <m.nav
         initial={{ y: 0 }}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
@@ -57,7 +57,7 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
 
             {/* Logo */}
             <div className="w-[180px]">
-              <motion.div
+              <m.div
                 animate={{ scale: isScrolled ? 0.88 : 1 }}
                 transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                 className="origin-left block"
@@ -72,7 +72,7 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
                     priority
                   />
                 </Link>
-              </motion.div>
+              </m.div>
             </div>
 
             {/* Links — desktop */}
@@ -118,11 +118,11 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
 
           </div>
         </div>
-      </motion.nav>
+      </m.nav>
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -167,7 +167,7 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
                 <LocaleSwitcher />
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

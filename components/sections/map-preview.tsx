@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -26,7 +26,7 @@ export function MapPreview() {
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 16, filter: 'blur(3px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={VP}
@@ -47,9 +47,9 @@ export function MapPreview() {
             <p className="text-sunbiotan-700/60 text-base font-light max-w-md mx-auto leading-relaxed">
               {t('subtitle')}
             </p>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VP}
@@ -84,9 +84,9 @@ export function MapPreview() {
                 <ArrowRight className="h-3.5 w-3.5 text-sunbiotan-500 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VP}
@@ -100,7 +100,7 @@ export function MapPreview() {
               {t('findCenter')}
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
-          </motion.div>
+          </m.div>
 
         </div>
       </div>

@@ -3,6 +3,7 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { WhatsAppButton } from '@/components/ui/whatsapp-button';
+import { MotionProvider } from '@/components/motion-provider';
 import type { Metadata } from 'next';
 
 export async function generateMetadata({
@@ -50,8 +51,10 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-      <WhatsAppButton />
+      <MotionProvider>
+        {children}
+        <WhatsAppButton />
+      </MotionProvider>
     </NextIntlClientProvider>
   );
 }

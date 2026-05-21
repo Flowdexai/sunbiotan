@@ -5,6 +5,7 @@ import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from '@/i18n/navigation';
 import Image from 'next/image';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 
 export default function LoginPage() {
@@ -158,9 +159,9 @@ export default function LoginPage() {
 
           <p className="text-center text-xs text-sunbiotan-500 mt-8">
             {t('notPartner')}{' '}
-            <a href="/#profissionais" className="text-sunbiotan-600 hover:underline">
+            <Link href="/#profissionais" className="text-sunbiotan-600 hover:underline">
               {t('learnMore')}
-            </a>
+            </Link>
           </p>
         </div>
       </div>

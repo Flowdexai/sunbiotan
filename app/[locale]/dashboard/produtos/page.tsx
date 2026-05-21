@@ -66,7 +66,7 @@ export default function ProdutosPage() {
           >
             {product.image_url ? (
               <div className="relative h-40 w-full">
-                <Image src={product.image_url} alt={product.name} fill className="object-cover" />
+                <Image src={product.image_url} alt={product.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
               </div>
             ) : (
               <div className="h-40 bg-sunbiotan-50 flex items-center justify-center">

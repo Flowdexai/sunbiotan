@@ -96,7 +96,7 @@ export default function NovoCentroPage() {
 
     try {
       const fullAddress = `${form.address}, ${form.city}, ${form.country}`;
-      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(fullAddress)}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}`;
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(fullAddress)}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`;
       const res = await fetch(url);
       const data = await res.json();
 

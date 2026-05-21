@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Sidebar } from '@/components/map/sidebar';
 import { getCenters } from '@/lib/data/centers-data';
 import { Center } from '@/types/center';
@@ -93,13 +93,13 @@ export function CentrosContent() {
         </div>
 
         <div className="relative container mx-auto px-6">
-          <motion.div
+          <m.div
             variants={headerVariants}
             initial="hidden"
             animate="show"
             className="py-10 md:py-14 text-center"
           >
-            <motion.div
+            <m.div
               variants={fadeUp}
               transition={{ duration: 0.7, ease: EASE }}
               className="flex items-center justify-center gap-3 mb-4"
@@ -109,18 +109,18 @@ export function CentrosContent() {
                 {t('eyebrow')}
               </p>
               <div className="h-px w-8 bg-gradient-to-l from-transparent to-sunbiotan-500/60" />
-            </motion.div>
+            </m.div>
 
-            <motion.h1
+            <m.h1
               variants={fadeUp}
               transition={{ duration: 0.7, ease: EASE }}
               className="font-display font-light text-[clamp(2.6rem,6vw,5rem)] text-sunbiotan-900 leading-[1.05] tracking-tight mb-5"
             >
               {t('headline')}{' '}
               <em className="not-italic italic text-sunbiotan-600">{t('headlineItalic')}</em>
-            </motion.h1>
+            </m.h1>
 
-            <motion.div
+            <m.div
               variants={fadeUp}
               transition={{ duration: 0.7, ease: EASE }}
               className="flex items-center justify-center gap-4 mb-5"
@@ -128,19 +128,19 @@ export function CentrosContent() {
               <div className="h-px w-12 bg-gradient-to-r from-transparent to-sunbiotan-500/40" />
               <div className="w-1 h-1 rounded-full bg-sunbiotan-500/60" />
               <div className="h-px w-12 bg-gradient-to-l from-transparent to-sunbiotan-500/40" />
-            </motion.div>
+            </m.div>
 
-            <motion.p
+            <m.p
               variants={fadeUp}
               transition={{ duration: 0.7, ease: EASE }}
               className="text-sunbiotan-700/80 text-sm font-light tracking-[0.04em] max-w-sm mx-auto"
             >
               {t('subtitle')}
-            </motion.p>
-          </motion.div>
+            </m.p>
+          </m.div>
 
           <div className="hidden lg:grid lg:grid-cols-2 gap-10 pb-16">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
@@ -151,9 +151,9 @@ export function CentrosContent() {
                 onCenterSelect={setSelectedCenter}
                 selectedCenter={selectedCenter}
               />
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
@@ -163,7 +163,7 @@ export function CentrosContent() {
                 selectedCenter={selectedCenter}
                 onCenterClick={setSelectedCenter}
               />
-            </motion.div>
+            </m.div>
           </div>
 
           <div className="lg:hidden pb-12">

@@ -99,6 +99,7 @@ export function FileUpload({
                 src={currentUrl}
                 alt="Preview"
                 fill
+                sizes="100vw"
                 className="object-cover"
               />
               <button

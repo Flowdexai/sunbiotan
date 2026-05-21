@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ArrowRight, Users, TrendingUp, Award } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
@@ -38,7 +38,7 @@ export function CtaProfessionals() {
       <div className="container mx-auto px-6 relative">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center max-w-6xl mx-auto">
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -16, filter: 'blur(3px)' }}
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
             viewport={VP}
@@ -54,7 +54,7 @@ export function CtaProfessionals() {
               <em className="not-italic italic text-sunbiotan-400">{t('headline2')}</em>
             </h2>
 
-            <motion.div
+            <m.div
               className="h-px bg-sunbiotan-600/60 mb-7 origin-left"
               style={{ width: '2.5rem' }}
               initial={{ scaleX: 0 }}
@@ -72,7 +72,7 @@ export function CtaProfessionals() {
 
             <div className="space-y-5 mb-10">
               {perks.map((perk, i) => (
-                <motion.div
+                <m.div
                   key={perk.title}
                   initial={{ opacity: 0, x: -12 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -87,12 +87,12 @@ export function CtaProfessionals() {
                     <p className="text-sunbiotan-100 font-medium text-[13px] mb-0.5 tracking-wide">{perk.title}</p>
                     <p className="text-sunbiotan-400/50 text-sm font-light leading-relaxed">{perk.description}</p>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 16, filter: 'blur(3px)' }}
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
             viewport={VP}
@@ -125,7 +125,7 @@ export function CtaProfessionals() {
               <div className="absolute bottom-4 left-8 w-1 h-1 rounded-full bg-sunbiotan-400/30" />
               <div className="absolute top-1/2 -left-3 w-1 h-1 rounded-full bg-sunbiotan-600/40" />
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

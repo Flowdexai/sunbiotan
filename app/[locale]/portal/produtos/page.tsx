@@ -76,7 +76,7 @@ export default function PortalProdutosPage() {
             >
               {product.image_url ? (
                 <div className="relative h-52 w-full">
-                  <Image src={product.image_url} alt={product.name} fill className="object-cover" />
+                  <Image src={product.image_url} alt={product.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
                 </div>
               ) : (
                 <div className="h-52 bg-sunbiotan-50 flex items-center justify-center">
@@ -108,6 +108,7 @@ export default function PortalProdutosPage() {
                       src={product.image_url_2}
                       alt={`${product.name} - ${t('imageAlt')}`}
                       fill
+                      sizes="(max-width: 640px) 100vw, 50vw"
                       className="object-cover"
                     />
                   </div>

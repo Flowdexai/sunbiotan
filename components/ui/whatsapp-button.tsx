@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
@@ -21,7 +21,7 @@ export function WhatsAppButton() {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.a
+        <m.a
           href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(t('message'))}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -33,7 +33,7 @@ export function WhatsAppButton() {
           aria-label={t('ariaLabel')}
         >
           <FontAwesomeIcon icon={faWhatsapp} style={{ width: '28px', height: '28px' }} className="text-white" />
-        </motion.a>
+        </m.a>
       )}
     </AnimatePresence>
   );

@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { MapPin, Phone, Mail, Star, Navigation, Loader2, X } from 'lucide-react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Center } from '@/types/center';
 import { useMapsLibrary } from '@vis.gl/react-google-maps';
 import dynamic from 'next/dynamic';
@@ -188,7 +188,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
   return (
     <div className="space-y-10">
 
-      <motion.div
+      <m.div
         variants={fadeUp}
         initial="hidden"
         animate="show"
@@ -203,9 +203,9 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           <div className="w-1 h-1 rounded-full bg-sunbiotan-500/80" />
           <div className="h-px w-6 bg-sunbiotan-400/30" />
         </div>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         variants={fadeUp}
         initial="hidden"
         animate="show"
@@ -257,10 +257,10 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
             </button>
           </div>
         )}
-      </motion.div>
+      </m.div>
 
       {mobileLayout && (
-        <motion.div
+        <m.div
           ref={mapRef}
           variants={fadeUp}
           initial="hidden"
@@ -270,12 +270,12 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           className="h-[400px] rounded-2xl overflow-hidden border border-sunbiotan-200/60 shadow-lg shadow-sunbiotan-100/50"
         >
           <MapView centers={centers} onCenterSelect={onCenterClick} selectedCenter={selectedCenter} />
-        </motion.div>
+        </m.div>
       )}
 
       {searchLocation && searchResults.length > 0 && (
         <div>
-          <motion.div
+          <m.div
             variants={fadeUp}
             initial="hidden"
             animate="show"
@@ -289,8 +289,8 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
             <span className="text-xs text-sunbiotan-400 font-light">
               ({searchResults.length})
             </span>
-          </motion.div>
-          <motion.div variants={stagger} initial="hidden" animate="show" className="grid md:grid-cols-2 gap-5">
+          </m.div>
+          <m.div variants={stagger} initial="hidden" animate="show" className="grid md:grid-cols-2 gap-5">
             {searchResults.map((center, index) => (
               <NearbyCard
                 key={center.id}
@@ -302,13 +302,13 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
                 viewOnMapLabel={viewOnMapLabel}
               />
             ))}
-          </motion.div>
+          </m.div>
         </div>
       )}
 
       {!searchLocation && featuredCenters.length > 0 && (
         <div>
-          <motion.div
+          <m.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
@@ -320,8 +320,8 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
             <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
               {t('premiumTitle')}
             </h2>
-          </motion.div>
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={VP} className="space-y-6">
+          </m.div>
+          <m.div variants={stagger} initial="hidden" whileInView="show" viewport={VP} className="space-y-6">
             {featuredCenters.map((center) => (
               <FeaturedCenterCard
                 key={center.id}
@@ -333,13 +333,13 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
                 viewOnMapLabel={viewOnMapLabel}
               />
             ))}
-          </motion.div>
+          </m.div>
         </div>
       )}
 
       {!searchLocation && regularCenters.length > 0 && (
         <div>
-          <motion.div
+          <m.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
@@ -351,8 +351,8 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
             <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
               {t('certifiedTitle')}
             </h2>
-          </motion.div>
-          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: false, amount: 0 }} className="grid md:grid-cols-2 gap-5">
+          </m.div>
+          <m.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: false, amount: 0 }} className="grid md:grid-cols-2 gap-5">
             {regularCenters.map((center) => (
               <RegularCenterCard
                 key={center.id}
@@ -364,12 +364,12 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
                 viewOnMapLabel={viewOnMapLabel}
               />
             ))}
-          </motion.div>
+          </m.div>
         </div>
       )}
 
       {filteredCenters.length === 0 && (
-        <motion.div
+        <m.div
           variants={fadeUp}
           initial="hidden"
           animate="show"
@@ -380,7 +380,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           <p className="font-display font-light text-xl text-sunbiotan-700">
             {t('notFound')}
           </p>
-        </motion.div>
+        </m.div>
       )}
     </div>
   );
@@ -397,7 +397,7 @@ function NearbyCard({
   viewOnMapLabel: string;
 }) {
   return (
-    <motion.div
+    <m.div
       variants={fadeUp}
       className={`p-5 rounded-2xl transition-all duration-300 border flex flex-col ${isSelected
         ? 'border-sunbiotan-500 bg-sunbiotan-50 shadow-lg shadow-sunbiotan-200/50'
@@ -465,7 +465,7 @@ function NearbyCard({
           {viewOnMapLabel}
         </button>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -480,7 +480,7 @@ function FeaturedCenterCard({
   viewOnMapLabel: string;
 }) {
   return (
-    <motion.div
+    <m.div
       variants={fadeUp}
       className={`rounded-2xl transition-all duration-300 overflow-hidden border ${isSelected
         ? 'border-sunbiotan-500 shadow-xl shadow-sunbiotan-200/50 scale-[1.01]'
@@ -489,7 +489,7 @@ function FeaturedCenterCard({
     >
       {center.image_url && (
         <div className="relative w-full h-48 overflow-hidden">
-          <Image src={center.image_url} alt={center.name} fill className="object-cover hover:scale-105 transition-transform duration-500" />
+          <Image src={center.image_url} alt={center.name} fill sizes="(max-width: 1024px) 100vw, 500px" className="object-cover hover:scale-105 transition-transform duration-500" />
           <div className="absolute inset-0 bg-gradient-to-t from-sunbiotan-950/40 to-transparent" />
           <div className="absolute top-3 right-3">
             <span className="inline-flex items-center gap-1 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 text-white px-3 py-1 rounded-full text-[10px] tracking-[0.12em] uppercase font-medium shadow-lg">
@@ -559,7 +559,7 @@ function FeaturedCenterCard({
           {viewOnMapLabel}
         </button>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -574,7 +574,7 @@ function RegularCenterCard({
   viewOnMapLabel: string;
 }) {
   return (
-    <motion.div
+    <m.div
       variants={fadeUp}
       className={`p-5 rounded-2xl transition-all duration-300 border flex flex-col ${isSelected
         ? 'border-sunbiotan-500 bg-sunbiotan-50 shadow-lg shadow-sunbiotan-200/50'
@@ -633,6 +633,6 @@ function RegularCenterCard({
           {viewOnMapLabel}
         </button>
       </div>
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Sparkles, Sun, Zap, Leaf, Clock, Award, Check, Users } from 'lucide-react';
 
@@ -24,7 +24,7 @@ export function Benefits() {
       </div>
 
       <div className="container mx-auto px-6 relative">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16, filter: 'blur(3px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={VP}
@@ -38,13 +38,13 @@ export function Benefits() {
             {t('headline')}{' '}
             <em className="not-italic italic text-sunbiotan-600">{t('headlineItalic')}</em>
           </h2>
-        </motion.div>
+        </m.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {BENEFIT_KEYS.map((key, i) => {
             const Icon = BENEFIT_ICONS[i];
             return (
-              <motion.div
+              <m.div
                 key={key}
                 initial={{ opacity: 0, y: 16, filter: 'blur(3px)' }}
                 whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -70,7 +70,7 @@ export function Benefits() {
                     <Icon className="h-4 w-4 text-sunbiotan-400 group-hover:text-sunbiotan-500 transition-colors duration-300" strokeWidth={1.5} />
                   </div>
 
-                  <motion.div
+                  <m.div
                     className="h-px mb-3.5 bg-sunbiotan-400 origin-left"
                     style={{ width: '1.25rem' }}
                     initial={{ scaleX: 0 }}
@@ -86,7 +86,7 @@ export function Benefits() {
                     {t(`items.${key}.description`)}
                   </p>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

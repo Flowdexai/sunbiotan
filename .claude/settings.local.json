@@ -11,7 +11,9 @@
       "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Nico\\\\Desktop\\\\FLOWDEX\\\\CLIENTES\\\\Sunbiotan\\\\web\\\\app\" -Recurse -Filter \"page.tsx\")",
       "Bash(Select-Object FullName)",
       "Bash(cp -r \"app/[locale]/centros\" \"app/[locale]/mapa-centros\")",
-      "Bash(rm -rf \"app/[locale]/centros\")"
+      "Bash(rm -rf \"app/[locale]/centros\")",
+      "Bash(npx react-doctor@latest)",
+      "Bash(npx react-doctor@latest . --verbose)"
     ],
     "additionalDirectories": [
       "c:\\Users\\Nico\\Desktop\\FLOWDEX\\CLIENTES\\Sunbiotan\\web\\app"

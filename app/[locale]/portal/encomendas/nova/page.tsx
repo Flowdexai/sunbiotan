@@ -164,7 +164,7 @@ export default function NovaEncomendaPage() {
                 >
                   {product.image_url ? (
                     <div className="relative w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
-                      <Image src={product.image_url} alt={product.name} fill className="object-cover" />
+                      <Image src={product.image_url} alt={product.name} fill sizes="56px" className="object-cover" />
                     </div>
                   ) : (
                     <div className="w-14 h-14 rounded-lg bg-sunbiotan-100 flex items-center justify-center flex-shrink-0">

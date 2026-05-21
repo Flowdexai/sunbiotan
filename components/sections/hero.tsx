@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
@@ -46,7 +46,7 @@ export function Hero() {
         }}
       />
 
-      <motion.div
+      <m.div
         style={{ opacity: overlayOpacity }}
         className="absolute inset-0 pointer-events-none"
       >
@@ -54,7 +54,7 @@ export function Hero() {
         <div className="absolute inset-0" style={{
           background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(26,19,10,0.55) 100%)',
         }} />
-      </motion.div>
+      </m.div>
 
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -64,26 +64,26 @@ export function Hero() {
         }}
       />
 
-      <motion.div
+      <m.div
         style={{ y: contentY }}
         className="relative z-10 container mx-auto px-6 text-center pt-14 md:pt-40"
       >
-        <motion.div variants={containerVariants} initial="hidden" animate="show">
-          <motion.div variants={itemVariants} className="mb-2">
+        <m.div variants={containerVariants} initial="hidden" animate="show">
+          <m.div variants={itemVariants} className="mb-2">
             <p className="font-display font-light text-[clamp(2rem,3vw,2rem)] tracking-[0.55em] uppercase text-sunbiotan-200/90">
               SUNBIOTAN
             </p>
-          </motion.div>
+          </m.div>
 
-          <motion.div variants={itemVariants} className="flex items-center justify-center gap-3 mb-3 md:mb-5">
+          <m.div variants={itemVariants} className="flex items-center justify-center gap-3 mb-3 md:mb-5">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-sunbiotan-500/60" />
             <p className="text-[10px] md:text-[11px] tracking-[0.5em] uppercase text-sunbiotan-200/80 font-light">
               {t('eyebrow')}
             </p>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-sunbiotan-500/60" />
-          </motion.div>
+          </m.div>
 
-          <motion.div variants={itemVariants} className="mb-3 md:mb-4">
+          <m.div variants={itemVariants} className="mb-3 md:mb-4">
             <h1 className="font-display font-light leading-[0.9] tracking-tight">
               <span className="block text-[clamp(2.8rem,9vw,7.5rem)] text-sunbiotan-100/92">
                 {t('headline1')}
@@ -92,22 +92,22 @@ export function Hero() {
                 {t('headline2')}
               </span>
             </h1>
-          </motion.div>
+          </m.div>
 
-          <motion.div variants={itemVariants} className="flex items-center justify-center gap-4 mb-3 md:mb-5">
+          <m.div variants={itemVariants} className="flex items-center justify-center gap-4 mb-3 md:mb-5">
             <div className="h-px w-16 bg-gradient-to-r from-transparent to-sunbiotan-500/40" />
             <div className="w-1 h-1 rounded-full bg-sunbiotan-500/60" />
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-sunbiotan-500/40" />
-          </motion.div>
+          </m.div>
 
-          <motion.p
+          <m.p
             variants={itemVariants}
             className="text-sunbiotan-100/75 text-sm md:text-base font-light tracking-[0.06em] max-w-xs md:max-w-md mx-auto mb-5 md:mb-8"
           >
             {t('subtitle')}
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-2.5 justify-center items-center mb-6 md:mb-12"
           >
@@ -125,9 +125,9 @@ export function Hero() {
             >
               {t('cta2')}
             </a>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             variants={itemVariants}
             className="flex justify-center items-stretch gap-0 border-t border-sunbiotan-700/20 pt-8"
           >
@@ -144,11 +144,11 @@ export function Hero() {
                 </div>
               </div>
             ))}
-          </motion.div>
-        </motion.div>
-      </motion.div>
+          </m.div>
+        </m.div>
+      </m.div>
 
-      <motion.button
+      <m.button
         onClick={scrollToNext}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -156,10 +156,10 @@ export function Hero() {
         className="absolute bottom-7 left-1/2 -translate-x-1/2 text-sunbiotan-300/35 hover:text-sunbiotan-300/65 transition-colors duration-300 cursor-pointer"
         aria-label={t('scroll')}
       >
-        <motion.div animate={{ y: [0, 7, 0] }} transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}>
+        <m.div animate={{ y: [0, 7, 0] }} transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}>
           <ChevronDown className="h-5 w-5" />
-        </motion.div>
-      </motion.button>
+        </m.div>
+      </m.button>
     </section>
   );
 }

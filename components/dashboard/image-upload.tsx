@@ -84,6 +84,7 @@ export function ImageUpload({ currentImageUrl, onUpload, onRemove }: ImageUpload
             src={currentImageUrl}
             alt="Imagem do centro"
             fill
+            sizes="100vw"
             className="object-cover"
           />
           <button
