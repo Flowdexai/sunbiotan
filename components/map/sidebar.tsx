@@ -269,7 +269,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           transition={{ duration: 0.6, ease: EASE }}
           className="h-[400px] rounded-2xl overflow-hidden border border-sunbiotan-200/60 shadow-lg shadow-sunbiotan-100/50"
         >
-          <MapView centers={centers} onCenterSelect={onCenterClick} />
+          <MapView centers={centers} onCenterSelect={onCenterClick} selectedCenter={selectedCenter} />
         </motion.div>
       )}
 
@@ -399,8 +399,7 @@ function NearbyCard({
   return (
     <motion.div
       variants={fadeUp}
-      onClick={onClick}
-      className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 border flex flex-col ${isSelected
+      className={`p-5 rounded-2xl transition-all duration-300 border flex flex-col ${isSelected
         ? 'border-sunbiotan-500 bg-sunbiotan-50 shadow-lg shadow-sunbiotan-200/50'
         : 'border-sunbiotan-200/60 bg-white hover:border-sunbiotan-300 hover:shadow-md hover:shadow-sunbiotan-100/30'
         }`}
@@ -460,7 +459,8 @@ function NearbyCard({
       <div className="mt-auto pt-4">
         <button
           className="w-full py-2.5 text-[10px] tracking-[0.18em] uppercase font-medium rounded-full bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white transition-all duration-300 hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]"
-          onClick={(e) => { e.stopPropagation(); onClick(); onScrollToMap(); }}
+          style={{ touchAction: 'manipulation' }}
+          onClick={() => { onClick(); onScrollToMap(); }}
         >
           {viewOnMapLabel}
         </button>
@@ -482,8 +482,7 @@ function FeaturedCenterCard({
   return (
     <motion.div
       variants={fadeUp}
-      onClick={onClick}
-      className={`rounded-2xl cursor-pointer transition-all duration-300 overflow-hidden border ${isSelected
+      className={`rounded-2xl transition-all duration-300 overflow-hidden border ${isSelected
         ? 'border-sunbiotan-500 shadow-xl shadow-sunbiotan-200/50 scale-[1.01]'
         : 'border-sunbiotan-200/60 hover:border-sunbiotan-400/60 hover:shadow-xl hover:shadow-sunbiotan-100/50'
         }`}
@@ -554,7 +553,8 @@ function FeaturedCenterCard({
 
         <button
           className="w-full py-2.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[10px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]"
-          onClick={(e) => { e.stopPropagation(); onClick(); onScrollToMap(); }}
+          style={{ touchAction: 'manipulation' }}
+          onClick={() => { onClick(); onScrollToMap(); }}
         >
           {viewOnMapLabel}
         </button>
@@ -576,8 +576,7 @@ function RegularCenterCard({
   return (
     <motion.div
       variants={fadeUp}
-      onClick={onClick}
-      className={`p-5 rounded-2xl cursor-pointer transition-all duration-300 border flex flex-col ${isSelected
+      className={`p-5 rounded-2xl transition-all duration-300 border flex flex-col ${isSelected
         ? 'border-sunbiotan-500 bg-sunbiotan-50 shadow-lg shadow-sunbiotan-200/50'
         : 'border-sunbiotan-200/60 bg-white hover:border-sunbiotan-300 hover:shadow-md hover:shadow-sunbiotan-100/30'
         }`}
@@ -628,7 +627,8 @@ function RegularCenterCard({
       <div className="mt-auto pt-4">
         <button
           className="w-full py-2.5 text-[10px] tracking-[0.18em] uppercase font-medium rounded-full bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white transition-all duration-300 hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]"
-          onClick={(e) => { e.stopPropagation(); onClick(); onScrollToMap(); }}
+          style={{ touchAction: 'manipulation' }}
+          onClick={() => { onClick(); onScrollToMap(); }}
         >
           {viewOnMapLabel}
         </button>
