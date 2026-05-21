@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Nico\\\\Desktop\\\\FLOWDEX\\\\CLIENTES\\\\Sunbiotan\\\\web\" -Force)",
+      "Bash(Select-Object Name, FullName)",
+      "Bash(mkdir -p \"c:\\\\Users\\\\Nico\\\\Desktop\\\\FLOWDEX\\\\CLIENTES\\\\Sunbiotan\\\\web\\\\app\\\\[locale]\")",
+      "Bash(git rm *)",
+      "Bash(npx tsc *)",
+      "Bash(Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue)",
+      "Bash(npm run *)",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\Nico\\\\Desktop\\\\FLOWDEX\\\\CLIENTES\\\\Sunbiotan\\\\web\\\\app\" -Recurse -Filter \"page.tsx\")",
+      "Bash(Select-Object FullName)",
+      "Bash(cp -r \"app/[locale]/centros\" \"app/[locale]/mapa-centros\")",
+      "Bash(rm -rf \"app/[locale]/centros\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Nico\\Desktop\\FLOWDEX\\CLIENTES\\Sunbiotan\\web\\app"
+    ]
+  }
+}

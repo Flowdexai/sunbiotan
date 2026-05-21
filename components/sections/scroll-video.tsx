@@ -3,19 +3,20 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export function VideoSection() {
+  const t = useTranslations('VideoSection');
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
-  const [started, setStarted] = useState(false); // user pressed play at least once
+  const [started, setStarted] = useState(false);
   const [showControls, setShowControls] = useState(true);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Autoplay muted when enters viewport
   useEffect(() => {
     const section = sectionRef.current;
     const video = videoRef.current;
@@ -42,7 +43,6 @@ export function VideoSection() {
     if (!video) return;
 
     if (!started) {
-      // First click: unmute and play
       video.muted = false;
       setMuted(false);
       setStarted(true);
@@ -81,11 +81,7 @@ export function VideoSection() {
   }, [playing, started]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative bg-sunbiotan-950 py-16 md:py-24"
-    >
-      {/* Header */}
+    <section ref={sectionRef} className="relative bg-sunbiotan-950 py-16 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 14, filter: 'blur(3px)' }}
         whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -96,17 +92,16 @@ export function VideoSection() {
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="h-px w-8 bg-sunbiotan-600/50" />
           <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-500 font-medium">
-            A Arte da Aplicação
+            {t('eyebrow')}
           </p>
           <div className="h-px w-8 bg-sunbiotan-600/50" />
         </div>
         <h2 className="font-display font-light text-5xl md:text-7xl text-sunbiotan-100 leading-[1.05] tracking-tight">
-          Aplicação{' '}
-          <em className="not-italic italic text-sunbiotan-400">Profissional</em>
+          {t('headline')}{' '}
+          <em className="not-italic italic text-sunbiotan-400">{t('headlineItalic')}</em>
         </h2>
       </motion.div>
 
-      {/* Video container */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -137,10 +132,8 @@ export function VideoSection() {
             <source src="/videos/SUNBIOTAN-musica.mp4" type="video/mp4" />
           </video>
 
-          {/* Vignette */}
           <div className="absolute inset-0 bg-gradient-to-t from-sunbiotan-950/40 via-transparent to-transparent pointer-events-none" />
 
-          {/* Controls overlay */}
           <AnimatePresence>
             {showControls && (
               <motion.div
@@ -150,7 +143,6 @@ export function VideoSection() {
                 transition={{ duration: 0.3 }}
                 className="absolute inset-0 flex items-center justify-center pointer-events-none"
               >
-                {/* Play/Pause button central */}
                 <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center pointer-events-auto hover:bg-white/20 transition-all duration-300 hover:scale-110">
                   {playing && started ? (
                     <Pause className="h-6 w-6 text-white" strokeWidth={1.5} />
@@ -162,7 +154,6 @@ export function VideoSection() {
             )}
           </AnimatePresence>
 
-          {/* First play hint */}
           <AnimatePresence>
             {!started && (
               <motion.div
@@ -173,13 +164,12 @@ export function VideoSection() {
                 className="absolute bottom-5 left-1/2 -translate-x-1/2 pointer-events-none"
               >
                 <p className="text-[10px] tracking-[0.3em] uppercase text-white/50 font-light">
-                  Clique para ativar o som
+                  {t('clickHint')}
                 </p>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Mute button — bottom right */}
           <AnimatePresence>
             {started && showControls && (
               <motion.button

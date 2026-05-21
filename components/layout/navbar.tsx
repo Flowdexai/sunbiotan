@@ -4,25 +4,28 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
-
-const links = [
-  { label: 'Início', href: '/' },
-  { label: 'Sobre', href: '/#sobre' },
-  { label: 'Centros', href: '/#centros' },
-  { label: 'Profissionais', href: '/#profissionais' },
-  { label: 'Contacto', href: '/#contacto' },
-];
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
+import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 
 interface NavbarProps {
   forceOpaque?: boolean;
 }
 
 export function Navbar({ forceOpaque = false }: NavbarProps) {
+  const t = useTranslations('Navbar');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
   const lastScrollY = useRef(0);
+
+  const links = [
+    { label: t('inicio'), href: '/' },
+    { label: t('sobre'), href: '/#sobre' },
+    { label: t('centros'), href: '/#centros' },
+    { label: t('profissionais'), href: '/#profissionais' },
+    { label: t('contacto'), href: '/#contacto' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,26 +55,27 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
         <div className="container mx-auto px-6">
           <div className="flex items-center justify-between h-16 md:h-20">
 
-            {/* Logo — ancho fijo */}
+            {/* Logo */}
             <div className="w-[180px]">
-              <motion.a
-                href="/"
+              <motion.div
                 animate={{ scale: isScrolled ? 0.88 : 1 }}
                 transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                 className="origin-left block"
               >
-                <Image
-                  src="/images/logo-sunbiotan.jpg"
-                  alt="Sunbiotan"
-                  width={180}
-                  height={56}
-                  className="h-11 w-auto object-contain"
-                  priority
-                />
-              </motion.a>
+                <Link href="/">
+                  <Image
+                    src="/images/logo-sunbiotan.jpg"
+                    alt="Sunbiotan"
+                    width={180}
+                    height={56}
+                    className="h-11 w-auto object-contain"
+                    priority
+                  />
+                </Link>
+              </motion.div>
             </div>
 
-            {/* Links — centro */}
+            {/* Links — desktop */}
             <div className="hidden md:flex items-center gap-8">
               {links.map((link) => (
                 <a
@@ -80,24 +84,25 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
                   className="relative text-[11px] tracking-[0.25em] uppercase font-medium text-sunbiotan-100/70 hover:text-sunbiotan-300 transition-colors duration-300 group"
                 >
                   {link.label}
-                  < span className="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-sunbiotan-400 to-sunbiotan-500 group-hover:w-full transition-all duration-300" />
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-sunbiotan-400 to-sunbiotan-500 group-hover:w-full transition-all duration-300" />
                 </a>
               ))}
             </div>
 
-            {/* Botones — ancho fijo igual al logo */}
-            <div className="w-[320px] hidden md:flex items-center gap-3 justify-end">
+            {/* Right side — desktop */}
+            <div className="w-[340px] hidden md:flex items-center gap-3 justify-end">
+              <LocaleSwitcher />
               <Link
                 href="/login"
                 className="inline-flex items-center px-4 py-2 border border-sunbiotan-600/35 text-sunbiotan-300/65 hover:border-sunbiotan-500/55 hover:text-sunbiotan-200 text-[11px] tracking-[0.18em] uppercase font-light rounded-full transition-all duration-300 hover:bg-white/[0.03]"
               >
-                Login
+                {t('login')}
               </Link>
               <Link
-                href="/centros"
+                href="/mapa-centros"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[11px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-sunbiotan-500/25 hover:scale-105 group"
               >
-                Encontrar Centro
+                {t('findCenter')}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
@@ -106,14 +111,14 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden text-sunbiotan-200 hover:text-sunbiotan-300 transition-colors p-1"
-              aria-label="Menu"
+              aria-label={t('menu')}
             >
               {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
 
           </div>
         </div>
-      </motion.nav >
+      </motion.nav>
 
       <AnimatePresence>
         {mobileOpen && (
@@ -140,7 +145,7 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
                 onClick={() => setMobileOpen(false)}
                 className="text-sm tracking-[0.2em] uppercase font-light text-sunbiotan-400/55 hover:text-sunbiotan-400 transition-colors"
               >
-                Área Profissional
+                {t('professionalArea')}
               </Link>
               <div className="flex flex-col gap-3 mt-2">
                 <Link
@@ -148,15 +153,18 @@ export function Navbar({ forceOpaque = false }: NavbarProps) {
                   onClick={() => setMobileOpen(false)}
                   className="inline-flex items-center justify-center px-6 py-3 border border-sunbiotan-600/40 text-sunbiotan-300/70 text-xs tracking-[0.18em] uppercase font-light rounded-full"
                 >
-                  Login
+                  {t('login')}
                 </Link>
                 <Link
-                  href="/centros"
+                  href="/mapa-centros"
                   onClick={() => setMobileOpen(false)}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 text-white text-xs tracking-[0.18em] uppercase font-medium rounded-full"
                 >
-                  Encontrar Centro
+                  {t('findCenter')}
                 </Link>
+              </div>
+              <div className="pt-2">
+                <LocaleSwitcher />
               </div>
             </div>
           </motion.div>

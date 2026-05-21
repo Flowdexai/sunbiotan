@@ -1,22 +1,25 @@
+'use client';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
-import Link from 'next/link';
 import { Mail, Phone, MapPin } from 'lucide-react';
-
-const navLinks = [
-  { label: 'Início', href: '/' },
-  { label: 'Sobre nós', href: '/#sobre' },
-  { label: 'Centros', href: '/centros' },
-  { label: 'Área Profissional', href: '/profissionais' },
-];
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 export function Footer() {
+  const t = useTranslations('Footer');
+
+  const navLinks = [
+    { label: t('inicio'), href: '/' },
+    { label: t('sobreNos'), href: '/#sobre' },
+    { label: t('centros'), href: '/centros' },
+    { label: t('professionalArea'), href: '/profissionais' },
+  ];
+
   return (
     <footer className="bg-sunbiotan-950 relative overflow-hidden">
-      {/* Top gradient border */}
       <div className="h-px bg-gradient-to-r from-transparent via-sunbiotan-700/40 to-transparent" />
 
-      {/* Grain */}
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
@@ -34,7 +37,7 @@ export function Footer() {
               SUNBIOTAN
             </p>
             <p className="text-sunbiotan-400/55 text-sm font-light leading-relaxed mb-6 max-w-xs">
-              Bronzeado natural e profissional. Elegância e expertise ao seu alcance.
+              {t('tagline')}
             </p>
             <div className="flex gap-3">
               <a
@@ -68,7 +71,7 @@ export function Footer() {
           {/* Navigation */}
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/80 mb-5 font-medium">
-              Navegação
+              {t('navigation')}
             </p>
             <ul className="space-y-3">
               {navLinks.map((link) => (
@@ -87,7 +90,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/80 mb-5 font-medium">
-              Contacto
+              {t('contact')}
             </p>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
@@ -101,11 +104,11 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="h-3.5 w-3.5 text-sunbiotan-600/70 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span className="text-sm text-sunbiotan-400/50 font-light">+351 964 031 351</span>
+                <span className="text-sm text-sunbiotan-400/50 font-light">+351 920 253 796</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="h-3.5 w-3.5 text-sunbiotan-600/70 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span className="text-sm text-sunbiotan-400/50 font-light">Europa</span>
+                <span className="text-sm text-sunbiotan-400/50 font-light">{t('location')}</span>
               </li>
             </ul>
           </div>
@@ -114,10 +117,10 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-sunbiotan-800/30 pt-8 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-[11px] text-sunbiotan-500/35 tracking-wider font-light">
-            © {new Date().getFullYear()} Sunbiotan. Todos os direitos reservados.
+            © {new Date().getFullYear()} Sunbiotan. {t('allRights')}
           </p>
           <p className="text-[11px] text-sunbiotan-500/25 tracking-wide font-light italic">
-            Bronzeado natural. Resultados profissionais.
+            {t('slogan')}
           </p>
         </div>
       </div>

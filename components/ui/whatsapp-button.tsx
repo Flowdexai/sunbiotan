@@ -4,11 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { useTranslations } from 'next-intl';
 
-const WA_NUMBER = '351964031351';
-const WA_MESSAGE = 'Olá! Gostaria de saber mais sobre a Sunbiotan.';
+const WA_NUMBER = '351920253796';
 
 export function WhatsAppButton() {
+  const t = useTranslations('WhatsApp');
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export function WhatsAppButton() {
     <AnimatePresence>
       {visible && (
         <motion.a
-          href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`}
+          href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(t('message'))}`}
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
@@ -29,7 +30,7 @@ export function WhatsAppButton() {
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] rounded-full flex items-center justify-center shadow-lg shadow-black/20 hover:shadow-xl hover:scale-110 transition-all duration-300"
-          aria-label="Contactar via WhatsApp"
+          aria-label={t('ariaLabel')}
         >
           <FontAwesomeIcon icon={faWhatsapp} style={{ width: '28px', height: '28px' }} className="text-white" />
         </motion.a>

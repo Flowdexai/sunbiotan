@@ -3,11 +3,15 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const VP = { once: false, amount: 0.15 };
 
 export function MapPreview() {
+  const t = useTranslations('MapPreview');
+
   return (
     <section
       id="centros"
@@ -22,7 +26,6 @@ export function MapPreview() {
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
 
-          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 16, filter: 'blur(3px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -33,20 +36,19 @@ export function MapPreview() {
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-px w-8 bg-sunbiotan-400/50" />
               <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-600/80 font-medium">
-                Onde Fazer?
+                {t('eyebrow')}
               </p>
               <div className="h-px w-8 bg-sunbiotan-400/50" />
             </div>
             <h2 className="font-display font-light text-[clamp(2.2rem,5vw,4rem)] text-sunbiotan-900 leading-[1.05] tracking-tight mb-5">
-              Encontre o seu{' '}
-              <em className="not-italic italic text-sunbiotan-600">Centro</em>
+              {t('headline')}{' '}
+              <em className="not-italic italic text-sunbiotan-600">{t('headlineItalic')}</em>
             </h2>
             <p className="text-sunbiotan-700/60 text-base font-light max-w-md mx-auto leading-relaxed">
-              Disponível exclusivamente em Centros Autorizados Sunbiotan.
+              {t('subtitle')}
             </p>
           </motion.div>
 
-          {/* Mapa */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +58,7 @@ export function MapPreview() {
           >
             <Image
               src="/images/map-preview.png"
-              alt="Mapa de centros Sunbiotan"
+              alt={t('mapAlt')}
               width={1200}
               height={600}
               style={{
@@ -65,7 +67,6 @@ export function MapPreview() {
                 objectFit: 'cover',
                 objectPosition: 'center 70%'
               }}
-              className=""
             />
             <div className="absolute inset-0 pointer-events-none"
               style={{
@@ -73,19 +74,18 @@ export function MapPreview() {
               }}
             />
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
-              <a
-                href="/centros"
+              <Link
+                href="/mapa-centros"
                 className="flex items-center gap-2 bg-white/85 backdrop-blur-sm px-5 py-2.5 rounded-full border border-sunbiotan-200/60 shadow-md hover:bg-white hover:shadow-lg transition-all duration-300 group"
               >
                 <span className="text-[11px] tracking-[0.18em] uppercase text-sunbiotan-700 font-medium">
-                  Ver mapa interactivo
+                  {t('viewInteractiveMap')}
                 </span>
                 <ArrowRight className="h-3.5 w-3.5 text-sunbiotan-500 transition-transform group-hover:translate-x-0.5" />
-              </a>
+              </Link>
             </div>
           </motion.div>
 
-          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -93,13 +93,13 @@ export function MapPreview() {
             transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
             className="flex justify-center"
           >
-            <a
-              href="/centros"
+            <Link
+              href="/mapa-centros"
               className="group inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[11px] tracking-[0.2em] uppercase font-medium rounded-full transition-all duration-300 shadow-xl shadow-sunbiotan-400/20 hover:scale-105"
             >
-              Encontrar um Centro
+              {t('findCenter')}
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </a>
+            </Link>
           </motion.div>
 
         </div>

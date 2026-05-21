@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const VP = { once: false, amount: 0.15 };
@@ -10,19 +11,16 @@ const fadeUp = {
   show:   { opacity: 1, y: 0,  filter: 'blur(0px)' },
 };
 
-const details = [
-  'Sem contra-indicações',
-  'Para todo o tipo de pele',
-  'Pode ser usado durante todo o ano',
-];
-
 export function About() {
+  const t = useTranslations('About');
+
+  const details = [t('detail1'), t('detail2'), t('detail3')];
+
   return (
     <section
       id="sobre"
       className="py-16 md:py-28 bg-sunbiotan-50 relative overflow-hidden"
     >
-      {/* Huge decorative background letter */}
       <div
         aria-hidden="true"
         className="absolute -top-8 right-0 font-display font-light text-[32vw] leading-none text-sunbiotan-200/30 pointer-events-none select-none tracking-tighter pr-4"
@@ -38,7 +36,6 @@ export function About() {
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_2fr] gap-12 items-start">
 
-          {/* Left: vertical label */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -50,13 +47,12 @@ export function About() {
             <div className="flex items-center gap-3 mb-3">
               <div className="h-px w-8 bg-sunbiotan-400/50" />
               <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-600/80 font-medium whitespace-nowrap">
-                O que é o SUN?
+                {t('eyebrow')}
               </p>
             </div>
             <div className="w-px h-20 bg-gradient-to-b from-sunbiotan-400/50 to-transparent ml-4 mt-2" />
           </motion.div>
 
-          {/* Right: main content */}
           <div>
             <motion.div
               variants={fadeUp}
@@ -68,7 +64,7 @@ export function About() {
             >
               <div className="h-px w-8 bg-sunbiotan-400/50" />
               <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-600/80 font-medium">
-                O que é o SUN?
+                {t('eyebrow')}
               </p>
             </motion.div>
 
@@ -80,12 +76,11 @@ export function About() {
               transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
               className="font-display font-light text-[clamp(2.6rem,6vw,5rem)] text-sunbiotan-900 mb-8 leading-[1.05] tracking-tight"
             >
-              O que é
+              {t('headline')}
               <br />
-              <em className="not-italic italic text-sunbiotan-600">o SUN?</em>
+              <em className="not-italic italic text-sunbiotan-600">{t('headlineItalic')}</em>
             </motion.h2>
 
-            {/* Ornament */}
             <motion.div
               initial={{ opacity: 0, scaleX: 0 }}
               whileInView={{ opacity: 1, scaleX: 1 }}
@@ -107,21 +102,15 @@ export function About() {
               className="space-y-5 max-w-xl"
             >
               <p className="text-lg md:text-xl text-sunbiotan-800 font-light leading-relaxed tracking-[0.02em]">
-                É um ativador da melanina, formulado com ingredientes de origem
-                natural, que estimula progressivamente a cor da pele{' '}
-                <span className="text-sunbiotan-600 font-medium">sem raios UV</span>.
-                Funciona em todos os tipos de pele, mesmo as mais claras ou
-                sensibilizadas, com resultados visíveis e seguros.
+                {t('p1')}{' '}
+                <span className="text-sunbiotan-600 font-medium">{t('p1Highlight')}</span>
+                {t('p1End')}
               </p>
               <p className="text-base text-sunbiotan-700/80 font-light leading-relaxed tracking-[0.02em]">
-                Para além de realçar o tom natural da pele, SUN também trata,
-                tonifica e ilumina, com um efeito lifting suave, deixando a pele
-                visivelmente mais firme e revitalizada.
+                {t('p2')}
               </p>
               <p className="text-base text-sunbiotan-700/80 font-light leading-relaxed tracking-[0.02em]">
-                Aplicado com um equipamento estético de alta precisão, através de
-                um sistema de micro-difusão que deposita suavemente o produto na
-                pele, garantindo um bronzeado uniforme, natural e progressivo.
+                {t('p3')}
               </p>
             </motion.div>
 
@@ -154,7 +143,7 @@ export function About() {
             >
               <span className="font-display text-3xl font-light text-sunbiotan-600">100%</span>
               <p className="text-sm text-sunbiotan-700 font-light leading-snug max-w-[160px]">
-                Ingredientes de origem natural
+                {t('naturalIngredients')}
               </p>
             </motion.div>
           </div>

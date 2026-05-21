@@ -2,17 +2,24 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Users, TrendingUp, Award } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useRouter } from '@/i18n/navigation';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const VP = { once: false, amount: 0.15 };
 
-const perks = [
-  { icon: Users, title: 'Formação e Apoio Contínuo', description: 'Acesso a formação profissional e acompanhamento pela equipa SUN.' },
-  { icon: TrendingUp, title: 'Faça Crescer o Negócio', description: 'Serviços premium de alto valor para diferenciar o seu salão no mercado.' },
-  { icon: Award, title: 'Condições Especiais', description: 'Rede de profissionais certificados com acesso a benefícios exclusivos.' },
-];
+const PERK_ICONS = [Users, TrendingUp, Award] as const;
 
 export function CtaProfessionals() {
+  const t = useTranslations('CtaProfessionals');
+  const router = useRouter();
+
+  const perks = [
+    { icon: PERK_ICONS[0], title: t('perk1Title'), description: t('perk1Desc') },
+    { icon: PERK_ICONS[1], title: t('perk2Title'), description: t('perk2Desc') },
+    { icon: PERK_ICONS[2], title: t('perk3Title'), description: t('perk3Desc') },
+  ];
+
   return (
     <section
       id="profissionais"
@@ -31,7 +38,6 @@ export function CtaProfessionals() {
       <div className="container mx-auto px-6 relative">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center max-w-6xl mx-auto">
 
-          {/* Left */}
           <motion.div
             initial={{ opacity: 0, x: -16, filter: 'blur(3px)' }}
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
@@ -39,13 +45,13 @@ export function CtaProfessionals() {
             transition={{ duration: 0.75, delay: 0.1, ease: EASE }}
           >
             <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-500 mb-5 font-medium">
-              Profissionais
+              {t('eyebrow')}
             </p>
 
             <h2 className="font-display font-light text-[clamp(2.4rem,5.5vw,4.5rem)] text-sunbiotan-100 mb-6 leading-[1.05] tracking-tight">
-              É um profissional
+              {t('headline1')}
               <br />
-              <em className="not-italic italic text-sunbiotan-400">de Estética?</em>
+              <em className="not-italic italic text-sunbiotan-400">{t('headline2')}</em>
             </h2>
 
             <motion.div
@@ -58,15 +64,12 @@ export function CtaProfessionals() {
             />
 
             <p className="text-sunbiotan-300/60 font-light text-base md:text-lg mb-3 leading-relaxed max-w-md">
-              Ofereça aos seus clientes o bronzeado mais seguro, mais natural
-              e mais eficaz do mercado.
+              {t('p1')}
             </p>
             <p className="text-sunbiotan-300/40 font-light text-sm mb-10 leading-relaxed max-w-md">
-              SUN também está disponível para salões de beleza, spas e técnicos
-              do sector. Junte-se à nossa rede de profissionais certificados.
+              {t('p2')}
             </p>
 
-            {/* Perks */}
             <div className="space-y-5 mb-10">
               {perks.map((perk, i) => (
                 <motion.div
@@ -89,7 +92,6 @@ export function CtaProfessionals() {
             </div>
           </motion.div>
 
-          {/* Right: Visual */}
           <motion.div
             initial={{ opacity: 0, x: 16, filter: 'blur(3px)' }}
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
@@ -98,15 +100,12 @@ export function CtaProfessionals() {
             className="flex justify-center lg:justify-end"
           >
             <div className="relative w-72 h-72 md:w-80 md:h-80">
-              {/* Glow exterior */}
               <div
                 className="absolute inset-0 rounded-full"
                 style={{ background: 'radial-gradient(ellipse at center, rgba(193,154,91,0.18) 0%, rgba(193,154,91,0.06) 45%, transparent 70%)', transform: 'scale(1.35)' }}
               />
-              {/* Anillos */}
               <div className="absolute inset-0 rounded-full border border-sunbiotan-700/25" />
               <div className="absolute inset-5 rounded-full border border-sunbiotan-700/15" />
-              {/* Botón circular — va último para quedar encima */}
               <div
                 className="absolute inset-10 rounded-full flex flex-col items-center justify-center text-center gap-3 cursor-pointer group transition-all duration-300 hover:scale-105"
                 style={{
@@ -114,15 +113,14 @@ export function CtaProfessionals() {
                   border: '1px solid rgba(193,154,91,0.4)',
                   backdropFilter: 'blur(6px)'
                 }}
-                onClick={() => window.location.href = '/profissionais'}
+                onClick={() => router.push('/profissionais')}
               >
                 <ArrowRight className="h-5 w-5 text-sunbiotan-400 -rotate-45 group-hover:text-sunbiotan-300 transition-colors duration-300" />
                 <div className="w-5 h-px bg-sunbiotan-600/50" />
-                <p className="text-[20px] tracking-[0.4em] uppercase text-sunbiotan-100/70 font-light leading-relaxed">
-                  Junte-se<br />à Rede
+                <p className="text-[20px] tracking-[0.4em] uppercase text-sunbiotan-100/70 font-light leading-relaxed whitespace-pre-line">
+                  {t('joinNetwork')}
                 </p>
               </div>
-              {/* Puntitos decorativos — dentro del div relativo */}
               <div className="absolute top-5 right-6 w-1.5 h-1.5 rounded-full bg-sunbiotan-500/45" />
               <div className="absolute bottom-4 left-8 w-1 h-1 rounded-full bg-sunbiotan-400/30" />
               <div className="absolute top-1/2 -left-3 w-1 h-1 rounded-full bg-sunbiotan-600/40" />

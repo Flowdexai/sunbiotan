@@ -1,8 +1,9 @@
 // lib/data/centers-data.ts
-import { supabase } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/client';
 import { Center } from '@/types/center';
 
 export async function getCenters(): Promise<Center[]> {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('centers')
     .select('*')
@@ -19,6 +20,7 @@ export async function getCenters(): Promise<Center[]> {
 }
 
 export async function getCenterById(id: string): Promise<Center | null> {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('centers')
     .select('*')
@@ -30,6 +32,7 @@ export async function getCenterById(id: string): Promise<Center | null> {
 }
 
 export async function getFeaturedCenters(): Promise<Center[]> {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('centers')
     .select('*')
@@ -42,6 +45,7 @@ export async function getFeaturedCenters(): Promise<Center[]> {
 }
 
 export async function searchCenters(query: string): Promise<Center[]> {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('centers')
     .select('*')
@@ -54,6 +58,7 @@ export async function searchCenters(query: string): Promise<Center[]> {
 }
 
 export async function getAllCities(): Promise<string[]> {
+  const supabase = createClient();
   const { data, error } = await supabase
     .from('centers')
     .select('city')

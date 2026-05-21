@@ -1,4 +1,3 @@
-// components/map/sidebar.tsx
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -10,6 +9,7 @@ import { useMapsLibrary } from '@vis.gl/react-google-maps';
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { useTranslations } from 'next-intl';
 
 const MapView = dynamic(
   () => import('./map-view').then(mod => mod.MapView),
@@ -17,7 +17,7 @@ const MapView = dynamic(
     ssr: false,
     loading: () => (
       <div className="w-full h-full bg-sunbiotan-100 animate-pulse flex items-center justify-center rounded-2xl">
-        <p className="text-sunbiotan-600 text-sm font-light tracking-wide">A carregar mapa...</p>
+        <p className="text-sunbiotan-600 text-sm font-light tracking-wide">...</p>
       </div>
     ),
   }
@@ -66,10 +66,7 @@ const fadeUp = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
-    }
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }
   },
   exit: {
     opacity: 0,
@@ -85,6 +82,7 @@ const stagger = {
 };
 
 export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout = false }: SidebarProps) {
+  const t = useTranslations('Sidebar');
   const [searchLocation, setSearchLocation] = useState<SearchLocation | null>(null);
   const [isLocating, setIsLocating] = useState(false);
   const [locationError, setLocationError] = useState<string | null>(null);
@@ -93,6 +91,11 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
   const placesLib = useMapsLibrary('places');
   const inputRef = useRef<HTMLInputElement>(null);
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  const scrollToMap = () => {
+    mapRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     if (!placesLib || !inputRef.current) return;
@@ -106,7 +109,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         setSearchLocation({
           lat: place.geometry.location.lat(),
           lng: place.geometry.location.lng(),
-          name: place.formatted_address || place.name || 'Localização seleccionada',
+          name: place.formatted_address || place.name || t('selectedLocation'),
         });
       }
     });
@@ -115,7 +118,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         google.maps.event.clearInstanceListeners(autocompleteRef.current);
       }
     };
-  }, [placesLib]);
+  }, [placesLib, t]);
 
   useEffect(() => {
     if (searchLocation) {
@@ -132,7 +135,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
 
   const handleGetLocation = () => {
     if (!navigator.geolocation) {
-      setLocationError('O seu browser não suporta geolocalização');
+      setLocationError(t('locationNotSupported'));
       return;
     }
     setIsLocating(true);
@@ -142,7 +145,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         setSearchLocation({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
-          name: 'A sua localização',
+          name: t('yourLocation'),
         });
         if (inputRef.current) inputRef.current.value = '';
         setIsLocating(false);
@@ -151,16 +154,16 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         setIsLocating(false);
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            setLocationError('Permissão de localização negada');
+            setLocationError(t('locationDenied'));
             break;
           case error.POSITION_UNAVAILABLE:
-            setLocationError('Localização indisponível');
+            setLocationError(t('locationUnavailable'));
             break;
           case error.TIMEOUT:
-            setLocationError('Tempo de espera esgotado');
+            setLocationError(t('locationTimeout'));
             break;
           default:
-            setLocationError('Erro ao obter localização');
+            setLocationError(t('locationError'));
         }
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
@@ -180,10 +183,11 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
   const featuredCenters = !searchLocation ? filteredCenters.filter((c) => c.featured) : [];
   const regularCenters = !searchLocation ? filteredCenters.filter((c) => !c.featured) : [];
 
+  const viewOnMapLabel = t('viewOnMap');
+
   return (
     <div className="space-y-10">
 
-      {/* Header */}
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -191,10 +195,9 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
       >
         <h1 className="font-display font-light text-[clamp(2rem,3.5vw,3rem)] text-sunbiotan-900 leading-[1.05] tracking-tight">
-          Encontre o seu{' '}
-          <em className="not-italic italic text-sunbiotan-600">Centro</em>
+          {t('heading')}{' '}
+          <em className="not-italic italic text-sunbiotan-600">{t('headingItalic')}</em>
         </h1>
-        {/* Ornament */}
         <div className="flex items-center gap-3 mt-5">
           <div className="h-px w-10 bg-sunbiotan-400/60" />
           <div className="w-1 h-1 rounded-full bg-sunbiotan-500/80" />
@@ -202,7 +205,6 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         </div>
       </motion.div>
 
-      {/* Search */}
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -216,7 +218,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
             <input
               ref={inputRef}
               type="text"
-              placeholder="Buscar cidade..."
+              placeholder={t('searchPlaceholder')}
               className="w-full pl-10 pr-4 h-11 bg-white border border-sunbiotan-200 rounded-full text-sm text-sunbiotan-900 placeholder:text-sunbiotan-400/60 focus:border-sunbiotan-500 focus:outline-none focus:ring-2 focus:ring-sunbiotan-500/20 transition-all"
             />
           </div>
@@ -224,7 +226,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
             onClick={handleGetLocation}
             disabled={isLocating}
             className="h-11 w-11 border border-sunbiotan-200 rounded-full bg-white hover:bg-sunbiotan-50 hover:border-sunbiotan-400 flex items-center justify-center text-sunbiotan-600 hover:text-sunbiotan-800 transition-all flex-shrink-0 disabled:opacity-50"
-            title="Usar a minha localização"
+            title={t('useLocation')}
           >
             {isLocating ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -238,13 +240,12 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           <p className="text-xs text-red-500 text-center tracking-wide">{locationError}</p>
         )}
 
-
         {searchLocation && (
           <div className="flex items-center justify-between bg-sunbiotan-50 border border-sunbiotan-200/60 rounded-full px-4 py-2.5">
             <div className="flex items-center gap-2">
               <Navigation className="h-3.5 w-3.5 text-sunbiotan-600 flex-shrink-0" strokeWidth={1.5} />
               <span className="text-xs text-sunbiotan-800 font-light tracking-wide">
-                Distâncias desde{' '}
+                {t('distancesFrom')}{' '}
                 <strong className="font-medium">{searchLocation.name}</strong>
               </span>
             </div>
@@ -258,46 +259,9 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         )}
       </motion.div>
 
-      {/* Con búsqueda: lista plana, máx 15, ordenada por distancia */}
-      {searchLocation && searchResults.length > 0 && (
-        <div>
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            transition={{ duration: 0.6, ease: EASE }}
-            className="flex items-center gap-3 mb-5"
-          >
-            <div className="h-px w-8 bg-sunbiotan-400/50" />
-            <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
-              Centros mais próximos
-            </h2>
-            <span className="text-xs text-sunbiotan-400 font-light">
-              ({searchResults.length})
-            </span>
-          </motion.div>
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            animate="show"
-            className="space-y-4"
-          >
-            {searchResults.map((center, index) => (
-              <NearbyCard
-                key={center.id}
-                center={center}
-                rank={index + 1}
-                isSelected={selectedCenter?.id === center.id}
-                onClick={() => onCenterClick(center)}
-              />
-            ))}
-          </motion.div>
-        </div>
-      )}
-
-      {/* Mapa em Mobile */}
       {mobileLayout && (
         <motion.div
+          ref={mapRef}
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
@@ -309,7 +273,39 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         </motion.div>
       )}
 
-      {/* Sin búsqueda: lógica original */}
+      {searchLocation && searchResults.length > 0 && (
+        <div>
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            transition={{ duration: 0.6, ease: EASE }}
+            className="flex items-center gap-3 mb-5"
+          >
+            <div className="h-px w-8 bg-sunbiotan-400/50" />
+            <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
+              {t('nearbyTitle')}
+            </h2>
+            <span className="text-xs text-sunbiotan-400 font-light">
+              ({searchResults.length})
+            </span>
+          </motion.div>
+          <motion.div variants={stagger} initial="hidden" animate="show" className="grid md:grid-cols-2 gap-5">
+            {searchResults.map((center, index) => (
+              <NearbyCard
+                key={center.id}
+                center={center}
+                rank={index + 1}
+                isSelected={selectedCenter?.id === center.id}
+                onClick={() => onCenterClick(center)}
+                onScrollToMap={scrollToMap}
+                viewOnMapLabel={viewOnMapLabel}
+              />
+            ))}
+          </motion.div>
+        </div>
+      )}
+
       {!searchLocation && featuredCenters.length > 0 && (
         <div>
           <motion.div
@@ -322,23 +318,19 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           >
             <div className="h-px w-8 bg-sunbiotan-400/50" />
             <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
-              Centros Premium
+              {t('premiumTitle')}
             </h2>
           </motion.div>
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={VP}
-            className="space-y-6"
-          >
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={VP} className="space-y-6">
             {featuredCenters.map((center) => (
               <FeaturedCenterCard
                 key={center.id}
                 center={center}
                 isSelected={selectedCenter?.id === center.id}
                 onClick={() => onCenterClick(center)}
+                onScrollToMap={scrollToMap}
                 showDistance={false}
+                viewOnMapLabel={viewOnMapLabel}
               />
             ))}
           </motion.div>
@@ -357,23 +349,19 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
           >
             <div className="h-px w-8 bg-sunbiotan-400/30" />
             <h2 className="font-display font-light text-xl text-sunbiotan-900 tracking-tight">
-              Centros Certificados
+              {t('certifiedTitle')}
             </h2>
           </motion.div>
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0 }}
-            className="grid md:grid-cols-2 gap-5"
-          >
+          <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: false, amount: 0 }} className="grid md:grid-cols-2 gap-5">
             {regularCenters.map((center) => (
               <RegularCenterCard
                 key={center.id}
                 center={center}
                 isSelected={selectedCenter?.id === center.id}
                 onClick={() => onCenterClick(center)}
+                onScrollToMap={scrollToMap}
                 showDistance={false}
+                viewOnMapLabel={viewOnMapLabel}
               />
             ))}
           </motion.div>
@@ -390,7 +378,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         >
           <MapPin className="h-10 w-10 mx-auto text-sunbiotan-300 mb-4" strokeWidth={1} />
           <p className="font-display font-light text-xl text-sunbiotan-700">
-            Nenhum centro encontrado
+            {t('notFound')}
           </p>
         </motion.div>
       )}
@@ -398,18 +386,15 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
   );
 }
 
-// ── Card: centros próximos ────────────────────────────────────────────────────
-
 function NearbyCard({
-  center,
-  rank,
-  isSelected,
-  onClick,
+  center, rank, isSelected, onClick, onScrollToMap, viewOnMapLabel,
 }: {
   center: CenterWithDistance;
   rank: number;
   isSelected: boolean;
   onClick: () => void;
+  onScrollToMap: () => void;
+  viewOnMapLabel: string;
 }) {
   return (
     <motion.div
@@ -420,95 +405,79 @@ function NearbyCard({
         : 'border-sunbiotan-200/60 bg-white hover:border-sunbiotan-300 hover:shadow-md hover:shadow-sunbiotan-100/30'
         }`}
     >
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-start gap-3">
-          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-sunbiotan-500 to-sunbiotan-600 text-white flex items-center justify-center font-display font-medium text-sm">
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <div className="flex items-start gap-2.5">
+          <span className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-to-br from-sunbiotan-500 to-sunbiotan-600 text-white flex items-center justify-center font-medium text-[10px] mt-0.5">
             {rank}
-          </div>
-          <div>
-            <h3 className="font-medium text-sm text-sunbiotan-900 flex items-center gap-2">
-              {center.name}
-              {center.featured && (
-                <Star className="h-3.5 w-3.5 text-sunbiotan-500 fill-sunbiotan-500" />
-              )}
-            </h3>
-            <p className="text-xs text-sunbiotan-600/70 mt-0.5">{center.address}</p>
-            <p className="text-xs font-medium text-sunbiotan-700 mt-0.5">{center.city}</p>
-          </div>
+          </span>
+          <h3 className="font-medium text-sm text-sunbiotan-900 flex items-center gap-1.5 flex-wrap">
+            {center.name}
+            {center.featured && <Star className="h-3 w-3 text-sunbiotan-500 fill-sunbiotan-500 flex-shrink-0" />}
+          </h3>
         </div>
         {center.distance !== undefined && (
-          <span className="inline-flex items-center gap-1 bg-sunbiotan-100 text-sunbiotan-700 px-2.5 py-1 rounded-full text-xs font-medium flex-shrink-0">
-            <Navigation className="h-3 w-3" strokeWidth={1.5} />
+          <span className="inline-flex items-center gap-1 bg-sunbiotan-100 text-sunbiotan-700 px-2 py-0.5 rounded-full text-[10px] font-medium flex-shrink-0">
+            <Navigation className="h-2.5 w-2.5" strokeWidth={1.5} />
             {formatDistance(center.distance)}
           </span>
         )}
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-sunbiotan-600/70">
+      <div className="space-y-2 text-xs text-sunbiotan-600/70">
+        <div className="flex items-start gap-2">
+          <MapPin className="h-3.5 w-3.5 flex-shrink-0 mt-0.5 text-sunbiotan-500" strokeWidth={1.5} />
+          <div>
+            <p>{center.address}</p>
+            <p className="font-medium text-sunbiotan-700 mt-0.5">{center.city}</p>
+          </div>
+        </div>
         {center.phone && (
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <Phone className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-            <a
-              href={`tel:${center.phone.replace(/\s/g, '')}`}
-              className="hover:text-sunbiotan-700 transition-colors"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <a href={`tel:${center.phone.replace(/\s/g, '')}`} className="hover:text-sunbiotan-700 transition-colors" onClick={(e) => e.stopPropagation()}>
               {center.phone}
             </a>
           </div>
         )}
         {center.instagram && (
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faInstagram} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-            <a
-              href={`https://instagram.com/${center.instagram.replace('@', '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <a href={`https://instagram.com/${center.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
               @{center.instagram.replace('@', '')}
             </a>
           </div>
         )}
         {center.facebook && (
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faFacebook} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-            <a
-              href={center.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <a href={center.facebook} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
               Facebook
             </a>
           </div>
         )}
       </div>
 
-      <button
-        className="w-full mt-auto py-2.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[10px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]"
-        onClick={(e) => { e.stopPropagation(); onClick(); }}
-      >
-        Ver no mapa
-      </button>
+      <div className="mt-auto pt-4">
+        <button
+          className="w-full py-2.5 text-[10px] tracking-[0.18em] uppercase font-medium rounded-full bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white transition-all duration-300 hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]"
+          onClick={(e) => { e.stopPropagation(); onClick(); onScrollToMap(); }}
+        >
+          {viewOnMapLabel}
+        </button>
+      </div>
     </motion.div>
   );
 }
 
-// ── Card: centro exclusivo ────────────────────────────────────────────────────
-
 function FeaturedCenterCard({
-  center,
-  isSelected,
-  onClick,
-  showDistance,
+  center, isSelected, onClick, onScrollToMap, showDistance, viewOnMapLabel,
 }: {
   center: CenterWithDistance;
   isSelected: boolean;
   onClick: () => void;
+  onScrollToMap: () => void;
   showDistance: boolean;
+  viewOnMapLabel: string;
 }) {
   return (
     <motion.div
@@ -521,12 +490,7 @@ function FeaturedCenterCard({
     >
       {center.image_url && (
         <div className="relative w-full h-48 overflow-hidden">
-          <Image
-            src={center.image_url}
-            alt={center.name}
-            fill
-            className="object-cover hover:scale-105 transition-transform duration-500"
-          />
+          <Image src={center.image_url} alt={center.name} fill className="object-cover hover:scale-105 transition-transform duration-500" />
           <div className="absolute inset-0 bg-gradient-to-t from-sunbiotan-950/40 to-transparent" />
           <div className="absolute top-3 right-3">
             <span className="inline-flex items-center gap-1 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 text-white px-3 py-1 rounded-full text-[10px] tracking-[0.12em] uppercase font-medium shadow-lg">
@@ -546,9 +510,7 @@ function FeaturedCenterCard({
       )}
 
       <div className="p-6 bg-sunbiotan-50/50">
-        <h3 className="font-display font-light text-xl text-sunbiotan-900 mb-4 tracking-tight">
-          {center.name}
-        </h3>
+        <h3 className="font-display font-light text-xl text-sunbiotan-900 mb-4 tracking-tight">{center.name}</h3>
 
         <div className="space-y-2.5 text-xs text-sunbiotan-600/80 mb-5">
           <div className="flex items-start gap-2">
@@ -561,11 +523,7 @@ function FeaturedCenterCard({
           {center.phone && (
             <div className="flex items-center gap-2">
               <Phone className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-              <a
-                href={`tel:${center.phone.replace(/\s/g, '')}`}
-                className="hover:text-sunbiotan-700 transition-colors"
-                onClick={(e) => e.stopPropagation()}
-              >
+              <a href={`tel:${center.phone.replace(/\s/g, '')}`} className="hover:text-sunbiotan-700 transition-colors" onClick={(e) => e.stopPropagation()}>
                 {center.phone}
               </a>
             </div>
@@ -573,13 +531,7 @@ function FeaturedCenterCard({
           {center.instagram && (
             <div className="flex items-center gap-2">
               <FontAwesomeIcon icon={faInstagram} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-              <a
-                href={`https://instagram.com/${center.instagram.replace('@', '')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
-                onClick={(e) => e.stopPropagation()}
-              >
+              <a href={`https://instagram.com/${center.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
                 @{center.instagram.replace('@', '')}
               </a>
             </div>
@@ -587,13 +539,7 @@ function FeaturedCenterCard({
           {center.facebook && (
             <div className="flex items-center gap-2">
               <FontAwesomeIcon icon={faFacebook} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-              <a
-                href={center.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
-                onClick={(e) => e.stopPropagation()}
-              >
+              <a href={center.facebook} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
                 Facebook
               </a>
             </div>
@@ -608,27 +554,24 @@ function FeaturedCenterCard({
 
         <button
           className="w-full py-2.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[10px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]"
-          onClick={(e) => { e.stopPropagation(); onClick(); }}
+          onClick={(e) => { e.stopPropagation(); onClick(); onScrollToMap(); }}
         >
-          Ver no mapa
+          {viewOnMapLabel}
         </button>
       </div>
     </motion.div>
   );
 }
 
-// ── Card: centro certificado ──────────────────────────────────────────────────
-
 function RegularCenterCard({
-  center,
-  isSelected,
-  onClick,
-  showDistance,
+  center, isSelected, onClick, onScrollToMap, showDistance, viewOnMapLabel,
 }: {
   center: CenterWithDistance;
   isSelected: boolean;
   onClick: () => void;
+  onScrollToMap: () => void;
   showDistance: boolean;
+  viewOnMapLabel: string;
 }) {
   return (
     <motion.div
@@ -656,60 +599,40 @@ function RegularCenterCard({
             <p className="font-medium text-sunbiotan-700 mt-0.5">{center.city}</p>
           </div>
         </div>
-
         {center.phone && (
           <div className="flex items-center gap-2">
             <Phone className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-            <a
-              href={`tel:${center.phone.replace(/\s/g, '')}`}
-              className="hover:text-sunbiotan-700 transition-colors"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <a href={`tel:${center.phone.replace(/\s/g, '')}`} className="hover:text-sunbiotan-700 transition-colors" onClick={(e) => e.stopPropagation()}>
               {center.phone}
             </a>
           </div>
         )}
-
         {center.instagram && (
           <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faInstagram} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-            <a
-              href={`https://instagram.com/${center.instagram.replace('@', '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <a href={`https://instagram.com/${center.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
               @{center.instagram.replace('@', '')}
             </a>
           </div>
         )}
-
         {center.facebook && (
           <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faFacebook} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-            <a
-              href={center.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <a href={center.facebook} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
               Facebook
             </a>
           </div>
         )}
       </div>
 
-      <button
-        className={`w-full mt-4 py-2 text-[10px] tracking-[0.18em] uppercase font-medium rounded-full transition-all duration-300 ${isSelected
-          ? 'bg-white text-sunbiotan-700 hover:bg-sunbiotan-100 border border-sunbiotan-300'
-          : 'bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]'
-          }`}
-        onClick={(e) => { e.stopPropagation(); onClick(); }}
-      >
-        Ver no mapa
-      </button>
+      <div className="mt-auto pt-4">
+        <button
+          className="w-full py-2.5 text-[10px] tracking-[0.18em] uppercase font-medium rounded-full bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white transition-all duration-300 hover:shadow-md hover:shadow-sunbiotan-400/20 hover:scale-[1.02]"
+          onClick={(e) => { e.stopPropagation(); onClick(); onScrollToMap(); }}
+        >
+          {viewOnMapLabel}
+        </button>
+      </div>
     </motion.div>
   );
 }
