@@ -112,6 +112,9 @@ export function About() {
               <p className="text-base text-sunbiotan-700/80 font-light leading-relaxed tracking-[0.02em]">
                 {t('p3')}
               </p>
+              <p className="text-base text-sunbiotan-700/80 font-light leading-relaxed tracking-[0.02em]">
+                {t('p4')}
+              </p>
             </m.div>
 
             <m.div

@@ -100,7 +100,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
   useEffect(() => {
     if (!placesLib || !inputRef.current) return;
     autocompleteRef.current = new placesLib.Autocomplete(inputRef.current, {
-      types: ['(cities)'],
+      types: ['geocode'],
       fields: ['geometry', 'formatted_address', 'name'],
     });
     autocompleteRef.current.addListener('place_changed', () => {
@@ -176,12 +176,9 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
     if (inputRef.current) inputRef.current.value = '';
   };
 
-  const filteredCenters = searchLocation
-    ? centersWithDistance.slice(0, 15)
-    : centersWithDistance;
-  const searchResults = searchLocation ? filteredCenters : [];
-  const featuredCenters = !searchLocation ? filteredCenters.filter((c) => c.featured) : [];
-  const regularCenters = !searchLocation ? filteredCenters.filter((c) => !c.featured) : [];
+  const searchResults = searchLocation ? centersWithDistance.slice(0, 15) : [];
+  const featuredCenters: CenterWithDistance[] = [];
+  const regularCenters: CenterWithDistance[] = [];
 
   const viewOnMapLabel = t('viewOnMap');
 
@@ -368,7 +365,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
         </div>
       )}
 
-      {filteredCenters.length === 0 && (
+      {searchLocation && searchResults.length === 0 && (
         <m.div
           variants={fadeUp}
           initial="hidden"

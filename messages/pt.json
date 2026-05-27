@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "title": "SUNBIOTAN | Bronzeado Natural Profissional sem Raios UV",
-    "description": "SUNBIOTAN — ativador de melanina com ingredientes 100% naturais. Bronzeado seguro, uniforme e duradouro. Disponível em salões autorizados em Portugal e Espanha.",
+    "description": "SUNBIOTAN — ativador de melanina com ingredientes 100% naturais. Bronzeado seguro, uniforme e duradouro. Disponível em salões autorizados.",
     "ogTitle": "SUNBIOTAN | Bronzeado Natural Profissional",
     "ogDescription": "O tratamento natural que respeita e trata a sua pele. Bronzeado radiante, seguro e duradouro — sem raios UV.",
     "twitterTitle": "SUNBIOTAN | Bronzeado Natural Profissional",
@@ -54,7 +54,7 @@
     "s1Title": "O que são cookies?",
     "s1Text": "Cookies são pequenos ficheiros de texto que são armazenados no seu dispositivo (computador, tablet ou smartphone) quando visita um website. Permitem que o site recorde as suas preferências e ações, para que não as tenha de introduzir novamente.",
     "s2Title": "Cookies que utilizamos",
-    "s2Intro": "Utilizamos exclusivamente cookies estritamente necessárias para o funcionamento do site. Não utilizamos cookies de publicidade, rastreamento ou análise de comportamento de terceiros.",
+    "s2Intro": "Utilizamos exclusivamente cookies estritamente necessárias para o funcionamento do site. Não utilizamos cookies de publicidade, rastreio ou análise de comportamento de terceiros.",
     "s2EssentialTitle": "Cookies essenciais",
     "s2Cookie1Name": "sb-auth-token (Supabase)",
     "s2Cookie1Purpose": "Autenticação de profissionais parceiros na área reservada.",
@@ -148,11 +148,12 @@
     "eyebrow": "O que é o SUN?",
     "headline": "O que é",
     "headlineItalic": "o SUN?",
-    "p1": "É um ativador da melanina, formulado com ingredientes de origem natural, que estimula progressivamente a cor da pele",
-    "p1Highlight": "sem raios UV",
-    "p1End": ". Funciona em todos os tipos de pele, mesmo as mais claras ou sensibilizadas, com resultados visíveis e seguros.",
-    "p2": "Para além de realçar o tom natural da pele, SUN também trata, tonifica e ilumina, com um efeito lifting suave, deixando a pele visivelmente mais firme e revitalizada.",
-    "p3": "Aplicado com um equipamento estético de alta precisão, através de um sistema de micro-difusão que deposita suavemente o produto na pele, garantindo um bronzeado uniforme, natural e progressivo.",
+    "p1": "É uma fórmula avançada, desenvolvida com ingredientes de origem natural associados ao bronzeado da pele. Foi criada para proporcionar um bronzeado progressivo, uniforme e de aspeto natural, sem necessidade de exposição",
+    "p1Highlight": "aos raios UV",
+    "p1End": ". A sua ação adapta-se a todos os tipos de pele, incluindo peles mais claras ou sensibilizadas, garantindo resultados visíveis, equilibrados e harmoniosos.",
+    "p2": "Além de realçar o tom natural da pele, SUN contribui para hidratar, suavizar e iluminar, ajudando a pele a apresentar um aspeto mais saudável, firme e revitalizado.",
+    "p3": "A aplicação é realizada com um equipamento estético de alta precisão, através de um sistema de microdifusão que distribui o produto de forma suave e uniforme sobre a pele. O resultado é um bronzeado natural, gradual e confortável.",
+    "p4": "Desenvolvido para utilização profissional, SUN oferece uma experiência de aplicação segura, cómoda e adaptada às necessidades da pele.",
     "detail1": "Sem contra-indicações",
     "detail2": "Para todo o tipo de pele",
     "detail3": "Pode ser usado durante todo o ano",
@@ -163,14 +164,14 @@
     "headline": "Por que escolher",
     "headlineItalic": "SUN?",
     "items": {
-      "01": { "title": "Bronzeado Natural", "description": "Homogéneo e uniforme, adaptado ao tom de pele de cada pessoa." },
-      "02": { "title": "Hidratação Profunda", "description": "Efeito sedoso imediato com hidratação intensa e duradoura." },
-      "03": { "title": "Efeito Tensor", "description": "Iluminador e anti-envelhecimento com lifting suave visível." },
-      "04": { "title": "Luminosidade Intensa", "description": "Pele radiante e luminosa com um brilho natural e saudável." },
-      "05": { "title": "Resultados Imediatos", "description": "Visíveis desde a primeira aplicação, sem esperas." },
-      "06": { "title": "100% Natural", "description": "Ingredientes activos à base de plantas de agricultura sustentável." },
-      "07": { "title": "Aplicação Rápida", "description": "Implementação simples, rápida e eficiente em qualquer centro." },
-      "08": { "title": "Para Toda a Pele", "description": "Indicado para peles delicadas, sensibilizadas ou com necessidades especiais." }
+      "01": { "title": "Bronzeado Natural", "description": "Resultado progressivo, uniforme e de aparência natural, adaptado ao tom de pele de cada pessoa." },
+      "02": { "title": "Hidratação Profunda", "description": "Ajuda a manter a pele hidratada, suave e confortável, com sensação sedosa e duradoura." },
+      "03": { "title": "Pele Mais Uniforme", "description": "Ajuda a proporcionar uma aparência mais homogénea e equilibrada, valorizando visualmente o tom da pele." },
+      "04": { "title": "Luminosidade Natural", "description": "Ajuda a realçar a luminosidade natural da pele, proporcionando um brilho saudável e elegante." },
+      "05": { "title": "Resultados Visíveis", "description": "Bronzeado visível desde as primeiras aplicações, com efeito imediato e evolução progressiva da cor da pele." },
+      "06": { "title": "Ingredientes de Origem Natural", "description": "Fórmula desenvolvida com ingredientes de origem natural associados ao bronzeado da pele." },
+      "07": { "title": "Aplicação Rápida", "description": "Sistema profissional de aplicação rápida, prática e adaptável a diferentes tipos de espaço." },
+      "08": { "title": "Adequado para Diferentes Tipos de Pele", "description": "Desenvolvido para diferentes tons e tipos de pele, incluindo peles mais delicadas ou sensibilizadas." }
     }
   },
   "HowItWorks": {
@@ -179,7 +180,7 @@
     "headlineItalic": "funciona?",
     "steps": {
       "01": { "title": "Efeito Flash Imediato", "description": "Bronzeado dourado visível logo após a aplicação, com um resultado fresco e luminoso." },
-      "02": { "title": "Evolução Natural", "description": "O bronzeado desenvolve-se progressivamente com o passar das horas, tornando-se mais rico e intenso." },
+      "02": { "title": "Evolução Natural", "description": "O bronzeado desenvolve-se progressivamente com o passar das horas, tornando-se mais intenso." },
       "03": { "title": "Resultado Ideal", "description": "No dia seguinte, a cor atinge o seu ponto perfeito: natural, uniforme e radiante." },
       "04": { "title": "7 a 9 Dias", "description": "O bronzeado mantém-se durante 7 a 9 dias, consoante o tipo de pele e os cuidados subsequentes." }
     }
@@ -247,15 +248,15 @@
     "eyebrow": "Onde fazer?",
     "headline": "Encontre o seu",
     "headlineItalic": "Centro",
-    "subtitle": "Disponível exclusivamente em salões de beleza autorizados em Portugal e Espanha."
+    "subtitle": "Disponível exclusivamente em salões de beleza autorizados."
   },
   "Sidebar": {
     "heading": "Encontre o seu",
     "headingItalic": "Centro",
-    "searchPlaceholder": "Buscar cidade...",
+    "searchPlaceholder": "Pesquisar cidade...",
     "useLocation": "Usar a minha localização",
     "nearbyTitle": "Centros mais próximos",
-    "distancesFrom": "Distâncias desde",
+    "distancesFrom": "Distâncias a partir de",
     "premiumTitle": "Centros Premium",
     "certifiedTitle": "Centros Certificados",
     "notFound": "Nenhum centro encontrado",
@@ -292,7 +293,7 @@
     "benefit3Title": "Produtos Exclusivos",
     "benefit3Desc": "Acesso aos produtos profissionais Sunbiotan em condições especiais para parceiros, com fórmula 100% natural.",
     "benefit4Title": "Rede de Parceiros",
-    "benefit4Desc": "Integre uma rede selecionada de centros em Portugal e Espanha. Visibilidade no nosso mapa e materiais de marketing incluídos.",
+    "benefit4Desc": "Integre uma rede selecionada de centros certificados. Visibilidade no nosso mapa e materiais de marketing incluídos.",
     "benefit5Title": "Certificação Oficial",
     "benefit5Desc": "O seu espaço recebe o selo \"Centro Certificado Sunbiotan\", transmitindo confiança e qualidade aos seus clientes.",
     "benefit6Title": "Apoio Contínuo",

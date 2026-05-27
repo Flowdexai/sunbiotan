@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "title": "SUNBIOTAN | Abbronzatura Naturale Professionale senza Raggi UV",
-    "description": "SUNBIOTAN — attivatore di melanina con ingredienti 100% naturali. Abbronzatura sicura, uniforme e duratura. Disponibile nei saloni autorizzati in Portogallo e Spagna.",
+    "description": "SUNBIOTAN — attivatore di melanina con ingredienti 100% naturali. Abbronzatura sicura, uniforme e duratura. Disponibile nei saloni autorizzati.",
     "ogTitle": "SUNBIOTAN | Abbronzatura Naturale Professionale",
     "ogDescription": "Il trattamento naturale che rispetta e cura la Sua pelle. Abbronzatura radiosa, sicura e duratura — senza raggi UV.",
     "twitterTitle": "SUNBIOTAN | Abbronzatura Naturale Professionale",
@@ -148,11 +148,12 @@
     "eyebrow": "Cos'è SUN?",
     "headline": "Cos'è",
     "headlineItalic": "SUN?",
-    "p1": "È un attivatore della melanina, formulato con ingredienti di origine naturale, che stimola progressivamente il colore della pelle",
-    "p1Highlight": "senza raggi UV",
-    "p1End": ". Funziona su tutti i tipi di pelle, anche le più chiare o sensibili, con risultati visibili e sicuri.",
-    "p2": "Oltre a valorizzare il tono naturale della pelle, SUN tratta, tonifica e illumina, con un delicato effetto lifting, lasciando la pelle visibilmente più soda e rivitalizzata.",
-    "p3": "Applicato con un dispositivo estetico di alta precisione, attraverso un sistema di micro-diffusione che deposita delicatamente il prodotto sulla pelle, garantendo un'abbronzatura uniforme, naturale e progressiva.",
+    "p1": "È una formula avanzata, sviluppata con ingredienti di origine naturale associati all'abbronzatura della pelle. È stata creata per offrire un'abbronzatura progressiva, uniforme e dall'aspetto naturale, senza necessità di esposizione",
+    "p1Highlight": "ai raggi UV",
+    "p1End": ". La sua azione si adatta a tutti i tipi di pelle, incluse le più chiare o sensibilizzate, garantendo risultati visibili, equilibrati e armoniosi.",
+    "p2": "Oltre a valorizzare il tono naturale della pelle, SUN contribuisce a idratare, levigare e illuminare, aiutando la pelle ad apparire più sana, tonica e rivitalizzata.",
+    "p3": "L'applicazione viene eseguita con un'attrezzatura estetica di alta precisione, attraverso un sistema di microdiffusione che distribuisce il prodotto in modo delicato e uniforme sulla pelle. Il risultato è un'abbronzatura naturale, graduale e confortevole.",
+    "p4": "Sviluppato per uso professionale, SUN offre un'esperienza di applicazione sicura, comoda e adattata alle esigenze della pelle.",
     "detail1": "Senza controindicazioni",
     "detail2": "Per tutti i tipi di pelle",
     "detail3": "Utilizzabile tutto l'anno",
@@ -163,14 +164,14 @@
     "headline": "Perché scegliere",
     "headlineItalic": "SUN?",
     "items": {
-      "01": { "title": "Abbronzatura Naturale", "description": "Omogenea e uniforme, adattata al tono di pelle di ciascuno." },
-      "02": { "title": "Idratazione Profonda", "description": "Effetto vellutato immediato con idratazione intensa e duratura." },
-      "03": { "title": "Effetto Tensore", "description": "Illuminante e anti-età con un leggero effetto lifting visibile." },
-      "04": { "title": "Luminosità Intensa", "description": "Pelle radiosa e luminosa con un bagliore naturale e sano." },
-      "05": { "title": "Risultati Immediati", "description": "Visibili fin dalla prima applicazione, senza attese." },
-      "06": { "title": "100% Naturale", "description": "Ingredienti attivi a base vegetale da agricoltura sostenibile." },
-      "07": { "title": "Applicazione Rapida", "description": "Implementazione semplice, rapida ed efficiente in qualsiasi centro." },
-      "08": { "title": "Per Ogni Tipo di Pelle", "description": "Indicato per pelli delicate, sensibilizzate o con esigenze particolari." }
+      "01": { "title": "Abbronzatura Naturale", "description": "Risultato progressivo, uniforme e dall'aspetto naturale, adattato al tono della pelle di ciascuna persona." },
+      "02": { "title": "Idratazione Profonda", "description": "Aiuta a mantenere la pelle idratata, morbida e confortevole, con una sensazione setosa e duratura." },
+      "03": { "title": "Pelle Più Uniforme", "description": "Aiuta a offrire un aspetto più omogeneo ed equilibrato, valorizzando visivamente il tono della pelle." },
+      "04": { "title": "Luminosità Naturale", "description": "Aiuta a valorizzare la luminosità naturale della pelle, offrendo un bagliore sano ed elegante." },
+      "05": { "title": "Risultati Visibili", "description": "Abbronzatura visibile fin dalle prime applicazioni, con effetto immediato ed evoluzione progressiva del colore della pelle." },
+      "06": { "title": "Ingredienti di Origine Naturale", "description": "Formula sviluppata con ingredienti di origine naturale associati all'abbronzatura della pelle." },
+      "07": { "title": "Applicazione Rapida", "description": "Sistema professionale di applicazione rapida, pratica e adattabile a diversi tipi di spazio." },
+      "08": { "title": "Adatto a Diversi Tipi di Pelle", "description": "Sviluppato per diversi toni e tipi di pelle, incluse le pelli più delicate o sensibilizzate." }
     }
   },
   "HowItWorks": {
@@ -179,7 +180,7 @@
     "headlineItalic": "funziona?",
     "steps": {
       "01": { "title": "Effetto Flash Immediato", "description": "Abbronzatura dorata visibile subito dopo l'applicazione, con un risultato fresco e luminoso." },
-      "02": { "title": "Evoluzione Naturale", "description": "L'abbronzatura si sviluppa progressivamente nel corso delle ore, diventando più ricca e intensa." },
+      "02": { "title": "Evoluzione Naturale", "description": "L'abbronzatura si sviluppa progressivamente nel corso delle ore, diventando più intensa." },
       "03": { "title": "Risultato Ideale", "description": "Il giorno seguente, il colore raggiunge il suo punto perfetto: naturale, uniforme e radioso." },
       "04": { "title": "Da 7 a 9 Giorni", "description": "L'abbronzatura si mantiene per 7-9 giorni, in base al tipo di pelle e alle cure successive." }
     }
@@ -247,7 +248,7 @@
     "eyebrow": "Dove farlo?",
     "headline": "Trovi il Suo",
     "headlineItalic": "Centro",
-    "subtitle": "Disponibile esclusivamente nei saloni di bellezza autorizzati in Portogallo e Spagna."
+    "subtitle": "Disponibile esclusivamente nei saloni di bellezza autorizzati."
   },
   "Sidebar": {
     "heading": "Trovi il Suo",

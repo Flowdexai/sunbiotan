@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "title": "SUNBIOTAN | Bronzage Naturel Professionnel sans Rayons UV",
-    "description": "SUNBIOTAN — activateur de mélanine aux ingrédients 100% naturels. Bronzage sûr, uniforme et durable. Disponible dans les salons agréés au Portugal et en Espagne.",
+    "description": "SUNBIOTAN — activateur de mélanine aux ingrédients 100% naturels. Bronzage sûr, uniforme et durable. Disponible dans les salons agréés.",
     "ogTitle": "SUNBIOTAN | Bronzage Naturel Professionnel",
     "ogDescription": "Le traitement naturel qui respecte et prend soin de votre peau. Bronzage radieux, sûr et durable — sans rayons UV.",
     "twitterTitle": "SUNBIOTAN | Bronzage Naturel Professionnel",
@@ -148,11 +148,12 @@
     "eyebrow": "Qu'est-ce que SUN ?",
     "headline": "Qu'est-ce que",
     "headlineItalic": "SUN ?",
-    "p1": "C'est un activateur de mélanine, formulé avec des ingrédients d'origine naturelle, qui stimule progressivement la couleur de la peau",
-    "p1Highlight": "sans rayons UV",
-    "p1End": ". Il fonctionne sur tous les types de peau, même les plus claires ou les plus sensibles, avec des résultats visibles et sûrs.",
-    "p2": "En plus de rehausser le ton naturel de la peau, SUN traite, tonifie et illumine, avec un léger effet lifting, laissant la peau visiblement plus ferme et revitalisée.",
-    "p3": "Appliqué avec un appareil esthétique de haute précision, grâce à un système de micro-diffusion qui dépose délicatement le produit sur la peau, garantissant un bronzage uniforme, naturel et progressif.",
+    "p1": "Est une formule avancée, développée avec des ingrédients d'origine naturelle associés au bronzage de la peau. Elle a été créée pour offrir un bronzage progressif, uniforme et d'apparence naturelle, sans nécessité d'exposition",
+    "p1Highlight": "aux rayons UV",
+    "p1End": ". Son action s'adapte à tous les types de peau, y compris les plus claires ou sensibilisées, garantissant des résultats visibles, équilibrés et harmonieux.",
+    "p2": "En plus de valoriser le teint naturel de la peau, SUN contribue à hydrater, adoucir et illuminer, aidant la peau à paraître plus saine, ferme et revitalisée.",
+    "p3": "L'application est réalisée avec un équipement esthétique de haute précision, grâce à un système de micro-diffusion qui distribue le produit de façon douce et uniforme sur la peau. Le résultat est un bronzage naturel, progressif et confortable.",
+    "p4": "Développé pour un usage professionnel, SUN offre une expérience d'application sûre, confortable et adaptée aux besoins de la peau.",
     "detail1": "Sans contre-indications",
     "detail2": "Pour tous les types de peau",
     "detail3": "Utilisable toute l'année",
@@ -163,14 +164,14 @@
     "headline": "Pourquoi choisir",
     "headlineItalic": "SUN ?",
     "items": {
-      "01": { "title": "Bronzage Naturel", "description": "Homogène et uniforme, adapté au teint de chaque personne." },
-      "02": { "title": "Hydratation Profonde", "description": "Effet soyeux immédiat avec une hydratation intense et durable." },
-      "03": { "title": "Effet Tenseur", "description": "Illuminant et anti-âge avec un léger effet lifting visible." },
-      "04": { "title": "Luminosité Intense", "description": "Peau radieuse et lumineuse avec un éclat naturel et sain." },
-      "05": { "title": "Résultats Immédiats", "description": "Visibles dès la première application, sans attendre." },
-      "06": { "title": "100% Naturel", "description": "Ingrédients actifs à base de plantes issues de l'agriculture durable." },
-      "07": { "title": "Application Rapide", "description": "Mise en œuvre simple, rapide et efficace dans n'importe quel centre." },
-      "08": { "title": "Pour Toutes les Peaux", "description": "Recommandé pour les peaux délicates, sensibilisées ou aux besoins particuliers." }
+      "01": { "title": "Bronzage Naturel", "description": "Résultat progressif, uniforme et d'apparence naturelle, adapté au teint de chaque personne." },
+      "02": { "title": "Hydratation Profonde", "description": "Aide à maintenir la peau hydratée, douce et confortable, avec une sensation soyeuse et durable." },
+      "03": { "title": "Peau Plus Uniforme", "description": "Aide à offrir une apparence plus homogène et équilibrée, valorisant visuellement le teint de la peau." },
+      "04": { "title": "Luminosité Naturelle", "description": "Aide à valoriser la luminosité naturelle de la peau, offrant un éclat sain et élégant." },
+      "05": { "title": "Résultats Visibles", "description": "Bronzage visible dès les premières applications, avec un effet immédiat et une évolution progressive de la couleur de la peau." },
+      "06": { "title": "Ingrédients d'Origine Naturelle", "description": "Formule développée avec des ingrédients d'origine naturelle associés au bronzage de la peau." },
+      "07": { "title": "Application Rapide", "description": "Système professionnel d'application rapide, pratique et adaptable à différents types d'espaces." },
+      "08": { "title": "Adapté à Différents Types de Peau", "description": "Développé pour différents teints et types de peau, y compris les peaux les plus délicates ou sensibilisées." }
     }
   },
   "HowItWorks": {
@@ -179,7 +180,7 @@
     "headlineItalic": "ça fonctionne ?",
     "steps": {
       "01": { "title": "Effet Flash Immédiat", "description": "Bronzage doré visible immédiatement après l'application, avec un résultat frais et lumineux." },
-      "02": { "title": "Évolution Naturelle", "description": "Le bronzage se développe progressivement au fil des heures, devenant plus riche et plus intense." },
+      "02": { "title": "Évolution Naturelle", "description": "Le bronzage se développe progressivement au fil des heures, devenant plus intense." },
       "03": { "title": "Résultat Idéal", "description": "Le lendemain, la couleur atteint son point parfait : naturelle, uniforme et radieuse." },
       "04": { "title": "7 à 9 Jours", "description": "Le bronzage se maintient pendant 7 à 9 jours, selon le type de peau et les soins suivants." }
     }
@@ -247,7 +248,7 @@
     "eyebrow": "Où le faire ?",
     "headline": "Trouvez votre",
     "headlineItalic": "Centre",
-    "subtitle": "Disponible exclusivement dans les salons de beauté agréés au Portugal et en Espagne."
+    "subtitle": "Disponible exclusivement dans les salons de beauté agréés."
   },
   "Sidebar": {
     "heading": "Trouvez votre",

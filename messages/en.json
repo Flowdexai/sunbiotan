@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "title": "SUNBIOTAN | Professional Natural Tan without UV Rays",
-    "description": "SUNBIOTAN — melanin activator with 100% natural ingredients. Safe, even, and long-lasting tan. Available at authorised salons in Portugal and Spain.",
+    "description": "SUNBIOTAN — melanin activator with 100% natural ingredients. Safe, even, and long-lasting tan. Available at authorised salons.",
     "ogTitle": "SUNBIOTAN | Professional Natural Tan",
     "ogDescription": "The natural treatment that respects and cares for your skin. Radiant, safe, and long-lasting tan — without UV rays.",
     "twitterTitle": "SUNBIOTAN | Professional Natural Tan",
@@ -148,11 +148,12 @@
     "eyebrow": "What is SUN?",
     "headline": "What is",
     "headlineItalic": "SUN?",
-    "p1": "It is a melanin activator, formulated with naturally derived ingredients, that progressively stimulates the skin's colour",
-    "p1Highlight": "without UV rays",
-    "p1End": ". It works on all skin types, even the fairest or most sensitive, with visible and safe results.",
-    "p2": "In addition to enhancing the skin's natural tone, SUN also treats, tones, and illuminates, with a gentle lifting effect, leaving the skin visibly firmer and more revitalised.",
-    "p3": "Applied with a high-precision aesthetic device, through a micro-diffusion system that gently deposits the product onto the skin, ensuring an even, natural, and progressive tan.",
+    "p1": "Is an advanced formula, developed with naturally derived ingredients associated with skin tanning. It was created to provide a progressive, even and natural-looking tan, without the need for exposure",
+    "p1Highlight": "to UV rays",
+    "p1End": ". Its action adapts to all skin types, including fairer or sensitised skin, ensuring visible, balanced and harmonious results.",
+    "p2": "In addition to enhancing the skin's natural tone, SUN helps to hydrate, soften and illuminate, helping the skin look healthier, firmer and more revitalised.",
+    "p3": "Application is carried out using high-precision aesthetic equipment, through a micro-diffusion system that distributes the product smoothly and evenly over the skin. The result is a natural, gradual and comfortable tan.",
+    "p4": "Developed for professional use, SUN offers a safe, comfortable application experience adapted to the skin's needs.",
     "detail1": "No contraindications",
     "detail2": "For all skin types",
     "detail3": "Can be used all year round",
@@ -163,14 +164,14 @@
     "headline": "Why choose",
     "headlineItalic": "SUN?",
     "items": {
-      "01": { "title": "Natural Tan", "description": "Even and uniform, adapted to each person's skin tone." },
-      "02": { "title": "Deep Hydration", "description": "Immediate silky effect with intense and long-lasting hydration." },
-      "03": { "title": "Firming Effect", "description": "Brightening and anti-ageing with a visible gentle lifting effect." },
-      "04": { "title": "Intense Radiance", "description": "Radiant and luminous skin with a natural and healthy glow." },
-      "05": { "title": "Immediate Results", "description": "Visible from the very first application, with no waiting." },
-      "06": { "title": "100% Natural", "description": "Active plant-based ingredients from sustainable agriculture." },
-      "07": { "title": "Quick Application", "description": "Simple, fast, and efficient implementation at any centre." },
-      "08": { "title": "For All Skin", "description": "Suitable for delicate, sensitised, or skin with special needs." }
+      "01": { "title": "Natural Tan", "description": "Progressive, even and natural-looking result, adapted to each person's skin tone." },
+      "02": { "title": "Deep Hydration", "description": "Helps keep skin hydrated, soft and comfortable, with a silky, long-lasting sensation." },
+      "03": { "title": "More Even Skin", "description": "Helps provide a more homogeneous and balanced appearance, visually enhancing the skin tone." },
+      "04": { "title": "Natural Radiance", "description": "Helps enhance the skin's natural luminosity, providing a healthy and elegant glow." },
+      "05": { "title": "Visible Results", "description": "Visible tan from the first applications, with an immediate effect and progressive evolution of skin colour." },
+      "06": { "title": "Naturally Derived Ingredients", "description": "Formula developed with naturally derived ingredients associated with skin tanning." },
+      "07": { "title": "Quick Application", "description": "Professional system for quick, practical application, adaptable to different types of spaces." },
+      "08": { "title": "Suitable for Different Skin Types", "description": "Developed for different skin tones and types, including more delicate or sensitised skin." }
     }
   },
   "HowItWorks": {
@@ -179,7 +180,7 @@
     "headlineItalic": "it work?",
     "steps": {
       "01": { "title": "Immediate Flash Effect", "description": "Golden tan visible right after application, with a fresh and luminous result." },
-      "02": { "title": "Natural Evolution", "description": "The tan develops progressively over the hours, becoming richer and more intense." },
+      "02": { "title": "Natural Evolution", "description": "The tan develops progressively over the hours, becoming more intense." },
       "03": { "title": "Ideal Result", "description": "The following day, the colour reaches its perfect point: natural, even, and radiant." },
       "04": { "title": "7 to 9 Days", "description": "The tan lasts 7 to 9 days, depending on skin type and subsequent care." }
     }
@@ -247,7 +248,7 @@
     "eyebrow": "Where to go?",
     "headline": "Find your",
     "headlineItalic": "Centre",
-    "subtitle": "Available exclusively at authorised beauty salons in Portugal and Spain."
+    "subtitle": "Available exclusively at authorised beauty salons."
   },
   "Sidebar": {
     "heading": "Find your",
