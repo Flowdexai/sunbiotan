@@ -3,6 +3,7 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { WhatsAppButton } from '@/components/ui/whatsapp-button';
+import { CookieBanner } from '@/components/ui/cookie-banner';
 import { MotionProvider } from '@/components/motion-provider';
 import type { Metadata } from 'next';
 
@@ -54,6 +55,7 @@ export default async function LocaleLayout({
       <MotionProvider>
         {children}
         <WhatsAppButton />
+        <CookieBanner />
       </MotionProvider>
     </NextIntlClientProvider>
   );

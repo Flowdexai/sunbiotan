@@ -5,6 +5,7 @@ import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import Image from 'next/image';
 
 export function Footer() {
   const t = useTranslations('Footer');
@@ -12,8 +13,13 @@ export function Footer() {
   const navLinks = [
     { label: t('inicio'), href: '/' },
     { label: t('sobreNos'), href: '/#sobre' },
-    { label: t('centros'), href: '/centros' },
+    { label: t('centros'), href: '/mapa-centros' },
     { label: t('professionalArea'), href: '/profissionais' },
+  ];
+
+  const legalLinks = [
+    { label: t('cookies'), href: '/cookies' },
+    { label: t('privacy'), href: '/privacidade' },
   ];
 
   return (
@@ -115,13 +121,45 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-sunbiotan-800/30 pt-8 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-[11px] text-sunbiotan-500/35 tracking-wider font-light">
-            © {new Date().getFullYear()} Sunbiotan. {t('allRights')}
-          </p>
-          <p className="text-[11px] text-sunbiotan-500/25 tracking-wide font-light italic">
-            {t('slogan')}
-          </p>
+        <div className="border-t border-sunbiotan-800/30 pt-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+
+            {/* Left — legal links + copyright */}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                {legalLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="text-[11px] text-sunbiotan-400/50 hover:text-sunbiotan-300 font-light tracking-wide transition-colors duration-300"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+              <p className="text-[11px] text-sunbiotan-400/50 tracking-wider font-light">
+                © {new Date().getFullYear()} Sunbiotan. {t('allRights')}
+              </p>
+            </div>
+
+            {/* Right — Livro de Reclamações */}
+            <a
+              href="https://www.livroreclamacoes.pt/Inicio/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('complaintsBook')}
+              className="flex-shrink-0 self-start md:self-auto"
+            >
+              <Image
+                src="/images/livro_reclamacoes.png"
+                alt="Livro de Reclamações"
+                width={120}
+                height={120}
+                className="object-contain"
+              />
+            </a>
+
+          </div>
         </div>
       </div>
     </footer>
