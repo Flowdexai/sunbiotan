@@ -15,18 +15,31 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Metadata' });
   return {
+    metadataBase: new URL('https://sunbiotan.pt'),
     title: t('title'),
     description: t('description'),
+    alternates: {
+      canonical: '/',
+      languages: {
+        'pt-PT': '/',
+        'es-ES': '/es',
+        'en-US': '/en',
+        'it-IT': '/it',
+        'fr-FR': '/fr',
+      },
+    },
     openGraph: {
       title: t('ogTitle'),
       description: t('ogDescription'),
       type: 'website',
       locale: locale === 'pt' ? 'pt_PT' : locale === 'es' ? 'es_ES' : locale === 'it' ? 'it_IT' : locale === 'fr' ? 'fr_FR' : 'en_US',
+      images: [{ url: '/images/logo-sunbiotan.jpg', width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: t('twitterTitle'),
       description: t('twitterDescription'),
+      images: ['/images/logo-sunbiotan.jpg'],
     },
   };
 }

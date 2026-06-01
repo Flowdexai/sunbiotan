@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,11 +21,15 @@ export const metadata: Metadata = {
   keywords: [
     "bronzeado natural",
     "bronzeado sem UV",
-    "ativador de melanina",
+    "fórmula avançada de origem natural",
     "tratamento bronzeado profissional",
     "sunbiotan",
     "bronzeado seguro",
     "salão de beleza bronzeado",
+    "bronzeado portugal",
+    "bronzeado espanha",
+    "bronzeado sem sol",
+    "tratamento pele natural",
   ],
 };
 
@@ -37,6 +42,18 @@ export default function RootLayout({
     <html className="scroll-smooth">
       <body className={`${inter.variable} ${cormorant.variable} font-sans antialiased`}>
         {children}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-C1R1VVSYX7"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-C1R1VVSYX7');
+          `}
+        </Script>
       </body>
     </html>
   );

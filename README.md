@@ -1,6 +1,6 @@
 # Sunbiotan Web
 
-Sitio web institucional de **Sunbiotan** — activador de melanina con ingredientes 100% naturales. Bronceado profesional sin rayos UV, disponible exclusivamente en salones autorizados en Portugal y España.
+Sitio web institucional de **Sunbiotan** — Es una fórmula avanzada, desarrollada con ingredientes de origen natural asociados al bronceado de la piel.
 
 Desarrollado por [Flowdex](https://flowdex.ai).
 
