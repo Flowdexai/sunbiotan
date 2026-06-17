@@ -62,6 +62,12 @@ export function Contact() {
 
     setSuccess(true);
     setForm(INITIAL);
+
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'conversion', {
+        send_to: 'AW-18244892935/zmTLCNSP_8AcEIfy6_tD',
+      });
+    }
   }
 
   return (
