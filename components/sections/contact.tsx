@@ -39,7 +39,7 @@ export function Contact() {
   }
 
   async function handleSubmit() {
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim() || !form.message.trim()) {
       setError(t('errorRequired'));
       return;
     }
@@ -164,7 +164,7 @@ export function Contact() {
 
                 <div className="space-y-1.5">
                   <label className="text-xs tracking-[0.15em] uppercase text-sunbiotan-700/70 font-medium">
-                    {t('labelPhone')}
+                    {t('labelPhone')} <span className="text-sunbiotan-600">*</span>
                   </label>
                   <input
                     type="tel"

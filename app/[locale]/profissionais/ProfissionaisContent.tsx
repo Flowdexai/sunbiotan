@@ -124,8 +124,10 @@ function CandidatureForm() {
           <input type="text" name="city" value={form.city} onChange={handleChange} required placeholder={t('placeholderCity')} className={inputClass} />
         </div>
         <div className="space-y-1.5">
-          <label className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/70 font-medium">{t('labelPhone')}</label>
-          <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+351 XXX XXX XXX" className={inputClass} />
+          <label className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/70 font-medium">
+            {t('labelPhone')} <span className="text-sunbiotan-600">*</span>
+          </label>
+          <input type="tel" name="phone" value={form.phone} onChange={handleChange} required placeholder="+351 XXX XXX XXX" className={inputClass} />
         </div>
       </div>
 
