@@ -5,7 +5,24 @@
     "ogTitle": "SUNBIOTAN | Bronzeado Natural Profissional",
     "ogDescription": "O tratamento natural que respeita e trata a sua pele. Bronzeado radiante, seguro e duradouro — sem raios UV.",
     "twitterTitle": "SUNBIOTAN | Bronzeado Natural Profissional",
-    "twitterDescription": "Bronzeado seguro, uniforme e duradouro com ingredientes 100% naturais."
+    "twitterDescription": "Bronzeado seguro, uniforme e duradouro com ingredientes 100% naturais.",
+    "keywords": [
+      "bronzeado natural",
+      "bronzeado sem UV",
+      "bronzeado sem raios UVA",
+      "autobronzeador profissional",
+      "bronzeado sem sol",
+      "bronzeado seguro",
+      "tratamento de bronzeado profissional",
+      "salão de beleza bronzeado",
+      "centro de bronzeamento",
+      "sunbiotan"
+    ]
+  },
+  "NotFound": {
+    "title": "Página não encontrada",
+    "description": "A página que procura não existe ou foi movida.",
+    "backHome": "Voltar ao início"
   },
   "Navbar": {
     "inicio": "Início",
@@ -222,8 +239,9 @@
     "labelName": "Nome *",
     "placeholderName": "O seu nome",
     "labelEmail": "Email *",
+    "placeholderEmail": "email@exemplo.pt",
     "labelPhone": "Telefone",
-    "placeholderPhone": "+351 000 000 000",
+    "placeholderPhone": "+351 900 000 000",
     "labelMessage": "Mensagem *",
     "placeholderMessage": "Como podemos ajudar?",
     "errorRequired": "Por favor preencha os campos obrigatórios.",
@@ -243,6 +261,8 @@
     "ariaLabel": "Contactar via WhatsApp"
   },
   "CentrosPage": {
+    "metaTitle": "Encontrar Centro | SUNBIOTAN",
+    "metaDescription": "Descubra os centros autorizados Sunbiotan mais próximos de si. Bronzeado natural profissional, disponível exclusivamente em salões certificados.",
     "loadingMap": "A carregar mapa...",
     "loadingCenters": "A carregar centros...",
     "eyebrow": "Onde fazer?",
@@ -271,6 +291,8 @@
     "selectedLocation": "Localização seleccionada"
   },
   "ProfissionaisPage": {
+    "metaTitle": "Torne-se Parceiro | SUNBIOTAN Profissionais",
+    "metaDescription": "Junte-se à rede de centros certificados Sunbiotan. Formação, produtos exclusivos e apoio contínuo para o seu espaço.",
     "eyebrow": "Área Profissional",
     "headline1": "Eleve o seu",
     "headline2": "espaço",
@@ -279,8 +301,8 @@
     "cta2": "Já sou parceiro → Login",
     "stat1Value": "50+",
     "stat1Label": "Centros Parceiros",
-    "stat2Value": "PT · ES",
-    "stat2Label": "Presença Ibérica",
+    "stat2Value": "48h",
+    "stat2Label": "Resposta",
     "stat3Value": "100%",
     "stat3Label": "Natural",
     "benefitsEyebrow": "Vantagens",
@@ -322,6 +344,7 @@
     "placeholderName": "O seu nome",
     "placeholderBusiness": "Salão, spa, clínica...",
     "placeholderCity": "Lisboa, Porto, Madrid...",
+    "placeholderPhone": "+351 900 000 000",
     "placeholderEmail": "email@exemplo.pt",
     "placeholderMessage": "Conte-nos um pouco sobre o seu espaço...",
     "errorSubmit": "Ocorreu um erro. Tente novamente ou contacte-nos diretamente.",

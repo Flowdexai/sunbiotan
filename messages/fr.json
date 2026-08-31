@@ -1,11 +1,26 @@
 {
   "Metadata": {
     "title": "SUNBIOTAN | Bronzage Naturel Professionnel sans Rayons UV",
-    "description": "SUNBIOTAN — activateur de mélanine aux ingrédients 100% naturels. Bronzage sûr, uniforme et durable. Disponible dans les salons agréés.",
+    "description": "SUNBIOTAN — une formule avancée, développée avec des ingrédients d'origine naturelle associés au bronzage de la peau. Disponible dans les salons agréés.",
     "ogTitle": "SUNBIOTAN | Bronzage Naturel Professionnel",
     "ogDescription": "Le traitement naturel qui respecte et prend soin de votre peau. Bronzage radieux, sûr et durable — sans rayons UV.",
     "twitterTitle": "SUNBIOTAN | Bronzage Naturel Professionnel",
-    "twitterDescription": "Bronzage sûr, uniforme et durable aux ingrédients 100% naturels."
+    "twitterDescription": "Bronzage sûr, uniforme et durable aux ingrédients 100% naturels.",
+    "keywords": [
+      "bronzage naturel",
+      "bronzage sans UV",
+      "bronzage sans rayons UV",
+      "autobronzant professionnel",
+      "bronzage sans soleil",
+      "bronzage sûr",
+      "soin bronzant professionnel",
+      "sunbiotan"
+    ]
+  },
+  "NotFound": {
+    "title": "Page introuvable",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "backHome": "Retour à l'accueil"
   },
   "Navbar": {
     "inicio": "Accueil",
@@ -222,6 +237,7 @@
     "labelName": "Nom *",
     "placeholderName": "Votre nom",
     "labelEmail": "Email *",
+    "placeholderEmail": "email@exemple.fr",
     "labelPhone": "Téléphone",
     "placeholderPhone": "+33 0 00 00 00 00",
     "labelMessage": "Message *",
@@ -243,6 +259,8 @@
     "ariaLabel": "Contacter via WhatsApp"
   },
   "CentrosPage": {
+    "metaTitle": "Trouver un Centre | SUNBIOTAN",
+    "metaDescription": "Découvrez les centres agréés Sunbiotan les plus proches. Bronzage naturel professionnel, disponible exclusivement dans les salons certifiés.",
     "loadingMap": "Chargement de la carte...",
     "loadingCenters": "Chargement des centres...",
     "eyebrow": "Où le faire ?",
@@ -271,6 +289,8 @@
     "selectedLocation": "Position sélectionnée"
   },
   "ProfissionaisPage": {
+    "metaTitle": "Devenir Partenaire | SUNBIOTAN Professionnels",
+    "metaDescription": "Rejoignez le réseau de centres certifiés Sunbiotan. Formation, produits exclusifs et accompagnement continu pour votre espace.",
     "eyebrow": "Espace Professionnel",
     "headline1": "Valorisez votre",
     "headline2": "espace",
@@ -279,8 +299,8 @@
     "cta2": "Je suis déjà partenaire → Login",
     "stat1Value": "50+",
     "stat1Label": "Centres Partenaires",
-    "stat2Value": "PT · ES",
-    "stat2Label": "Présence Ibérique",
+    "stat2Value": "48h",
+    "stat2Label": "Réponse",
     "stat3Value": "100%",
     "stat3Label": "Naturel",
     "benefitsEyebrow": "Avantages",
@@ -293,7 +313,7 @@
     "benefit3Title": "Produits Exclusifs",
     "benefit3Desc": "Accès aux produits professionnels Sunbiotan à des conditions spéciales pour partenaires, avec une formule 100% naturelle.",
     "benefit4Title": "Réseau de Partenaires",
-    "benefit4Desc": "Intégrez un réseau sélectionné de centres au Portugal et en Espagne. Visibilité sur notre carte et matériaux marketing inclus.",
+    "benefit4Desc": "Intégrez un réseau sélectionné de centres. Visibilité sur notre carte et supports marketing inclus.",
     "benefit5Title": "Certification Officielle",
     "benefit5Desc": "Votre espace reçoit le label \"Centre Certifié Sunbiotan\", transmettant confiance et qualité à vos clients.",
     "benefit6Title": "Accompagnement Continu",
@@ -322,6 +342,7 @@
     "placeholderName": "Votre nom",
     "placeholderBusiness": "Salon, spa, clinique...",
     "placeholderCity": "Paris, Lyon, Madrid...",
+    "placeholderPhone": "+33 0 00 00 00 00",
     "placeholderEmail": "email@exemple.fr",
     "placeholderMessage": "Parlez-nous un peu de votre espace...",
     "errorSubmit": "Une erreur s'est produite. Veuillez réessayer ou nous contacter directement.",

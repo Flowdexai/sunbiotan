@@ -156,7 +156,7 @@ export function Contact() {
                       type="email"
                       value={form.email}
                       onChange={e => handleChange('email', e.target.value)}
-                      placeholder="email@exemplo.com"
+                      placeholder={t('placeholderEmail')}
                       className="w-full px-4 py-3 bg-white border border-sunbiotan-200 rounded-xl text-sm text-sunbiotan-900 placeholder:text-sunbiotan-400/50 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400/30 focus:border-sunbiotan-400 transition-all"
                     />
                   </div>

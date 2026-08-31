@@ -5,7 +5,22 @@
     "ogTitle": "SUNBIOTAN | Abbronzatura Naturale Professionale",
     "ogDescription": "Il trattamento naturale che rispetta e cura la Sua pelle. Abbronzatura radiosa, sicura e duratura — senza raggi UV.",
     "twitterTitle": "SUNBIOTAN | Abbronzatura Naturale Professionale",
-    "twitterDescription": "Abbronzatura sicura, uniforme e duratura con ingredienti 100% naturali."
+    "twitterDescription": "Abbronzatura sicura, uniforme e duratura con ingredienti 100% naturali.",
+    "keywords": [
+      "abbronzatura naturale",
+      "abbronzatura senza UV",
+      "abbronzatura senza raggi UV",
+      "autoabbronzante professionale",
+      "abbronzatura senza sole",
+      "abbronzatura sicura",
+      "trattamento abbronzante professionale",
+      "sunbiotan"
+    ]
+  },
+  "NotFound": {
+    "title": "Pagina non trovata",
+    "description": "La pagina che cerchi non esiste o è stata spostata.",
+    "backHome": "Torna all'inizio"
   },
   "Navbar": {
     "inicio": "Home",
@@ -222,6 +237,7 @@
     "labelName": "Nome *",
     "placeholderName": "Il Suo nome",
     "labelEmail": "Email *",
+    "placeholderEmail": "email@esempio.it",
     "labelPhone": "Telefono",
     "placeholderPhone": "+39 000 000 0000",
     "labelMessage": "Messaggio *",
@@ -243,6 +259,8 @@
     "ariaLabel": "Contattare tramite WhatsApp"
   },
   "CentrosPage": {
+    "metaTitle": "Trova un Centro | SUNBIOTAN",
+    "metaDescription": "Scopri i centri autorizzati Sunbiotan più vicini a te. Abbronzatura naturale professionale, disponibile esclusivamente nei saloni certificati.",
     "loadingMap": "Caricamento mappa...",
     "loadingCenters": "Caricamento centri...",
     "eyebrow": "Dove farlo?",
@@ -271,6 +289,8 @@
     "selectedLocation": "Posizione selezionata"
   },
   "ProfissionaisPage": {
+    "metaTitle": "Diventa Partner | SUNBIOTAN Professionisti",
+    "metaDescription": "Unisciti alla rete di centri certificati Sunbiotan. Formazione, prodotti esclusivi e supporto continuo per il tuo spazio.",
     "eyebrow": "Area Professionale",
     "headline1": "Elevi il Suo",
     "headline2": "spazio",
@@ -279,8 +299,8 @@
     "cta2": "Sono già partner → Login",
     "stat1Value": "50+",
     "stat1Label": "Centri Partner",
-    "stat2Value": "PT · ES",
-    "stat2Label": "Presenza Iberica",
+    "stat2Value": "48h",
+    "stat2Label": "Risposta",
     "stat3Value": "100%",
     "stat3Label": "Naturale",
     "benefitsEyebrow": "Vantaggi",
@@ -293,7 +313,7 @@
     "benefit3Title": "Prodotti Esclusivi",
     "benefit3Desc": "Accesso ai prodotti professionali Sunbiotan a condizioni speciali per partner, con formula 100% naturale.",
     "benefit4Title": "Rete di Partner",
-    "benefit4Desc": "Si integri in una rete selezionata di centri in Portogallo e Spagna. Visibilità sulla mappa e materiali marketing inclusi.",
+    "benefit4Desc": "Si integri in una rete selezionata di centri. Visibilità sulla mappa e materiali marketing inclusi.",
     "benefit5Title": "Certificazione Ufficiale",
     "benefit5Desc": "Il Suo spazio riceve il marchio \"Centro Certificato Sunbiotan\", trasmettendo fiducia e qualità ai Suoi clienti.",
     "benefit6Title": "Supporto Continuo",
@@ -322,6 +342,7 @@
     "placeholderName": "Il Suo nome",
     "placeholderBusiness": "Salone, spa, clinica...",
     "placeholderCity": "Milano, Roma, Madrid...",
+    "placeholderPhone": "+39 000 000 0000",
     "placeholderEmail": "email@esempio.it",
     "placeholderMessage": "Ci racconti un po' del Suo spazio...",
     "errorSubmit": "Si è verificato un errore. Riprovi o ci contatti direttamente.",

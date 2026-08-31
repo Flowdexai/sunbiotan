@@ -1,11 +1,27 @@
 {
   "Metadata": {
     "title": "SUNBIOTAN | Professional Natural Tan without UV Rays",
-    "description": "SUNBIOTAN — melanin activator with 100% natural ingredients. Safe, even, and long-lasting tan. Available at authorised salons.",
+    "description": "SUNBIOTAN — an advanced formula, developed with naturally derived ingredients associated with skin tanning. Available at authorised salons.",
     "ogTitle": "SUNBIOTAN | Professional Natural Tan",
     "ogDescription": "The natural treatment that respects and cares for your skin. Radiant, safe, and long-lasting tan — without UV rays.",
     "twitterTitle": "SUNBIOTAN | Professional Natural Tan",
-    "twitterDescription": "Safe, even, and long-lasting tan with 100% natural ingredients."
+    "twitterDescription": "Safe, even, and long-lasting tan with 100% natural ingredients.",
+    "keywords": [
+      "natural tan",
+      "UV-free tan",
+      "tan without UV rays",
+      "professional self-tan",
+      "sunless tanning",
+      "safe tan",
+      "professional tanning treatment",
+      "spray tan alternative",
+      "sunbiotan"
+    ]
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for doesn't exist or has been moved.",
+    "backHome": "Back to home"
   },
   "Navbar": {
     "inicio": "Home",
@@ -222,8 +238,9 @@
     "labelName": "Name *",
     "placeholderName": "Your name",
     "labelEmail": "Email *",
+    "placeholderEmail": "email@example.com",
     "labelPhone": "Phone",
-    "placeholderPhone": "+351 000 000 000",
+    "placeholderPhone": "+351 900 000 000",
     "labelMessage": "Message *",
     "placeholderMessage": "How can we help you?",
     "errorRequired": "Please fill in all required fields.",
@@ -243,6 +260,8 @@
     "ariaLabel": "Contact via WhatsApp"
   },
   "CentrosPage": {
+    "metaTitle": "Find a Centre | SUNBIOTAN",
+    "metaDescription": "Discover the nearest authorised Sunbiotan centres. Professional natural tan, available exclusively at certified salons.",
     "loadingMap": "Loading map...",
     "loadingCenters": "Loading centres...",
     "eyebrow": "Where to go?",
@@ -271,6 +290,8 @@
     "selectedLocation": "Selected location"
   },
   "ProfissionaisPage": {
+    "metaTitle": "Become a Partner | SUNBIOTAN Professionals",
+    "metaDescription": "Join the Sunbiotan certified centre network. Training, exclusive products and ongoing support for your space.",
     "eyebrow": "Professional Area",
     "headline1": "Elevate your",
     "headline2": "space",
@@ -279,8 +300,8 @@
     "cta2": "I'm already a partner → Login",
     "stat1Value": "50+",
     "stat1Label": "Partner Centres",
-    "stat2Value": "PT · ES",
-    "stat2Label": "Iberian Presence",
+    "stat2Value": "48h",
+    "stat2Label": "Response Time",
     "stat3Value": "100%",
     "stat3Label": "Natural",
     "benefitsEyebrow": "Advantages",
@@ -293,7 +314,7 @@
     "benefit3Title": "Exclusive Products",
     "benefit3Desc": "Access to Sunbiotan professional products at special partner conditions, with a 100% natural formula.",
     "benefit4Title": "Partner Network",
-    "benefit4Desc": "Join a curated network of centres in Portugal and Spain. Map visibility and marketing materials included.",
+    "benefit4Desc": "Join a curated network of centres. Map visibility and marketing materials included.",
     "benefit5Title": "Official Certification",
     "benefit5Desc": "Your space receives the \"Sunbiotan Certified Centre\" seal, conveying trust and quality to your clients.",
     "benefit6Title": "Ongoing Support",
@@ -322,6 +343,7 @@
     "placeholderName": "Your name",
     "placeholderBusiness": "Salon, spa, clinic...",
     "placeholderCity": "London, Madrid, Lisbon...",
+    "placeholderPhone": "+351 900 000 000",
     "placeholderEmail": "email@example.com",
     "placeholderMessage": "Tell us a little about your space...",
     "errorSubmit": "An error occurred. Please try again or contact us directly.",
