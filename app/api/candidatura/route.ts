@@ -2,14 +2,14 @@ import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
   const { name, business_name, city, phone, email, message } = await req.json();
 
   if (!name || !business_name || !city || !email || !message) {
     return NextResponse.json({ error: 'Campos obrigatórios em falta.' }, { status: 400 });
   }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
