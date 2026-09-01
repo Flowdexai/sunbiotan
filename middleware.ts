@@ -57,33 +57,35 @@ export async function middleware(req: NextRequest) {
       }
     );
 
-    const { data: { session } } = await supabase.auth.getSession();
+    // getUser() revalidates the token against Supabase Auth on every request,
+    // unlike getSession() which trusts the (spoofable) cookie payload.
+    const { data: { user } } = await supabase.auth.getUser();
 
     if (isDashboard) {
-      if (!session) {
+      if (!user) {
         return NextResponse.redirect(new URL(localizedPath('/login', locale), req.url));
       }
       const { data: profile } = await supabase
-        .from('profiles').select('role').eq('id', session.user.id).single();
+        .from('profiles').select('role').eq('id', user.id).single();
       if (profile?.role !== 'admin') {
         return NextResponse.redirect(new URL(localizedPath('/login', locale), req.url));
       }
     }
 
     if (isPortal) {
-      if (!session) {
+      if (!user) {
         return NextResponse.redirect(new URL(localizedPath('/login', locale), req.url));
       }
       const { data: profile } = await supabase
-        .from('profiles').select('role, approved').eq('id', session.user.id).single();
+        .from('profiles').select('role, approved').eq('id', user.id).single();
       if (profile?.role !== 'professional' || !profile?.approved) {
         return NextResponse.redirect(new URL(localizedPath('/login', locale), req.url));
       }
     }
 
-    if (isLogin && session) {
+    if (isLogin && user) {
       const { data: profile } = await supabase
-        .from('profiles').select('role').eq('id', session.user.id).single();
+        .from('profiles').select('role').eq('id', user.id).single();
       if (profile?.role === 'admin') {
         return NextResponse.redirect(new URL(localizedPath('/dashboard', locale), req.url));
       }
