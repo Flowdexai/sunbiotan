@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
-import { buildAlternates, localizedHref } from '@/lib/seo';
+import { buildAlternates, localizedHref, OG_IMAGE } from '@/lib/seo';
 import { CentrosContent } from './CentrosContent';
 
 export async function generateMetadata({
@@ -18,8 +18,8 @@ export async function generateMetadata({
     title,
     description,
     alternates: buildAlternates(locale, '/mapa-centros'),
-    openGraph: { title, description, url: localizedHref(locale, '/mapa-centros') },
-    twitter: { title, description },
+    openGraph: { title, description, url: localizedHref(locale, '/mapa-centros'), images: [OG_IMAGE] },
+    twitter: { title, description, card: 'summary', images: [OG_IMAGE.url] },
   };
 }
 

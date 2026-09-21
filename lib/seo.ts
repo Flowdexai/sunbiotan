@@ -38,3 +38,6 @@ export function buildAlternates(locale: string, path = ''): Metadata['alternates
     languages: hreflangLanguages(path),
   };
 }
+
+/** Shared social-preview image. Pages that define their own `openGraph`/`twitter` replace the layout's, so they must repeat it. */
+export const OG_IMAGE = { url: '/images/logo-sunbiotan.jpg', width: 512, height: 512, alt: 'Sunbiotan' };

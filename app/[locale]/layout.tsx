@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { Inter, Cormorant_Garamond } from 'next/font/google';
 import Script from 'next/script';
 import { routing } from '@/i18n/routing';
-import { buildAlternates, localizedHref } from '@/lib/seo';
+import { buildAlternates, localizedHref, OG_IMAGE } from '@/lib/seo';
 import { WhatsAppButton } from '@/components/ui/whatsapp-button';
 import { CookieBanner } from '@/components/ui/cookie-banner';
 import { MotionProvider } from '@/components/motion-provider';
@@ -59,13 +59,13 @@ export async function generateMetadata({
       type: 'website',
       url: localizedHref(locale),
       locale: OG_LOCALES[locale] ?? 'en_US',
-      images: [{ url: '/images/logo-sunbiotan.jpg', width: 1200, height: 630 }],
+      images: [OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: t('twitterTitle'),
       description: t('twitterDescription'),
-      images: ['/images/logo-sunbiotan.jpg'],
+      images: [OG_IMAGE.url],
     },
   };
 }
