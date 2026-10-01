@@ -259,7 +259,6 @@ export function ProfissionaisContent() {
           <div className="border-t border-sunbiotan-700/20 pt-8 flex justify-center">
             <div className="flex items-stretch gap-0">
               {[
-                { value: t('stat1Value'), label: t('stat1Label') },
                 { value: t('stat2Value'), label: t('stat2Label') },
                 { value: t('stat3Value'), label: t('stat3Label') },
               ].map((stat, i, arr) => (
