@@ -1,11 +1,18 @@
+// next.config.mjs
+//
+// JavaScript puro (no .ts) A PROPÓSITO: desde Next 16.3 el binario nativo de
+// SWC para Linux exige glibc 2.30 y el contenedor de build de Hostinger tiene
+// una más vieja, así que Next cae a SWC WASM. Con WASM, un next.config.ts
+// envuelto por Hostinger falla al cargar ("Cannot find module
+// '<hash>.next.config'"). Un .mjs se carga sin transpilar y no depende de SWC.
 import createNextIntlPlugin from 'next-intl/plugin';
-import type { NextConfig } from "next";
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 // Origen de Supabase (https + wss) derivado de la variable pública; si no
 // está, comodín de Supabase como respaldo. Nunca se hardcodea el proyecto.
-function supabaseOrigins(): { http: string; ws: string } {
+/** @returns {{ http: string; ws: string }} */
+function supabaseOrigins() {
   try {
     const url = new URL(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '');
     return { http: url.origin, ws: `wss://${url.host}` };
@@ -78,7 +85,8 @@ const SECURITY_HEADERS = [
   { key: 'Content-Security-Policy-Report-Only', value: CSP },
 ];
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   poweredByHeader: false,
   images: {
     unoptimized: true,
