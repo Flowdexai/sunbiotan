@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { useTranslations } from 'next-intl';
 import { Center } from '@/types/center';
+import { websiteHref, instagramHref, telHref } from '@/lib/partners/website';
 
 interface MapViewProps {
   centers: Center[];
@@ -92,26 +93,26 @@ function MapContent({ centers, onCenterSelect, selectedCenter }: MapViewProps) {
               </div>
             </div>
 
-            {infoOpen.phone && (
+            {telHref(infoOpen.phone) && (
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 6 }}>
                 <Phone style={{ width: 14, height: 14, color: '#c19a5b', flexShrink: 0 }} strokeWidth={1.5} />
-                <a href={`tel:${infoOpen.phone.replace(/\s/g, '')}`} style={{ fontSize: 12, color: '#6b4e27', textDecoration: 'none' }}>
+                <a href={telHref(infoOpen.phone)!} style={{ fontSize: 12, color: '#6b4e27', textDecoration: 'none' }}>
                   {infoOpen.phone}
                 </a>
               </div>
             )}
-            {infoOpen.instagram && (
+            {infoOpen.instagram && instagramHref(infoOpen.instagram) && (
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 6 }}>
                 <FontAwesomeIcon icon={faInstagram} style={{ width: 14, height: 14, color: '#c19a5b', flexShrink: 0 }} />
-                <a href={`https://instagram.com/${infoOpen.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: '#6b4e27', textDecoration: 'none' }}>
+                <a href={instagramHref(infoOpen.instagram)!} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: '#6b4e27', textDecoration: 'none' }}>
                   @{infoOpen.instagram.replace('@', '')}
                 </a>
               </div>
             )}
-            {infoOpen.facebook && (
+            {websiteHref(infoOpen.facebook) && (
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 6 }}>
                 <FontAwesomeIcon icon={faFacebook} style={{ width: 14, height: 14, color: '#c19a5b', flexShrink: 0 }} />
-                <a href={infoOpen.facebook} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: '#6b4e27', textDecoration: 'none' }}>
+                <a href={websiteHref(infoOpen.facebook)!} target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: '#6b4e27', textDecoration: 'none' }}>
                   Facebook
                 </a>
               </div>

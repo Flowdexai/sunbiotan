@@ -65,12 +65,11 @@ export default function EditarCentroPage() {
     setError('');
     try {
       const fullAddress = `${form.address}, ${form.city}, ${form.country}`;
-      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(fullAddress)}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}`;
-      const res = await fetch(url);
+      // Mismo proxy que dashboard/centros/nuevo: la key de Geocoding no sale del servidor.
+      const res = await fetch(`/api/geocode?address=${encodeURIComponent(fullAddress)}`);
       const data = await res.json();
-      if (data.results && data.results.length > 0) {
-        const { lat, lng } = data.results[0].geometry.location;
-        setForm((prev) => ({ ...prev, lat, lng }));
+      if (res.ok) {
+        setForm((prev) => ({ ...prev, lat: data.lat, lng: data.lng }));
       } else {
         setError(t('errorNotFoundEdit'));
       }

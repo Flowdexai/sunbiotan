@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { useTranslations } from 'next-intl';
+import { websiteHref, instagramHref, telHref } from '@/lib/partners/website';
 
 const MapView = dynamic(
   () => import('./map-view').then(mod => mod.MapView),
@@ -427,26 +428,26 @@ function NearbyCard({
             <p className="font-medium text-sunbiotan-700 mt-0.5">{center.city}</p>
           </div>
         </div>
-        {center.phone && (
+        {telHref(center.phone) && (
           <div className="flex items-center gap-2">
             <Phone className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-            <a href={`tel:${center.phone.replace(/\s/g, '')}`} className="hover:text-sunbiotan-700 transition-colors" onClick={(e) => e.stopPropagation()}>
+            <a href={telHref(center.phone)!} className="hover:text-sunbiotan-700 transition-colors" onClick={(e) => e.stopPropagation()}>
               {center.phone}
             </a>
           </div>
         )}
-        {center.instagram && (
+        {center.instagram && instagramHref(center.instagram) && (
           <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faInstagram} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-            <a href={`https://instagram.com/${center.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
+            <a href={instagramHref(center.instagram)!} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
               @{center.instagram.replace('@', '')}
             </a>
           </div>
         )}
-        {center.facebook && (
+        {websiteHref(center.facebook) && (
           <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faFacebook} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-            <a href={center.facebook} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
+            <a href={websiteHref(center.facebook)!} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
               Facebook
             </a>
           </div>
@@ -516,26 +517,26 @@ function FeaturedCenterCard({
               <p className="font-medium text-sunbiotan-700 mt-0.5">{center.city}</p>
             </div>
           </div>
-          {center.phone && (
+          {telHref(center.phone) && (
             <div className="flex items-center gap-2">
               <Phone className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-              <a href={`tel:${center.phone.replace(/\s/g, '')}`} className="hover:text-sunbiotan-700 transition-colors" onClick={(e) => e.stopPropagation()}>
+              <a href={telHref(center.phone)!} className="hover:text-sunbiotan-700 transition-colors" onClick={(e) => e.stopPropagation()}>
                 {center.phone}
               </a>
             </div>
           )}
-          {center.instagram && (
+          {center.instagram && instagramHref(center.instagram) && (
             <div className="flex items-center gap-2">
               <FontAwesomeIcon icon={faInstagram} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-              <a href={`https://instagram.com/${center.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
+              <a href={instagramHref(center.instagram)!} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
                 @{center.instagram.replace('@', '')}
               </a>
             </div>
           )}
-          {center.facebook && (
+          {websiteHref(center.facebook) && (
             <div className="flex items-center gap-2">
               <FontAwesomeIcon icon={faFacebook} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-              <a href={center.facebook} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
+              <a href={websiteHref(center.facebook)!} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
                 Facebook
               </a>
             </div>
@@ -595,26 +596,26 @@ function RegularCenterCard({
             <p className="font-medium text-sunbiotan-700 mt-0.5">{center.city}</p>
           </div>
         </div>
-        {center.phone && (
+        {telHref(center.phone) && (
           <div className="flex items-center gap-2">
             <Phone className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
-            <a href={`tel:${center.phone.replace(/\s/g, '')}`} className="hover:text-sunbiotan-700 transition-colors" onClick={(e) => e.stopPropagation()}>
+            <a href={telHref(center.phone)!} className="hover:text-sunbiotan-700 transition-colors" onClick={(e) => e.stopPropagation()}>
               {center.phone}
             </a>
           </div>
         )}
-        {center.instagram && (
+        {center.instagram && instagramHref(center.instagram) && (
           <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faInstagram} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-            <a href={`https://instagram.com/${center.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
+            <a href={instagramHref(center.instagram)!} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
               @{center.instagram.replace('@', '')}
             </a>
           </div>
         )}
-        {center.facebook && (
+        {websiteHref(center.facebook) && (
           <div className="flex items-center gap-2">
             <FontAwesomeIcon icon={faFacebook} className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0" />
-            <a href={center.facebook} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
+            <a href={websiteHref(center.facebook)!} target="_blank" rel="noopener noreferrer" className="text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline transition-colors" onClick={(e) => e.stopPropagation()}>
               Facebook
             </a>
           </div>

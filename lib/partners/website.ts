@@ -26,3 +26,18 @@ export function websiteHref(raw: string | null | undefined): string | null {
     return null;
   }
 }
+
+const BARE_HANDLE = /^[A-Za-z0-9._]{1,30}$/;
+
+/** Campo instagram de centers: "@handle", "handle" o URL completa → URL segura o null. */
+export function instagramHref(raw: string | null | undefined): string | null {
+  const value = (raw ?? '').trim();
+  const handle = value.replace(/^@/, '');
+  return websiteHref(BARE_HANDLE.test(handle) ? `@${handle}` : value);
+}
+
+/** Teléfono → "tel:" solo con dígitos y "+", o null si no queda ningún dígito. */
+export function telHref(raw: string | null | undefined): string | null {
+  const digits = (raw ?? '').replace(/[^0-9+]/g, '');
+  return /\d/.test(digits) ? `tel:${digits}` : null;
+}

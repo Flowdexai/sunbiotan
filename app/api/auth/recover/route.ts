@@ -33,11 +33,18 @@ export async function POST(req: Request) {
 
   try {
     const admin = createAdminClient();
-    const { data: profile } = await admin
+    // Sin distinción de mayúsculas. En ilike, \ % y _ son especiales: se
+    // escapan para que el email se compare literal. Después se confirma la
+    // igualdad exacta (en minúsculas) en JS.
+    const pattern = email.replace(/[\\%_]/g, (c) => `\\${c}`);
+    const { data: candidates } = await admin
       .from('profiles')
-      .select('id, full_name, locale, role, approved')
-      .eq('email', email)
-      .maybeSingle();
+      .select('id, email, full_name, locale, role, approved')
+      .ilike('email', pattern)
+      .limit(5);
+    const profile = (candidates ?? []).find(
+      (p) => typeof p.email === 'string' && p.email.toLowerCase() === email.toLowerCase()
+    );
 
     if (profile && profile.role === 'professional' && profile.approved) {
       const result = await sendAccessLink({

@@ -5,6 +5,14 @@ import { useState, useRef } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { Upload, X, Loader2, ImageIcon } from 'lucide-react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+
+// Bucket público 'centers': solo estos tipos. La extensión se deriva del MIME.
+const ALLOWED_IMAGE_TYPES: Record<string, string> = {
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+  'image/webp': 'webp',
+};
 
 interface ImageUploadProps {
   currentImageUrl?: string | null;
@@ -13,6 +21,7 @@ interface ImageUploadProps {
 }
 
 export function ImageUpload({ currentImageUrl, onUpload, onRemove }: ImageUploadProps) {
+  const t = useTranslations('ImageUpload');
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,9 +35,11 @@ export function ImageUpload({ currentImageUrl, onUpload, onRemove }: ImageUpload
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validar tipo
-    if (!file.type.startsWith('image/')) {
-      setError('Apenas imagens são permitidas.');
+    // Validar tipo: lista blanca; la extensión sale del MIME, nunca del nombre.
+    const ext = ALLOWED_IMAGE_TYPES[file.type];
+    if (!ext) {
+      setError(t('errorType'));
+      if (inputRef.current) inputRef.current.value = '';
       return;
     }
 
@@ -41,12 +52,11 @@ export function ImageUpload({ currentImageUrl, onUpload, onRemove }: ImageUpload
     setUploading(true);
     setError('');
 
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+    const fileName = `${crypto.randomUUID()}.${ext}`;
 
     const { error: uploadError } = await supabase.storage
       .from('centers')
-      .upload(fileName, file, { upsert: false });
+      .upload(fileName, file, { upsert: false, contentType: file.type });
 
     if (uploadError) {
       setError('Erro ao fazer upload. Tente novamente.');
@@ -129,7 +139,7 @@ export function ImageUpload({ currentImageUrl, onUpload, onRemove }: ImageUpload
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept="image/jpeg,image/png,image/webp"
         onChange={handleUpload}
         className="hidden"
       />
