@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { m } from 'framer-motion';
 import { Mail, Phone, Send, Loader2, CheckCircle } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,6 +25,10 @@ export function Contact() {
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Anti-spam: honeypot + tiempo mínimo con el formulario abierto.
+  const [hpUrl, setHpUrl] = useState('');
+  const mountedAt = useRef(0);
+  useEffect(() => { mountedAt.current = Date.now(); }, []);
 
   const contactInfo = [
     { isFa: false as const, icon: Mail, label: t('contactEmail'), value: 'info@sunbiotan.pt', href: 'mailto:info@sunbiotan.pt' },
@@ -50,7 +54,7 @@ export function Contact() {
     const res = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, hp_url: hpUrl, elapsed_ms: Date.now() - mountedAt.current }),
     });
 
     setSending(false);
@@ -60,8 +64,13 @@ export function Contact() {
       return;
     }
 
+    const data = await res.json().catch(() => ({}));
+
     setSuccess(true);
     setForm(INITIAL);
+
+    // Envío descartado por el anti-spam: se muestra éxito pero no se mide conversión.
+    if (data?.discarded) return;
 
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'conversion', {
@@ -90,16 +99,16 @@ export function Contact() {
         >
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="h-px w-8 bg-sunbiotan-400/50" />
-            <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-600/80 font-medium">
+            <p className="text-[11px] tracking-[0.45em] uppercase text-sunbiotan-700 font-medium">
               {t('eyebrow')}
             </p>
             <div className="h-px w-8 bg-sunbiotan-400/50" />
           </div>
           <h2 className="font-display font-light text-6xl text-sunbiotan-900 leading-[1.05] tracking-tight">
             {t('headline')}{' '}
-            <em className="not-italic italic text-sunbiotan-600">{t('headlineItalic')}</em>
+            <em className="italic text-sunbiotan-600">{t('headlineItalic')}</em>
           </h2>
-          <p className="mt-4 text-sunbiotan-600/60 font-light text-base max-w-lg mx-auto leading-relaxed">
+          <p className="mt-4 text-sunbiotan-800 font-light text-base max-w-lg mx-auto leading-relaxed">
             {t('subtitle')}
           </p>
         </m.div>
@@ -119,25 +128,38 @@ export function Contact() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center justify-center gap-4 py-16 text-center"
               >
-                <CheckCircle className="h-12 w-12 text-sunbiotan-500" strokeWidth={1} />
+                <CheckCircle className="h-12 w-12 text-sunbiotan-600" strokeWidth={1} />
                 <h3 className="font-display font-light text-2xl text-sunbiotan-900">
                   {t('successTitle')}
                 </h3>
-                <p className="text-sunbiotan-600/60 font-light text-sm">
+                <p className="text-sunbiotan-700 font-light text-sm">
                   {t('successSub')}
                 </p>
                 <button
                   onClick={() => setSuccess(false)}
-                  className="mt-2 text-xs tracking-[0.18em] uppercase text-sunbiotan-500 hover:text-sunbiotan-700 transition-colors underline underline-offset-4"
+                  className="mt-2 text-xs tracking-[0.18em] uppercase text-sunbiotan-700 hover:text-sunbiotan-900 transition-colors underline underline-offset-4"
                 >
                   {t('sendAnother')}
                 </button>
               </m.div>
             ) : (
               <>
+                <div aria-hidden="true" className="absolute -left-[10000px] top-auto w-px h-px overflow-hidden">
+                  <label>
+                    Website
+                    <input
+                      type="text"
+                      name="hp_url"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={hpUrl}
+                      onChange={e => setHpUrl(e.target.value)}
+                    />
+                  </label>
+                </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs tracking-[0.15em] uppercase text-sunbiotan-700/70 font-medium">
+                    <label className="text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium">
                       {t('labelName')}
                     </label>
                     <input
@@ -145,11 +167,11 @@ export function Contact() {
                       value={form.name}
                       onChange={e => handleChange('name', e.target.value)}
                       placeholder={t('placeholderName')}
-                      className="w-full px-4 py-3 bg-white border border-sunbiotan-200 rounded-xl text-sm text-sunbiotan-900 placeholder:text-sunbiotan-400/50 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400/30 focus:border-sunbiotan-400 transition-all"
+                      className="w-full px-4 py-3 bg-white border border-sunbiotan-600 rounded-xl text-sm text-sunbiotan-900 placeholder:text-sunbiotan-700 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400/30 focus:border-sunbiotan-800 transition-all"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs tracking-[0.15em] uppercase text-sunbiotan-700/70 font-medium">
+                    <label className="text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium">
                       {t('labelEmail')}
                     </label>
                     <input
@@ -157,13 +179,13 @@ export function Contact() {
                       value={form.email}
                       onChange={e => handleChange('email', e.target.value)}
                       placeholder={t('placeholderEmail')}
-                      className="w-full px-4 py-3 bg-white border border-sunbiotan-200 rounded-xl text-sm text-sunbiotan-900 placeholder:text-sunbiotan-400/50 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400/30 focus:border-sunbiotan-400 transition-all"
+                      className="w-full px-4 py-3 bg-white border border-sunbiotan-600 rounded-xl text-sm text-sunbiotan-900 placeholder:text-sunbiotan-700 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400/30 focus:border-sunbiotan-800 transition-all"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs tracking-[0.15em] uppercase text-sunbiotan-700/70 font-medium">
+                  <label className="text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium">
                     {t('labelPhone')} <span className="text-sunbiotan-600">*</span>
                   </label>
                   <input
@@ -171,12 +193,12 @@ export function Contact() {
                     value={form.phone}
                     onChange={e => handleChange('phone', e.target.value)}
                     placeholder={t('placeholderPhone')}
-                    className="w-full px-4 py-3 bg-white border border-sunbiotan-200 rounded-xl text-sm text-sunbiotan-900 placeholder:text-sunbiotan-400/50 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400/30 focus:border-sunbiotan-400 transition-all"
+                    className="w-full px-4 py-3 bg-white border border-sunbiotan-600 rounded-xl text-sm text-sunbiotan-900 placeholder:text-sunbiotan-700 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400/30 focus:border-sunbiotan-800 transition-all"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs tracking-[0.15em] uppercase text-sunbiotan-700/70 font-medium">
+                  <label className="text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium">
                     {t('labelMessage')}
                   </label>
                   <textarea
@@ -184,18 +206,18 @@ export function Contact() {
                     onChange={e => handleChange('message', e.target.value)}
                     placeholder={t('placeholderMessage')}
                     rows={5}
-                    className="w-full px-4 py-3 bg-white border border-sunbiotan-200 rounded-xl text-sm text-sunbiotan-900 placeholder:text-sunbiotan-400/50 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400/30 focus:border-sunbiotan-400 transition-all resize-none"
+                    className="w-full px-4 py-3 bg-white border border-sunbiotan-600 rounded-xl text-sm text-sunbiotan-900 placeholder:text-sunbiotan-700 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400/30 focus:border-sunbiotan-800 transition-all resize-none"
                   />
                 </div>
 
                 {error && (
-                  <p className="text-sm text-red-500 bg-red-50 px-4 py-2.5 rounded-xl">{error}</p>
+                  <p className="text-sm text-red-700 bg-red-50 px-4 py-2.5 rounded-xl">{error}</p>
                 )}
 
                 <button
                   onClick={handleSubmit}
                   disabled={sending}
-                  className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[11px] tracking-[0.2em] uppercase font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-sunbiotan-400/20 hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="w-full flex items-center justify-center gap-2.5 py-3.5 bg-gradient-to-r from-[#e8cf9c] to-sunbiotan-400 hover:from-[#f0dcae] hover:to-[#dcc395] border border-sunbiotan-700 text-sunbiotan-950 text-[13px] tracking-[0.14em] uppercase font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-sunbiotan-400/20 hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
                   {sending ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -229,13 +251,13 @@ export function Contact() {
               >
                 <div className="flex-shrink-0 w-14 h-14 border border-sunbiotan-200 rounded-2xl flex items-center justify-center group-hover:border-sunbiotan-400 group-hover:bg-sunbiotan-50 transition-all duration-300">
                   {item.isFa ? (
-                    <FontAwesomeIcon icon={item.icon} style={{ width: '24px', height: '24px' }} className="text-sunbiotan-500" />
+                    <FontAwesomeIcon icon={item.icon} style={{ width: '24px', height: '24px' }} className="text-sunbiotan-600" />
                   ) : (
-                    <item.icon className="h-6 w-6 text-sunbiotan-500" strokeWidth={1.5} />
+                    <item.icon className="h-6 w-6 text-sunbiotan-600" strokeWidth={1.5} />
                   )}
                 </div>
                 <div>
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-sunbiotan-500/60 font-medium mb-1">
+                  <p className="text-[11px] tracking-[0.2em] uppercase text-sunbiotan-700 font-medium mb-1">
                     {item.label}
                   </p>
                   <p className="text-base text-sunbiotan-800 group-hover:text-sunbiotan-600 transition-colors font-light">

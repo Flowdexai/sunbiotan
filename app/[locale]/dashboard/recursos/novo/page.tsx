@@ -1,20 +1,25 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useRouter, Link } from '@/i18n/navigation';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { ResourceSourceFields, type SourceMode } from '@/components/dashboard/resource-source-fields';
+import { isHttpUrl } from '@/lib/resources/config';
 
 interface ResourceForm {
   title: string;
   description: string;
   type: string;
   url: string;
+  storage_path: string;
   thumbnail_url: string;
   category: string;
   order_index: number;
   active: boolean;
+  featured: boolean;
+  locale: string; // '' = todos
 }
 
 const initialForm: ResourceForm = {
@@ -22,48 +27,71 @@ const initialForm: ResourceForm = {
   description: '',
   type: 'video',
   url: '',
+  storage_path: '',
   thumbnail_url: '',
   category: 'formacao',
   order_index: 0,
   active: true,
+  featured: false,
+  locale: '',
 };
 
 const inputClass = 'w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sm focus:outline-none focus:border-sunbiotan-500 transition-colors';
+const labelClass = 'block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2';
 
 export default function NovoRecursoPage() {
   const t = useTranslations('DashboardRecursoForm');
   const [form, setForm] = useState<ResourceForm>(initialForm);
+  const [mode, setMode] = useState<SourceMode>('upload');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const router = useRouter();
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  const supabase = useMemo(
+    () => createBrowserClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!),
+    []
   );
+
+  const set = <K extends keyof ResourceForm>(key: K, value: ResourceForm[K]) =>
+    setForm((prev) => ({ ...prev, [key]: value }));
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
-    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : name === 'order_index' ? parseInt(value) || 0 : value,
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
 
+    // resources_source_chk: url o storage_path (uno de los dos).
+    const url = form.url.trim();
+    if (mode === 'upload' && !form.storage_path) return setError(t('errorSource'));
+    if (mode === 'link') {
+      if (!url) return setError(t('errorSource'));
+      if (!isHttpUrl(url)) return setError(t('errorUrlInvalid'));
+    }
+
+    setLoading(true);
+
     const { error } = await supabase.from('resources').insert({
-      title: form.title,
-      description: form.description || null,
+      title: form.title.trim(),
+      description: form.description.trim() || null,
       type: form.type,
-      url: form.url,
-      thumbnail_url: form.thumbnail_url || null,
+      url: mode === 'link' ? url : null,
+      storage_path: mode === 'upload' ? form.storage_path : null,
+      thumbnail_url: form.thumbnail_url.trim() || null,
       category: form.category,
       order_index: form.order_index,
       active: form.active,
+      featured: form.featured,
+      locale: form.locale || null,
     });
 
     if (error) {
@@ -98,18 +126,18 @@ export default function NovoRecursoPage() {
           <h2 className="text-sm font-medium text-sunbiotan-900 tracking-[0.1em] uppercase">{t('sectionInfo')}</h2>
 
           <div>
-            <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">{t('labelTitle')}</label>
+            <label className={labelClass}>{t('labelTitle')}</label>
             <input type="text" name="title" value={form.title} onChange={handleChange} required className={inputClass} />
           </div>
 
           <div>
-            <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">{t('labelDescription')}</label>
+            <label className={labelClass}>{t('labelDescription')}</label>
             <textarea name="description" value={form.description} onChange={handleChange} rows={3} className={`${inputClass} resize-none`} />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">{t('labelType')}</label>
+              <label className={labelClass}>{t('labelType')}</label>
               <select name="type" value={form.type} onChange={handleChange} className={inputClass}>
                 <option value="video">{t('typeVideo')}</option>
                 <option value="image">{t('typeImage')}</option>
@@ -119,11 +147,12 @@ export default function NovoRecursoPage() {
             </div>
 
             <div>
-              <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">{t('labelCategory')}</label>
+              <label className={labelClass}>{t('labelCategory')}</label>
               <select name="category" value={form.category} onChange={handleChange} className={inputClass}>
                 <option value="formacao">{t('catFormacao')}</option>
                 <option value="marketing">{t('catMarketing')}</option>
                 <option value="marca">{t('catMarca')}</option>
+                <option value="sistema">{t('catSistema')}</option>
               </select>
             </div>
           </div>
@@ -132,14 +161,24 @@ export default function NovoRecursoPage() {
         <div className="bg-white rounded-xl border border-sunbiotan-100 p-6 shadow-sm space-y-5">
           <h2 className="text-sm font-medium text-sunbiotan-900 tracking-[0.1em] uppercase">{t('sectionLinks')}</h2>
 
-          <div>
-            <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">{t('labelUrl')}</label>
-            <input type="url" name="url" value={form.url} onChange={handleChange} required placeholder="https://..." className={inputClass} />
-            <p className="text-xs text-sunbiotan-400 mt-1">{t('urlHint')}</p>
-          </div>
+          <ResourceSourceFields
+            mode={mode}
+            onModeChange={setMode}
+            category={form.category}
+            storagePath={form.storage_path}
+            onStoragePathChange={(v) => set('storage_path', v)}
+            url={form.url}
+            onUrlChange={(v) => set('url', v)}
+            featured={form.featured}
+            onFeaturedChange={(v) => set('featured', v)}
+            locale={form.locale}
+            onLocaleChange={(v) => set('locale', v)}
+            labelClass={labelClass}
+            inputClass={inputClass}
+          />
 
           <div>
-            <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">{t('labelThumbnail')}</label>
+            <label className={labelClass}>{t('labelThumbnail')}</label>
             <input type="url" name="thumbnail_url" value={form.thumbnail_url} onChange={handleChange} placeholder="https://..." className={inputClass} />
             <p className="text-xs text-sunbiotan-400 mt-1">{t('thumbnailHint')}</p>
           </div>
@@ -149,7 +188,7 @@ export default function NovoRecursoPage() {
           <h2 className="text-sm font-medium text-sunbiotan-900 tracking-[0.1em] uppercase">{t('sectionConfig')}</h2>
 
           <div>
-            <label className="block text-xs tracking-[0.15em] uppercase text-sunbiotan-700 font-medium mb-2">{t('labelOrder')}</label>
+            <label className={labelClass}>{t('labelOrder')}</label>
             <input type="number" name="order_index" value={form.order_index} onChange={handleChange} min={0} className="w-24 px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sm focus:outline-none focus:border-sunbiotan-500 transition-colors" />
           </div>
 

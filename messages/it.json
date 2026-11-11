@@ -3,16 +3,13 @@
     "title": "SUNBIOTAN | Abbronzatura Naturale Professionale senza Raggi UV",
     "description": "SUNBIOTAN — si tratta di una formula avanzata, sviluppata con ingredienti di origine naturale noti per favorire l'abbronzatura della pelle. Disponibile nei saloni autorizzati.",
     "ogTitle": "SUNBIOTAN | Abbronzatura Naturale Professionale",
-    "ogDescription": "Il trattamento naturale che rispetta e cura la Sua pelle. Abbronzatura radiosa, sicura e duratura — senza raggi UV.",
+    "ogDescription": "Abbronzatura naturale senza raggi UV: trattamento professionale che dona un'abbronzatura radiosa, uniforme e duratura, disponibile nei Centri Autorizzati Sun BioTan.",
     "twitterTitle": "SUNBIOTAN | Abbronzatura Naturale Professionale",
-    "twitterDescription": "Abbronzatura sicura, uniforme e duratura con ingredienti 100% naturali.",
+    "twitterDescription": "Abbronzatura naturale senza raggi UV: trattamento professionale che dona un'abbronzatura radiosa, uniforme e duratura, disponibile nei Centri Autorizzati Sun BioTan.",
     "keywords": [
       "abbronzatura naturale",
       "abbronzatura senza UV",
       "abbronzatura senza raggi UV",
-      "autoabbronzante professionale",
-      "abbronzatura senza sole",
-      "abbronzatura sicura",
       "trattamento abbronzante professionale",
       "sunbiotan"
     ]
@@ -147,32 +144,57 @@
     "backHome": "Torna alla home"
   },
   "Hero": {
-    "eyebrow": "Ci prendiamo cura della Sua pelle",
+    "eyebrow": "Dal 2015 · Fabbricato in Portogallo",
     "headline1": "Abbronzatura Naturale",
     "headline2": "Senza Raggi UV",
-    "subtitle": "Il trattamento naturale che rispetta e cura la Sua pelle, regalandoLe un'abbronzatura radiosa, sicura e duratura.",
-    "stat1Value": "Senza UV",
-    "stat1Label": "Abbronzatura Sicura",
-    "stat2Label": "Giorni di Durata",
-    "stat3Label": "Ingredienti Naturali",
-    "cta1": "Trova un Centro",
-    "cta2": "Sono un Professionista",
+    "subtitle": "Da oltre dieci anni, Sun BioTan si prende cura della pelle con un trattamento professionale che dona un'abbronzatura radiosa, uniforme e duratura, senza esposizione ai raggi UV.",
+    "stat1Value": "Dal 2015",
+    "stat1Label": "Oltre dieci anni di esperienza",
+    "stat2Value": "Fabbricato in Portogallo",
+    "stat2Label": "Produzione cosmetica professionale",
+    "stat3Value": "La più grande rete",
+    "stat3Label": "Centri Autorizzati in Portogallo",
+    "stat4Value": "7–9 giorni",
+    "stat4Label": "Durata media dell'abbronzatura",
+    "cta1": "Trova il Centro Autorizzato più Vicino",
+    "cta2": "Diventa Centro Sun BioTan",
     "scroll": "Scorri"
+  },
+  "FormulaStrip": {
+    "items": [
+      "Vegan",
+      "Senza alcol",
+      "Senza profumo",
+      "Senza derivati di origine animale",
+      "Senza OGM"
+    ],
+    "text": "Formula professionale con ingredienti di origine naturale, sviluppata e prodotta in Portogallo."
+  },
+  "TrueTreatment": {
+    "eyebrow": "IL VERO TRATTAMENTO SUN BIOTAN®",
+    "title": "Più di un'abbronzatura. Un'esperienza professionale di bellezza.",
+    "text": "Disponibile esclusivamente nei Centri Autorizzati, il trattamento Sun BioTan® è eseguito da professionisti formati nel sistema di applicazione del marchio. Un protocollo pensato per offrire un risultato uniforme, luminoso e adatto al tono della pelle, senza esposizione ai raggi UV.",
+    "cta": "Trova un Centro Autorizzato"
   },
   "About": {
     "eyebrow": "Cos'è SUN?",
-    "headline": "Cos'è",
-    "headlineItalic": "SUN?",
-    "p1": "È una formula avanzata, sviluppata con ingredienti di origine naturale associati all'abbronzatura della pelle. È stata creata per offrire un'abbronzatura progressiva, uniforme e dall'aspetto naturale, senza necessità di esposizione",
-    "p1Highlight": "ai raggi UV",
-    "p1End": ". La sua azione si adatta a tutti i tipi di pelle, incluse le più chiare o sensibilizzate, garantendo risultati visibili, equilibrati e armoniosi.",
-    "p2": "Oltre a valorizzare il tono naturale della pelle, SUN contribuisce a idratare, levigare e illuminare, aiutando la pelle ad apparire più sana, tonica e rivitalizzata.",
-    "p3": "L'applicazione viene eseguita con un'attrezzatura estetica di alta precisione, attraverso un sistema di microdiffusione che distribuisce il prodotto in modo delicato e uniforme sulla pelle. Il risultato è un'abbronzatura naturale, graduale e confortevole.",
-    "p4": "Sviluppato per uso professionale, SUN offre un'esperienza di applicazione sicura, comoda e adattata alle esigenze della pelle.",
-    "detail1": "Senza controindicazioni",
-    "detail2": "Per tutti i tipi di pelle",
-    "detail3": "Utilizzabile tutto l'anno",
+    "headline": "Un'abbronzatura che valorizza la tua pelle.",
+    "headlineItalic": "Un'esperienza che valorizza come ti senti.",
+    "p1": "SUN è una formula professionale sviluppata per offrire un'abbronzatura radiosa, uniforme e duratura, senza bisogno di esposizione ai raggi UV. La sua applicazione a microdiffusione permette di distribuire il prodotto in modo morbido e omogeneo, creando un'esperienza rapida, confortevole e curata.",
+    "p2": "Il risultato è visibile subito dopo l'applicazione e si intensifica progressivamente nel corso delle ore, raggiungendo il suo punto ideale il giorno successivo. La formula aiuta a mantenere la pelle idratata, morbida e luminosa, per un'abbronzatura elegante che dura, in media, da 7 a 9 giorni.",
+    "p3": "Più di un semplice risultato estetico, SUN trasforma l'abbronzatura in un vero rituale professionale di bellezza e cura della pelle.",
     "naturalIngredients": "Ingredienti di origine naturale"
+  },
+  "Occasions": {
+    "title": "Ci sono momenti speciali. E ci sono tutti gli altri giorni in cui vogliamo semplicemente sentirci meglio.",
+    "items": [
+      "Matrimoni e cerimonie",
+      "Feste ed eventi speciali",
+      "Vacanze e mare",
+      "Sessioni fotografiche e momenti professionali",
+      "Tutto l'anno"
+    ],
+    "closing": "Perché sentirsi bene nella propria pelle non dovrebbe dipendere dalla stagione."
   },
   "Benefits": {
     "eyebrow": "Principali Benefici",
@@ -216,18 +238,15 @@
     "findCenter": "Trova un Centro"
   },
   "CtaProfessionals": {
-    "eyebrow": "Professionisti",
-    "headline1": "È un professionista",
-    "headline2": "dell'Estetica?",
-    "p1": "Offra ai Suoi clienti l'abbronzatura più sicura, più naturale e più efficace del mercato.",
-    "p2": "SUN è disponibile anche per saloni di bellezza, spa e tecnici del settore. Si unisca alla nostra rete di professionisti certificati.",
-    "perk1Title": "Formazione e Supporto Continuo",
-    "perk1Desc": "Accesso alla formazione professionale e all'accompagnamento da parte del team SUN.",
-    "perk2Title": "Faccia Crescere il Business",
-    "perk2Desc": "Servizi premium di alto valore per differenziare il Suo salone nel mercato.",
-    "perk3Title": "Condizioni Speciali",
-    "perk3Desc": "Rete di professionisti certificati con accesso a benefici esclusivi.",
-    "joinNetwork": "Unisciti\nalla Rete"
+    "title": "Hai un centro estetico?",
+    "text": "Entra nella più grande rete di Centri Autorizzati di abbronzatura naturale senza raggi UV in Portogallo e offri al tuo spazio un servizio differenziante, redditizio e seguito dal nostro team.",
+    "points": [
+      "Formazione professionale nel tuo centro",
+      "Sistema completo",
+      "Supporto continuo",
+      "Visibilità nella rete Sun BioTan®"
+    ],
+    "cta": "Voglio Conoscere il Sistema Professionale"
   },
   "Contact": {
     "eyebrow": "Contatto",
@@ -294,13 +313,13 @@
     "eyebrow": "Area Professionale",
     "headline1": "Elevi il Suo",
     "headline2": "spazio",
-    "subtitle": "Offra ai Suoi clienti l'abbronzatura più sicura e naturale del mercato. Si unisca alla rete di centri certificati Sunbiotan.",
+    "subtitle": "Offra ai Suoi clienti l'abbronzatura più naturale del mercato. Si unisca alla rete di centri certificati Sunbiotan.",
     "cta1": "Voglio diventare partner",
     "cta2": "Sono già partner → Login",
     "stat2Value": "48h",
     "stat2Label": "Risposta",
-    "stat3Value": "100%",
-    "stat3Label": "Naturale",
+    "stat3Value": "Dal 2015",
+    "stat3Label": "Oltre dieci anni di esperienza",
     "benefitsEyebrow": "Vantaggi",
     "benefitsHeadline": "Perché scegliere",
     "benefitsHeadlineItalic": "Sunbiotan",
@@ -309,7 +328,7 @@
     "benefit2Title": "Crescita del Business",
     "benefit2Desc": "Aggiunga un servizio premium di alto valore al Suo menù. L'abbronzatura naturale SUN distingue il Suo spazio nel mercato.",
     "benefit3Title": "Prodotti Esclusivi",
-    "benefit3Desc": "Accesso ai prodotti professionali Sunbiotan a condizioni speciali per partner, con formula 100% naturale.",
+    "benefit3Desc": "Accesso ai prodotti professionali Sunbiotan a condizioni speciali per partner, formulati con ingredienti di origine naturale.",
     "benefit4Title": "Rete di Partner",
     "benefit4Desc": "Si integri in una rete selezionata di centri. Visibilità sulla mappa e materiali marketing inclusi.",
     "benefit5Title": "Certificazione Ufficiale",
@@ -348,7 +367,21 @@
     "alreadyPartner": "È già partner?",
     "accessPortal": "Accedi al portale →",
     "successTitle": "Candidatura inviata",
-    "successDesc": "Abbiamo ricevuto la Sua richiesta. Il nostro team La contatterà entro 48 ore."
+    "successDesc": "Abbiamo ricevuto la Sua richiesta. Il nostro team La contatterà entro 48 ore.",
+    "labelWebsite": "Sito web o Instagram (facoltativo)",
+    "placeholderWebsite": "www.iltuospazio.it o @iltuospazio",
+    "labelActivity": "Tipo di attività",
+    "activityPlaceholder": "Seleziona…",
+    "activityOptions": {
+      "salao": "Salone di bellezza",
+      "estetica": "Centro estetico",
+      "spa": "Spa",
+      "clinica": "Clinica",
+      "ginasio": "Palestra / wellness",
+      "solario": "Studio di abbronzatura",
+      "outro": "Altro"
+    },
+    "errorRateLimit": "Abbiamo ricevuto troppe richieste dalla tua connessione. Attendi qualche istante e riprova, oppure contattaci direttamente."
   },
   "LoginPage": {
     "privateArea": "Area Privata",
@@ -359,10 +392,12 @@
     "login": "Accedi",
     "logging": "Accesso in corso...",
     "errorInvalid": "Email o password non corretti.",
-    "errorNotApproved": "Il Suo account non è ancora stato approvato. Attenda il contatto del team Sunbiotan.",
+    "errorNotApproved": "Il tuo account non è ancora attivo. Attendi di essere contattato dal team Sun BioTan.",
     "errorGeneral": "Si è verificato un errore. Riprovi.",
     "notPartner": "Non è ancora partner?",
-    "learnMore": "Scopra di più"
+    "learnMore": "Scopra di più",
+    "forgotPassword": "Hai dimenticato la password?",
+    "noticePasswordUpdated": "Password aggiornata. Ora puoi accedere."
   },
   "DashboardLayout": {
     "overview": "Panoramica",
@@ -372,7 +407,9 @@
     "resources": "Risorse",
     "adminPanel": "Pannello Admin",
     "adminArea": "Sunbiotan · Area Amministrativa",
-    "logout": "Esci"
+    "logout": "Esci",
+    "applications": "Candidature",
+    "orders": "Ordini"
   },
   "DashboardHome": {
     "title": "Panoramica",
@@ -394,7 +431,11 @@
     "manageProducts": "Gestisci Prodotti",
     "productCatalog": "Catalogo prodotti",
     "manageResources": "Gestisci Risorse",
-    "partnerMaterials": "Materiali del portale partner"
+    "partnerMaterials": "Materiali del portale partner",
+    "statPendingApplications": "Candidature in attesa",
+    "statToReview": "da esaminare",
+    "statPendingOrders": "Ordini in attesa",
+    "statToConfirm": "da confermare"
   },
   "DashboardCentros": {
     "title": "Centri",
@@ -468,7 +509,15 @@
     "notFound": "Nessun professionista trovato",
     "registeredOn": "Registrato il",
     "noName": "Senza nome",
-    "pendingBadge": "{count} in attesa"
+    "pendingBadge": "{count} in attesa",
+    "noCenter": "Nessun centro",
+    "centerLabel": "Centro",
+    "resendAccess": "Reinvia accesso",
+    "awaitingPassword": "In attesa di impostare la password",
+    "msgCenterSaved": "Centro aggiornato.",
+    "msgResent": "Accesso reinviato via email.",
+    "msgResendFailed": "Impossibile inviare l'email. Riprova.",
+    "msgError": "Si è verificato un errore. Riprova."
   },
   "DashboardProdutos": {
     "title": "Prodotti",
@@ -500,7 +549,9 @@
     "catFormacao": "Formazione",
     "catMarketing": "Marketing",
     "catMarca": "Marchio",
-    "notFound": "Nessuna risorsa trovata"
+    "notFound": "Nessuna risorsa trovata",
+    "catSistema": "Sistema Professionale",
+    "featured": "In evidenza"
   },
   "DashboardRecursoForm": {
     "titleNew": "Nuova Risorsa",
@@ -545,7 +596,24 @@
     "placeholderTitle": "Es: Protocollo di Applicazione Sunbiotan",
     "placeholderDesc": "Breve descrizione della risorsa...",
     "placeholderUrl": "https://...",
-    "placeholderThumbnail": "https://... (opzionale)"
+    "placeholderThumbnail": "https://... (opzionale)",
+    "catSistema": "Sistema Professionale",
+    "labelSource": "Origine della risorsa",
+    "sourceUpload": "Carica file",
+    "sourceLink": "Link esterno",
+    "labelFile": "File",
+    "uploadCta": "Clicca per caricare un file",
+    "fileHint": "PDF, MP4, PNG, JPG, WEBP o PPTX · max. {max} MB",
+    "filePrivateHint": "Salvato in uno spazio privato: solo i professionisti approvati possono aprirlo, tramite un link temporaneo.",
+    "errorFileSize": "Il file non può superare {max} MB.",
+    "errorFileType": "Tipo di file non consentito.",
+    "errorFileUpload": "Errore durante il caricamento del file. Riprova.",
+    "labelLocale": "Lingua",
+    "localeAll": "Tutte le lingue",
+    "featuredLabel": "In evidenza",
+    "featuredDesc": "Nella categoria Sistema Professionale, appare in evidenza nella home del portale.",
+    "errorSource": "Carica un file o indica un link.",
+    "errorUrlInvalid": "Il link deve iniziare con http:// o https://."
   },
   "PortalLayout": {
     "home": "Home",
@@ -565,7 +633,11 @@
     "history": "Storico",
     "historySub": "{count} ordini effettuati",
     "support": "Supporto",
-    "supportDesc": "Per qualsiasi domanda o assistenza, contatti il team Sunbiotan direttamente via email o telefono. Siamo qui per aiutarLa."
+    "supportDesc": "Per qualsiasi domanda o assistenza, contatti il team Sunbiotan direttamente via email o telefono. Siamo qui per aiutarLa.",
+    "systemEyebrow": "Sistema Professionale",
+    "systemTitle": "Presentazione del sistema",
+    "systemText": "Consulta la presentazione del sistema professionale Sun BioTan.",
+    "systemButton": "Apri la presentazione"
   },
   "PortalEncomendas": {
     "title": "Ordini",
@@ -591,7 +663,8 @@
     "successTitle": "Ordine inviato!",
     "redirecting": "Reindirizzamento...",
     "item": "articolo",
-    "items": "articoli"
+    "items": "articoli",
+    "errorSubmit": "Impossibile inviare l'ordine. Riprova."
   },
   "PortalProdutos": {
     "title": "Prodotti",
@@ -615,6 +688,116 @@
     "noResources": "Non ci sono ancora risorse in questa categoria.",
     "comingSoon": "I materiali verranno aggiunti a breve.",
     "watchVideo": "Guarda il video",
-    "download": "Scarica"
+    "download": "Scarica",
+    "catSistema": "Sistema Professionale",
+    "catSistemaDesc": "Presentazione e documenti del sistema professionale"
+  },
+  "AuthAcesso": {
+    "eyebrow": "Area Professionale",
+    "titleInvite": "Benvenuto in Sun BioTan",
+    "titleRecovery": "Reimposta la password",
+    "intro": "Clicca su Continua per confermare il tuo accesso e definire la tua password.",
+    "continue": "Continua",
+    "verifying": "Verifica in corso...",
+    "invalidLink": "Link non valido o scaduto.",
+    "requestNewLink": "Richiedi un nuovo link"
+  },
+  "AuthDefinirSenha": {
+    "eyebrow": "Area Professionale",
+    "title": "Definisci la password",
+    "intro": "Scegli una password di almeno {min} caratteri.",
+    "labelPassword": "Nuova password",
+    "labelConfirm": "Conferma password",
+    "submit": "Salva password",
+    "saving": "Salvataggio...",
+    "showPassword": "Mostra password",
+    "hidePassword": "Nascondi password",
+    "errorTooShort": "La password deve contenere almeno {min} caratteri.",
+    "errorTooLong": "La password è troppo lunga (massimo 72 caratteri).",
+    "errorMismatch": "Le password non coincidono.",
+    "errorSamePassword": "La nuova password deve essere diversa da quella precedente.",
+    "errorWeak": "Questa password è troppo debole. Scegline un'altra.",
+    "errorSession": "La sessione è scaduta. Richiedi un nuovo link.",
+    "errorGeneric": "Si è verificato un errore. Riprova."
+  },
+  "AuthRecuperar": {
+    "eyebrow": "Area Professionale",
+    "title": "Recupera la password",
+    "intro": "Inserisci l'email del tuo account. Se è associata a un account attivo, ti invieremo un link per impostare una nuova password.",
+    "labelEmail": "Email",
+    "emailPlaceholder": "tua@email.com",
+    "submit": "Invia link",
+    "sending": "Invio in corso...",
+    "sent": "Se l'email è associata a un account attivo, riceverai a breve un link per reimpostare la password. Controlla anche la cartella spam.",
+    "backToLogin": "Torna al login",
+    "errorRateLimit": "Troppe richieste. Attendi qualche minuto e riprova.",
+    "errorInvalid": "Inserisci un'email valida.",
+    "errorGeneric": "Si è verificato un errore. Riprova."
+  },
+  "DashboardCandidaturas": {
+    "title": "Candidature",
+    "subtitle": "Richieste di collaborazione ricevute tramite il modulo professionale",
+    "tabPending": "In attesa",
+    "tabApproved": "Approvate",
+    "tabRejected": "Rifiutate",
+    "searchPlaceholder": "Cerca per nome, attività, città o email…",
+    "selectAllShown": "Seleziona quelle visibili ({count})",
+    "selectedCount": "{count} selezionate",
+    "selectOne": "Seleziona {name}",
+    "bulkReject": "Rifiuta selezionate",
+    "bulkDelete": "Elimina selezionate",
+    "confirmBulkReject": "Rifiutare {count} candidature? Quelle già approvate non vengono modificate.",
+    "confirmBulkDelete": "Eliminare definitivamente {count} candidature? L'operazione non può essere annullata.",
+    "confirm": "Conferma",
+    "cancel": "Annulla",
+    "empty": "Nessuna candidatura trovata",
+    "duplicate": "Possibile duplicato",
+    "notes": "Note interne",
+    "receivedOn": "Ricevuta il",
+    "reviewedOn": "esaminata il",
+    "invitedOn": "accesso inviato il",
+    "approve": "Approva",
+    "reject": "Rifiuta",
+    "resend": "Reinvia accesso",
+    "reply": "Rispondi via email",
+    "delete": "Elimina",
+    "approveTitle": "Approva candidatura",
+    "approveHint": "Verrà creato l'accesso al portale e inviata un'email, nella lingua della candidatura, per definire la password.",
+    "approveCenterLabel": "Centro (facoltativo)",
+    "noCenter": "Nessun centro",
+    "confirmApprove": "Approva e invia accesso",
+    "rejectNoteLabel": "Nota interna (facoltativa)",
+    "confirmReject": "Rifiuta",
+    "notesPlaceholder": "Visibile solo al team…",
+    "saveNotes": "Salva note",
+    "confirmDelete": "Eliminare definitivamente questa candidatura?",
+    "loadMore": "Mostra altre ({count} rimanenti)",
+    "msgApproved": "Candidatura approvata e accesso inviato via email.",
+    "msgApprovedNoEmail": "Candidatura approvata, ma l'email non è stata inviata. Usa \"Reinvia accesso\".",
+    "msgResent": "Accesso reinviato via email.",
+    "msgResendFailed": "Impossibile inviare l'email. Riprova.",
+    "msgRejected": "Candidatura rifiutata.",
+    "msgDeleted": "Candidatura eliminata.",
+    "msgNotesSaved": "Note salvate.",
+    "msgBulkDone": "{count} candidature aggiornate.",
+    "msgConflict": "Questa email appartiene a un account non professionale (ad esempio un amministratore) oppure la candidatura era già approvata. Nessuna modifica effettuata.",
+    "msgError": "Si è verificato un errore. Riprova."
+  },
+  "DashboardEncomendas": {
+    "title": "Ordini",
+    "count": "{count} ordini",
+    "empty": "Non ci sono ancora ordini.",
+    "unknownProfessional": "Professionista sconosciuto",
+    "noCenter": "Nessun centro",
+    "statusLabel": "Stato",
+    "qty": "× {qty}",
+    "loadMore": "Mostra altri ({count} rimanenti)",
+    "msgError": "Si è verificato un errore. Riprova.",
+    "status": {
+      "pending": "In attesa",
+      "confirmed": "Confermato",
+      "shipped": "Spedito",
+      "delivered": "Consegnato"
+    }
   }
 }

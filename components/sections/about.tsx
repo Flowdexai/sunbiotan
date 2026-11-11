@@ -14,16 +14,14 @@ const fadeUp = {
 export function About() {
   const t = useTranslations('About');
 
-  const details = [t('detail1'), t('detail2'), t('detail3')];
-
   return (
     <section
       id="sobre"
-      className="py-16 md:py-28 bg-sunbiotan-50 relative overflow-hidden"
+      className="py-16 md:py-28 bg-sunbiotan-100 relative overflow-hidden"
     >
       <div
         aria-hidden="true"
-        className="absolute -top-8 right-0 font-display font-light text-[32vw] leading-none text-sunbiotan-200/30 pointer-events-none select-none tracking-tighter pr-4"
+        className="absolute -top-8 right-0 font-display font-light text-[32vw] leading-none text-sunbiotan-200/70 pointer-events-none select-none tracking-tighter pr-4"
         style={{ lineHeight: 0.85 }}
       >
         S
@@ -33,7 +31,7 @@ export function About() {
         background: 'radial-gradient(ellipse 60% 55% at 30% 50%, rgba(193,154,91,0.05) 0%, transparent 70%)',
       }} />
 
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 relative">
         <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_2fr] gap-12 items-start">
 
           <m.div
@@ -45,12 +43,12 @@ export function About() {
             className="hidden md:flex flex-col items-start pt-4"
           >
             <div className="flex items-center gap-3 mb-3">
-              <div className="h-px w-8 bg-sunbiotan-400/50" />
-              <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-600/80 font-medium whitespace-nowrap">
+              <div className="h-px w-8 bg-sunbiotan-500/70" />
+              <p className="text-[11px] tracking-[0.4em] uppercase text-sunbiotan-700 font-medium whitespace-nowrap">
                 {t('eyebrow')}
               </p>
             </div>
-            <div className="w-px h-20 bg-gradient-to-b from-sunbiotan-400/50 to-transparent ml-4 mt-2" />
+            <div className="w-px h-20 bg-gradient-to-b from-sunbiotan-500/60 to-transparent ml-4 mt-2" />
           </m.div>
 
           <div>
@@ -62,8 +60,8 @@ export function About() {
               transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
               className="flex md:hidden items-center gap-3 mb-8"
             >
-              <div className="h-px w-8 bg-sunbiotan-400/50" />
-              <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-600/80 font-medium">
+              <div className="h-px w-8 bg-sunbiotan-500/70" />
+              <p className="text-[11px] tracking-[0.4em] uppercase text-sunbiotan-700 font-medium">
                 {t('eyebrow')}
               </p>
             </m.div>
@@ -74,11 +72,11 @@ export function About() {
               whileInView="show"
               viewport={VP}
               transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-              className="font-display font-light text-[clamp(2.6rem,6vw,5rem)] text-sunbiotan-900 mb-8 leading-[1.05] tracking-tight"
+              className="font-display font-light text-[clamp(2.1rem,4.4vw,3.6rem)] text-sunbiotan-900 mb-8 leading-[1.08] tracking-tight"
             >
               {t('headline')}
               <br />
-              <em className="not-italic italic text-sunbiotan-600">{t('headlineItalic')}</em>
+              <em className="italic text-sunbiotan-600">{t('headlineItalic')}</em>
             </m.h2>
 
             <m.div
@@ -88,9 +86,9 @@ export function About() {
               transition={{ duration: 0.7, delay: 0.25, ease: EASE }}
               className="origin-left flex items-center gap-3 mb-8"
             >
-              <div className="h-px w-10 bg-sunbiotan-400/60" />
-              <div className="w-1 h-1 rounded-full bg-sunbiotan-500/80" />
-              <div className="h-px w-6 bg-sunbiotan-400/30" />
+              <div className="h-px w-10 bg-sunbiotan-500/70" />
+              <div className="w-1 h-1 rounded-full bg-sunbiotan-500" />
+              <div className="h-px w-6 bg-sunbiotan-500/40" />
             </m.div>
 
             <m.div
@@ -101,40 +99,24 @@ export function About() {
               transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
               className="space-y-5 max-w-xl"
             >
-              <p className="text-lg md:text-xl text-sunbiotan-800 font-light leading-relaxed tracking-[0.02em]">
-                {t('p1')}{' '}
-                <span className="text-sunbiotan-600 font-medium">{t('p1Highlight')}</span>
-                {t('p1End')}
+              <p className="text-base md:text-lg text-sunbiotan-800 font-light leading-relaxed tracking-[0.01em]">
+                {t('p1')}
               </p>
-              <p className="text-base text-sunbiotan-700/80 font-light leading-relaxed tracking-[0.02em]">
+              <p className="text-base md:text-lg text-sunbiotan-800 font-light leading-relaxed tracking-[0.01em]">
                 {t('p2')}
-              </p>
-              <p className="text-base text-sunbiotan-700/80 font-light leading-relaxed tracking-[0.02em]">
-                {t('p3')}
-              </p>
-              <p className="text-base text-sunbiotan-700/80 font-light leading-relaxed tracking-[0.02em]">
-                {t('p4')}
               </p>
             </m.div>
 
-            <m.div
+            <m.p
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
               viewport={VP}
               transition={{ duration: 0.7, delay: 0.3, ease: EASE }}
-              className="mt-10 flex flex-wrap gap-2.5"
+              className="mt-10 max-w-xl border-l-2 border-sunbiotan-500 pl-5 font-display italic text-[1.4rem] md:text-[1.7rem] leading-snug text-sunbiotan-700"
             >
-              {details.map((d) => (
-                <span
-                  key={d}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-sunbiotan-400/60 text-[11px] tracking-[0.12em] uppercase text-sunbiotan-700 font-medium bg-sunbiotan-100"
-                >
-                  <span className="w-1 h-1 rounded-full bg-sunbiotan-500/60 flex-shrink-0" />
-                  {d}
-                </span>
-              ))}
-            </m.div>
+              {t('p3')}
+            </m.p>
 
             <m.div
               variants={fadeUp}
@@ -142,10 +124,10 @@ export function About() {
               whileInView="show"
               viewport={VP}
               transition={{ duration: 0.7, delay: 0.35, ease: EASE }}
-              className="mt-10 inline-flex items-center gap-4 border-l-2 border-sunbiotan-400/50 pl-4"
+              className="mt-10 inline-flex items-center gap-3"
             >
-              <span className="font-display text-3xl font-light text-sunbiotan-600">100%</span>
-              <p className="text-sm text-sunbiotan-700 font-light leading-snug max-w-[160px]">
+              <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-sunbiotan-500" />
+              <p className="text-[11px] md:text-xs tracking-[0.2em] uppercase font-medium text-sunbiotan-700">
                 {t('naturalIngredients')}
               </p>
             </m.div>

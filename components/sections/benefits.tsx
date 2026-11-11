@@ -31,12 +31,12 @@ export function Benefits() {
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
           className="mb-20"
         >
-          <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-600 mb-4 font-medium">
+          <p className="text-[11px] tracking-[0.45em] uppercase text-sunbiotan-700 mb-4 font-medium">
             {t('eyebrow')}
           </p>
           <h2 className="font-display font-light text-[clamp(2.6rem,6vw,5rem)] text-sunbiotan-900 leading-[1.05] tracking-tight max-w-lg">
             {t('headline')}{' '}
-            <em className="not-italic italic text-sunbiotan-600">{t('headlineItalic')}</em>
+            <em className="italic text-sunbiotan-600">{t('headlineItalic')}</em>
           </h2>
         </m.div>
 
@@ -82,7 +82,7 @@ export function Benefits() {
                   <h3 className="text-[14px] font-medium text-sunbiotan-900 mb-2 tracking-wide">
                     {t(`items.${key}.title`)}
                   </h3>
-                  <p className="text-[13px] text-sunbiotan-700 font-light leading-relaxed">
+                  <p className="text-sm text-sunbiotan-700 font-light leading-relaxed">
                     {t(`items.${key}.description`)}
                   </p>
                 </div>

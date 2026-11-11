@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { Link } from '@/i18n/navigation';
-import { Package, ShoppingBag, Clock } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { Package, ShoppingBag, Clock, Presentation, ArrowRight } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface Profile {
   full_name: string;
@@ -14,9 +14,18 @@ interface Profile {
   };
 }
 
+interface SystemResource {
+  id: string;
+  title: string;
+  description: string | null;
+  locale: string | null;
+}
+
 export default function PortalPage() {
   const t = useTranslations('PortalHome');
+  const locale = useLocale();
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [systemResource, setSystemResource] = useState<SystemResource | null>(null);
   const [ordersCount, setOrdersCount] = useState(0);
 
   const supabase = createBrowserClient(
@@ -50,10 +59,23 @@ export default function PortalPage() {
         .eq('professional_id', user.id);
 
       setOrdersCount(count || 0);
+
+      // Presentación del sistema: el destacado más reciente; variante del
+      // idioma actual si existe, si no la de locale null (todos los idiomas).
+      const { data: sys } = await supabase
+        .from('resources')
+        .select('id, title, description, locale')
+        .eq('category', 'sistema')
+        .eq('featured', true)
+        .eq('active', true)
+        .order('created_at', { ascending: false })
+        .limit(20);
+      const list = (sys as SystemResource[] | null) ?? [];
+      setSystemResource(list.find((r) => r.locale === locale) ?? list.find((r) => !r.locale) ?? null);
     }
 
     load();
-  }, [supabase]);
+  }, [supabase, locale]);
 
   return (
     <div className="space-y-8">
@@ -67,6 +89,33 @@ export default function PortalPage() {
           </p>
         )}
       </div>
+
+      {systemResource && (
+        <div className="relative overflow-hidden rounded-2xl border border-sunbiotan-700 bg-sunbiotan-950 p-6 md:p-8">
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 80% at 90% 10%, rgba(193,154,91,0.18) 0%, transparent 70%)' }} />
+          <div className="relative flex flex-col md:flex-row md:items-center gap-6 justify-between">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl border border-sunbiotan-500/50 flex items-center justify-center flex-shrink-0">
+                <Presentation className="h-5 w-5 text-sunbiotan-400" strokeWidth={1.5} />
+              </div>
+              <div>
+                <p className="text-[11px] tracking-[0.3em] uppercase text-sunbiotan-400 font-medium mb-2">{t('systemEyebrow')}</p>
+                <h2 className="font-display font-light text-2xl md:text-3xl text-sunbiotan-50 mb-2">{t('systemTitle')}</h2>
+                <p className="text-sm text-sunbiotan-200 font-light leading-relaxed max-w-xl">{systemResource.description || t('systemText')}</p>
+              </div>
+            </div>
+            <a
+              href={`/api/portal/recursos/${systemResource.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-sunbiotan-500 hover:bg-sunbiotan-400 border border-sunbiotan-700 text-sunbiotan-950 text-xs tracking-[0.15em] uppercase font-bold transition-colors flex-shrink-0"
+            >
+              {t('systemButton')}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Link

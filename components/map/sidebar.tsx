@@ -193,7 +193,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
       >
         <h1 className="font-display font-light text-[clamp(2rem,3.5vw,3rem)] text-sunbiotan-900 leading-[1.05] tracking-tight">
           {t('heading')}{' '}
-          <em className="not-italic italic text-sunbiotan-600">{t('headingItalic')}</em>
+          <em className="italic text-sunbiotan-600">{t('headingItalic')}</em>
         </h1>
         <div className="flex items-center gap-3 mt-5">
           <div className="h-px w-10 bg-sunbiotan-400/60" />
@@ -216,7 +216,7 @@ export function Sidebar({ centers, selectedCenter, onCenterClick, mobileLayout =
               ref={inputRef}
               type="text"
               placeholder={t('searchPlaceholder')}
-              className="w-full pl-10 pr-4 h-11 bg-white border border-sunbiotan-200 rounded-full text-sm text-sunbiotan-900 placeholder:text-sunbiotan-400/60 focus:border-sunbiotan-500 focus:outline-none focus:ring-2 focus:ring-sunbiotan-500/20 transition-all"
+              className="w-full pl-10 pr-4 h-11 bg-white border border-sunbiotan-600 rounded-full text-sm text-sunbiotan-900 placeholder:text-sunbiotan-700 focus:border-sunbiotan-800 focus:outline-none focus:ring-2 focus:ring-sunbiotan-500/40 transition-all"
             />
           </div>
           <button

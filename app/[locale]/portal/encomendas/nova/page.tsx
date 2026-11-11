@@ -27,6 +27,7 @@ export default function NovaEncomendaPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const router = useRouter();
   const supabase = createBrowserClient(
@@ -80,39 +81,30 @@ export default function NovaEncomendaPage() {
     if (cart.length === 0) return;
 
     setSubmitting(true);
+    setSubmitError(false);
 
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
+    // Pedido atómico: create_order() inserta orders + order_items en una
+    // transacción (center_id del perfil, status 'pending') y avisa por email.
+    let ok = false;
+    try {
+      const res = await fetch('/api/portal/encomendas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message,
+          items: cart.map((item) => ({ product_id: item.product.id, quantity: item.quantity })),
+        }),
+      });
+      ok = res.ok;
+    } catch {
+      ok = false;
+    }
 
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('center_id')
-      .eq('id', user.id)
-      .single();
-
-    const { data: order, error } = await supabase
-      .from('orders')
-      .insert({
-        professional_id: user.id,
-        center_id: profile?.center_id || null,
-        message: message || null,
-        status: 'pending',
-      })
-      .select()
-      .single();
-
-    if (error || !order) {
+    if (!ok) {
+      setSubmitError(true);
       setSubmitting(false);
       return;
     }
-
-    await supabase.from('order_items').insert(
-      cart.map((item) => ({
-        order_id: order.id,
-        product_id: item.product.id,
-        quantity: item.quantity,
-      }))
-    );
 
     setSuccess(true);
     setTimeout(() => router.push('/portal/encomendas'), 2000);
@@ -213,9 +205,16 @@ export default function NovaEncomendaPage() {
             onChange={(e) => setMessage(e.target.value)}
             placeholder={t('messagePlaceholder')}
             rows={3}
+            maxLength={2000}
             className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sm focus:outline-none focus:border-sunbiotan-500 transition-colors resize-none"
           />
         </div>
+
+        {submitError && (
+          <div role="alert" className="bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+            <p className="text-red-700 text-sm">{t('errorSubmit')}</p>
+          </div>
+        )}
 
         <button
           type="submit"

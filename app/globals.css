@@ -96,6 +96,23 @@
   animation: goldShimmer 5s ease-in-out infinite;
 }
 
+/* Light, luminous variant for the home hero (no dark-brown ends, readable over the dark overlay) */
+.golden-shimmer-light {
+  background: linear-gradient(
+    105deg,
+    #d4b989 0%,
+    #f6e2a8 30%,
+    #fff0c4 50%,
+    #f6e2a8 70%,
+    #d4b989 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShimmer 5s ease-in-out infinite;
+}
+
 @keyframes goldShimmer {
   0%   { background-position: 0%   center; }
   50%  { background-position: 100% center; }
@@ -121,7 +138,8 @@
 
 /* ── Respect prefers-reduced-motion (WCAG 2.3.3) ────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .golden-shimmer {
+  .golden-shimmer,
+  .golden-shimmer-light {
     animation: none;
     background-position: 50% center;
   }

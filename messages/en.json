@@ -1,20 +1,16 @@
 {
   "Metadata": {
-    "title": "SUNBIOTAN | Professional Natural Tan without UV Rays",
+    "title": "SUNBIOTAN | Professional Natural Tan without UV Exposure",
     "description": "SUNBIOTAN — an advanced formula, developed with naturally derived ingredients associated with skin tanning. Available at authorised salons.",
     "ogTitle": "SUNBIOTAN | Professional Natural Tan",
-    "ogDescription": "The natural treatment that respects and cares for your skin. Radiant, safe, and long-lasting tan — without UV rays.",
+    "ogDescription": "Natural tan without UV exposure: a professional treatment that delivers a radiant, even and long-lasting tan, available at Sun BioTan Authorised Centres.",
     "twitterTitle": "SUNBIOTAN | Professional Natural Tan",
-    "twitterDescription": "Safe, even, and long-lasting tan with 100% natural ingredients.",
+    "twitterDescription": "Natural tan without UV exposure: a professional treatment that delivers a radiant, even and long-lasting tan, available at Sun BioTan Authorised Centres.",
     "keywords": [
       "natural tan",
       "UV-free tan",
       "tan without UV rays",
-      "professional self-tan",
-      "sunless tanning",
-      "safe tan",
       "professional tanning treatment",
-      "spray tan alternative",
       "sunbiotan"
     ]
   },
@@ -148,32 +144,57 @@
     "backHome": "Back to home"
   },
   "Hero": {
-    "eyebrow": "We care for your skin",
+    "eyebrow": "Since 2015 · Made in Portugal",
     "headline1": "Natural Tan",
-    "headline2": "Without UV Rays",
-    "subtitle": "The natural treatment that respects and cares for your skin, providing a radiant, safe, and long-lasting tan.",
-    "stat1Value": "UV-Free",
-    "stat1Label": "Safe Tan",
-    "stat2Label": "Days of Duration",
-    "stat3Label": "Natural Ingredients",
-    "cta1": "Find a Centre",
-    "cta2": "I'm a Professional",
+    "headline2": "Without UV Exposure",
+    "subtitle": "For over a decade, Sun BioTan has cared for your skin with a professional treatment that delivers a radiant, even and long-lasting tan with a natural-looking result.",
+    "stat1Value": "Since 2015",
+    "stat1Label": "Over a decade of experience",
+    "stat2Value": "Made in Portugal",
+    "stat2Label": "Professional cosmetic production",
+    "stat3Value": "The largest network",
+    "stat3Label": "Authorised Centres in Portugal",
+    "stat4Value": "7–9 days",
+    "stat4Label": "Average tan duration",
+    "cta1": "Find Your Nearest Authorised Centre",
+    "cta2": "Become a Sun BioTan Centre",
     "scroll": "Scroll"
+  },
+  "FormulaStrip": {
+    "items": [
+      "Vegan",
+      "Alcohol-free",
+      "Fragrance-free",
+      "No animal-derived ingredients",
+      "Non-GMO"
+    ],
+    "text": "Professional formula with naturally derived ingredients, developed and manufactured in Portugal."
+  },
+  "TrueTreatment": {
+    "eyebrow": "THE TRUE SUN BIOTAN® TREATMENT",
+    "title": "More than a tan. A professional beauty experience.",
+    "text": "Available exclusively at Authorised Centres, the Sun BioTan® treatment is carried out by professionals trained in the brand's application system. A protocol designed to deliver an even, luminous result adapted to your skin tone, without UV exposure.",
+    "cta": "Find an Authorised Centre"
   },
   "About": {
     "eyebrow": "What is SUN?",
-    "headline": "What is",
-    "headlineItalic": "SUN?",
-    "p1": "Is an advanced formula, developed with naturally derived ingredients associated with skin tanning. It was created to provide a progressive, even and natural-looking tan, without the need for exposure",
-    "p1Highlight": "to UV rays",
-    "p1End": ". Its action adapts to all skin types, including fairer or sensitised skin, ensuring visible, balanced and harmonious results.",
-    "p2": "In addition to enhancing the skin's natural tone, SUN helps to hydrate, soften and illuminate, helping the skin look healthier, firmer and more revitalised.",
-    "p3": "Application is carried out using high-precision aesthetic equipment, through a micro-diffusion system that distributes the product smoothly and evenly over the skin. The result is a natural, gradual and comfortable tan.",
-    "p4": "Developed for professional use, SUN offers a safe, comfortable application experience adapted to the skin's needs.",
-    "detail1": "No contraindications",
-    "detail2": "For all skin types",
-    "detail3": "Can be used all year round",
+    "headline": "A tan that enhances your skin.",
+    "headlineItalic": "An experience that enhances how you feel.",
+    "p1": "SUN is a professional formula developed to deliver a radiant, even and long-lasting tan, with no need for UV exposure. Its microdiffusion application spreads the product smoothly and evenly, creating a quick, comfortable and carefully crafted experience.",
+    "p2": "The result is visible right after application and builds progressively over the following hours, reaching its ideal point the next day. The formula helps keep the skin hydrated, soft and luminous, for an elegant tan that lasts, on average, 7 to 9 days.",
+    "p3": "More than a simple aesthetic result, SUN turns tanning into a true professional beauty and skincare ritual.",
     "naturalIngredients": "Naturally derived ingredients"
+  },
+  "Occasions": {
+    "title": "There are special moments. And all the other days when we simply want to feel better.",
+    "items": [
+      "Weddings and ceremonies",
+      "Parties and special events",
+      "Holidays and beach",
+      "Photo shoots and professional moments",
+      "All year round"
+    ],
+    "closing": "Because feeling good in your own skin shouldn't depend on the season."
   },
   "Benefits": {
     "eyebrow": "Key Benefits",
@@ -217,18 +238,15 @@
     "findCenter": "Find a Centre"
   },
   "CtaProfessionals": {
-    "eyebrow": "Professionals",
-    "headline1": "Are you an",
-    "headline2": "Aesthetics Professional?",
-    "p1": "Offer your clients the safest, most natural, and most effective tan on the market.",
-    "p2": "SUN is also available for beauty salons, spas, and industry technicians. Join our network of certified professionals.",
-    "perk1Title": "Training and Ongoing Support",
-    "perk1Desc": "Access to professional training and support from the SUN team.",
-    "perk2Title": "Grow Your Business",
-    "perk2Desc": "Premium high-value services to differentiate your salon in the market.",
-    "perk3Title": "Special Conditions",
-    "perk3Desc": "Network of certified professionals with access to exclusive benefits.",
-    "joinNetwork": "Join\nthe Network"
+    "title": "Do you have a beauty centre?",
+    "text": "Join the largest network of Authorised Centres for natural tanning without UV exposure in Portugal and add a differentiating, profitable service to your space, backed by our team.",
+    "points": [
+      "Professional training at your centre",
+      "Complete system",
+      "Ongoing support",
+      "Visibility in the Sun BioTan® network"
+    ],
+    "cta": "I Want to Discover the Professional System"
   },
   "Contact": {
     "eyebrow": "Contact",
@@ -295,13 +313,13 @@
     "eyebrow": "Professional Area",
     "headline1": "Elevate your",
     "headline2": "space",
-    "subtitle": "Offer your clients the safest and most natural tan on the market. Join the Sunbiotan certified centre network.",
+    "subtitle": "Offer your clients the most natural tan on the market. Join the Sunbiotan certified centre network.",
     "cta1": "I want to be a partner",
     "cta2": "I'm already a partner → Login",
     "stat2Value": "48h",
     "stat2Label": "Response Time",
-    "stat3Value": "100%",
-    "stat3Label": "Natural",
+    "stat3Value": "Since 2015",
+    "stat3Label": "Over a decade of experience",
     "benefitsEyebrow": "Advantages",
     "benefitsHeadline": "Why choose",
     "benefitsHeadlineItalic": "Sunbiotan",
@@ -310,7 +328,7 @@
     "benefit2Title": "Business Growth",
     "benefit2Desc": "Add a premium high-value service to your menu. The SUN natural tan sets your space apart in the market.",
     "benefit3Title": "Exclusive Products",
-    "benefit3Desc": "Access to Sunbiotan professional products at special partner conditions, with a 100% natural formula.",
+    "benefit3Desc": "Access to Sunbiotan professional products at special partner conditions, formulated with naturally derived ingredients.",
     "benefit4Title": "Partner Network",
     "benefit4Desc": "Join a curated network of centres. Map visibility and marketing materials included.",
     "benefit5Title": "Official Certification",
@@ -349,7 +367,21 @@
     "alreadyPartner": "Already a partner?",
     "accessPortal": "Access the portal →",
     "successTitle": "Application submitted",
-    "successDesc": "We have received your request. Our team will be in touch within 48 hours."
+    "successDesc": "We have received your request. Our team will be in touch within 48 hours.",
+    "labelWebsite": "Website or Instagram (optional)",
+    "placeholderWebsite": "www.yourspace.com or @yourspace",
+    "labelActivity": "Type of business",
+    "activityPlaceholder": "Select…",
+    "activityOptions": {
+      "salao": "Beauty salon",
+      "estetica": "Aesthetics centre",
+      "spa": "Spa",
+      "clinica": "Clinic",
+      "ginasio": "Gym / wellness",
+      "solario": "Tanning studio",
+      "outro": "Other"
+    },
+    "errorRateLimit": "We've received too many requests from your connection. Please wait a moment and try again, or contact us directly."
   },
   "LoginPage": {
     "privateArea": "Private Area",
@@ -360,10 +392,12 @@
     "login": "Sign in",
     "logging": "Signing in...",
     "errorInvalid": "Incorrect email or password.",
-    "errorNotApproved": "Your account has not been approved yet. Please await contact from the Sunbiotan team.",
+    "errorNotApproved": "Your account is not active yet. Please wait to hear from the Sun BioTan team.",
     "errorGeneral": "An error occurred. Please try again.",
     "notPartner": "Not a partner yet?",
-    "learnMore": "Learn more"
+    "learnMore": "Learn more",
+    "forgotPassword": "Forgot your password?",
+    "noticePasswordUpdated": "Password updated. You can now sign in."
   },
   "DashboardLayout": {
     "overview": "Overview",
@@ -373,7 +407,9 @@
     "resources": "Resources",
     "adminPanel": "Admin Panel",
     "adminArea": "Sunbiotan · Administrative Area",
-    "logout": "Sign out"
+    "logout": "Sign out",
+    "applications": "Applications",
+    "orders": "Orders"
   },
   "DashboardHome": {
     "title": "Overview",
@@ -395,7 +431,11 @@
     "manageProducts": "Manage Products",
     "productCatalog": "Product catalogue",
     "manageResources": "Manage Resources",
-    "partnerMaterials": "Partner portal materials"
+    "partnerMaterials": "Partner portal materials",
+    "statPendingApplications": "Pending applications",
+    "statToReview": "to review",
+    "statPendingOrders": "Pending orders",
+    "statToConfirm": "to confirm"
   },
   "DashboardCentros": {
     "title": "Centres",
@@ -469,7 +509,15 @@
     "notFound": "No professional found",
     "registeredOn": "Registered on",
     "noName": "No name",
-    "pendingBadge": "{count} pending"
+    "pendingBadge": "{count} pending",
+    "noCenter": "No centre",
+    "centerLabel": "Centre",
+    "resendAccess": "Resend access",
+    "awaitingPassword": "Waiting to set password",
+    "msgCenterSaved": "Centre updated.",
+    "msgResent": "Access link resent by email.",
+    "msgResendFailed": "The email could not be sent. Please try again.",
+    "msgError": "Something went wrong. Please try again."
   },
   "DashboardProdutos": {
     "title": "Products",
@@ -501,7 +549,9 @@
     "catFormacao": "Training",
     "catMarketing": "Marketing",
     "catMarca": "Brand",
-    "notFound": "No resource found"
+    "notFound": "No resource found",
+    "catSistema": "Professional System",
+    "featured": "Featured"
   },
   "DashboardRecursoForm": {
     "titleNew": "New Resource",
@@ -546,7 +596,24 @@
     "placeholderTitle": "E.g.: Sunbiotan Application Protocol",
     "placeholderDesc": "Brief description of the resource...",
     "placeholderUrl": "https://...",
-    "placeholderThumbnail": "https://... (optional)"
+    "placeholderThumbnail": "https://... (optional)",
+    "catSistema": "Professional System",
+    "labelSource": "Resource source",
+    "sourceUpload": "Upload file",
+    "sourceLink": "External link",
+    "labelFile": "File",
+    "uploadCta": "Click to upload a file",
+    "fileHint": "PDF, MP4, PNG, JPG, WEBP or PPTX · max. {max} MB",
+    "filePrivateHint": "Stored in a private space: only approved professionals can open it, through a temporary link.",
+    "errorFileSize": "The file cannot be larger than {max} MB.",
+    "errorFileType": "File type not allowed.",
+    "errorFileUpload": "Error uploading the file. Please try again.",
+    "labelLocale": "Language",
+    "localeAll": "All languages",
+    "featuredLabel": "Featured",
+    "featuredDesc": "In the Professional System category, it is highlighted on the portal home page.",
+    "errorSource": "Upload a file or provide a link.",
+    "errorUrlInvalid": "The link must start with http:// or https://."
   },
   "PortalLayout": {
     "home": "Home",
@@ -566,7 +633,11 @@
     "history": "History",
     "historySub": "{count} orders placed",
     "support": "Support",
-    "supportDesc": "For any questions or assistance, contact the Sunbiotan team directly by email or phone. We are here to help."
+    "supportDesc": "For any questions or assistance, contact the Sunbiotan team directly by email or phone. We are here to help.",
+    "systemEyebrow": "Professional System",
+    "systemTitle": "System presentation",
+    "systemText": "View the Sun BioTan professional system presentation.",
+    "systemButton": "Open presentation"
   },
   "PortalEncomendas": {
     "title": "Orders",
@@ -592,7 +663,8 @@
     "successTitle": "Order submitted!",
     "redirecting": "Redirecting...",
     "item": "item",
-    "items": "items"
+    "items": "items",
+    "errorSubmit": "The order could not be sent. Please try again."
   },
   "PortalProdutos": {
     "title": "Products",
@@ -616,6 +688,116 @@
     "noResources": "There are no resources in this category yet.",
     "comingSoon": "Materials will be added soon.",
     "watchVideo": "Watch video",
-    "download": "Download"
+    "download": "Download",
+    "catSistema": "Professional System",
+    "catSistemaDesc": "Presentation and documents of the professional system"
+  },
+  "AuthAcesso": {
+    "eyebrow": "Professional Area",
+    "titleInvite": "Welcome to Sun BioTan",
+    "titleRecovery": "Reset password",
+    "intro": "Click Continue to confirm your access and set your password.",
+    "continue": "Continue",
+    "verifying": "Verifying...",
+    "invalidLink": "Invalid or expired link.",
+    "requestNewLink": "Request a new link"
+  },
+  "AuthDefinirSenha": {
+    "eyebrow": "Professional Area",
+    "title": "Set password",
+    "intro": "Choose a password with at least {min} characters.",
+    "labelPassword": "New password",
+    "labelConfirm": "Confirm password",
+    "submit": "Save password",
+    "saving": "Saving...",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "errorTooShort": "The password must be at least {min} characters long.",
+    "errorTooLong": "The password is too long (maximum 72 characters).",
+    "errorMismatch": "The passwords do not match.",
+    "errorSamePassword": "The new password must be different from the previous one.",
+    "errorWeak": "This password is too weak. Please choose another.",
+    "errorSession": "Your session has expired. Please request a new link.",
+    "errorGeneric": "Something went wrong. Please try again."
+  },
+  "AuthRecuperar": {
+    "eyebrow": "Professional Area",
+    "title": "Recover password",
+    "intro": "Enter your account email. If it belongs to an active account, we'll send you a link to set a new password.",
+    "labelEmail": "Email",
+    "emailPlaceholder": "you@email.com",
+    "submit": "Send link",
+    "sending": "Sending...",
+    "sent": "If the email belongs to an active account, you'll shortly receive a link to reset your password. Please also check your spam folder.",
+    "backToLogin": "Back to login",
+    "errorRateLimit": "Too many requests. Please wait a few minutes and try again.",
+    "errorInvalid": "Please enter a valid email.",
+    "errorGeneric": "Something went wrong. Please try again."
+  },
+  "DashboardCandidaturas": {
+    "title": "Applications",
+    "subtitle": "Partnership requests received through the professional form",
+    "tabPending": "Pending",
+    "tabApproved": "Approved",
+    "tabRejected": "Rejected",
+    "searchPlaceholder": "Search by name, business, city or email…",
+    "selectAllShown": "Select visible ({count})",
+    "selectedCount": "{count} selected",
+    "selectOne": "Select {name}",
+    "bulkReject": "Reject selected",
+    "bulkDelete": "Delete selected",
+    "confirmBulkReject": "Reject {count} applications? Already approved ones are not changed.",
+    "confirmBulkDelete": "Permanently delete {count} applications? This cannot be undone.",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "empty": "No applications found",
+    "duplicate": "Possible duplicate",
+    "notes": "Internal notes",
+    "receivedOn": "Received on",
+    "reviewedOn": "reviewed on",
+    "invitedOn": "access sent on",
+    "approve": "Approve",
+    "reject": "Reject",
+    "resend": "Resend access",
+    "reply": "Reply by email",
+    "delete": "Delete",
+    "approveTitle": "Approve application",
+    "approveHint": "Portal access will be created and an email will be sent, in the application's language, to set the password.",
+    "approveCenterLabel": "Centre (optional)",
+    "noCenter": "No centre",
+    "confirmApprove": "Approve and send access",
+    "rejectNoteLabel": "Internal note (optional)",
+    "confirmReject": "Reject",
+    "notesPlaceholder": "Visible to the team only…",
+    "saveNotes": "Save notes",
+    "confirmDelete": "Permanently delete this application?",
+    "loadMore": "Show more ({count} remaining)",
+    "msgApproved": "Application approved and access sent by email.",
+    "msgApprovedNoEmail": "Application approved, but the email was not sent. Use \"Resend access\".",
+    "msgResent": "Access resent by email.",
+    "msgResendFailed": "The email could not be sent. Please try again.",
+    "msgRejected": "Application rejected.",
+    "msgDeleted": "Application deleted.",
+    "msgNotesSaved": "Notes saved.",
+    "msgBulkDone": "{count} applications updated.",
+    "msgConflict": "This email belongs to a non-professional account (for example, an administrator) or the application was already approved. Nothing was changed.",
+    "msgError": "Something went wrong. Please try again."
+  },
+  "DashboardEncomendas": {
+    "title": "Orders",
+    "count": "{count} orders",
+    "empty": "No orders yet.",
+    "unknownProfessional": "Unknown professional",
+    "noCenter": "No centre",
+    "statusLabel": "Status",
+    "qty": "× {qty}",
+    "loadMore": "Show more ({count} remaining)",
+    "msgError": "Something went wrong. Please try again.",
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "shipped": "Shipped",
+      "delivered": "Delivered"
+    }
   }
 }

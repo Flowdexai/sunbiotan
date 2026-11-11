@@ -42,7 +42,7 @@ export function Footer() {
             <p className="font-display font-medium tracking-[0.2em] text-xl text-sunbiotan-300 mb-4">
               SUNBIOTAN
             </p>
-            <p className="text-sunbiotan-400/55 text-sm font-light leading-relaxed mb-6 max-w-xs">
+            <p className="text-sunbiotan-300 text-sm font-light leading-relaxed mb-6 max-w-xs">
               {t('tagline')}
             </p>
             <div className="flex gap-3">
@@ -51,7 +51,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="w-8 h-8 border border-sunbiotan-800/60 rounded-full flex items-center justify-center text-sunbiotan-500/60 hover:border-sunbiotan-500/60 hover:text-sunbiotan-400 transition-all duration-300"
+                className="w-8 h-8 border border-sunbiotan-800/60 rounded-full flex items-center justify-center text-sunbiotan-400 hover:border-sunbiotan-500/60 hover:text-sunbiotan-200 transition-all duration-300"
               >
                 <FontAwesomeIcon icon={faFacebook} style={{ width: '14px', height: '14px' }} />
               </a>
@@ -60,14 +60,14 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-8 h-8 border border-sunbiotan-800/60 rounded-full flex items-center justify-center text-sunbiotan-500/60 hover:border-sunbiotan-500/60 hover:text-sunbiotan-400 transition-all duration-300"
+                className="w-8 h-8 border border-sunbiotan-800/60 rounded-full flex items-center justify-center text-sunbiotan-400 hover:border-sunbiotan-500/60 hover:text-sunbiotan-200 transition-all duration-300"
               >
                 <FontAwesomeIcon icon={faInstagram} style={{ width: '14px', height: '14px' }} />
               </a>
               <a
                 href="mailto:info@sunbiotan.pt"
                 aria-label="Email"
-                className="w-8 h-8 border border-sunbiotan-800/60 rounded-full flex items-center justify-center text-sunbiotan-500/60 hover:border-sunbiotan-500/60 hover:text-sunbiotan-400 transition-all duration-300"
+                className="w-8 h-8 border border-sunbiotan-800/60 rounded-full flex items-center justify-center text-sunbiotan-400 hover:border-sunbiotan-500/60 hover:text-sunbiotan-200 transition-all duration-300"
               >
                 <Mail className="h-3.5 w-3.5" strokeWidth={1.5} />
               </a>
@@ -76,7 +76,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/80 mb-5 font-medium">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-sunbiotan-400 mb-5 font-medium">
               {t('navigation')}
             </p>
             <ul className="space-y-3">
@@ -84,7 +84,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-sunbiotan-400/50 hover:text-sunbiotan-300 font-light transition-colors duration-300"
+                    className="text-sm text-sunbiotan-300 hover:text-sunbiotan-100 font-light transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -95,26 +95,26 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/80 mb-5 font-medium">
+            <p className="text-[11px] tracking-[0.3em] uppercase text-sunbiotan-400 mb-5 font-medium">
               {t('contact')}
             </p>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <Mail className="h-3.5 w-3.5 text-sunbiotan-600/70 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                <Mail className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
                 <a
                   href="mailto:info@sunbiotan.pt"
-                  className="text-sm text-sunbiotan-400/50 hover:text-sunbiotan-300 font-light transition-colors"
+                  className="text-sm text-sunbiotan-300 hover:text-sunbiotan-100 font-light transition-colors"
                 >
                   info@sunbiotan.pt
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Phone className="h-3.5 w-3.5 text-sunbiotan-600/70 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span className="text-sm text-sunbiotan-400/50 font-light">+351 920 253 796</span>
+                <Phone className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                <span className="text-sm text-sunbiotan-300 font-light">+351 920 253 796</span>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="h-3.5 w-3.5 text-sunbiotan-600/70 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span className="text-sm text-sunbiotan-400/50 font-light">{t('location')}</span>
+                <MapPin className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
+                <span className="text-sm text-sunbiotan-300 font-light">{t('location')}</span>
               </li>
             </ul>
           </div>
@@ -131,13 +131,13 @@ export function Footer() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="text-[11px] text-sunbiotan-400/50 hover:text-sunbiotan-300 font-light tracking-wide transition-colors duration-300"
+                    className="text-[11px] text-sunbiotan-300 hover:text-sunbiotan-100 font-light tracking-wide transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
                 ))}
               </div>
-              <p className="text-[11px] text-sunbiotan-400/50 tracking-wider font-light">
+              <p className="text-[11px] text-sunbiotan-300 tracking-wider font-light">
                 © {new Date().getFullYear()} Sunbiotan. {t('allRights')}
               </p>
             </div>

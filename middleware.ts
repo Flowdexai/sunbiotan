@@ -30,72 +30,97 @@ function localizedPath(path: string, locale: string): string {
   return `/${locale}${path}`;
 }
 
+/** ¿Hay cookie de sesión de Supabase? (evita llamar a Auth en visitas anónimas). */
+function hasAuthCookie(req: NextRequest): boolean {
+  return req.cookies.getAll().some((c) => c.name.startsWith('sb-') && c.name.includes('-auth-token'));
+}
+
 export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const locale = getLocaleFromPath(pathname);
   const canonical = stripLocalePrefix(pathname);
 
-  const isDashboard = canonical.startsWith('/dashboard');
-  const isPortal = canonical.startsWith('/portal');
+  const isDashboard = canonical === '/dashboard' || canonical.startsWith('/dashboard/');
+  const isPortal = canonical === '/portal' || canonical.startsWith('/portal/');
   const isLogin = canonical === '/login';
+  const isDefinirSenha = canonical === '/definir-senha';
+  // Rutas de auth: accesibles sin sesión y también para quien todavía no
+  // definió contraseña.
+  const isAuthRoute = canonical === '/acesso' || canonical === '/recuperar-senha' || isDefinirSenha;
 
-  if (isDashboard || isPortal || isLogin) {
-    const res = NextResponse.next({ request: { headers: req.headers } });
+  const mustCheck = isDashboard || isPortal || isLogin || isDefinirSenha || hasAuthCookie(req);
+  if (!mustCheck) return intlMiddleware(req);
 
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() { return req.cookies.getAll(); },
-          setAll(cookiesToSet) {
-            cookiesToSet.forEach(({ name, value, options }) => {
-              res.cookies.set(name, value, options);
-            });
-          },
+  // Cookies que Supabase refresca durante getUser(); se copian a la respuesta final.
+  const pendingCookies: { name: string; value: string; options: Record<string, unknown> }[] = [];
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() { return req.cookies.getAll(); },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            req.cookies.set(name, value);
+            pendingCookies.push({ name, value, options: options as Record<string, unknown> });
+          });
         },
-      }
-    );
-
-    // getUser() revalidates the token against Supabase Auth on every request,
-    // unlike getSession() which trusts the (spoofable) cookie payload.
-    const { data: { user } } = await supabase.auth.getUser();
-
-    if (isDashboard) {
-      if (!user) {
-        return NextResponse.redirect(new URL(localizedPath('/login', locale), req.url));
-      }
-      const { data: profile } = await supabase
-        .from('profiles').select('role').eq('id', user.id).single();
-      if (profile?.role !== 'admin') {
-        return NextResponse.redirect(new URL(localizedPath('/login', locale), req.url));
-      }
+      },
     }
+  );
 
-    if (isPortal) {
-      if (!user) {
-        return NextResponse.redirect(new URL(localizedPath('/login', locale), req.url));
-      }
-      const { data: profile } = await supabase
-        .from('profiles').select('role, approved').eq('id', user.id).single();
-      if (profile?.role !== 'professional' || !profile?.approved) {
-        return NextResponse.redirect(new URL(localizedPath('/login', locale), req.url));
-      }
-    }
+  const withCookies = (res: NextResponse) => {
+    pendingCookies.forEach(({ name, value, options }) => res.cookies.set(name, value, options));
+    return res;
+  };
+  const redirectTo = (path: string) =>
+    withCookies(NextResponse.redirect(new URL(localizedPath(path, locale), req.url)));
 
-    if (isLogin && user) {
-      const { data: profile } = await supabase
-        .from('profiles').select('role').eq('id', user.id).single();
-      if (profile?.role === 'admin') {
-        return NextResponse.redirect(new URL(localizedPath('/dashboard', locale), req.url));
-      }
-      if (profile?.role === 'professional') {
-        return NextResponse.redirect(new URL(localizedPath('/portal', locale), req.url));
-      }
-    }
+  // getUser() revalida el token contra Supabase Auth en cada request,
+  // a diferencia de getSession(), que confía en la cookie.
+  const { data: { user } } = await supabase.auth.getUser();
+
+  let profile: { role: string | null; approved: boolean | null; password_set: boolean | null } | null = null;
+  if (user) {
+    const { data } = await supabase
+      .from('profiles')
+      .select('role, approved, password_set')
+      .eq('id', user.id)
+      .maybeSingle();
+    profile = data;
   }
 
-  return intlMiddleware(req);
+  const isProfessional = profile?.role === 'professional';
+  const isApprovedPro = isProfessional && profile?.approved === true;
+  const mustSetPassword = isApprovedPro && profile?.password_set === false;
+
+  // Profesional aprobado sin contraseña: solo puede estar en las rutas de auth.
+  if (mustSetPassword && !isAuthRoute) {
+    return redirectTo('/definir-senha');
+  }
+
+  if (isDefinirSenha && !user) {
+    return redirectTo('/login');
+  }
+
+  if (isDashboard) {
+    if (!user || profile?.role !== 'admin') return redirectTo('/login');
+  }
+
+  if (isPortal) {
+    if (!user || !isProfessional) return redirectTo('/login');
+    if (!isApprovedPro) return redirectTo('/login?aviso=inactive');
+  }
+
+  if (isLogin && user) {
+    if (profile?.role === 'admin') return redirectTo('/dashboard');
+    // Solo un profesional aprobado y con contraseña va al portal. El resto
+    // (no aprobado, sin perfil) ve /login: así no hay bucle /login ↔ /portal.
+    if (isApprovedPro && profile?.password_set !== false) return redirectTo('/portal');
+  }
+
+  return withCookies(intlMiddleware(req));
 }
 
 export const config = {

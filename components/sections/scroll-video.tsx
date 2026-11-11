@@ -91,14 +91,14 @@ export function VideoSection() {
       >
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="h-px w-8 bg-sunbiotan-600/50" />
-          <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-500 font-medium">
+          <p className="text-[11px] tracking-[0.45em] uppercase text-sunbiotan-400 font-medium">
             {t('eyebrow')}
           </p>
           <div className="h-px w-8 bg-sunbiotan-600/50" />
         </div>
         <h2 className="font-display font-light text-5xl md:text-7xl text-sunbiotan-100 leading-[1.05] tracking-tight">
           {t('headline')}{' '}
-          <em className="not-italic italic text-sunbiotan-400">{t('headlineItalic')}</em>
+          <em className="italic text-sunbiotan-400">{t('headlineItalic')}</em>
         </h2>
       </m.div>
 
@@ -163,7 +163,9 @@ export function VideoSection() {
                 transition={{ duration: 0.4, delay: 0.5 }}
                 className="absolute bottom-5 left-1/2 -translate-x-1/2 pointer-events-none"
               >
-                <p className="text-[10px] tracking-[0.3em] uppercase text-white/50 font-light">
+                <p
+                  className="px-3 py-1 rounded-full bg-black/60 text-[11px] tracking-[0.3em] uppercase text-white font-medium"
+                >
                   {t('clickHint')}
                 </p>
               </m.div>

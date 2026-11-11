@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from '@/i18n/navigation';
 import Image from 'next/image';
@@ -15,6 +15,15 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+
+  // Avisos que llegan por query desde el middleware o /definir-senha.
+  // (window.location en vez de useSearchParams para no exigir Suspense.)
+  useEffect(() => {
+    const aviso = new URLSearchParams(window.location.search).get('aviso');
+    if (aviso === 'inactive') setNotice(t('errorNotApproved'));
+    else if (aviso === 'password_updated') setNotice(t('noticePasswordUpdated'));
+  }, [t]);
 
   const router = useRouter();
   const supabase = createBrowserClient(
@@ -26,6 +35,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setNotice('');
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -108,7 +118,8 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t('emailPlaceholder')}
                 required
-                className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sunbiotan-900 placeholder-sunbiotan-400 focus:outline-none focus:border-sunbiotan-500 transition-colors text-sm"
+                autoComplete="email"
+                className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-600 rounded-lg text-sunbiotan-900 placeholder:text-sunbiotan-700 focus:outline-none focus:border-sunbiotan-800 focus:ring-2 focus:ring-sunbiotan-500/30 transition-colors text-sm"
               />
             </div>
 
@@ -123,7 +134,8 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-200 rounded-lg text-sunbiotan-900 placeholder-sunbiotan-400 focus:outline-none focus:border-sunbiotan-500 transition-colors text-sm pr-12"
+                  autoComplete="current-password"
+                  className="w-full px-4 py-3 bg-sunbiotan-50 border border-sunbiotan-600 rounded-lg text-sunbiotan-900 placeholder:text-sunbiotan-700 focus:outline-none focus:border-sunbiotan-800 focus:ring-2 focus:ring-sunbiotan-500/30 transition-colors text-sm pr-12"
                 />
                 <button
                   type="button"
@@ -133,7 +145,18 @@ export default function LoginPage() {
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
+              <div className="mt-2 text-right">
+                <Link href="/recuperar-senha" className="text-xs text-sunbiotan-700 hover:text-sunbiotan-900 hover:underline">
+                  {t('forgotPassword')}
+                </Link>
+              </div>
             </div>
+
+            {notice && !error && (
+              <div role="status" className="bg-sunbiotan-100 border border-sunbiotan-300 rounded-lg px-4 py-3">
+                <p className="text-sunbiotan-900 text-sm">{notice}</p>
+              </div>
+            )}
 
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3">

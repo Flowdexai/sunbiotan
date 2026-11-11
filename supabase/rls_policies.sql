@@ -1,48 +1,45 @@
 -- =============================================================================
--- Sunbiotan — Row Level Security audit & hardening
+-- Sunbiotan — Row Level Security (estado de producción, fase 3)
 -- =============================================================================
--- Run this whole file in the Supabase SQL editor (it is idempotent — safe to
--- re-run). It drops every existing policy on the 7 app tables and recreates a
--- known-good set, so there is nothing to reconcile by hand.
+-- ORDEN DE EJECUCIÓN (SQL editor de Supabase, a mano):
+--   1. supabase/rls_policies.sql   (este archivo)
+--   2. supabase/fase3_extra.sql    (handle_new_user, create_order, índices)
 --
--- Tables covered: centers, profiles, products, resources, orders, order_items,
--- partner_requests
+-- Idempotente: borra TODAS las policies de las 7 tablas de la app y las vuelve
+-- a crear tal como están en producción. Re-ejecutarlo no revierte nada de la
+-- fase 3 (incluye is_approved_professional, las policies de lectura solo para
+-- aprobados, la ausencia de insert público en partner_requests, el bucket
+-- portal-resources y sus policies, y los checks de resources).
 --
--- Column note: `orders` keys the owning professional as `professional_id`
--- (not `user_id` as the ticket assumed) — verified against
--- app/[locale]/portal/encomendas/nova/page.tsx. Policies below use the real
--- column.
+-- No crea ni borra columnas. Columnas añadidas en la fase 3 (ya aplicadas):
+--   partner_requests: website_or_instagram, activity_type, locale, admin_notes,
+--                     reviewed_at, reviewed_by, user_id, center_id, invited_at, ip_hash
+--                     checks: status in (pending, approved, rejected);
+--                             activity_type in (salao, estetica, spa, clinica,
+--                             solario, ginasio, outro); locale in (pt, es, en, it, fr)
+--   profiles:         email, locale, password_set (default true; los invitados
+--                     se crean con false)
+--   resources:        featured, storage_path, locale (null = todos los idiomas);
+--                     url pasa a ser nullable
+--   products:         sin columna price.
+--
+-- Tablas: centers, profiles, products, resources, orders, order_items,
+-- partner_requests. orders usa professional_id como dueño.
 -- =============================================================================
 
 
 -- -----------------------------------------------------------------------------
--- 0. AUDIT — inspect what exists today. Run this block on its own first.
+-- 0. AUDIT (opcional, correr solo)
 -- -----------------------------------------------------------------------------
--- Existing policies:
---   SELECT * FROM pg_policies WHERE schemaname = 'public' ORDER BY tablename, policyname;
---
--- RLS enabled / forced per table:
---   SELECT relname, relrowsecurity, relforcerowsecurity
---   FROM pg_class
+--   SELECT * FROM pg_policies WHERE schemaname IN ('public','storage') ORDER BY schemaname, tablename, policyname;
+--   SELECT relname, relrowsecurity FROM pg_class
 --   WHERE relnamespace = 'public'::regnamespace
---     AND relname IN ('centers','profiles','products','resources','orders','order_items','partner_requests')
---   ORDER BY relname;
---
--- Anon/public grants that could bypass the point of RLS (RLS still applies, but
--- worth knowing what the anon key can even attempt):
---   SELECT table_name, privilege_type, grantee
---   FROM information_schema.role_table_grants
---   WHERE table_schema = 'public' AND grantee IN ('anon','authenticated')
---   ORDER BY table_name, grantee, privilege_type;
+--     AND relname IN ('centers','profiles','products','resources','orders','order_items','partner_requests');
 
 
 -- -----------------------------------------------------------------------------
--- 1. Helper functions (SECURITY DEFINER — bypass RLS, so no policy recursion)
+-- 1. Helpers (SECURITY DEFINER: leen profiles/orders sin recursión de RLS)
 -- -----------------------------------------------------------------------------
-
--- True when the current user's profile row has role = 'admin'.
--- SECURITY DEFINER + owned by postgres => reads profiles without triggering
--- the profiles RLS policies (which would otherwise recurse).
 create or replace function public.is_admin()
 returns boolean
 language sql
@@ -51,14 +48,24 @@ security definer
 set search_path = public
 as $$
   select exists (
-    select 1
-    from public.profiles p
-    where p.id = auth.uid()
-      and p.role = 'admin'
+    select 1 from public.profiles p
+    where p.id = auth.uid() and p.role = 'admin'
   );
 $$;
 
--- True when the given order belongs to the current user.
+create or replace function public.is_approved_professional()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1 from public.profiles p
+    where p.id = auth.uid() and p.role = 'professional' and p.approved = true
+  );
+$$;
+
 create or replace function public.owns_order(p_order_id uuid)
 returns boolean
 language sql
@@ -67,28 +74,25 @@ security definer
 set search_path = public
 as $$
   select exists (
-    select 1
-    from public.orders o
-    where o.id = p_order_id
-      and o.professional_id = auth.uid()
+    select 1 from public.orders o
+    where o.id = p_order_id and o.professional_id = auth.uid()
   );
 $$;
 
-revoke all on function public.is_admin()            from public;
-revoke all on function public.owns_order(uuid)      from public;
-grant execute on function public.is_admin()         to anon, authenticated;
-grant execute on function public.owns_order(uuid)   to anon, authenticated;
+revoke all on function public.is_admin()                  from public;
+revoke all on function public.is_approved_professional()  from public;
+revoke all on function public.owns_order(uuid)            from public;
+grant execute on function public.is_admin()                 to anon, authenticated;
+grant execute on function public.is_approved_professional() to authenticated;
+grant execute on function public.owns_order(uuid)           to anon, authenticated;
 
 
 -- -----------------------------------------------------------------------------
--- 2. Guard: stop non-admins from escalating their own profile
+-- 2. Guard de profiles: un no-admin no puede escalar su propio perfil
 -- -----------------------------------------------------------------------------
--- The profiles policies below let a user write their OWN row (needed for the
--- portal). Without this trigger a professional could PATCH their row to
--- role='admin' / approved=true straight through the anon key. The trigger
--- silently pins role/approved/id/center_id for non-admin, authenticated writes
--- and leaves service-role / SQL-editor / auth-trigger writes (auth.uid() null)
--- untouched so seeding still works.
+-- Fija role/approved/id/center_id/email en escrituras de usuarios autenticados
+-- no admin. Service role, SQL editor y el trigger de auth.users (auth.uid()
+-- null) y los admins pasan sin cambios.
 create or replace function public.enforce_profile_self_write()
 returns trigger
 language plpgsql
@@ -96,7 +100,6 @@ security definer
 set search_path = public
 as $$
 begin
-  -- No end-user identity (service role, SQL editor, auth.users trigger) → allow.
   if auth.uid() is null or public.is_admin() then
     return new;
   end if;
@@ -108,10 +111,11 @@ begin
     new.role     := 'professional';
     new.approved := false;
   elsif tg_op = 'UPDATE' then
-    new.id         := old.id;
-    new.role       := old.role;
-    new.approved   := old.approved;
-    new.center_id  := old.center_id;  -- only admins assign a center
+    new.id        := old.id;
+    new.role      := old.role;
+    new.approved  := old.approved;
+    new.center_id := old.center_id;
+    new.email     := old.email;
   end if;
 
   return new;
@@ -125,7 +129,7 @@ create trigger trg_enforce_profile_self_write
 
 
 -- -----------------------------------------------------------------------------
--- 3. Drop ALL existing policies on the target tables (resolves conflicts)
+-- 3. Borrar TODAS las policies de las tablas de la app
 -- -----------------------------------------------------------------------------
 do $$
 declare
@@ -147,7 +151,7 @@ $$;
 
 
 -- -----------------------------------------------------------------------------
--- 4. Enable RLS on every table
+-- 4. RLS activado en todas las tablas
 -- -----------------------------------------------------------------------------
 alter table public.centers          enable row level security;
 alter table public.profiles         enable row level security;
@@ -163,9 +167,7 @@ alter table public.partner_requests enable row level security;
 -- =============================================================================
 
 -- -------------------------------------------------------------------- centers --
--- Public map: anyone (incl. anon key, no session) can read every center.
--- Detail page loads inactive centers too (getCenterById has no active filter),
--- so SELECT is unconditional.
+-- Mapa público: cualquiera (incluida la anon key) lee los centros.
 create policy "centers_select_public"
   on public.centers for select
   to anon, authenticated
@@ -189,22 +191,16 @@ create policy "centers_delete_admin"
 
 
 -- ------------------------------------------------------------------- profiles --
--- SELECT: own row, plus admin reads all (dashboard/profissionais + dashboard
--- home counts). Ticket said "own row only"; admin read is required for the
--- admin panel to function and is added deliberately.
 create policy "profiles_select_self_or_admin"
   on public.profiles for select
   to authenticated
   using (id = auth.uid() or public.is_admin());
 
--- INSERT: only your own row (trigger in §2 forces role/approved for non-admins).
 create policy "profiles_insert_self"
   on public.profiles for insert
   to authenticated
   with check (id = auth.uid() or public.is_admin());
 
--- UPDATE: own row, or admin (admin toggles `approved`). Column-level escalation
--- is blocked by trg_enforce_profile_self_write.
 create policy "profiles_update_self_or_admin"
   on public.profiles for update
   to authenticated
@@ -218,11 +214,11 @@ create policy "profiles_delete_admin"
 
 
 -- ------------------------------------------------------------------- products --
--- Portal catalogue: any signed-in user reads. No public/anon access.
-create policy "products_select_authenticated"
+-- Catálogo: solo profesionales aprobados o admin. Nada para anon.
+create policy "products_select_approved_or_admin"
   on public.products for select
   to authenticated
-  using (true);
+  using (public.is_approved_professional() or public.is_admin());
 
 create policy "products_insert_admin"
   on public.products for insert
@@ -242,10 +238,10 @@ create policy "products_delete_admin"
 
 
 -- ------------------------------------------------------------------ resources --
-create policy "resources_select_authenticated"
+create policy "resources_select_approved_or_admin"
   on public.resources for select
   to authenticated
-  using (true);
+  using (public.is_approved_professional() or public.is_admin());
 
 create policy "resources_insert_admin"
   on public.resources for insert
@@ -265,16 +261,20 @@ create policy "resources_delete_admin"
 
 
 -- --------------------------------------------------------------------- orders --
--- Owner column is professional_id.
 create policy "orders_select_own_or_admin"
   on public.orders for select
   to authenticated
   using (professional_id = auth.uid() or public.is_admin());
 
+-- Insert: solo un profesional aprobado, para sí mismo y en estado pending.
 create policy "orders_insert_own"
   on public.orders for insert
   to authenticated
-  with check (professional_id = auth.uid());
+  with check (
+    professional_id = auth.uid()
+    and public.is_approved_professional()
+    and status = 'pending'
+  );
 
 create policy "orders_update_admin"
   on public.orders for update
@@ -289,7 +289,6 @@ create policy "orders_delete_admin"
 
 
 -- ---------------------------------------------------------------- order_items --
--- Visibility/ownership derived from the parent order via owns_order().
 create policy "order_items_select_own_or_admin"
   on public.order_items for select
   to authenticated
@@ -298,7 +297,11 @@ create policy "order_items_select_own_or_admin"
 create policy "order_items_insert_own"
   on public.order_items for insert
   to authenticated
-  with check (public.owns_order(order_id));
+  with check (
+    public.owns_order(order_id)
+    and public.is_approved_professional()
+    and quantity > 0
+  );
 
 create policy "order_items_update_admin"
   on public.order_items for update
@@ -313,16 +316,9 @@ create policy "order_items_delete_admin"
 
 
 -- ----------------------------------------------------------- partner_requests --
--- INSERT is public: the candidatura form must submit with no session.
--- (The current API route at app/api/candidatura/route.ts uses the service-role
--- key, which bypasses RLS anyway — this policy keeps the form working if it is
--- ever moved to the client. If you never want anon inserts, drop this one
--- policy; nothing else depends on it.)
-create policy "partner_requests_insert_public"
-  on public.partner_requests for insert
-  to anon, authenticated
-  with check (true);
-
+-- SIN policy de insert: el formulario público inserta solo vía
+-- app/api/candidatura (service role, que ignora RLS) con validación,
+-- honeypot y rate limit. La anon key no puede insertar directo.
 create policy "partner_requests_select_admin"
   on public.partner_requests for select
   to authenticated
@@ -340,26 +336,79 @@ create policy "partner_requests_delete_admin"
   using (public.is_admin());
 
 
+-- -----------------------------------------------------------------------------
+-- 6. Checks de resources (fase 3)
+-- -----------------------------------------------------------------------------
+alter table public.resources drop constraint if exists resources_category_chk;
+alter table public.resources add  constraint resources_category_chk
+  check (category in ('formacao', 'marketing', 'marca', 'sistema'));
+
+alter table public.resources drop constraint if exists resources_source_chk;
+alter table public.resources add  constraint resources_source_chk
+  check (url is not null or storage_path is not null);
+
+alter table public.resources drop constraint if exists resources_locale_chk;
+alter table public.resources add  constraint resources_locale_chk
+  check (locale is null or locale in ('pt', 'es', 'en', 'it', 'fr'));
+
+
+-- -----------------------------------------------------------------------------
+-- 7. Storage: bucket privado portal-resources
+-- -----------------------------------------------------------------------------
+-- No toca los buckets 'centers' (público) ni 'resources' (público, legado).
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values (
+  'portal-resources', 'portal-resources', false, 52428800,
+  array[
+    'application/pdf',
+    'video/mp4',
+    'image/png',
+    'image/jpeg',
+    'image/webp',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+  ]
+)
+on conflict (id) do update
+  set public             = false,
+      file_size_limit    = excluded.file_size_limit,
+      allowed_mime_types = excluded.allowed_mime_types;
+
+drop policy if exists "portal_resources_read"   on storage.objects;
+drop policy if exists "portal_resources_insert" on storage.objects;
+drop policy if exists "portal_resources_update" on storage.objects;
+drop policy if exists "portal_resources_delete" on storage.objects;
+
+create policy "portal_resources_read" on storage.objects
+  for select to authenticated
+  using (bucket_id = 'portal-resources'
+         and (public.is_approved_professional() or public.is_admin()));
+
+create policy "portal_resources_insert" on storage.objects
+  for insert to authenticated
+  with check (bucket_id = 'portal-resources' and public.is_admin());
+
+create policy "portal_resources_update" on storage.objects
+  for update to authenticated
+  using (bucket_id = 'portal-resources' and public.is_admin())
+  with check (bucket_id = 'portal-resources' and public.is_admin());
+
+create policy "portal_resources_delete" on storage.objects
+  for delete to authenticated
+  using (bucket_id = 'portal-resources' and public.is_admin());
+
+
 -- =============================================================================
--- 6. VERIFY — run after applying
+-- 8. VERIFY
 -- =============================================================================
--- Every target table should show rowsecurity = true:
---   SELECT relname AS table, relrowsecurity AS rls_enabled
---   FROM pg_class
---   WHERE relnamespace = 'public'::regnamespace
---     AND relname IN ('centers','profiles','products','resources','orders','order_items','partner_requests')
---   ORDER BY relname;
---
--- Full policy list (expect 4 per table, 3 for none):
---   SELECT tablename, policyname, cmd, roles, qual, with_check
---   FROM pg_policies WHERE schemaname = 'public'
---   ORDER BY tablename, cmd, policyname;
+--   SELECT tablename, policyname, cmd, roles FROM pg_policies
+--   WHERE schemaname = 'public' ORDER BY tablename, cmd, policyname;
+--   -- partner_requests: 3 policies (select/update/delete), ninguna INSERT.
 --
 -- Smoke tests:
---   * Logged out: GET centers  -> rows returned
---   * Logged out: POST partner_requests -> succeeds
---   * Logged out: GET products / profiles / orders -> 0 rows
---   * Professional A: GET orders -> only A's rows; cannot see B's order_items
---   * Professional: PATCH own profile set role='admin' -> value stays 'professional'
---   * Admin: full CRUD on centers/products/resources; can read all profiles
+--   * Sin sesión: GET centers -> filas; GET products/resources/profiles/orders -> 0 filas
+--   * Sin sesión: POST partner_requests directo con la anon key -> rechazado
+--   * Profesional NO aprobado: GET products/resources -> 0 filas; INSERT orders -> rechazado
+--   * Profesional aprobado: GET products/resources -> filas; solo ve sus orders/order_items
+--   * Profesional: PATCH su perfil role='admin' / email='x' -> sin cambios
+--   * Admin: CRUD completo en centers/products/resources; lee todos los profiles y partner_requests
 -- =============================================================================

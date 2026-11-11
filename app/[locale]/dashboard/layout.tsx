@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { createBrowserClient } from '@supabase/ssr';
 import Image from 'next/image';
@@ -11,6 +11,8 @@ import {
   Users,
   Package,
   FolderOpen,
+  Inbox,
+  ShoppingBag,
   LogOut,
   Menu,
   ChevronRight,
@@ -29,15 +31,32 @@ export default function DashboardLayout({
   const navItems = [
     { label: t('overview'), href: '/dashboard', icon: LayoutDashboard },
     { label: t('centers'), href: '/dashboard/centros', icon: MapPin },
+    { label: t('applications'), href: '/dashboard/candidaturas', icon: Inbox },
     { label: t('professionals'), href: '/dashboard/profissionais', icon: Users },
+    { label: t('orders'), href: '/dashboard/encomendas', icon: ShoppingBag },
     { label: t('products'), href: '/dashboard/produtos', icon: Package },
     { label: t('resources'), href: '/dashboard/recursos', icon: FolderOpen },
   ];
 
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  const supabase = useMemo(
+    () => createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    ),
+    []
   );
+
+  // Contador de candidaturas pendientes (se refresca al navegar).
+  const [pendingApplications, setPendingApplications] = useState(0);
+  useEffect(() => {
+    let cancelled = false;
+    supabase
+      .from('partner_requests')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'pending')
+      .then(({ count }) => { if (!cancelled) setPendingApplications(count ?? 0); });
+    return () => { cancelled = true; };
+  }, [supabase, pathname]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -88,8 +107,13 @@ export default function DashboardLayout({
                     <span className="text-sm font-light tracking-wide">
                       {item.label}
                     </span>
+                    {item.href === '/dashboard/candidaturas' && pendingApplications > 0 && (
+                      <span className={`ml-auto text-[10px] min-w-5 px-1.5 py-0.5 rounded-full text-center ${isActive ? 'bg-white/25 text-white' : 'bg-sunbiotan-500 text-sunbiotan-950 font-medium'}`}>
+                        {pendingApplications}
+                      </span>
+                    )}
                     {isActive && (
-                      <ChevronRight className="h-3 w-3 ml-auto" />
+                      <ChevronRight className={`h-3 w-3 ${item.href === '/dashboard/candidaturas' && pendingApplications > 0 ? '' : 'ml-auto'}`} />
                     )}
                   </Link>
                 </li>

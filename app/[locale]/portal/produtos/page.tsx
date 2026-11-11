@@ -13,7 +13,6 @@ interface Product {
   description: string | null;
   image_url: string | null;
   image_url_2: string | null;
-  order_index: number;
 }
 
 export default function PortalProdutosPage() {
@@ -31,7 +30,7 @@ export default function PortalProdutosPage() {
     async function load() {
       const { data } = await supabase
         .from('products')
-        .select('*')
+        .select('id, name, description, image_url, image_url_2')
         .eq('active', true)
         .order('order_index');
 

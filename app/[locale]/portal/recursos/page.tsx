@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
-import { Play, Download, Image as ImageIcon, FileText, Palette } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { Play, Download, Image as ImageIcon, FileText, Palette, Presentation } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface Resource {
   id: string;
   title: string;
   description: string | null;
   type: string;
-  url: string;
   thumbnail_url: string | null;
   category: string;
   order_index: number;
+  locale: string | null;
 }
 
 const typeIcon: Record<string, React.ElementType> = {
@@ -25,6 +25,7 @@ const typeIcon: Record<string, React.ElementType> = {
 
 export default function RecursosPage() {
   const t = useTranslations('PortalRecursos');
+  const locale = useLocale();
   const [resources, setResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState<string>('formacao');
@@ -35,6 +36,7 @@ export default function RecursosPage() {
   );
 
   const categoryConfig = [
+    { key: 'sistema', label: t('catSistema'), icon: Presentation, description: t('catSistemaDesc') },
     { key: 'formacao', label: t('catFormacao'), icon: Play, description: t('catFormacaoDesc') },
     { key: 'marketing', label: t('catMarketing'), icon: ImageIcon, description: t('catMarketingDesc') },
     { key: 'marca', label: t('catMarca'), icon: Palette, description: t('catMarcaDesc') },
@@ -44,15 +46,18 @@ export default function RecursosPage() {
     async function load() {
       const { data } = await supabase
         .from('resources')
-        .select('*')
+        // Columnas explícitas: url y storage_path no llegan al cliente;
+        // los recursos se abren vía /api/portal/recursos/[id].
+        .select('id, title, description, type, thumbnail_url, category, order_index, locale')
         .eq('active', true)
         .order('order_index');
 
-      if (data) setResources(data);
+      // Recursos para todos los idiomas (locale null) o para el idioma actual.
+      if (data) setResources((data as Resource[]).filter((r) => !r.locale || r.locale === locale));
       setLoading(false);
     }
     load();
-  }, [supabase]);
+  }, [supabase, locale]);
 
   const filtered = resources.filter((r) => r.category === activeCategory);
 
@@ -71,7 +76,7 @@ export default function RecursosPage() {
         <p className="text-sunbiotan-600 text-sm font-light">{t('subtitle')}</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {categoryConfig.map(({ key, label, icon: Icon, description }) => {
           const count = resources.filter((r) => r.category === key).length;
           const isActive = activeCategory === key;
@@ -143,7 +148,7 @@ export default function RecursosPage() {
                   )}
 
                   <a
-                    href={resource.url}
+                    href={`/api/portal/recursos/${resource.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs text-sunbiotan-600 hover:text-sunbiotan-800 transition-colors"

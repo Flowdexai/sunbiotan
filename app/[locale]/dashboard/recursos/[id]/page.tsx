@@ -6,19 +6,24 @@ import { useRouter, Link } from '@/i18n/navigation';
 import { createBrowserClient } from '@supabase/ssr';
 import { ArrowLeft, Loader2, FileText, Video, Image as ImageIcon, Palette, Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { ResourceSourceFields, type SourceMode } from '@/components/dashboard/resource-source-fields';
+import { isHttpUrl, PORTAL_RESOURCES_BUCKET } from '@/lib/resources/config';
 
 type ResourceType = 'video' | 'image' | 'document' | 'logo';
-type ResourceCategory = 'formacao' | 'marketing' | 'marca';
+type ResourceCategory = 'formacao' | 'marketing' | 'marca' | 'sistema';
 
 interface FormData {
   title: string;
   description: string;
   type: ResourceType;
   url: string;
+  storage_path: string;
   thumbnail_url: string;
   category: ResourceCategory;
   order_index: number;
   active: boolean;
+  featured: boolean;
+  locale: string; // '' = todos
 }
 
 export default function EditarRecursoPage() {
@@ -33,6 +38,10 @@ export default function EditarRecursoPage() {
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [mode, setMode] = useState<SourceMode>('link');
+  // Path guardado en la base al cargar: si se reemplaza o se elimina el recurso,
+  // se borra el objeto del bucket después de guardar.
+  const [originalStoragePath, setOriginalStoragePath] = useState<string | null>(null);
 
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -50,13 +59,14 @@ export default function EditarRecursoPage() {
     { value: 'formacao', label: t('catFormacao') },
     { value: 'marketing', label: t('catMarketing') },
     { value: 'marca', label: t('catMarca') },
+    { value: 'sistema', label: t('catSistema') },
   ];
 
   useEffect(() => {
     async function loadResource() {
       const { data, error } = await supabase
         .from('resources')
-        .select('title, description, type, url, thumbnail_url, category, order_index, active')
+        .select('title, description, type, url, storage_path, thumbnail_url, category, order_index, active, featured, locale')
         .eq('id', id)
         .single();
 
@@ -65,7 +75,21 @@ export default function EditarRecursoPage() {
         return;
       }
 
-      setForm(data as FormData);
+      setForm({
+        title: data.title ?? '',
+        description: data.description ?? '',
+        type: data.type,
+        url: data.url ?? '',
+        storage_path: data.storage_path ?? '',
+        thumbnail_url: data.thumbnail_url ?? '',
+        category: data.category,
+        order_index: data.order_index ?? 0,
+        active: data.active ?? true,
+        featured: data.featured ?? false,
+        locale: data.locale ?? '',
+      });
+      setOriginalStoragePath(data.storage_path ?? null);
+      setMode(data.storage_path ? 'upload' : 'link');
       setLoading(false);
     }
 
@@ -80,7 +104,13 @@ export default function EditarRecursoPage() {
   async function handleSubmit() {
     if (!form) return;
     if (!form.title.trim()) return setError(t('errorTitle'));
-    if (!form.url.trim()) return setError(t('errorUrl'));
+    const url = form.url.trim();
+    if (mode === 'upload' && !form.storage_path) return setError(t('errorSource'));
+    if (mode === 'link') {
+      if (!url) return setError(t('errorSource'));
+      if (!isHttpUrl(url)) return setError(t('errorUrlInvalid'));
+    }
+    const nextStoragePath = mode === 'upload' ? form.storage_path : null;
 
     setSaving(true);
     setError(null);
@@ -91,11 +121,14 @@ export default function EditarRecursoPage() {
         title: form.title.trim(),
         description: form.description.trim() || null,
         type: form.type,
-        url: form.url.trim(),
+        url: mode === 'link' ? url : null,
+        storage_path: nextStoragePath,
         thumbnail_url: form.thumbnail_url.trim() || null,
         category: form.category,
         order_index: form.order_index,
         active: form.active,
+        featured: form.featured,
+        locale: form.locale || null,
       })
       .eq('id', id);
 
@@ -104,6 +137,11 @@ export default function EditarRecursoPage() {
     if (supabaseError) {
       setError(t('errorSave'));
       return;
+    }
+
+    // Archivo reemplazado o pasado a enlace: se borra el objeto anterior.
+    if (originalStoragePath && originalStoragePath !== nextStoragePath) {
+      await supabase.storage.from(PORTAL_RESOURCES_BUCKET).remove([originalStoragePath]);
     }
 
     router.push('/dashboard/recursos');
@@ -127,6 +165,11 @@ export default function EditarRecursoPage() {
       setDeleting(false);
       setConfirmDelete(false);
       return;
+    }
+
+    // Recurso borrado: también el objeto del bucket privado (policy delete admin).
+    if (originalStoragePath) {
+      await supabase.storage.from(PORTAL_RESOURCES_BUCKET).remove([originalStoragePath]);
     }
 
     router.push('/dashboard/recursos');
@@ -193,16 +236,21 @@ export default function EditarRecursoPage() {
           />
         </div>
 
-        <div className="space-y-1.5">
-          <label className="text-sm font-medium text-sunbiotan-700">{t('labelUrl')}</label>
-          <input
-            type="url"
-            value={form.url}
-            onChange={(e) => handleChange('url', e.target.value)}
-            placeholder={t('placeholderUrl')}
-            className="w-full px-4 py-2.5 rounded-xl border border-sunbiotan-200 text-sunbiotan-900 placeholder:text-sunbiotan-300 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400 text-sm"
-          />
-        </div>
+        <ResourceSourceFields
+          mode={mode}
+          onModeChange={setMode}
+          category={form.category}
+          storagePath={form.storage_path}
+          onStoragePathChange={(v) => handleChange('storage_path', v)}
+          url={form.url}
+          onUrlChange={(v) => handleChange('url', v)}
+          featured={form.featured}
+          onFeaturedChange={(v) => handleChange('featured', v)}
+          locale={form.locale}
+          onLocaleChange={(v) => handleChange('locale', v)}
+          labelClass="block text-sm font-medium text-sunbiotan-700 mb-1.5"
+          inputClass="w-full px-4 py-2.5 rounded-xl border border-sunbiotan-200 text-sunbiotan-900 placeholder:text-sunbiotan-300 focus:outline-none focus:ring-2 focus:ring-sunbiotan-400 text-sm bg-white"
+        />
 
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-sunbiotan-700">{t('labelThumbnail')}</label>

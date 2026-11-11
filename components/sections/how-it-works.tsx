@@ -14,7 +14,7 @@ export function HowItWorks() {
   const t = useTranslations('HowItWorks');
 
   return (
-    <section className="py-16 md:py-28 bg-sunbiotan-950 relative overflow-hidden">
+    <section className="py-16 md:py-28 bg-sunbiotan-100 relative overflow-hidden">
       <div
         className="absolute inset-0 opacity-[0.035] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, #c19a5b 1px, transparent 0)', backgroundSize: '36px 36px' }}
@@ -27,7 +27,7 @@ export function HowItWorks() {
 
       <div
         aria-hidden="true"
-        className="absolute bottom-0 right-4 font-display font-light text-[26vw] leading-none text-sunbiotan-800/20 pointer-events-none select-none"
+        className="absolute bottom-0 right-4 font-display font-light text-[26vw] leading-none text-sunbiotan-200/70 pointer-events-none select-none"
         style={{ lineHeight: 0.8 }}
       >
         04
@@ -41,12 +41,12 @@ export function HowItWorks() {
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
           className="mb-20"
         >
-          <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-500 mb-4 font-medium">
+          <p className="text-[11px] tracking-[0.45em] uppercase text-sunbiotan-700 mb-4 font-medium">
             {t('eyebrow')}
           </p>
-          <h2 className="font-display font-light text-[clamp(2.6rem,6vw,5rem)] text-sunbiotan-100 leading-[1.05] tracking-tight">
+          <h2 className="font-display font-light text-[clamp(2.6rem,6vw,5rem)] text-sunbiotan-900 leading-[1.05] tracking-tight">
             {t('headline')}{' '}
-            <em className="not-italic italic text-sunbiotan-400">{t('headlineItalic')}</em>
+            <em className="italic text-sunbiotan-600">{t('headlineItalic')}</em>
           </h2>
         </m.div>
 
@@ -74,11 +74,11 @@ export function HowItWorks() {
                 )}
 
                 <div className="flex items-start gap-3 mb-6">
-                  <span className="font-display text-5xl md:text-6xl font-light leading-none text-sunbiotan-700/70 group-hover:text-sunbiotan-600/90 transition-colors duration-500 select-none">
+                  <span className="font-display text-5xl md:text-6xl font-light leading-none text-sunbiotan-600 group-hover:text-sunbiotan-700 transition-colors duration-500 select-none">
                     {key}
                   </span>
-                  <div className="mt-2 w-7 h-7 border border-sunbiotan-700/40 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:border-sunbiotan-500/55 transition-colors duration-300">
-                    <StepIcon className="h-3.5 w-3.5 text-sunbiotan-500" strokeWidth={1.5} />
+                  <div className="mt-2 w-7 h-7 border border-sunbiotan-500/60 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:border-sunbiotan-600 transition-colors duration-300">
+                    <StepIcon className="h-3.5 w-3.5 text-sunbiotan-600" strokeWidth={1.5} />
                   </div>
                 </div>
 
@@ -91,10 +91,10 @@ export function HowItWorks() {
                   transition={{ duration: 0.6, delay: 0.25 + index * 0.1, ease: EASE }}
                 />
 
-                <h3 className="text-base font-medium text-sunbiotan-100 mb-3 tracking-wide">
+                <h3 className="text-base font-medium text-sunbiotan-900 mb-3 tracking-wide">
                   {t(`steps.${key}.title`)}
                 </h3>
-                <p className="text-sm text-sunbiotan-400/60 font-light leading-relaxed">
+                <p className="text-sm text-sunbiotan-800 leading-relaxed">
                   {t(`steps.${key}.description`)}
                 </p>
               </m.div>

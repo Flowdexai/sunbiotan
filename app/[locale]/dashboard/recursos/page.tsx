@@ -11,9 +11,11 @@ interface Resource {
   title: string;
   description: string | null;
   type: string;
-  url: string;
+  url: string | null;
   category: string;
   active: boolean;
+  featured?: boolean | null;
+  locale?: string | null;
   order_index: number;
 }
 
@@ -65,6 +67,7 @@ export default function RecursosDashboardPage() {
     formacao: t('catFormacao'),
     marketing: t('catMarketing'),
     marca: t('catMarca'),
+    sistema: t('catSistema'),
   };
 
   const filtered = activeCategory === 'all'
@@ -96,7 +99,7 @@ export default function RecursosDashboardPage() {
       </div>
 
       <div className="flex gap-2 flex-wrap">
-        {(['all', 'formacao', 'marketing', 'marca'] as const).map((cat) => (
+        {(['all', 'sistema', 'formacao', 'marketing', 'marca'] as const).map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
@@ -133,6 +136,12 @@ export default function RecursosDashboardPage() {
                           {resource.type}
                         </span>
                         <span className="text-[10px] text-sunbiotan-400">{categoryLabel[resource.category]}</span>
+                        {resource.featured && (
+                          <span className="text-[10px] bg-sunbiotan-500 text-white px-2 py-0.5 rounded-full">{t('featured')}</span>
+                        )}
+                        {resource.locale && (
+                          <span className="text-[10px] text-sunbiotan-500 uppercase">{resource.locale}</span>
+                        )}
                       </div>
                     </div>
                   </div>

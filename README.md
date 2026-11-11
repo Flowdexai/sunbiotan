@@ -103,6 +103,8 @@ npm start
 npm run lint
 ```
 
+> **Nota:** `npm run build` usa `next build --webpack` (no Turbopack). Next.js 16 usa Turbopack por defecto en build, pero crashea en el contenedor de build de Hostinger (`TurbopackInternalError`, "node process exited before we could connect to it") al procesar `app/globals.css` — el `@config` de Tailwind v4 obliga a Turbopack a lanzar un proceso Node hijo que el contenedor no deja completar. Pasó también en otro proyecto Flowdex con el mismo stack. Si se saca el flag `--webpack`, verificar primero que el build local (`npx next build`, sin flag) funcione en el entorno de deploy real antes de sacarlo.
+
 ---
 
 ## Páginas

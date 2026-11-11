@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
-import { MapPin, Users, Package, TrendingUp, FolderOpen } from 'lucide-react';
+import { MapPin, Users, Package, TrendingUp, FolderOpen, Inbox, ShoppingBag } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 
@@ -14,6 +14,8 @@ interface Stats {
   pendingProfessionals: number;
   totalResources: number;
   activeResources: number;
+  pendingApplications: number;
+  pendingOrders: number;
 }
 
 export default function DashboardPage() {
@@ -26,6 +28,8 @@ export default function DashboardPage() {
     pendingProfessionals: 0,
     totalResources: 0,
     activeResources: 0,
+    pendingApplications: 0,
+    pendingOrders: 0,
   });
   const [loading, setLoading] = useState(true);
   const supabase = createBrowserClient(
@@ -43,6 +47,8 @@ export default function DashboardPage() {
         { count: pendingProfessionals },
         { count: totalResources },
         { count: activeResources },
+        { count: pendingApplications },
+        { count: pendingOrders },
       ] = await Promise.all([
         supabase.from('centers').select('*', { count: 'exact', head: true }),
         supabase.from('centers').select('*', { count: 'exact', head: true }).eq('active', true),
@@ -51,6 +57,8 @@ export default function DashboardPage() {
         supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'professional').eq('approved', false),
         supabase.from('resources').select('*', { count: 'exact', head: true }),
         supabase.from('resources').select('*', { count: 'exact', head: true }).eq('active', true),
+        supabase.from('partner_requests').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
+        supabase.from('orders').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
       ]);
 
       setStats({
@@ -61,6 +69,8 @@ export default function DashboardPage() {
         pendingProfessionals: pendingProfessionals || 0,
         totalResources: totalResources || 0,
         activeResources: activeResources || 0,
+        pendingApplications: pendingApplications || 0,
+        pendingOrders: pendingOrders || 0,
       });
 
       setLoading(false);
@@ -70,6 +80,22 @@ export default function DashboardPage() {
   }, [supabase]);
 
   const statCards = [
+    {
+      label: t('statPendingApplications'),
+      value: stats.pendingApplications,
+      sub: t('statToReview'),
+      icon: Inbox,
+      color: 'from-sunbiotan-500 to-sunbiotan-700',
+      href: '/dashboard/candidaturas',
+    },
+    {
+      label: t('statPendingOrders'),
+      value: stats.pendingOrders,
+      sub: t('statToConfirm'),
+      icon: ShoppingBag,
+      color: 'from-sunbiotan-600 to-sunbiotan-800',
+      href: '/dashboard/encomendas',
+    },
     {
       label: t('statTotalCenters'),
       value: stats.totalCenters,
@@ -127,11 +153,9 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {statCards.map((card) => (
-          <div
-            key={card.label}
-            className="bg-white rounded-xl border border-sunbiotan-100 p-6 shadow-sm hover:shadow-md transition-shadow"
-          >
+        {statCards.map((card) => {
+          const inner = (
+            <>
             <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${card.color} flex items-center justify-center mb-4`}>
               <card.icon className="h-5 w-5 text-white" />
             </div>
@@ -144,8 +168,15 @@ export default function DashboardPage() {
             <div className="text-xs text-sunbiotan-500">
               {card.sub}
             </div>
-          </div>
-        ))}
+            </>
+          );
+          const cls = 'bg-white rounded-xl border border-sunbiotan-100 p-6 shadow-sm hover:shadow-md transition-shadow';
+          return 'href' in card && card.href ? (
+            <Link key={card.label} href={card.href} className={`${cls} block`}>{inner}</Link>
+          ) : (
+            <div key={card.label} className={cls}>{inner}</div>
+          );
+        })}
       </div>
 
       <div>

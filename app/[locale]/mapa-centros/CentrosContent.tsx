@@ -117,7 +117,7 @@ export function CentrosContent() {
               className="font-display font-light text-[clamp(2.6rem,6vw,5rem)] text-sunbiotan-900 leading-[1.05] tracking-tight mb-5"
             >
               {t('headline')}{' '}
-              <em className="not-italic italic text-sunbiotan-600">{t('headlineItalic')}</em>
+              <em className="italic text-sunbiotan-600">{t('headlineItalic')}</em>
             </m.h1>
 
             <m.div

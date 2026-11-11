@@ -15,27 +15,32 @@ const itemVariants = {
   show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
 };
 
+// Divider layout for the indicators: 2×2 grid with a cross on mobile,
+// single row with vertical dividers from md up.
+const STAT_BORDERS = [
+  'border-r border-b md:border-b-0',
+  'border-b md:border-b-0 md:border-r',
+  'border-r',
+  '',
+] as const;
+
+const STAT_KEYS = ['stat1', 'stat2', 'stat3', 'stat4'] as const;
+
 export function Hero() {
   const t = useTranslations('Hero');
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
 
+  // Content parallax only — the overlay keeps a fixed opacity so it never lightens on scroll.
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.6]);
 
   const scrollToNext = () =>
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-
-  const stats = [
-    { value: t('stat1Value'), label: t('stat1Label') },
-    { value: '7–9', label: t('stat2Label') },
-    { value: '100%', label: t('stat3Label') },
-  ];
+    window.scrollTo({ top: heroRef.current?.offsetHeight ?? window.innerHeight, behavior: 'smooth' });
 
   return (
     <section
       ref={heroRef}
-      className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-sunbiotan-950"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-sunbiotan-950"
     >
       <div
         className="absolute inset-0 w-full h-full bg-cover opacity-95"
@@ -46,15 +51,21 @@ export function Hero() {
         }}
       />
 
-      <m.div
-        style={{ opacity: overlayOpacity }}
-        className="absolute inset-0 pointer-events-none"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a130a]/85 via-[#3d2e17]/45 to-[#1a130a]/90" />
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, rgba(26,19,10,0.55) 100%)',
-        }} />
-      </m.div>
+      {/*
+        Warm overlay (#1a130a). The uniform 72% layer alone guarantees WCAG contrast
+        against the brightest pixel of hero-bg.jpg; the other two layers only add depth
+        (darker top/bottom for navbar and indicators, extra density behind the text).
+      */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[#1a130a]/72" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a130a]/50 via-transparent to-[#1a130a]/60" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(26,19,10,0.35) 0%, rgba(26,19,10,0.15) 60%, transparent 100%)',
+          }}
+        />
+      </div>
 
       <div
         className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -66,7 +77,7 @@ export function Hero() {
 
       <m.div
         style={{ y: contentY }}
-        className="relative z-10 container mx-auto px-6 text-center pt-14 md:pt-40"
+        className="relative z-10 w-full container mx-auto px-6 text-center pt-20 pb-8 md:pt-32 md:pb-16"
       >
         <m.div variants={containerVariants} initial="hidden" animate="show">
           <m.div variants={itemVariants} className="mb-2">
@@ -75,72 +86,67 @@ export function Hero() {
             </p>
           </m.div>
 
-          <m.div variants={itemVariants} className="flex items-center justify-center gap-3 mb-3 md:mb-5">
-            <div className="h-px w-8 bg-gradient-to-r from-transparent to-sunbiotan-500/60" />
-            <p className="text-[10px] md:text-[11px] tracking-[0.5em] uppercase text-sunbiotan-200/80 font-light">
+          <m.div variants={itemVariants} className="flex items-center justify-center gap-2 md:gap-4 mb-3 md:mb-5">
+            <div className="h-px w-5 md:w-14 flex-shrink-0 bg-sunbiotan-400/80" />
+            <p className="min-w-0 text-[11px] md:text-xs tracking-[0.2em] md:tracking-[0.38em] uppercase text-sunbiotan-100/90 font-medium">
               {t('eyebrow')}
             </p>
-            <div className="h-px w-8 bg-gradient-to-l from-transparent to-sunbiotan-500/60" />
+            <div className="h-px w-5 md:w-14 flex-shrink-0 bg-sunbiotan-400/80" />
           </m.div>
 
-          <m.div variants={itemVariants} className="mb-3 md:mb-4">
-            <h1 className="font-display font-light leading-[0.9] tracking-tight">
-              <span className="block text-[clamp(2.8rem,9vw,7.5rem)] text-sunbiotan-100/92">
+          <m.div variants={itemVariants} className="mb-4 md:mb-6">
+            <h1 className="font-display font-light leading-[0.95] tracking-tight">
+              <span className="block text-[clamp(2.6rem,9vw,7.5rem)] text-sunbiotan-50">
                 {t('headline1')}
               </span>
-              <span className="block text-[clamp(2.8rem,9vw,7.5rem)] golden-shimmer">
+              <span className="block text-[clamp(2.6rem,9vw,7.5rem)] golden-shimmer-light">
                 {t('headline2')}
               </span>
             </h1>
           </m.div>
 
-          <m.div variants={itemVariants} className="flex items-center justify-center gap-4 mb-3 md:mb-5">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-sunbiotan-500/40" />
-            <div className="w-1 h-1 rounded-full bg-sunbiotan-500/60" />
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-sunbiotan-500/40" />
-          </m.div>
-
           <m.p
             variants={itemVariants}
-            className="text-sunbiotan-100/75 text-sm md:text-base font-light tracking-[0.06em] max-w-xs md:max-w-md mx-auto mb-5 md:mb-8"
+            className="text-base md:text-lg font-medium leading-relaxed text-sunbiotan-50/95 max-w-xl md:max-w-2xl mx-auto mb-6 md:mb-9"
+            style={{ textShadow: '0 1px 14px rgba(26,19,10,0.65)' }}
           >
             {t('subtitle')}
           </m.p>
 
           <m.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-2.5 justify-center items-center mb-6 md:mb-12"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center max-w-md sm:max-w-none mx-auto mb-8 md:mb-14"
           >
             <Link
               href="/mapa-centros"
-              className="group inline-flex items-center gap-2.5 px-9 py-3.5 bg-gradient-to-r from-sunbiotan-500 to-sunbiotan-600 hover:from-sunbiotan-400 hover:to-sunbiotan-500 text-white text-[11px] tracking-[0.2em] uppercase font-medium rounded-full transition-all duration-400 shadow-xl shadow-sunbiotan-900/40 hover:shadow-sunbiotan-500/20 hover:scale-105"
+              className="group inline-flex items-center justify-center gap-2.5 px-7 md:px-9 py-3.5 md:py-4 bg-gradient-to-r from-[#e8cf9c] to-sunbiotan-400 hover:from-[#f0dcae] hover:to-[#dcc395] text-sunbiotan-950 text-[13px] md:text-sm leading-snug tracking-[0.12em] uppercase font-bold text-center rounded-full transition-all duration-300 shadow-xl shadow-black/30 hover:scale-[1.03]"
             >
-              {t('cta1')}
-              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+              <span>{t('cta1')}</span>
+              <ArrowRight className="h-4 w-4 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" strokeWidth={2.25} />
             </Link>
 
-            <a
-              href="#profissionais"
-              className="inline-flex items-center gap-2.5 px-9 py-3.5 border border-sunbiotan-300/40 text-sunbiotan-100/85 hover:border-sunbiotan-300/70 hover:text-white text-[11px] tracking-[0.2em] uppercase font-light rounded-full transition-all duration-300 backdrop-blur-sm hover:bg-white/[0.04]"
+            <Link
+              href="/profissionais"
+              className="inline-flex items-center justify-center px-7 md:px-9 py-3.5 md:py-4 border-[1.5px] border-sunbiotan-50/80 hover:border-white text-white text-[13px] md:text-sm leading-snug tracking-[0.12em] uppercase font-semibold text-center rounded-full transition-all duration-300 hover:bg-white/8"
             >
               {t('cta2')}
-            </a>
+            </Link>
           </m.div>
 
           <m.div
             variants={itemVariants}
-            className="flex justify-center items-stretch gap-0 border-t border-sunbiotan-700/20 pt-8"
+            className="grid grid-cols-2 md:grid-cols-4 max-w-5xl mx-auto border-t border-sunbiotan-400/60"
           >
-            {stats.map((stat, i) => (
+            {STAT_KEYS.map((key, i) => (
               <div
-                key={stat.label}
-                className={`flex-1 max-w-[140px] text-center ${i < stats.length - 1 ? 'border-r border-sunbiotan-700/20' : ''}`}
+                key={key}
+                className={`flex flex-col items-center justify-center text-center px-2 md:px-4 py-4 md:py-6 border-sunbiotan-400/45 ${STAT_BORDERS[i]}`}
               >
-                <div className="font-display text-2xl md:text-3xl font-light text-sunbiotan-200 mb-0.5 tracking-wide">
-                  {stat.value}
+                <div className="font-display text-[1.35rem] md:text-[1.7rem] leading-tight font-normal text-sunbiotan-300 mb-1">
+                  {t(`${key}Value`)}
                 </div>
-                <div className="text-[9px] tracking-[0.22em] uppercase text-sunbiotan-200/60 font-light">
-                  {stat.label}
+                <div className="text-[11px] md:text-xs leading-snug tracking-[0.14em] uppercase font-medium text-sunbiotan-100/90">
+                  {t(`${key}Label`)}
                 </div>
               </div>
             ))}
@@ -153,7 +159,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-7 left-1/2 -translate-x-1/2 text-sunbiotan-300/35 hover:text-sunbiotan-300/65 transition-colors duration-300 cursor-pointer"
+        className="hidden md:block absolute bottom-5 left-1/2 -translate-x-1/2 text-sunbiotan-300/60 hover:text-sunbiotan-200 transition-colors duration-300 cursor-pointer"
         aria-label={t('scroll')}
       >
         <m.div animate={{ y: [0, 7, 0] }} transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}>

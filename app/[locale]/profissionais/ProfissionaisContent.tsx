@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { m } from 'framer-motion';
 import { Link } from '@/i18n/navigation';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import {
   ArrowRight,
   Users,
@@ -28,6 +28,8 @@ interface FormData {
   city: string;
   phone: string;
   email: string;
+  website_or_instagram: string;
+  activity_type: string;
   message: string;
 }
 
@@ -37,17 +39,28 @@ const emptyForm: FormData = {
   city: '',
   phone: '',
   email: '',
+  website_or_instagram: '',
+  activity_type: '',
   message: '',
 };
 
+const ACTIVITY_OPTIONS = ['salao', 'estetica', 'spa', 'clinica', 'ginasio', 'solario', 'outro'] as const;
+
 function CandidatureForm() {
   const t = useTranslations('ProfissionaisPage');
+  const locale = useLocale();
   const [form, setForm] = useState<FormData>(emptyForm);
+  const [hpUrl, setHpUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  const mountedAt = useRef(0);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  useEffect(() => {
+    mountedAt.current = Date.now();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
@@ -57,20 +70,37 @@ function CandidatureForm() {
     setLoading(true);
     setError('');
 
-    const res = await fetch('/api/candidatura', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    });
-
-    if (!res.ok) {
+    let res: Response;
+    try {
+      res = await fetch('/api/candidatura', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...form,
+          locale,
+          hp_url: hpUrl,
+          elapsed_ms: Date.now() - mountedAt.current,
+        }),
+      });
+    } catch {
       setError(t('errorSubmit'));
       setLoading(false);
       return;
     }
 
+    if (!res.ok) {
+      setError(res.status === 429 ? t('errorRateLimit') : t('errorSubmit'));
+      setLoading(false);
+      return;
+    }
+
+    const data = await res.json().catch(() => ({}));
+
     setSuccess(true);
     setLoading(false);
+
+    // Envío descartado por el anti-spam: éxito visible, sin conversión.
+    if (data?.discarded) return;
 
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'conversion', {
@@ -79,8 +109,10 @@ function CandidatureForm() {
     }
   };
 
+  // Contraste (ver reporte fase 3): borde 600 ≥ 4:1, placeholder 500 ≥ 5.8:1,
+  // foco con borde 300 + anillo para distinguirlo del reposo.
   const inputClass =
-    'w-full bg-white/[0.04] border border-sunbiotan-700/30 rounded-xl px-5 py-3.5 text-sm text-sunbiotan-100 placeholder:text-sunbiotan-500/50 focus:outline-none focus:border-sunbiotan-500/60 focus:bg-white/[0.06] transition-all duration-300';
+    'w-full bg-white/[0.04] border border-sunbiotan-600 rounded-xl px-5 py-3.5 text-sm text-sunbiotan-100 placeholder:text-sunbiotan-500 focus:outline-none focus:border-sunbiotan-300 focus:ring-1 focus:ring-sunbiotan-300/50 focus:bg-white/[0.06] transition-all duration-300';
 
   if (success) {
     return (
@@ -100,7 +132,21 @@ function CandidatureForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 relative">
+      <div aria-hidden="true" className="absolute -left-[10000px] top-auto w-px h-px overflow-hidden">
+        <label>
+          Website
+          <input
+            type="text"
+            name="hp_url"
+            tabIndex={-1}
+            autoComplete="off"
+            value={hpUrl}
+            onChange={(e) => setHpUrl(e.target.value)}
+          />
+        </label>
+      </div>
+
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <label className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/70 font-medium">
@@ -138,14 +184,50 @@ function CandidatureForm() {
         <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder={t('placeholderEmail')} className={inputClass} />
       </div>
 
-      <div className="space-y-1.5">
-        <label className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/70 font-medium">
-          {t('labelMessage')} <span className="text-sunbiotan-600">*</span>
-        </label>
-        <textarea name="message" value={form.message} onChange={handleChange} rows={4} required placeholder={t('placeholderMessage')} className={`${inputClass} resize-none`} />
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div className="space-y-1.5">
+          <label htmlFor="cand-activity" className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/70 font-medium">
+            {t('labelActivity')} <span className="text-sunbiotan-600">*</span>
+          </label>
+          <select
+            id="cand-activity"
+            name="activity_type"
+            value={form.activity_type}
+            onChange={handleChange}
+            required
+            className={`${inputClass} ${form.activity_type === '' ? 'text-sunbiotan-500' : ''} [&>option]:bg-[#1a130a] [&>option]:text-sunbiotan-100`}
+          >
+            <option value="" disabled>{t('activityPlaceholder')}</option>
+            {ACTIVITY_OPTIONS.map((value) => (
+              <option key={value} value={value}>{t(`activityOptions.${value}`)}</option>
+            ))}
+          </select>
+        </div>
+        <div className="space-y-1.5">
+          <label htmlFor="cand-website" className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/70 font-medium">
+            {t('labelWebsite')}
+          </label>
+          <input
+            id="cand-website"
+            type="text"
+            name="website_or_instagram"
+            value={form.website_or_instagram}
+            onChange={handleChange}
+            maxLength={300}
+            placeholder={t('placeholderWebsite')}
+            className={inputClass}
+          />
+        </div>
       </div>
 
-      {error && <p className="text-red-400/80 text-xs font-light">{error}</p>}
+      <div className="space-y-1.5">
+        <label className="text-[10px] tracking-[0.3em] uppercase text-sunbiotan-500/70 font-medium">
+          {t('labelMessage')} <span className="normal-case tracking-normal text-sunbiotan-500/70">{t('labelMessageOptional')}</span>
+        </label>
+        <textarea name="message" value={form.message} onChange={handleChange} rows={4} maxLength={3000} placeholder={t('placeholderMessage')} className={`${inputClass} resize-none`} />
+      </div>
+
+      {error && <p role="alert" className="text-red-400/80 text-xs font-light">{error}</p>}
 
       <button
         type="submit"
@@ -285,7 +367,7 @@ export function ProfissionaisContent() {
             <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-500/70 mb-4 font-medium">{t('benefitsEyebrow')}</p>
             <h2 className="font-display font-light text-[clamp(2rem,5vw,3.8rem)] text-sunbiotan-100 leading-tight tracking-tight">
               {t('benefitsHeadline')}{' '}
-              <em className="not-italic italic text-sunbiotan-400">{t('benefitsHeadlineItalic')}</em>
+              <em className="italic text-sunbiotan-400">{t('benefitsHeadlineItalic')}</em>
             </h2>
           </m.div>
 
@@ -323,7 +405,7 @@ export function ProfissionaisContent() {
             <p className="text-[10px] tracking-[0.45em] uppercase text-sunbiotan-500/70 mb-4 font-medium">{t('stepsEyebrow')}</p>
             <h2 className="font-display font-light text-[clamp(2rem,5vw,3.8rem)] text-sunbiotan-100 leading-tight tracking-tight">
               {t('stepsHeadline')}{' '}
-              <em className="not-italic italic text-sunbiotan-400">{t('stepsHeadlineItalic')}</em>
+              <em className="italic text-sunbiotan-400">{t('stepsHeadlineItalic')}</em>
             </h2>
           </m.div>
 
