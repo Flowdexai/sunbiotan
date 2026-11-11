@@ -95,7 +95,7 @@
   "PrivacidadePage": {
     "title": "Informativa sulla Privacy",
     "lastUpdated": "Ultimo aggiornamento: maggio 2025",
-    "intro": "Sunbiotan è impegnata nella protezione dei Suoi dati personali e della Sua privacy. Questa Informativa La informa sui dati che raccogliamo, come li trattiamo e i diritti che Le spettano, in conformità con il Regolamento Generale sulla Protezione dei Dati (GDPR — Regolamento UE 2016/679).",
+    "intro": "Sun BioTan® è impegnata nella protezione dei Suoi dati personali e della Sua privacy. Questa Informativa La informa sui dati che raccogliamo, come li trattiamo e i diritti che Le spettano, in conformità con il Regolamento Generale sulla Protezione dei Dati (GDPR — Regolamento UE 2016/679).",
     "s1Title": "1. Titolare del Trattamento",
     "s1Text": "Il titolare del trattamento dei Suoi dati personali è:",
     "s1Name": "Sunbiotan",
@@ -106,9 +106,9 @@
     "s2Item1Title": "Modulo di contatto",
     "s2Item1Text": "Nome, indirizzo e-mail, numero di telefono (facoltativo) e messaggio. Utilizzati esclusivamente per rispondere alla Sua richiesta di informazioni.",
     "s2Item2Title": "Candidatura professionale",
-    "s2Item2Text": "Nome completo, nome dello spazio, città, telefono, e-mail e messaggio facoltativo. Utilizzati per valutare la Sua candidatura come partner Sunbiotan.",
+    "s2Item2Text": "Nome completo, nome dello spazio, città, telefono, e-mail e messaggio facoltativo. Utilizzati per valutare la Sua candidatura come partner Sun BioTan®.",
     "s2Item3Title": "Geolocalizzazione (Mappa dei Centri)",
-    "s2Item3Text": "La nostra Mappa dei Centri può richiedere l'accesso alla Sua posizione geografica per mostrare i centri Sunbiotan più vicini. Questa informazione viene elaborata esclusivamente nel Suo browser e NON viene trasmessa, memorizzata o condivisa con i nostri server. Il permesso viene concesso o negato tramite il browser e può essere revocato in qualsiasi momento nelle impostazioni del dispositivo.",
+    "s2Item3Text": "La nostra Mappa dei Centri può richiedere l'accesso alla Sua posizione geografica per mostrare i centri Sun BioTan® più vicini. Questa informazione viene elaborata esclusivamente nel Suo browser e NON viene trasmessa, memorizzata o condivisa con i nostri server. Il permesso viene concesso o negato tramite il browser e può essere revocato in qualsiasi momento nelle impostazioni del dispositivo.",
     "s2Item4Title": "Cookie",
     "s2Item4Text": "Consulti la nostra",
     "s2Item4Link": "Politica sui Cookie",
@@ -147,7 +147,7 @@
     "eyebrow": "Dal 2015 · Fabbricato in Portogallo",
     "headline1": "Abbronzatura Naturale",
     "headline2": "Senza Raggi UV",
-    "subtitle": "Da oltre dieci anni, Sun BioTan si prende cura della pelle con un trattamento professionale che dona un'abbronzatura radiosa, uniforme e duratura, senza esposizione ai raggi UV.",
+    "subtitle": "Da oltre dieci anni, Sun BioTan® si prende cura della pelle con un trattamento professionale che dona un'abbronzatura radiosa, uniforme e duratura, senza esposizione ai raggi UV.",
     "stat1Value": "Dal 2015",
     "stat1Label": "Oltre dieci anni di esperienza",
     "stat2Value": "Fabbricato in Portogallo",
@@ -205,7 +205,7 @@
       "02": { "title": "Idratazione Profonda", "description": "Aiuta a mantenere la pelle idratata, morbida e confortevole, con una sensazione setosa e duratura." },
       "03": { "title": "Pelle Più Uniforme", "description": "Aiuta a offrire un aspetto più omogeneo ed equilibrato, valorizzando visivamente il tono della pelle." },
       "04": { "title": "Luminosità Naturale", "description": "Aiuta a valorizzare la luminosità naturale della pelle, offrendo un bagliore sano ed elegante." },
-      "05": { "title": "Risultati Visibili", "description": "Abbronzatura visibile fin dalle prime applicazioni, con effetto immediato ed evoluzione progressiva del colore della pelle." },
+      "05": { "title": "Risultati Visibili", "description": "Abbronzatura visibile fin dalla prima applicazione, con effetto immediato ed evoluzione progressiva del colore della pelle." },
       "06": { "title": "Ingredienti di Origine Naturale", "description": "Formula sviluppata con ingredienti di origine naturale associati all'abbronzatura della pelle." },
       "07": { "title": "Applicazione Rapida", "description": "Sistema professionale di applicazione rapida, pratica e adattabile a diversi tipi di spazio." },
       "08": { "title": "Adatto a Diversi Tipi di Pelle", "description": "Sviluppato per diversi toni e tipi di pelle, incluse le pelli più delicate o sensibilizzate." }
@@ -219,20 +219,20 @@
       "01": { "title": "Effetto Flash Immediato", "description": "Abbronzatura dorata visibile subito dopo l'applicazione, con un risultato fresco e luminoso." },
       "02": { "title": "Evoluzione Naturale", "description": "L'abbronzatura si sviluppa progressivamente nel corso delle ore, diventando più intensa." },
       "03": { "title": "Risultato Ideale", "description": "Il giorno seguente, il colore raggiunge il suo punto perfetto: naturale, uniforme e radioso." },
-      "04": { "title": "Da 7 a 9 Giorni", "description": "L'abbronzatura si mantiene per 7-9 giorni, in base al tipo di pelle e alle cure successive." }
+      "04": { "title": "Da 7 a 9 Giorni", "description": "L'abbronzatura si mantiene per 7–9 giorni, in base al tipo di pelle e alle cure successive." }
     }
   },
   "VideoSection": {
     "eyebrow": "L'Arte dell'Applicazione",
     "headline": "Applicazione",
     "headlineItalic": "Professionale",
-    "clickHint": "Clicchi per attivare il suono"
+    "clickHint": "Clicca per attivare il suono"
   },
   "MapPreview": {
     "eyebrow": "Dove Farlo?",
-    "headline": "Trovi il Suo",
+    "headline": "Trova il tuo",
     "headlineItalic": "Centro",
-    "subtitle": "Disponibile esclusivamente nei Centri Autorizzati Sunbiotan.",
+    "subtitle": "Disponibile esclusivamente nei Centri Autorizzati Sun BioTan®.",
     "mapAlt": "Mappa dei centri Sunbiotan",
     "viewInteractiveMap": "Vedi mappa interattiva",
     "findCenter": "Trova un Centro"
@@ -250,9 +250,9 @@
   },
   "Contact": {
     "eyebrow": "Contatto",
-    "headline": "Ci",
-    "headlineItalic": "contatti",
-    "subtitle": "Ha domande, suggerimenti o desidera semplicemente saperne di più su Sunbiotan? Siamo qui per aiutarLa.",
+    "headline": "",
+    "headlineItalic": "Contattaci",
+    "subtitle": "Hai domande, suggerimenti o desideri semplicemente saperne di più su Sun BioTan®? Siamo qui per aiutarti.",
     "labelName": "Nome *",
     "placeholderName": "Il Suo nome",
     "labelEmail": "Email *",
@@ -283,12 +283,12 @@
     "loadingMap": "Caricamento mappa...",
     "loadingCenters": "Caricamento centri...",
     "eyebrow": "Dove farlo?",
-    "headline": "Trovi il Suo",
+    "headline": "Trova il tuo",
     "headlineItalic": "Centro",
     "subtitle": "Disponibile esclusivamente nei saloni di bellezza autorizzati."
   },
   "Sidebar": {
-    "heading": "Trovi il Suo",
+    "heading": "Trova il tuo",
     "headingItalic": "Centro",
     "searchPlaceholder": "Cerca città...",
     "useLocation": "Usa la mia posizione",
@@ -313,7 +313,7 @@
     "eyebrow": "Area Professionale",
     "headline1": "Elevi il Suo",
     "headline2": "spazio",
-    "subtitle": "Offra ai Suoi clienti l'abbronzatura più naturale del mercato. Si unisca alla rete di centri certificati Sunbiotan.",
+    "subtitle": "Offra ai Suoi clienti l'abbronzatura più naturale del mercato. Si unisca alla rete di centri certificati Sun BioTan®.",
     "cta1": "Voglio diventare partner",
     "cta2": "Sono già partner → Login",
     "stat2Value": "48h",
@@ -324,15 +324,15 @@
     "benefitsHeadline": "Perché scegliere",
     "benefitsHeadlineItalic": "Sunbiotan",
     "benefit1Title": "Formazione Certificata",
-    "benefit1Desc": "Formazione completa e continua dal team Sunbiotan. I Suoi collaboratori saranno pronti a offrire risultati di eccellenza.",
+    "benefit1Desc": "Formazione completa e continua dal team Sun BioTan®. I Suoi collaboratori saranno pronti a offrire risultati di eccellenza.",
     "benefit2Title": "Crescita del Business",
     "benefit2Desc": "Aggiunga un servizio premium di alto valore al Suo menù. L'abbronzatura naturale SUN distingue il Suo spazio nel mercato.",
     "benefit3Title": "Prodotti Esclusivi",
-    "benefit3Desc": "Accesso ai prodotti professionali Sunbiotan a condizioni speciali per partner, formulati con ingredienti di origine naturale.",
+    "benefit3Desc": "Accesso ai prodotti professionali Sun BioTan® a condizioni speciali per partner, formulati con ingredienti di origine naturale.",
     "benefit4Title": "Rete di Partner",
     "benefit4Desc": "Si integri in una rete selezionata di centri. Visibilità sulla mappa e materiali marketing inclusi.",
     "benefit5Title": "Certificazione Ufficiale",
-    "benefit5Desc": "Il Suo spazio riceve il marchio \"Centro Certificato Sunbiotan\", trasmettendo fiducia e qualità ai Suoi clienti.",
+    "benefit5Desc": "Il Suo spazio riceve il marchio \"Centro Certificato Sun BioTan®\", trasmettendo fiducia e qualità ai Suoi clienti.",
     "benefit6Title": "Supporto Continuo",
     "benefit6Desc": "Supporto dedicato dal nostro team ad ogni fase. Non sarà mai solo nel processo di crescita.",
     "stepsEyebrow": "Processo",
@@ -345,7 +345,7 @@
     "step3Title": "Formazione",
     "step3Desc": "Dopo l'approvazione, pianifichiamo la formazione in presenza o online per il Suo team.",
     "step4Title": "Partner Ufficiale",
-    "step4Desc": "Riceve i prodotti, i materiali e l'accesso al portale esclusivo dei partner Sunbiotan.",
+    "step4Desc": "Riceve i prodotti, i materiali e l'accesso al portale esclusivo dei partner Sun BioTan®.",
     "formEyebrow": "Candidatura",
     "formHeadline": "Inizi oggi",
     "formSubtitle": "Compili il modulo e La contatteremo entro 48 ore. Senza impegno.",
@@ -392,7 +392,7 @@
     "login": "Accedi",
     "logging": "Accesso in corso...",
     "errorInvalid": "Email o password non corretti.",
-    "errorNotApproved": "Il tuo account non è ancora attivo. Attendi di essere contattato dal team Sun BioTan.",
+    "errorNotApproved": "Il tuo account non è ancora attivo. Attendi di essere contattato dal team Sun BioTan®.",
     "errorGeneral": "Si è verificato un errore. Riprovi.",
     "notPartner": "Non è ancora partner?",
     "learnMore": "Scopra di più",
@@ -629,14 +629,14 @@
     "catalogProducts": "Catalogo Prodotti",
     "catalogProductsSub": "Visualizza tutti i prodotti disponibili",
     "newOrder": "Nuovo Ordine",
-    "newOrderSub": "Richiedi prodotti Sunbiotan",
+    "newOrderSub": "Richiedi prodotti Sun BioTan®",
     "history": "Storico",
     "historySub": "{count} ordini effettuati",
     "support": "Supporto",
-    "supportDesc": "Per qualsiasi domanda o assistenza, contatti il team Sunbiotan direttamente via email o telefono. Siamo qui per aiutarLa.",
+    "supportDesc": "Per qualsiasi domanda o assistenza, contatti il team Sun BioTan® direttamente via email o telefono. Siamo qui per aiutarLa.",
     "systemEyebrow": "Sistema Professionale",
     "systemTitle": "Presentazione del sistema",
-    "systemText": "Consulta la presentazione del sistema professionale Sun BioTan.",
+    "systemText": "Consulta la presentazione del sistema professionale Sun BioTan®.",
     "systemButton": "Apri la presentazione"
   },
   "PortalEncomendas": {
@@ -676,7 +676,7 @@
   },
   "PortalRecursos": {
     "title": "Risorse",
-    "subtitle": "Materiali esclusivi per i partner Sunbiotan",
+    "subtitle": "Materiali esclusivi per i partner Sun BioTan®",
     "catFormacao": "Formazione",
     "catFormacaoDesc": "Video e materiali di formazione professionale",
     "catMarketing": "Marketing",
@@ -799,5 +799,8 @@
       "shipped": "Spedito",
       "delivered": "Consegnato"
     }
+  },
+  "ImageUpload": {
+    "errorType": "Sono consentite solo immagini JPG, PNG o WebP."
   }
 }

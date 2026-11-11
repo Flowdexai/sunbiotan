@@ -105,7 +105,8 @@ export function Contact() {
             <div className="h-px w-8 bg-sunbiotan-400/50" />
           </div>
           <h2 className="font-display font-light text-6xl text-sunbiotan-900 leading-[1.05] tracking-tight">
-            {t('headline')}{' '}
+            {/* Sin espacio tras un guion final ("Contactez-" + "nous" → "Contactez-nous"). */}
+            {t('headline')}{t('headline').endsWith('-') ? '' : ' '}
             <em className="italic text-sunbiotan-600">{t('headlineItalic')}</em>
           </h2>
           <p className="mt-4 text-sunbiotan-800 font-light text-base max-w-lg mx-auto leading-relaxed">

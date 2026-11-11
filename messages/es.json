@@ -96,7 +96,7 @@
   "PrivacidadePage": {
     "title": "Política de Privacidad",
     "lastUpdated": "Última actualización: mayo de 2025",
-    "intro": "Sunbiotan está comprometida con la protección de sus datos personales y su privacidad. Esta Política le informa sobre los datos que recopilamos, cómo los tratamos y los derechos que le asisten, de conformidad con el Reglamento General de Protección de Datos (RGPD — Reglamento UE 2016/679).",
+    "intro": "Sun BioTan® está comprometida con la protección de sus datos personales y su privacidad. Esta Política le informa sobre los datos que recopilamos, cómo los tratamos y los derechos que le asisten, de conformidad con el Reglamento General de Protección de Datos (RGPD — Reglamento UE 2016/679).",
     "s1Title": "1. Responsable del Tratamiento",
     "s1Text": "El responsable del tratamiento de sus datos personales es:",
     "s1Name": "Sunbiotan",
@@ -107,9 +107,9 @@
     "s2Item1Title": "Formulario de contacto",
     "s2Item1Text": "Nombre, dirección de correo electrónico, número de teléfono (opcional) y mensaje. Utilizados exclusivamente para responder a su solicitud de información.",
     "s2Item2Title": "Candidatura profesional",
-    "s2Item2Text": "Nombre completo, nombre del espacio, ciudad, teléfono, correo electrónico y mensaje opcional. Utilizados para analizar su candidatura como socio Sunbiotan.",
+    "s2Item2Text": "Nombre completo, nombre del espacio, ciudad, teléfono, correo electrónico y mensaje opcional. Utilizados para analizar su candidatura como socio Sun BioTan®.",
     "s2Item3Title": "Geolocalización (Mapa de Centros)",
-    "s2Item3Text": "Nuestro Mapa de Centros puede solicitar acceso a su ubicación geográfica para mostrar los centros Sunbiotan más cercanos. Esta información se procesa exclusivamente en su navegador y NO se transmite, almacena ni comparte con nuestros servidores. El permiso se otorga o deniega a través del propio navegador y puede revocarse en cualquier momento en la configuración del dispositivo.",
+    "s2Item3Text": "Nuestro Mapa de Centros puede solicitar acceso a su ubicación geográfica para mostrar los centros Sun BioTan® más cercanos. Esta información se procesa exclusivamente en su navegador y NO se transmite, almacena ni comparte con nuestros servidores. El permiso se otorga o deniega a través del propio navegador y puede revocarse en cualquier momento en la configuración del dispositivo.",
     "s2Item4Title": "Cookies",
     "s2Item4Text": "Consulte nuestra",
     "s2Item4Link": "Política de Cookies",
@@ -148,7 +148,7 @@
     "eyebrow": "Desde 2015 · Fabricado en Portugal",
     "headline1": "Bronceado Natural",
     "headline2": "Sin Rayos UV",
-    "subtitle": "Desde hace más de una década, Sun BioTan cuida tu piel con un tratamiento profesional que proporciona un bronceado radiante, uniforme y duradero, sin exposición a los rayos UV.",
+    "subtitle": "Desde hace más de una década, Sun BioTan® cuida tu piel con un tratamiento profesional que proporciona un bronceado radiante, uniforme y duradero, sin exposición a los rayos UV.",
     "stat1Value": "Desde 2015",
     "stat1Label": "Más de una década de experiencia",
     "stat2Value": "Fabricado en Portugal",
@@ -187,7 +187,7 @@
     "naturalIngredients": "Ingredientes de origen natural"
   },
   "Occasions": {
-    "title": "Hay momentos especiales. Y están todos los demás días en que simplemente queremos sentirnos mejor.",
+    "title": "Hay momentos especiales. Y todos los demás días en los que simplemente queremos sentirnos mejor.",
     "items": [
       "Bodas y ceremonias",
       "Fiestas y eventos especiales",
@@ -204,9 +204,9 @@
     "items": {
       "01": { "title": "Bronceado Natural", "description": "Resultado progresivo, uniforme y de apariencia natural, adaptado al tono de piel de cada persona." },
       "02": { "title": "Hidratación Profunda", "description": "Ayuda a mantener la piel hidratada, suave y confortable, con sensación sedosa y duradera." },
-      "03": { "title": "Piel Más Uniforme", "description": "Ayuda a proporcionar una apariencia más homogénea y equilibrada, valorizando visualmente el tono de la piel." },
+      "03": { "title": "Piel Más Uniforme", "description": "Ayuda a proporcionar una apariencia más homogénea y equilibrada, realzando visualmente el tono de la piel." },
       "04": { "title": "Luminosidad Natural", "description": "Ayuda a realzar la luminosidad natural de la piel, proporcionando un brillo saludable y elegante." },
-      "05": { "title": "Resultados Visibles", "description": "Bronceado visible desde las primeras aplicaciones, con efecto inmediato y evolución progresiva del color de la piel." },
+      "05": { "title": "Resultados Visibles", "description": "Bronceado visible desde la primera aplicación, con efecto inmediato y evolución progresiva del color de la piel." },
       "06": { "title": "Ingredientes de Origen Natural", "description": "Fórmula desarrollada con ingredientes de origen natural asociados al bronceado de la piel." },
       "07": { "title": "Aplicación Rápida", "description": "Sistema profesional de aplicación rápida, práctica y adaptable a diferentes tipos de espacio." },
       "08": { "title": "Adecuado para Diferentes Tipos de Piel", "description": "Desarrollado para diferentes tonos y tipos de piel, incluyendo pieles más delicadas o sensibilizadas." }
@@ -233,7 +233,7 @@
     "eyebrow": "¿Dónde Hacerlo?",
     "headline": "Encuentra tu",
     "headlineItalic": "Centro",
-    "subtitle": "Disponible exclusivamente en Centros Autorizados Sunbiotan.",
+    "subtitle": "Disponible exclusivamente en Centros Autorizados Sun BioTan®.",
     "mapAlt": "Mapa de centros Sunbiotan",
     "viewInteractiveMap": "Ver mapa interactivo",
     "findCenter": "Encontrar un Centro"
@@ -253,7 +253,7 @@
     "eyebrow": "Contacto",
     "headline": "Habla",
     "headlineItalic": "con nosotros",
-    "subtitle": "¿Tienes alguna pregunta o sugerencia, o simplemente quieres saber más sobre Sunbiotan? Estamos aquí para ayudarte.",
+    "subtitle": "¿Tienes alguna pregunta o sugerencia, o simplemente quieres saber más sobre Sun BioTan®? Estamos aquí para ayudarte.",
     "labelName": "Nombre *",
     "placeholderName": "Tu nombre",
     "labelEmail": "Email *",
@@ -314,7 +314,7 @@
     "eyebrow": "Área Profesional",
     "headline1": "Eleva tu",
     "headline2": "espacio",
-    "subtitle": "Ofrece a tus clientes el bronceado más natural del mercado. Únete a la red de centros certificados Sunbiotan.",
+    "subtitle": "Ofrece a tus clientes el bronceado más natural del mercado. Únete a la red de centros certificados Sun BioTan®.",
     "cta1": "Quiero ser socio",
     "cta2": "Ya soy socio → Login",
     "stat2Value": "48h",
@@ -325,15 +325,15 @@
     "benefitsHeadline": "Por qué elegir",
     "benefitsHeadlineItalic": "Sunbiotan",
     "benefit1Title": "Formación Certificada",
-    "benefit1Desc": "Formación completa y continua a cargo del equipo Sunbiotan. Tus colaboradores estarán listos para ofrecer resultados de excelencia.",
+    "benefit1Desc": "Formación completa y continua a cargo del equipo Sun BioTan®. Tus colaboradores estarán listos para ofrecer resultados de excelencia.",
     "benefit2Title": "Crecimiento del Negocio",
     "benefit2Desc": "Añade un servicio premium de alto valor a tu oferta. El bronceado natural SUN diferencia tu espacio en el mercado.",
     "benefit3Title": "Productos Exclusivos",
-    "benefit3Desc": "Acceso a los productos profesionales Sunbiotan en condiciones especiales para socios, formulados con ingredientes de origen natural.",
+    "benefit3Desc": "Acceso a los productos profesionales Sun BioTan® en condiciones especiales para socios, formulados con ingredientes de origen natural.",
     "benefit4Title": "Red de Socios",
     "benefit4Desc": "Únete a una red seleccionada de centros. Visibilidad en nuestro mapa y materiales de marketing incluidos.",
     "benefit5Title": "Certificación Oficial",
-    "benefit5Desc": "Tu espacio recibe el sello \"Centro Certificado Sunbiotan\", transmitiendo confianza y calidad a tus clientes.",
+    "benefit5Desc": "Tu espacio recibe el sello \"Centro Certificado Sun BioTan®\", transmitiendo confianza y calidad a tus clientes.",
     "benefit6Title": "Apoyo Continuo",
     "benefit6Desc": "Soporte dedicado de nuestro equipo en cada etapa. Nunca estás solo en el proceso de crecimiento.",
     "stepsEyebrow": "Proceso",
@@ -346,7 +346,7 @@
     "step3Title": "Formación",
     "step3Desc": "Tras la aprobación, programamos la formación presencial u online para tu equipo.",
     "step4Title": "Socio Oficial",
-    "step4Desc": "Recibes los productos, los materiales y el acceso al portal exclusivo de socios Sunbiotan.",
+    "step4Desc": "Recibes los productos, los materiales y el acceso al portal exclusivo de socios Sun BioTan®.",
     "formEyebrow": "Candidatura",
     "formHeadline": "Empieza hoy",
     "formSubtitle": "Completa el formulario y nos pondremos en contacto contigo en un plazo máximo de 48 horas. Sin compromiso.",
@@ -393,7 +393,7 @@
     "login": "Acceder",
     "logging": "Accediendo...",
     "errorInvalid": "Email o contraseña incorrectos.",
-    "errorNotApproved": "Tu cuenta todavía no está activa. Espera el contacto del equipo Sun BioTan.",
+    "errorNotApproved": "Tu cuenta todavía no está activa. Espera el contacto del equipo Sun BioTan®.",
     "errorGeneral": "Se ha producido un error. Inténtalo de nuevo.",
     "notPartner": "¿Todavía no eres socio?",
     "learnMore": "Más información",
@@ -630,14 +630,14 @@
     "catalogProducts": "Catálogo de Productos",
     "catalogProductsSub": "Ver todos los productos disponibles",
     "newOrder": "Nuevo Pedido",
-    "newOrderSub": "Solicitar productos Sunbiotan",
+    "newOrderSub": "Solicitar productos Sun BioTan®",
     "history": "Historial",
     "historySub": "{count} pedidos realizados",
     "support": "Soporte",
-    "supportDesc": "Para cualquier consulta o asistencia, contacta con el equipo Sunbiotan directamente por email o teléfono. Estamos aquí para ayudarte.",
+    "supportDesc": "Para cualquier consulta o asistencia, contacta con el equipo Sun BioTan® directamente por email o teléfono. Estamos aquí para ayudarte.",
     "systemEyebrow": "Sistema Profesional",
     "systemTitle": "Presentación del sistema",
-    "systemText": "Consulta la presentación del sistema profesional Sun BioTan.",
+    "systemText": "Consulta la presentación del sistema profesional Sun BioTan®.",
     "systemButton": "Abrir presentación"
   },
   "PortalEncomendas": {
@@ -677,7 +677,7 @@
   },
   "PortalRecursos": {
     "title": "Recursos",
-    "subtitle": "Materiales exclusivos para socios Sunbiotan",
+    "subtitle": "Materiales exclusivos para socios Sun BioTan®",
     "catFormacao": "Formación",
     "catFormacaoDesc": "Vídeos y materiales de formación profesional",
     "catMarketing": "Marketing",
@@ -800,5 +800,8 @@
       "shipped": "Enviado",
       "delivered": "Entregado"
     }
+  },
+  "ImageUpload": {
+    "errorType": "Solo se permiten imágenes JPG, PNG o WebP."
   }
 }
