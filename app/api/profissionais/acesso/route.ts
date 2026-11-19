@@ -1,6 +1,7 @@
 // POST /api/profissionais/acesso
 // Formulario profesional: guarda/actualiza el lead, avisa internamente y abre
-// la presentación con la cookie firmada `pro_access` (30 min, sin renovación).
+// la presentación con la cookie firmada `pro_access` (sin renovación; duración según el flow: live 30 min, test 30 días
+// temporal — ver proSessionMinutes en lib/pro/config.ts).
 import { NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { getClientIp, hashIp } from '@/lib/http/request';

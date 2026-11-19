@@ -16,7 +16,7 @@ import { AutoplayVideo } from '@/components/ui/autoplay-video';
 import { SectionEyebrow } from '@/components/ui/section-eyebrow';
 import { SHORT_VIDEO_SRC } from '@/components/sections/scroll-video';
 import { CONTACT_PHONE } from '@/lib/contact';
-import { PRO_SESSION_MINUTES } from '@/lib/pro/config';
+import { PRO_SESSION_MINUTES, type ProFlow } from '@/lib/pro/config';
 import { ProNavbar } from './pro-navbar';
 import { PRO_VISIT_URL, trackWhatsappInterest } from './track';
 import { BG, CARD_HOVER, EASE, PRIMARY_BUTTON, PhoneLink, Reveal, SectionHeader } from './ui';
@@ -31,6 +31,8 @@ export interface ProPresentationProps {
   firstName: string;
   /** wa.me con el mensaje prearmado en el idioma del lead. */
   whatsappUrl: string;
+  /** En 'test' el hero no menciona la duración del acceso (temporal: 30 días en prueba). */
+  flow: ProFlow;
 }
 
 const SYSTEM_BAR_ICONS = [Truck, ShieldCheck, GraduationCap] as const;
@@ -267,7 +269,7 @@ function FaqItem({ item }: { item: Faq }) {
   );
 }
 
-export function ProPresentation({ firstName, whatsappUrl }: ProPresentationProps) {
+export function ProPresentation({ firstName, whatsappUrl, flow }: ProPresentationProps) {
   const t = useTranslations('ProPresentation');
   const heroKeys = t.raw('heroKeys') as string[];
   const benefits = t.raw('claims.benefits') as Item[];
@@ -316,7 +318,7 @@ export function ProPresentation({ firstName, whatsappUrl }: ProPresentationProps
                 {t('heroLead')} <em className="italic text-sunbiotan-300">{t('heroAccent')}</em>
               </h1>
               <p className="text-base md:text-lg font-medium leading-relaxed text-sunbiotan-50 max-w-2xl mb-10 md:mb-12">
-                {t('heroText', { minutes: PRO_SESSION_MINUTES })}
+                {flow === 'test' ? t('heroTextTest') : t('heroText', { minutes: PRO_SESSION_MINUTES })}
               </p>
               <ul className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-x-8 gap-y-3 max-w-full">
                 {heroKeys.map((k) => (

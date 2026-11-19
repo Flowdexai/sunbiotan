@@ -52,5 +52,5 @@ export async function ProPresentationRoute({ flow, locale }: { flow: ProFlow; lo
   const message = tLead('whatsappMessage', { name: lead.name, business: lead.business_name });
   const firstName = lead.name.trim().split(/\s+/)[0] || lead.name;
 
-  return <ProPresentation firstName={firstName} whatsappUrl={whatsappHref(message)} />;
+  return <ProPresentation firstName={firstName} whatsappUrl={whatsappHref(message)} flow={flow} />;
 }

@@ -10,7 +10,7 @@
 import 'server-only';
 import { createHmac, timingSafeEqual } from 'crypto';
 import { normalizeLocale, type AppLocale } from '@/lib/auth/links';
-import { PRO_SESSION_MINUTES, type ProFlow } from './config';
+import { proSessionMinutes, type ProFlow } from './config';
 
 export const PRO_COOKIE = 'pro_access';
 export const PRO_SECRET_MIN_LENGTH = 32;
@@ -91,13 +91,16 @@ export function decodeProSession(token: string | null | undefined, secret: strin
   return { leadId: w.l, locale: normalizeLocale(w.c), isTest: w.t === 1, exp: w.e };
 }
 
-/** Nueva sesión: expira PRO_SESSION_MINUTES después de `nowMs`. */
+/**
+ * Nueva sesión: expira proSessionMinutes(flow) después de `nowMs` (live 30 min;
+ * test 30 días, temporal). El Max-Age de la cookie sale de este exp (proCookieOptions).
+ */
 export function newProSession(leadId: string, locale: AppLocale, flow: ProFlow, nowMs = Date.now()): ProSession {
   return {
     leadId,
     locale,
     isTest: flow === 'test',
-    exp: Math.floor(nowMs / 1000) + PRO_SESSION_MINUTES * 60,
+    exp: Math.floor(nowMs / 1000) + proSessionMinutes(flow) * 60,
   };
 }
 

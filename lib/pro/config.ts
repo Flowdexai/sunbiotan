@@ -2,8 +2,20 @@
 // Configuración del flujo profesional (formulario → presentación reservada).
 // Sin 'server-only': lo usan también los componentes de cliente.
 
-/** Minutos que dura el acceso a la presentación desde el envío (sin renovación). */
+/** Minutos que dura el acceso a la presentación desde el envío (sin renovación), flow live. */
 export const PRO_SESSION_MINUTES = 30;
+
+/**
+ * TEMPORAL, solo para la fase de prueba: en el flow 'test' el acceso dura 30 días,
+ * así se puede revisar la presentación sin volver a llenar el formulario.
+ * El flow live NO cambia: sigue en PRO_SESSION_MINUTES (30 min).
+ */
+export const PRO_SESSION_MINUTES_TEST = 60 * 24 * 30;
+
+/** Duración del acceso según el flow (fuente única para el exp de la cookie). */
+export function proSessionMinutes(flow: ProFlow): number {
+  return flow === 'test' ? PRO_SESSION_MINUTES_TEST : PRO_SESSION_MINUTES;
+}
 
 /** Versión de los textos de consentimiento que se guarda con cada lead. Cambiarla al editar los textos. */
 export const PRO_CONSENT_VERSION = '2026-11-18';

@@ -149,7 +149,8 @@ export function ProLanding({ flow }: { flow: ProFlow }) {
             eyebrow={t('formEyebrow')}
             lead={t('formLead')}
             accent={t('formAccent')}
-            intro={t('formSubtitle', { minutes: PRO_SESSION_MINUTES })}
+            // En test no se menciona la duración del acceso (temporal: 30 días en prueba).
+            intro={flow === 'test' ? t('formSubtitleTest') : t('formSubtitle', { minutes: PRO_SESSION_MINUTES })}
           />
           <Reveal className="max-w-xl mx-auto">
             <div className="relative bg-white border border-sunbiotan-200 rounded-2xl p-5 sm:p-8 shadow-sm">

@@ -898,6 +898,7 @@
     "formLead": "Aceda à",
     "formAccent": "apresentação",
     "formSubtitle": "Preencha os dados do seu centro. A apresentação abre de imediato e fica disponível durante {minutes} minutos.",
+    "formSubtitleTest": "Preencha os dados do seu centro. A apresentação abre de imediato.",
     "accessHint": "Preencha o formulário para aceder à apresentação.",
     "requiredNote": "* Obrigatório",
     "labelName": "Nome",
@@ -957,6 +958,7 @@
     "heroLead": "Bronzeado natural sem raios UV,",
     "heroAccent": "pronto para o seu centro",
     "heroText": "Preparámos esta apresentação para conhecer o tratamento, o sistema completo e a rentabilidade. Fica disponível durante {minutes} minutos.",
+    "heroTextTest": "Preparámos esta apresentação para conhecer o tratamento, o sistema completo e a rentabilidade.",
     "heroKeys": [
       "Sem raios UV",
       "Sistema completo pronto a usar",
