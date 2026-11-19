@@ -896,7 +896,6 @@
     "formLead": "Accédez à la",
     "formAccent": "présentation",
     "formSubtitle": "Renseignez les informations de votre institut. La présentation s’ouvre immédiatement et reste disponible pendant {minutes} minutes.",
-    "formSubtitleTest": "Renseignez les informations de votre institut. La présentation s’ouvre immédiatement.",
     "accessHint": "Remplissez le formulaire pour accéder à la présentation.",
     "requiredNote": "* Obligatoire",
     "labelName": "Nom",
@@ -956,7 +955,6 @@
     "heroLead": "Le bronzage naturel sans UV,",
     "heroAccent": "prêt pour votre institut",
     "heroText": "Nous avons préparé cette présentation pour vous faire découvrir le soin, le système complet et sa rentabilité. Elle reste disponible pendant {minutes} minutes.",
-    "heroTextTest": "Nous avons préparé cette présentation pour vous faire découvrir le soin, le système complet et sa rentabilité.",
     "heroKeys": [
       "Sans UV",
       "Système complet prêt à l’emploi",

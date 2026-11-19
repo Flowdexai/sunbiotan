@@ -896,7 +896,6 @@
     "formLead": "Acceda alla",
     "formAccent": "presentazione",
     "formSubtitle": "Compili i dati del Suo centro. La presentazione si apre subito e resta disponibile per {minutes} minuti.",
-    "formSubtitleTest": "Compili i dati del Suo centro. La presentazione si apre subito.",
     "accessHint": "Compili il modulo per accedere alla presentazione.",
     "requiredNote": "* Obbligatorio",
     "labelName": "Nome",
@@ -956,7 +955,6 @@
     "heroLead": "Abbronzatura naturale senza raggi UV,",
     "heroAccent": "pronta per il Suo centro",
     "heroText": "Abbiamo preparato questa presentazione per farLe conoscere il trattamento, il sistema completo e la redditività. Resta disponibile per {minutes} minuti.",
-    "heroTextTest": "Abbiamo preparato questa presentazione per farLe conoscere il trattamento, il sistema completo e la redditività.",
     "heroKeys": [
       "Senza raggi UV",
       "Sistema completo pronto all’uso",

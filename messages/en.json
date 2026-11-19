@@ -896,7 +896,6 @@
     "formLead": "Access the",
     "formAccent": "presentation",
     "formSubtitle": "Enter your centre’s details. The presentation opens straight away and stays available for {minutes} minutes.",
-    "formSubtitleTest": "Enter your centre’s details. The presentation opens straight away.",
     "accessHint": "Fill in the form to access the presentation.",
     "requiredNote": "* Required",
     "labelName": "Name",
@@ -956,7 +955,6 @@
     "heroLead": "UV-free natural tanning,",
     "heroAccent": "ready for your centre",
     "heroText": "We have prepared this presentation so you can explore the treatment, the complete system and its profitability. It is available for {minutes} minutes.",
-    "heroTextTest": "We have prepared this presentation so you can explore the treatment, the complete system and its profitability.",
     "heroKeys": [
       "UV-free",
       "Complete, ready-to-use system",
