@@ -6,6 +6,7 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import { CONTACT_PHONE, CONTACT_TEL_HREF } from '@/lib/contact';
 
 export function Footer() {
   const t = useTranslations('Footer');
@@ -110,7 +111,12 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span className="text-sm text-sunbiotan-300 font-light">+351 920 253 796</span>
+                <a
+                  href={CONTACT_TEL_HREF}
+                  className="text-sm text-sunbiotan-300 hover:text-sunbiotan-100 font-light transition-colors"
+                >
+                  {CONTACT_PHONE.display}
+                </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="h-3.5 w-3.5 text-sunbiotan-500 flex-shrink-0 mt-0.5" strokeWidth={1.5} />

@@ -85,6 +85,34 @@ const SECURITY_HEADERS = [
   { key: 'Content-Security-Policy-Report-Only', value: CSP },
 ];
 
+/*
+ * Flujo profesional (formulario → presentación reservada). Mismas bases que
+ * PRO_BASES en lib/pro/config.ts: si cambian en el swap, cambiar las dos.
+ *   · test: todo el subárbol noindex/nofollow (la ruta no se publica en ningún lado).
+ *   · presentación (test y live): sin caché compartida y noindex.
+ * No se agrega Disallow en robots.txt a propósito: publicaría las rutas.
+ */
+const PRO_BASES = { test: '/profissionais-test', live: '/profissionais' };
+const PRO_PRESENTATION = '/apresentacao';
+// Prefijos de idioma explícitos (pt va sin prefijo: localePrefix 'as-needed').
+const LOCALE_PREFIX = '/:locale(es|en|it|fr)';
+
+const NOINDEX = { key: 'X-Robots-Tag', value: 'noindex, nofollow' };
+
+function proHeaders() {
+  const testTree = [`${PRO_BASES.test}/:path*`, `${LOCALE_PREFIX}${PRO_BASES.test}/:path*`].map((source) => ({
+    source,
+    headers: [NOINDEX],
+  }));
+  const presentation = Object.values(PRO_BASES).flatMap((base) =>
+    [`${base}${PRO_PRESENTATION}`, `${LOCALE_PREFIX}${base}${PRO_PRESENTATION}`].map((source) => ({
+      source,
+      headers: [{ key: 'Cache-Control', value: 'private, no-store' }, NOINDEX],
+    }))
+  );
+  return [...testTree, ...presentation];
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
@@ -103,6 +131,7 @@ const nextConfig = {
         source: '/:path*',
         headers: SECURITY_HEADERS,
       },
+      ...proHeaders(),
     ];
   },
 };

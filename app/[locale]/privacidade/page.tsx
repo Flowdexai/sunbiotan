@@ -3,6 +3,7 @@ import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { Link } from '@/i18n/navigation';
 import { MapPin } from 'lucide-react';
+import { CONTACT_PHONE, CONTACT_TEL_HREF } from '@/lib/contact';
 
 export async function generateMetadata({
   params,
@@ -66,7 +67,9 @@ export default async function PrivacidadePage() {
                 <a href={`mailto:${t('s1Email')}`} className="block text-sm text-sunbiotan-500 hover:text-sunbiotan-400 font-light transition-colors underline underline-offset-2">
                   {t('s1Email')}
                 </a>
-                <p className="text-sm text-sunbiotan-500/60 font-light">{t('s1Phone')}</p>
+                <a href={CONTACT_TEL_HREF} className="block text-sm text-sunbiotan-500/60 hover:text-sunbiotan-400 font-light transition-colors">
+                  {CONTACT_PHONE.display}
+                </a>
               </div>
             </section>
 
@@ -95,6 +98,15 @@ export default async function PrivacidadePage() {
                   </h3>
                   <p className="text-sm text-sunbiotan-500/60 font-light leading-relaxed">
                     {t('s2Item2Text')}
+                  </p>
+                </div>
+                {/* Professional contact form (presentation access) */}
+                <div className="border-l-2 border-sunbiotan-700/40 pl-5">
+                  <h3 className="text-sm font-medium text-sunbiotan-300/80 mb-1.5">
+                    {t('s2Item5Title')}
+                  </h3>
+                  <p className="text-sm text-sunbiotan-500/60 font-light leading-relaxed">
+                    {t('s2Item5Text')}
                   </p>
                 </div>
                 {/* Geolocation — highlighted */}
@@ -132,7 +144,7 @@ export default async function PrivacidadePage() {
                 {t('s3Title')}
               </h2>
               <ul className="space-y-3">
-                {[t('s3Item1'), t('s3Item2'), t('s3Item3'), t('s3Item4')].map((item, i) => (
+                {[t('s3Item1'), t('s3Item2'), t('s3Item5'), t('s3Item6'), t('s3Item3'), t('s3Item4')].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-sunbiotan-400/65 font-light leading-relaxed">
                     <span className="text-sunbiotan-600/60 flex-shrink-0 mt-0.5">—</span>
                     <span>{item}</span>
@@ -147,7 +159,7 @@ export default async function PrivacidadePage() {
                 {t('s4Title')}
               </h2>
               <ul className="space-y-3">
-                {[t('s4Item1'), t('s4Item2'), t('s4Item3')].map((item, i) => (
+                {[t('s4Item1'), t('s4Item2'), t('s4Item4'), t('s4Item3')].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-sunbiotan-400/65 font-light leading-relaxed">
                     <span className="text-sunbiotan-600/60 flex-shrink-0 mt-0.5">—</span>
                     <span>{item}</span>

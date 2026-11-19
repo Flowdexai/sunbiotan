@@ -63,7 +63,7 @@
   },
   "CookiesPage": {
     "title": "Política de Cookies",
-    "lastUpdated": "Última atualização: maio de 2025",
+    "lastUpdated": "Última atualização: novembro de 2026",
     "intro": "Este website utiliza cookies para garantir o seu correto funcionamento e proporcionar uma melhor experiência de navegação. A presente política explica o que são cookies, quais utilizamos e como pode geri-los.",
     "s1Title": "O que são cookies?",
     "s1Text": "Cookies são pequenos ficheiros de texto que são armazenados no seu dispositivo (computador, tablet ou smartphone) quando visita um website. Permitem que o site recorde as suas preferências e ações, para que não as tenha de introduzir novamente.",
@@ -79,6 +79,9 @@
     "s2Cookie3Name": "cookie-consent",
     "s2Cookie3Purpose": "Regista a sua decisão de aceitação ou rejeição de cookies.",
     "s2Cookie3Duration": "Duração: 1 ano.",
+    "s2Cookie4Name": "pro_access",
+    "s2Cookie4Purpose": "Acesso temporário à apresentação profissional, depois de enviar o formulário profissional. Cookie HttpOnly, não acessível por scripts.",
+    "s2Cookie4Duration": "Duração: 30 minutos.",
     "s2Note": "Estes cookies são necessários para o funcionamento do site e não podem ser desativados sem afetar a usabilidade. Não são utilizados para fins publicitários.",
     "s3Title": "Como gerir cookies",
     "s3Text": "Pode controlar e eliminar cookies através das definições do seu browser. A maioria dos browsers permite bloquear ou eliminar todos ou determinados cookies. Tenha em atenção que a desativação de cookies essenciais pode afetar o funcionamento do site.",
@@ -96,19 +99,20 @@
   },
   "PrivacidadePage": {
     "title": "Política de Privacidade",
-    "lastUpdated": "Última atualização: maio de 2025",
+    "lastUpdated": "Última atualização: novembro de 2026",
     "intro": "A Sun BioTan® está comprometida com a proteção dos seus dados pessoais e com a sua privacidade. A presente Política informa sobre os dados que recolhemos, a forma como os tratamos e os direitos que lhe assistem, em conformidade com o Regulamento Geral sobre a Proteção de Dados (RGPD — Regulamento UE 2016/679) e a Lei n.º 58/2019.",
     "s1Title": "1. Responsável pelo Tratamento",
     "s1Text": "O responsável pelo tratamento dos seus dados pessoais é:",
     "s1Name": "Sunbiotan",
     "s1Email": "info@sunbiotan.pt",
-    "s1Phone": "+351 920 253 796",
     "s2Title": "2. Dados Pessoais Recolhidos",
     "s2Intro": "Recolhemos dados pessoais nas seguintes situações:",
     "s2Item1Title": "Formulário de contacto",
-    "s2Item1Text": "Nome, endereço de e-mail, número de telefone (opcional) e mensagem. Utilizados exclusivamente para responder ao seu pedido de informação.",
+    "s2Item1Text": "Nome, endereço de e-mail, número de telefone e mensagem. Utilizados exclusivamente para responder ao seu pedido de informação.",
     "s2Item2Title": "Candidatura profissional",
     "s2Item2Text": "Nome completo, nome do espaço, cidade, telefone, endereço de e-mail e mensagem opcional. Utilizados para analisar a sua candidatura como parceiro Sun BioTan®.",
+    "s2Item5Title": "Formulário profissional (acesso à apresentação)",
+    "s2Item5Text": "Nome, nome do centro, localidade, telefone, endereço de e-mail, tipo de atividade, website ou Instagram do centro, idioma e o endereço IP convertido num código irreversível (hash). Utilizados para responder ao seu pedido, dar acesso temporário à apresentação profissional e notificar internamente a nossa equipa por e-mail e através de um serviço de mensagens. Se o autorizar, o e-mail é também utilizado para enviar novidades e ofertas da Sun BioTan®.",
     "s2Item3Title": "Geolocalização (Mapa de Centros)",
     "s2Item3Text": "O nosso Mapa de Centros pode solicitar acesso à sua localização geográfica para apresentar os centros Sun BioTan® mais próximos de si. Esta informação é processada exclusivamente no seu browser e NÃO é transmitida, armazenada ou partilhada com os nossos servidores. A permissão é concedida ou recusada pelo próprio browser e pode ser revogada em qualquer momento nas definições do dispositivo.",
     "s2Item4Title": "Cookies",
@@ -117,11 +121,14 @@
     "s3Title": "3. Finalidades e Base Legal",
     "s3Item1": "Resposta a pedidos de contacto: execução de diligências pré-contratuais ou interesse legítimo [art. 6.º, n.º 1, al. b) e f) do RGPD].",
     "s3Item2": "Análise de candidaturas profissionais: execução de diligências pré-contratuais [art. 6.º, n.º 1, al. b) do RGPD].",
+    "s3Item5": "Formulário profissional (resposta ao pedido, acesso à apresentação e notificação interna): execução de diligências pré-contratuais a pedido do titular [art. 6.º, n.º 1, al. b) do RGPD].",
+    "s3Item6": "Comunicações comerciais por e-mail (novidades e ofertas): consentimento, que pode retirar a qualquer momento através de info@sunbiotan.pt [art. 6.º, n.º 1, al. a) do RGPD].",
     "s3Item3": "Cookies essenciais: interesse legítimo para garantir o funcionamento técnico do site [art. 6.º, n.º 1, al. f) do RGPD].",
     "s3Item4": "Geolocalização: consentimento explícito do utilizador através do browser [art. 6.º, n.º 1, al. a) do RGPD].",
     "s4Title": "4. Prazo de Conservação",
     "s4Item1": "Dados de formulários de contacto: conservados por 12 meses.",
     "s4Item2": "Dados de candidaturas profissionais: conservados por 24 meses ou até decisão final.",
+    "s4Item4": "Dados do formulário profissional: conservados por 24 meses. O e-mail utilizado para comunicações comerciais é conservado até à retirada do consentimento.",
     "s4Item3": "Dados de acesso à área de parceiros: durante a vigência da relação contratual e por 5 anos após o seu termo.",
     "s5Title": "5. Direitos dos Titulares",
     "s5Intro": "Nos termos do RGPD, tem os seguintes direitos relativamente aos seus dados pessoais:",
@@ -411,6 +418,7 @@
     "adminArea": "Sunbiotan · Área Administrativa",
     "logout": "Sair",
     "applications": "Candidaturas",
+    "contacts": "Contactos",
     "orders": "Encomendas"
   },
   "DashboardHome": {
@@ -804,5 +812,369 @@
   },
   "ImageUpload": {
     "errorType": "Apenas imagens JPG, PNG ou WebP são permitidas."
+  },
+  "ProLanding": {
+    "metaTitle": "Sun BioTan® para centros de estética | Apresentação profissional",
+    "metaDescription": "Bronzeado natural sem raios UV para o seu centro: sistema completo, formação no centro e acompanhamento. Preencha o formulário e aceda à apresentação.",
+    "heroEyebrow": "Para centros de estética e bem-estar",
+    "heroHeadline1": "Bronzeado sem raios UV",
+    "heroHeadline2": "no seu centro",
+    "heroSubtitle": "Acrescente ao seu espaço um serviço diferenciador, com sistema completo, formação no centro e acompanhamento da nossa equipa.",
+    "heroCta": "Aceder à apresentação",
+    "stats": [
+      {
+        "value": "Desde 2015",
+        "label": "Bronzeado profissional"
+      },
+      {
+        "value": "Fabricado em Portugal",
+        "label": "Produção cosmética profissional"
+      },
+      {
+        "value": "A maior rede",
+        "label": "de Centros Autorizados"
+      },
+      {
+        "value": "Sem raios UV",
+        "label": "Bronzeado natural e progressivo"
+      }
+    ],
+    "whyEyebrow": "Vantagens",
+    "whyLead": "Porquê Sun BioTan®",
+    "whyAccent": "no seu centro",
+    "why": [
+      {
+        "title": "Formação no seu centro",
+        "text": "Formação presencial na entrega do sistema, com demonstração prática, para a sua equipa começar com confiança."
+      },
+      {
+        "title": "Um serviço que se destaca",
+        "text": "Bronzeado natural sem raios UV: um serviço rápido, valorizado pelos clientes e diferenciador no seu menu."
+      },
+      {
+        "title": "Sistema completo",
+        "text": "Equipamento, produto, protocolo e materiais de divulgação, prontos a usar desde o primeiro dia."
+      },
+      {
+        "title": "Visibilidade na rede",
+        "text": "O seu centro no mapa oficial de Centros Autorizados Sun BioTan® e nas páginas oficiais da marca."
+      },
+      {
+        "title": "Ingredientes de origem natural",
+        "text": "Fórmula com ingredientes de origem natural associados ao bronzeado da pele, para diferentes tipos de pele."
+      },
+      {
+        "title": "Acompanhamento contínuo",
+        "text": "Apoio técnico e comercial da nossa equipa antes, durante e depois do arranque."
+      }
+    ],
+    "howEyebrow": "Como funciona",
+    "howLead": "Quatro passos",
+    "howAccent": "até ao arranque",
+    "steps": [
+      {
+        "title": "Preencha o formulário",
+        "text": "Os dados do seu centro, em menos de um minuto."
+      },
+      {
+        "title": "Aceda à apresentação",
+        "text": "Abre de imediato: tratamento, sistema completo e rentabilidade."
+      },
+      {
+        "title": "Receba a proposta por WhatsApp",
+        "text": "Enviamos-lhe a proposta completa, adaptada ao seu centro."
+      },
+      {
+        "title": "Formação no seu centro",
+        "text": "Na entrega, com demonstração prática e instruções de utilização."
+      }
+    ],
+    "networkEyebrow": "Rede Sun BioTan®",
+    "networkLead": "A maior rede",
+    "networkAccent": "de Centros Autorizados",
+    "networkText": "Os clientes procuram o centro mais próximo no mapa oficial Sun BioTan®. O seu centro passa a fazer parte dessa rede.",
+    "networkCta": "Ver o mapa de centros",
+    "formEyebrow": "Apresentação reservada",
+    "formLead": "Aceda à",
+    "formAccent": "apresentação",
+    "formSubtitle": "Preencha os dados do seu centro. A apresentação abre de imediato e fica disponível durante {minutes} minutos.",
+    "accessHint": "Preencha o formulário para aceder à apresentação.",
+    "requiredNote": "* Obrigatório",
+    "labelName": "Nome",
+    "labelBusiness": "Nome do centro",
+    "labelCity": "Localidade",
+    "labelPhone": "Telefone",
+    "labelEmail": "Email",
+    "labelActivity": "Tipo de atividade",
+    "activityPlaceholder": "Selecione…",
+    "labelInstagram": "Instagram do centro",
+    "instagramHint": "Aceita @utilizador ou o link do perfil.",
+    "noInstagram": "O meu centro não tem Instagram",
+    "labelWebsite": "Website do centro",
+    "placeholderName": "O seu nome",
+    "placeholderBusiness": "Nome do seu centro",
+    "placeholderCity": "Lisboa, Porto, Braga…",
+    "placeholderPhone": "+351 900 000 000",
+    "placeholderEmail": "email@exemplo.pt",
+    "placeholderInstagram": "@oseucentro",
+    "placeholderWebsite": "https://www.oseucentro.pt",
+    "consentPrivacy": "Li e aceito a <link>Política de Privacidade</link>.",
+    "consentMarketing": "Quero receber novidades e ofertas da Sun BioTan® por email.",
+    "submit": "Ver a apresentação",
+    "sending": "A enviar…",
+    "preparing": "A preparar a apresentação…",
+    "errorRequired": "Preencha este campo.",
+    "errorEmail": "Indique um email válido.",
+    "errorPhone": "Indique um telefone válido.",
+    "errorActivity": "Selecione o tipo de atividade.",
+    "errorInstagram": "Indique o Instagram do centro (@utilizador ou link do perfil).",
+    "errorWebsite": "Indique um website válido (https://…).",
+    "errorPrivacy": "Para continuar, aceite a Política de Privacidade.",
+    "errorFix": "Reveja os campos assinalados.",
+    "errorSubmit": "Não foi possível enviar. Tente novamente dentro de instantes ou contacte-nos diretamente.",
+    "errorRateLimit": "Recebemos demasiados pedidos a partir da sua ligação. Aguarde um pouco e tente novamente, ou contacte-nos diretamente.",
+    "activityOptions": {
+      "salao": "Salão de beleza",
+      "estetica": "Centro de estética",
+      "spa": "Spa",
+      "clinica": "Clínica",
+      "ginasio": "Ginásio / wellness",
+      "solario": "Estúdio de bronzeamento",
+      "outro": "Outro"
+    }
+  },
+  "ProPresentation": {
+    "metaTitle": "Apresentação profissional | Sun BioTan®",
+    "navTreatment": "Tratamento",
+    "navComparison": "Comparativo",
+    "navSystem": "Sistema",
+    "navProfit": "Rentabilidade",
+    "navFaq": "FAQ",
+    "navCta": "Receber a proposta",
+    "navMenu": "Menu",
+    "heroEyebrow": "Apresentação reservada",
+    "heroGreeting": "Olá, {name}.",
+    "heroLead": "Bronzeado natural sem raios UV,",
+    "heroAccent": "pronto para o seu centro",
+    "heroText": "Preparámos esta apresentação para conhecer o tratamento, o sistema completo e a rentabilidade. Fica disponível durante {minutes} minutos.",
+    "heroKeys": [
+      "Sem raios UV",
+      "Sistema completo pronto a usar",
+      "Formação presencial no centro"
+    ],
+    "heroCta": "Quero receber a proposta",
+    "treatmentEyebrow": "O tratamento",
+    "treatmentLead": "Sete razões",
+    "treatmentAccent": "para os seus clientes",
+    "showMore": "Ver mais",
+    "showLess": "Ver menos",
+    "comparisonEyebrow": "Comparativo",
+    "comparisonLead": "Três formas de bronzear.",
+    "comparisonAccent": "Uma diferença clara.",
+    "comparisonRowsLabel": "Critério",
+    "systemEyebrow": "Sistema completo",
+    "systemLead": "Tudo o que precisa",
+    "systemAccent": "para começar",
+    "videoEyebrow": "Em ação",
+    "videoLead": "Veja a",
+    "videoAccent": "aplicação",
+    "videoClickHint": "Clique para ativar o som",
+    "videoMute": "Desativar som",
+    "videoUnmute": "Ativar som",
+    "videoFull": "Ver vídeo completo",
+    "profitEyebrow": "Rentabilidade",
+    "profitLead": "Um serviço rápido,",
+    "profitAccent": "com margem elevada",
+    "profitIntro": "Um serviço rápido, valorizado e com grande procura.",
+    "profitExampleTitle": "Exemplo ilustrativo",
+    "faqEyebrow": "Perguntas frequentes",
+    "faqLead": "Antes de",
+    "faqAccent": "avançar",
+    "closingEyebrow": "Próximo passo",
+    "closingLead": "Receba a proposta",
+    "closingAccent": "completa",
+    "closingText": "Enviamos-lhe por WhatsApp a proposta completa, adaptada ao seu centro.",
+    "closingCta": "Quero receber a proposta completa",
+    "closingPhone": "Ou ligue-nos",
+    "whatsappMessage": "Olá! Sou {name}, do centro {business}. Já vi a apresentação e gostaria de receber a proposta completa.",
+    "claims": {
+      "benefits": [
+        {
+          "title": "Ingredientes associados ao bronzeado da pele",
+          "text": "Fórmula com ingredientes de origem natural associados ao bronzeado, para um resultado natural, uniforme e progressivo."
+        },
+        {
+          "title": "Hidratação profunda e cuidado da pele",
+          "text": "Ajuda a hidratar, suavizar e iluminar a pele, para uma aparência mais saudável, confortável e revitalizada."
+        },
+        {
+          "title": "Fórmula segura e certificada",
+          "text": "Sem álcool, parabenos ou ingredientes de origem animal. Hipoalergénica e adequada até para peles sensíveis."
+        },
+        {
+          "title": "Resultado visível desde a primeira aplicação",
+          "text": "Efeito imediato e tom mais intenso no dia seguinte."
+        },
+        {
+          "title": "Sem manchas ou resíduos",
+          "text": "Seca rapidamente e não deixa marcas na roupa nem na pele."
+        },
+        {
+          "title": "Durabilidade ideal",
+          "text": "Dura 7 a 9 dias e desaparece gradualmente com a renovação celular."
+        },
+        {
+          "title": "Solução sustentável",
+          "text": "Ingredientes de origem vegetal provenientes de agricultura responsável."
+        }
+      ],
+      "comparison": {
+        "rows": [
+          "Base do bronzeado",
+          "Cuidado da pele",
+          "Resultado e cuidados"
+        ],
+        "columns": [
+          {
+            "name": "Sun BioTan®",
+            "cells": [
+              "Ingredientes associados ao bronzeado da pele, para um bronzeado natural, uniforme e progressivo.",
+              "Hidratação profunda, suavidade e luminosidade. Fórmula leve, natural e segura para todos os tipos de pele.",
+              "Resultado uniforme e progressivo, com desaparecimento natural."
+            ]
+          },
+          {
+            "name": "Solário",
+            "cells": [
+              "Radiação UV artificial.",
+              "Pode acelerar o envelhecimento da pele e aumenta o risco de manchas, desidratação e problemas mais graves, como cancro de pele.",
+              "Exige exposição repetida e cuidados redobrados com proteção solar."
+            ]
+          },
+          {
+            "name": "Jet Bronze",
+            "cells": [
+              "Pigmentos artificiais que colorem apenas a superfície.",
+              "Fórmulas químicas mais agressivas, que podem causar irritações.",
+              "Pode desbotar de forma desigual e deixar manchas; resultado nem sempre compatível com o tom natural da pele."
+            ]
+          }
+        ]
+      },
+      "business": [
+        "Produto exclusivo, sem concorrência direta, com fórmula inovadora de alta eficácia",
+        "Sem raios UV nem pigmentos artificiais, seguro para a pele",
+        "Elevada taxa de satisfação e fidelização",
+        "Investimento inicial acessível, retorno rápido e margem elevada por aplicação"
+      ],
+      "system": [
+        {
+          "title": "Equipamento",
+          "text": "Aparelho profissional Sun BioTan® pronto a usar, com aerógrafos de microbrumização de alta precisão."
+        },
+        {
+          "title": "Produto",
+          "text": "1 litro incluído, cerca de 20 a 25 tratamentos de corpo inteiro."
+        },
+        {
+          "title": "Formação",
+          "text": "Presencial no centro, na entrega, com demonstração prática e instruções de utilização."
+        },
+        {
+          "title": "Manutenção",
+          "text": "Kit completo de limpeza."
+        },
+        {
+          "title": "Divulgação",
+          "text": "Cartaz, folhetos, páginas oficiais (Facebook e Instagram) e inserção do centro no mapa oficial online."
+        },
+        {
+          "title": "Acompanhamento",
+          "text": "Apoio técnico e comercial contínuo."
+        }
+      ],
+      "systemBar": [
+        "Transporte incluído",
+        "Garantia oficial de 2 anos",
+        "Formação presencial no centro"
+      ],
+      "profit": [
+        {
+          "value": "~€6,70 – ~€8,30",
+          "label": "Custo por tratamento"
+        },
+        {
+          "value": "20 – 25",
+          "label": "Tratamentos de corpo inteiro por litro, em média"
+        },
+        {
+          "value": "até ~€1.000",
+          "label": "Faturação por litro, com €30 a €40 por aplicação"
+        },
+        {
+          "value": "~€120 – ~€210",
+          "label": "Por hora de trabalho efetivo (10 a 15 min por aplicação)"
+        }
+      ],
+      "profitExample": "Cada litro rende em média 20 a 25 tratamentos de corpo inteiro. Com €30 a €40 por aplicação, a faturação pode chegar a ~€1.000 por litro. Como cada aplicação dura 10 a 15 minutos, cada hora de trabalho efetivo representa ~€120 a ~€210.",
+      "profitNote": "Valores orientativos. Variam com a região, o posicionamento do centro e a prática do operador.",
+      "faq": [
+        {
+          "q": "Como funciona a formação e o arranque?",
+          "a": "A formação presencial acontece no centro, no momento da entrega, com demonstração prática, utilização do equipamento, preparação da pele e cuidados posteriores. Depois, a equipa mantém o apoio técnico e comercial."
+        },
+        {
+          "q": "Posso comprar só o produto para outra máquina?",
+          "a": "O arranque de novos centros é feito com o sistema completo Sun BioTan®: equipamento, produto, protocolo e formação. As recargas destinam-se aos centros que trabalham com o nosso sistema."
+        },
+        {
+          "q": "Que cuidados e condições de espaço são necessários?",
+          "a": "A preparação do espaço, ventilação e limpeza são avaliadas consigo antes do arranque. O protocolo inclui os cuidados a transmitir ao cliente, como evitar duche e transpiração durante cerca de 5 a 6 horas após a aplicação."
+        }
+      ]
+    }
+  },
+  "DashboardContactos": {
+    "title": "Contactos",
+    "subtitle": "Pedidos de acesso à apresentação profissional.",
+    "summaryTotal": "Total",
+    "summaryViewed": "Viu a apresentação",
+    "summaryWants": "Quer avançar",
+    "summaryMarketing": "Aceitou novidades",
+    "export": "Exportar emails com consentimento",
+    "filterAll": "Todos",
+    "filterWants": "Quer avançar",
+    "filterMarketing": "Aceitou novidades",
+    "includeTests": "Incluir testes",
+    "deleteTests": "Apagar testes",
+    "confirmDeleteTests": "Apagar todos os contactos de teste?",
+    "confirmDelete": "Apagar este contacto?",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "empty": "Sem contactos.",
+    "showMore": "Ver mais",
+    "showing": "{shown} de {total}",
+    "received": "Recebido",
+    "visits": "Visitas",
+    "lastVisit": "Última visita",
+    "accesses": "Acessos",
+    "whatsappClicks": "Cliques WhatsApp",
+    "never": "nunca",
+    "badgeWants": "Quer avançar",
+    "badgeMarketing": "Novidades",
+    "badgeTest": "Teste",
+    "notifyEmail": "Email",
+    "notifyTelegram": "Telegram",
+    "statusSent": "enviado",
+    "statusError": "erro",
+    "statusSkipped": "não configurado",
+    "statusNone": "sem aviso",
+    "resend": "Reenviar aviso",
+    "delete": "Apagar",
+    "msgResent": "Aviso reenviado.",
+    "msgResendPartial": "Aviso reenviado com falhas: veja o estado de cada canal.",
+    "msgDeleted": "Contacto apagado.",
+    "msgTestsDeleted": "{count} contactos de teste apagados.",
+    "msgError": "Não foi possível concluir. Tente novamente."
   }
 }

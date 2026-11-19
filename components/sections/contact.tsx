@@ -6,6 +6,7 @@ import { Mail, Phone, Send, Loader2, CheckCircle } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { useTranslations } from 'next-intl';
+import { CONTACT_PHONE, CONTACT_TEL_HREF } from '@/lib/contact';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const VP = { once: false, amount: 0.15 };
@@ -32,7 +33,7 @@ export function Contact() {
 
   const contactInfo = [
     { isFa: false as const, icon: Mail, label: t('contactEmail'), value: 'info@sunbiotan.pt', href: 'mailto:info@sunbiotan.pt' },
-    { isFa: false as const, icon: Phone, label: t('contactPhone'), value: '+351 920 253 796', href: 'tel:+351920253796' },
+    { isFa: false as const, icon: Phone, label: t('contactPhone'), value: CONTACT_PHONE.display, href: CONTACT_TEL_HREF },
     { isFa: true as const, icon: faInstagram, label: t('contactInstagram'), value: '@sunbiotan', href: 'https://instagram.com/sunbiotan' },
     { isFa: true as const, icon: faFacebook, label: t('contactFacebook'), value: 'Sunbiotan', href: 'https://www.facebook.com/sunbiotan.eu' },
   ];

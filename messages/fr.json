@@ -61,7 +61,7 @@
   },
   "CookiesPage": {
     "title": "Politique de Cookies",
-    "lastUpdated": "Dernière mise à jour : mai 2025",
+    "lastUpdated": "Dernière mise à jour : novembre 2026",
     "intro": "Ce site web utilise des cookies pour assurer son bon fonctionnement et vous offrir une meilleure expérience de navigation. Cette politique explique ce que sont les cookies, lesquels nous utilisons et comment les gérer.",
     "s1Title": "Que sont les cookies ?",
     "s1Text": "Les cookies sont de petits fichiers texte stockés sur votre appareil lorsque vous visitez un site web. Ils permettent au site de mémoriser vos préférences et actions afin que vous n'ayez pas à les saisir à nouveau.",
@@ -77,6 +77,9 @@
     "s2Cookie3Name": "cookie-consent",
     "s2Cookie3Purpose": "Enregistre votre décision d'acceptation ou de refus des cookies.",
     "s2Cookie3Duration": "Durée : 1 an.",
+    "s2Cookie4Name": "pro_access",
+    "s2Cookie4Purpose": "Accès temporaire à la présentation professionnelle, après l’envoi du formulaire professionnel. Cookie HttpOnly, inaccessible aux scripts.",
+    "s2Cookie4Duration": "Durée : 30 minutes.",
     "s2Note": "Ces cookies sont nécessaires au fonctionnement du site et ne peuvent être désactivés sans en affecter l'utilisation. Ils ne sont pas utilisés à des fins publicitaires.",
     "s3Title": "Comment gérer les cookies",
     "s3Text": "Vous pouvez contrôler et supprimer les cookies via les paramètres de votre navigateur. La plupart des navigateurs vous permettent de bloquer ou supprimer tous les cookies ou certains d'entre eux. Veuillez noter que la désactivation des cookies essentiels peut affecter le fonctionnement du site.",
@@ -94,19 +97,20 @@
   },
   "PrivacidadePage": {
     "title": "Politique de Confidentialité",
-    "lastUpdated": "Dernière mise à jour : mai 2025",
+    "lastUpdated": "Dernière mise à jour : novembre 2026",
     "intro": "Sun BioTan® s'engage à protéger vos données personnelles et votre vie privée. Cette Politique vous informe sur les données que nous collectons, la façon dont nous les traitons et les droits dont vous disposez, conformément au Règlement Général sur la Protection des Données (RGPD — Règlement UE 2016/679).",
     "s1Title": "1. Responsable du Traitement",
     "s1Text": "Le responsable du traitement de vos données personnelles est :",
     "s1Name": "Sunbiotan",
     "s1Email": "info@sunbiotan.pt",
-    "s1Phone": "+351 920 253 796",
     "s2Title": "2. Données Personnelles Collectées",
     "s2Intro": "Nous collectons des données personnelles dans les situations suivantes :",
     "s2Item1Title": "Formulaire de contact",
-    "s2Item1Text": "Nom, adresse e-mail, numéro de téléphone (facultatif) et message. Utilisés exclusivement pour répondre à votre demande d'information.",
+    "s2Item1Text": "Nom, adresse e-mail, numéro de téléphone et message. Utilisés exclusivement pour répondre à votre demande d'information.",
     "s2Item2Title": "Candidature professionnelle",
     "s2Item2Text": "Nom complet, nom de l'espace, ville, téléphone, e-mail et message facultatif. Utilisés pour évaluer votre candidature en tant que partenaire Sun BioTan®.",
+    "s2Item5Title": "Formulaire professionnel (accès à la présentation)",
+    "s2Item5Text": "Nom, nom de l’institut, localité, téléphone, adresse e-mail, type d’activité, site web ou Instagram de l’institut, langue et adresse IP convertie en un code irréversible (hash). Utilisés pour répondre à votre demande, vous donner un accès temporaire à la présentation professionnelle et prévenir en interne notre équipe par e-mail et via un service de messagerie. Si vous l’autorisez, votre e-mail est également utilisé pour vous envoyer les nouveautés et les offres Sun BioTan®.",
     "s2Item3Title": "Géolocalisation (Carte des Centres)",
     "s2Item3Text": "Notre Carte des Centres peut demander l'accès à votre position géographique pour afficher les centres Sun BioTan® les plus proches. Ces informations sont traitées exclusivement dans votre navigateur et NE sont PAS transmises, stockées ou partagées avec nos serveurs. L'autorisation est accordée ou refusée via votre navigateur et peut être révoquée à tout moment dans les paramètres de votre appareil.",
     "s2Item4Title": "Cookies",
@@ -115,11 +119,14 @@
     "s3Title": "3. Finalités et Bases Légales",
     "s3Item1": "Réponse aux demandes de contact : exécution de mesures précontractuelles ou intérêt légitime [art. 6, par. 1, point b) et f) du RGPD].",
     "s3Item2": "Traitement des candidatures professionnelles : exécution de mesures précontractuelles [art. 6, par. 1, point b) du RGPD].",
+    "s3Item5": "Formulaire professionnel (réponse à la demande, accès à la présentation et notification interne) : exécution de mesures précontractuelles prises à votre demande [art. 6, par. 1, point b) du RGPD].",
+    "s3Item6": "Communications commerciales par e-mail (nouveautés et offres) : consentement, que vous pouvez retirer à tout moment en écrivant à info@sunbiotan.pt [art. 6, par. 1, point a) du RGPD].",
     "s3Item3": "Cookies essentiels : intérêt légitime pour assurer le fonctionnement technique du site [art. 6, par. 1, point f) du RGPD].",
     "s3Item4": "Géolocalisation : consentement explicite de l'utilisateur via le navigateur [art. 6, par. 1, point a) du RGPD].",
     "s4Title": "4. Durée de Conservation",
     "s4Item1": "Données des formulaires de contact : conservées pendant 12 mois.",
     "s4Item2": "Données des candidatures professionnelles : conservées pendant 24 mois ou jusqu'à la décision finale.",
+    "s4Item4": "Données du formulaire professionnel : conservées pendant 24 mois. L’e-mail utilisé pour les communications commerciales est conservé jusqu’au retrait de votre consentement.",
     "s4Item3": "Données d'accès à l'espace partenaire : pendant la durée de la relation contractuelle et 5 ans après son terme.",
     "s5Title": "5. Vos Droits",
     "s5Intro": "En vertu du RGPD, vous disposez des droits suivants concernant vos données personnelles :",
@@ -409,6 +416,7 @@
     "adminArea": "Sunbiotan · Espace Administratif",
     "logout": "Se déconnecter",
     "applications": "Candidatures",
+    "contacts": "Contacts",
     "orders": "Commandes"
   },
   "DashboardHome": {
@@ -802,5 +810,369 @@
   },
   "ImageUpload": {
     "errorType": "Seules les images JPG, PNG ou WebP sont autorisées."
+  },
+  "ProLanding": {
+    "metaTitle": "Sun BioTan® pour les instituts | Présentation professionnelle",
+    "metaDescription": "Bronzage naturel sans UV pour votre institut : système complet, formation sur place et accompagnement. Remplissez le formulaire et accédez à la présentation.",
+    "heroEyebrow": "Pour les instituts de beauté et de bien-être",
+    "heroHeadline1": "Le bronzage sans UV",
+    "heroHeadline2": "dans votre institut",
+    "heroSubtitle": "Ajoutez à votre espace un service qui fait la différence, avec un système complet, une formation sur place et l’accompagnement de notre équipe.",
+    "heroCta": "Accéder à la présentation",
+    "stats": [
+      {
+        "value": "Depuis 2015",
+        "label": "Bronzage professionnel"
+      },
+      {
+        "value": "Fabriqué au Portugal",
+        "label": "Production cosmétique professionnelle"
+      },
+      {
+        "value": "Le plus grand réseau",
+        "label": "de Centres Agréés"
+      },
+      {
+        "value": "Sans UV",
+        "label": "Bronzage naturel et progressif"
+      }
+    ],
+    "whyEyebrow": "Avantages",
+    "whyLead": "Pourquoi Sun BioTan®",
+    "whyAccent": "dans votre institut",
+    "why": [
+      {
+        "title": "Formation dans votre institut",
+        "text": "Formation sur place à la livraison du système, avec démonstration pratique, pour que votre équipe démarre en confiance."
+      },
+      {
+        "title": "Un service qui se démarque",
+        "text": "Bronzage naturel sans UV : un service rapide, apprécié des clients et distinctif dans votre carte."
+      },
+      {
+        "title": "Système complet",
+        "text": "Équipement, produit, protocole et supports de communication, prêts à l’emploi dès le premier jour."
+      },
+      {
+        "title": "Visibilité dans le réseau",
+        "text": "Votre institut sur la carte officielle des Centres Agréés Sun BioTan® et sur les pages officielles de la marque."
+      },
+      {
+        "title": "Ingrédients d’origine naturelle",
+        "text": "Une formule aux ingrédients d’origine naturelle associés au bronzage de la peau, pour différents types de peau."
+      },
+      {
+        "title": "Accompagnement continu",
+        "text": "Soutien technique et commercial de notre équipe avant, pendant et après le démarrage."
+      }
+    ],
+    "howEyebrow": "Comment ça marche",
+    "howLead": "Quatre étapes",
+    "howAccent": "jusqu’au démarrage",
+    "steps": [
+      {
+        "title": "Remplissez le formulaire",
+        "text": "Les informations de votre institut, en moins d’une minute."
+      },
+      {
+        "title": "Accédez à la présentation",
+        "text": "Elle s’ouvre immédiatement : soin, système complet et rentabilité."
+      },
+      {
+        "title": "Recevez la proposition sur WhatsApp",
+        "text": "Nous vous envoyons la proposition complète, adaptée à votre institut."
+      },
+      {
+        "title": "Formation dans votre institut",
+        "text": "À la livraison, avec démonstration pratique et mode d’emploi."
+      }
+    ],
+    "networkEyebrow": "Réseau Sun BioTan®",
+    "networkLead": "Le plus grand réseau",
+    "networkAccent": "de Centres Agréés",
+    "networkText": "Les clients cherchent le centre le plus proche sur la carte officielle Sun BioTan®. Votre institut rejoint ce réseau.",
+    "networkCta": "Voir la carte des centres",
+    "formEyebrow": "Présentation réservée",
+    "formLead": "Accédez à la",
+    "formAccent": "présentation",
+    "formSubtitle": "Renseignez les informations de votre institut. La présentation s’ouvre immédiatement et reste disponible pendant {minutes} minutes.",
+    "accessHint": "Remplissez le formulaire pour accéder à la présentation.",
+    "requiredNote": "* Obligatoire",
+    "labelName": "Nom",
+    "labelBusiness": "Nom de l’institut",
+    "labelCity": "Localité",
+    "labelPhone": "Téléphone",
+    "labelEmail": "Email",
+    "labelActivity": "Type d’activité",
+    "activityPlaceholder": "Sélectionnez…",
+    "labelInstagram": "Instagram de l’institut",
+    "instagramHint": "Accepte @utilisateur ou le lien du profil.",
+    "noInstagram": "Mon institut n’a pas d’Instagram",
+    "labelWebsite": "Site web de l’institut",
+    "placeholderName": "Votre nom",
+    "placeholderBusiness": "Nom de votre institut",
+    "placeholderCity": "Paris, Lyon, Bruxelles…",
+    "placeholderPhone": "+33 6 00 00 00 00",
+    "placeholderEmail": "email@exemple.fr",
+    "placeholderInstagram": "@votreinstitut",
+    "placeholderWebsite": "https://www.votreinstitut.fr",
+    "consentPrivacy": "J’ai lu et j’accepte la <link>Politique de confidentialité</link>.",
+    "consentMarketing": "Je souhaite recevoir les nouveautés et les offres Sun BioTan® par email.",
+    "submit": "Voir la présentation",
+    "sending": "Envoi en cours…",
+    "preparing": "Préparation de la présentation…",
+    "errorRequired": "Veuillez remplir ce champ.",
+    "errorEmail": "Veuillez indiquer un email valide.",
+    "errorPhone": "Veuillez indiquer un numéro de téléphone valide.",
+    "errorActivity": "Veuillez sélectionner le type d’activité.",
+    "errorInstagram": "Veuillez indiquer l’Instagram de l’institut (@utilisateur ou lien du profil).",
+    "errorWebsite": "Veuillez indiquer un site web valide (https://…).",
+    "errorPrivacy": "Pour continuer, veuillez accepter la Politique de confidentialité.",
+    "errorFix": "Veuillez vérifier les champs signalés.",
+    "errorSubmit": "L’envoi n’a pas abouti. Réessayez dans un instant ou contactez-nous directement.",
+    "errorRateLimit": "Nous avons reçu trop de demandes depuis votre connexion. Patientez un instant puis réessayez, ou contactez-nous directement.",
+    "activityOptions": {
+      "salao": "Salon de beauté",
+      "estetica": "Institut de beauté",
+      "spa": "Spa",
+      "clinica": "Clinique",
+      "ginasio": "Salle de sport / bien-être",
+      "solario": "Studio de bronzage",
+      "outro": "Autre"
+    }
+  },
+  "ProPresentation": {
+    "metaTitle": "Présentation professionnelle | Sun BioTan®",
+    "navTreatment": "Soin",
+    "navComparison": "Comparatif",
+    "navSystem": "Système",
+    "navProfit": "Rentabilité",
+    "navFaq": "FAQ",
+    "navCta": "Recevoir la proposition",
+    "navMenu": "Menu",
+    "heroEyebrow": "Présentation réservée",
+    "heroGreeting": "Bonjour, {name}.",
+    "heroLead": "Le bronzage naturel sans UV,",
+    "heroAccent": "prêt pour votre institut",
+    "heroText": "Nous avons préparé cette présentation pour vous faire découvrir le soin, le système complet et sa rentabilité. Elle reste disponible pendant {minutes} minutes.",
+    "heroKeys": [
+      "Sans UV",
+      "Système complet prêt à l’emploi",
+      "Formation sur place dans votre institut"
+    ],
+    "heroCta": "Je souhaite recevoir la proposition",
+    "treatmentEyebrow": "Le soin",
+    "treatmentLead": "Sept raisons",
+    "treatmentAccent": "pour vos clients",
+    "showMore": "Voir plus",
+    "showLess": "Voir moins",
+    "comparisonEyebrow": "Comparatif",
+    "comparisonLead": "Trois façons de bronzer.",
+    "comparisonAccent": "Une différence nette.",
+    "comparisonRowsLabel": "Critère",
+    "systemEyebrow": "Système complet",
+    "systemLead": "Tout ce qu’il faut",
+    "systemAccent": "pour démarrer",
+    "videoEyebrow": "En action",
+    "videoLead": "Découvrez",
+    "videoAccent": "l’application",
+    "videoClickHint": "Cliquez pour activer le son",
+    "videoMute": "Couper le son",
+    "videoUnmute": "Activer le son",
+    "videoFull": "Voir la vidéo complète",
+    "profitEyebrow": "Rentabilité",
+    "profitLead": "Un service rapide,",
+    "profitAccent": "à forte marge",
+    "profitIntro": "Un service rapide, apprécié et très demandé.",
+    "profitExampleTitle": "Exemple indicatif",
+    "faqEyebrow": "Questions fréquentes",
+    "faqLead": "Avant de",
+    "faqAccent": "vous lancer",
+    "closingEyebrow": "Prochaine étape",
+    "closingLead": "Recevez la proposition",
+    "closingAccent": "complète",
+    "closingText": "Nous vous envoyons sur WhatsApp la proposition complète, adaptée à votre institut.",
+    "closingCta": "Je souhaite recevoir la proposition complète",
+    "closingPhone": "Ou appelez-nous",
+    "whatsappMessage": "Bonjour ! Je suis {name}, de l’institut {business}. J’ai vu la présentation et je souhaiterais recevoir la proposition complète.",
+    "claims": {
+      "benefits": [
+        {
+          "title": "Ingrédients associés au bronzage de la peau",
+          "text": "Une formule aux ingrédients d’origine naturelle associés au bronzage, pour un résultat naturel, uniforme et progressif."
+        },
+        {
+          "title": "Hydratation profonde et soin de la peau",
+          "text": "Aide à hydrater, adoucir et illuminer la peau, pour un aspect plus sain, confortable et revitalisé."
+        },
+        {
+          "title": "Formule sûre et certifiée",
+          "text": "Sans alcool, parabènes ni ingrédients d’origine animale. Hypoallergénique et adaptée même aux peaux sensibles."
+        },
+        {
+          "title": "Résultat visible dès la première application",
+          "text": "Effet immédiat et teint plus intense le lendemain."
+        },
+        {
+          "title": "Sans taches ni résidus",
+          "text": "Sèche rapidement et ne laisse pas de traces sur les vêtements ni sur la peau."
+        },
+        {
+          "title": "Durée idéale",
+          "text": "Dure de 7 à 9 jours et s’estompe progressivement avec le renouvellement cellulaire."
+        },
+        {
+          "title": "Solution durable",
+          "text": "Ingrédients d’origine végétale issus d’une agriculture responsable."
+        }
+      ],
+      "comparison": {
+        "rows": [
+          "Base du bronzage",
+          "Soin de la peau",
+          "Résultat et précautions"
+        ],
+        "columns": [
+          {
+            "name": "Sun BioTan®",
+            "cells": [
+              "Ingrédients associés au bronzage de la peau, pour un bronzage naturel, uniforme et progressif.",
+              "Hydratation profonde, douceur et éclat. Formule légère, naturelle et sûre pour tous les types de peau.",
+              "Résultat uniforme et progressif, qui s’estompe naturellement."
+            ]
+          },
+          {
+            "name": "Cabine UV",
+            "cells": [
+              "Rayonnement UV artificiel.",
+              "Peut accélérer le vieillissement de la peau et augmente le risque de taches, de déshydratation et de problèmes plus graves, comme le cancer de la peau.",
+              "Exige des expositions répétées et une protection solaire renforcée."
+            ]
+          },
+          {
+            "name": "Jet Bronze",
+            "cells": [
+              "Pigments artificiels qui ne colorent que la surface.",
+              "Formules chimiques plus agressives, qui peuvent provoquer des irritations.",
+              "Peut s’estomper de façon inégale et laisser des taches ; résultat pas toujours compatible avec le teint naturel."
+            ]
+          }
+        ]
+      },
+      "business": [
+        "Produit exclusif, sans concurrence directe, à la formule innovante et très efficace",
+        "Sans UV ni pigments artificiels, sûr pour la peau",
+        "Taux élevé de satisfaction et de fidélisation",
+        "Investissement initial accessible, retour rapide et forte marge par application"
+      ],
+      "system": [
+        {
+          "title": "Équipement",
+          "text": "Appareil professionnel Sun BioTan® prêt à l’emploi, avec aérographes de micro-brumisation de haute précision."
+        },
+        {
+          "title": "Produit",
+          "text": "1 litre inclus, soit environ 20 à 25 soins corps entier."
+        },
+        {
+          "title": "Formation",
+          "text": "Sur place dans votre institut, à la livraison, avec démonstration pratique et mode d’emploi."
+        },
+        {
+          "title": "Entretien",
+          "text": "Kit de nettoyage complet."
+        },
+        {
+          "title": "Communication",
+          "text": "Affiche, dépliants, pages officielles (Facebook et Instagram) et ajout de votre institut sur la carte officielle en ligne."
+        },
+        {
+          "title": "Accompagnement",
+          "text": "Soutien technique et commercial continu."
+        }
+      ],
+      "systemBar": [
+        "Transport inclus",
+        "Garantie officielle de 2 ans",
+        "Formation sur place dans votre institut"
+      ],
+      "profit": [
+        {
+          "value": "~6,70 € – ~8,30 €",
+          "label": "Coût par soin"
+        },
+        {
+          "value": "20 – 25",
+          "label": "Soins corps entier par litre, en moyenne"
+        },
+        {
+          "value": "jusqu’à ~1 000 €",
+          "label": "Chiffre d’affaires par litre, à 30–40 € par application"
+        },
+        {
+          "value": "~120 € – ~210 €",
+          "label": "Par heure de travail effectif (10 à 15 min par application)"
+        }
+      ],
+      "profitExample": "Chaque litre permet en moyenne 20 à 25 soins corps entier. À 30–40 € par application, le chiffre d’affaires peut atteindre ~1 000 € par litre. Chaque application durant 10 à 15 minutes, chaque heure de travail effectif représente ~120 € à ~210 €.",
+      "profitNote": "Valeurs indicatives. Elles varient selon la région, le positionnement de l’institut et la pratique de l’opérateur.",
+      "faq": [
+        {
+          "q": "Comment se passent la formation et le démarrage ?",
+          "a": "La formation sur place a lieu dans votre institut, au moment de la livraison, avec démonstration pratique, utilisation de l’équipement, préparation de la peau et soins après application. Ensuite, l’équipe assure le soutien technique et commercial."
+        },
+        {
+          "q": "Puis-je acheter uniquement le produit pour une autre machine ?",
+          "a": "Le démarrage des nouveaux instituts se fait avec le système complet Sun BioTan® : équipement, produit, protocole et formation. Les recharges sont destinées aux instituts qui travaillent avec notre système."
+        },
+        {
+          "q": "Quelles précautions et quelles conditions d’espace faut-il ?",
+          "a": "La préparation de l’espace, la ventilation et le nettoyage sont évalués avec vous avant le démarrage. Le protocole comprend les précautions à transmettre au client, comme éviter la douche et la transpiration pendant environ 5 à 6 heures après l’application."
+        }
+      ]
+    }
+  },
+  "DashboardContactos": {
+    "title": "Contacts",
+    "subtitle": "Demandes d’accès à la présentation professionnelle.",
+    "summaryTotal": "Total",
+    "summaryViewed": "A vu la présentation",
+    "summaryWants": "Veut avancer",
+    "summaryMarketing": "A accepté les nouveautés",
+    "export": "Exporter les emails avec consentement",
+    "filterAll": "Tous",
+    "filterWants": "Veut avancer",
+    "filterMarketing": "A accepté les nouveautés",
+    "includeTests": "Inclure les tests",
+    "deleteTests": "Supprimer les tests",
+    "confirmDeleteTests": "Supprimer tous les contacts de test ?",
+    "confirmDelete": "Supprimer ce contact ?",
+    "confirm": "Confirmer",
+    "cancel": "Annuler",
+    "empty": "Aucun contact.",
+    "showMore": "Voir plus",
+    "showing": "{shown} sur {total}",
+    "received": "Reçu",
+    "visits": "Visites",
+    "lastVisit": "Dernière visite",
+    "accesses": "Envois",
+    "whatsappClicks": "Clics WhatsApp",
+    "never": "jamais",
+    "badgeWants": "Veut avancer",
+    "badgeMarketing": "Nouveautés",
+    "badgeTest": "Test",
+    "notifyEmail": "Email",
+    "notifyTelegram": "Telegram",
+    "statusSent": "envoyé",
+    "statusError": "erreur",
+    "statusSkipped": "non configuré",
+    "statusNone": "pas d’alerte",
+    "resend": "Renvoyer l’alerte",
+    "delete": "Supprimer",
+    "msgResent": "Alerte renvoyée.",
+    "msgResendPartial": "Alerte renvoyée avec des erreurs : vérifiez l’état de chaque canal.",
+    "msgDeleted": "Contact supprimé.",
+    "msgTestsDeleted": "{count} contacts de test supprimés.",
+    "msgError": "L’opération a échoué. Réessayez."
   }
 }

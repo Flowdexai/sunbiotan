@@ -114,6 +114,18 @@ export default async function CookiesPage() {
                       {t('s2Cookie3Duration')}
                     </p>
                   </div>
+                  {/* Cookie 4 — acesso temporário à apresentação profissional */}
+                  <div className="px-5 py-4">
+                    <p className="text-xs font-medium text-sunbiotan-300/80 mb-1 font-mono">
+                      {t('s2Cookie4Name')}
+                    </p>
+                    <p className="text-xs text-sunbiotan-500/60 font-light leading-relaxed">
+                      {t('s2Cookie4Purpose')}
+                    </p>
+                    <p className="text-[11px] text-sunbiotan-600/55 font-light mt-1 italic">
+                      {t('s2Cookie4Duration')}
+                    </p>
+                  </div>
                 </div>
               </div>
 

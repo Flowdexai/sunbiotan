@@ -8,6 +8,7 @@ import { buildAlternates, localizedHref, OG_IMAGE } from '@/lib/seo';
 import { WhatsAppButton } from '@/components/ui/whatsapp-button';
 import { CookieBanner } from '@/components/ui/cookie-banner';
 import { MotionProvider } from '@/components/motion-provider';
+import { CONTACT_PHONE } from '@/lib/contact';
 import type { Metadata } from 'next';
 
 const inter = Inter({
@@ -84,7 +85,7 @@ const organizationJsonLd = {
   url: 'https://sunbiotan.pt',
   logo: 'https://sunbiotan.pt/images/logo-sunbiotan.jpg',
   email: 'info@sunbiotan.pt',
-  telephone: '+351920253796',
+  telephone: CONTACT_PHONE.e164,
   areaServed: 'Europe',
   sameAs: [
     'https://instagram.com/sunbiotan',

@@ -5,11 +5,13 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { useTranslations } from 'next-intl';
-
-const WA_NUMBER = '351920253796';
+import { usePathname } from '@/i18n/navigation';
+import { whatsappHref } from '@/lib/contact';
+import { PRO_PRESENTATION_SEGMENT } from '@/lib/pro/config';
 
 export function WhatsAppButton() {
   const t = useTranslations('WhatsApp');
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -18,11 +20,14 @@ export function WhatsAppButton() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // La presentación profesional tiene sus propios CTAs de WhatsApp (rastreados).
+  if (pathname.endsWith(PRO_PRESENTATION_SEGMENT)) return null;
+
   return (
     <AnimatePresence>
       {visible && (
         <m.a
-          href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(t('message'))}`}
+          href={whatsappHref(t('message'))}
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, scale: 0.5, y: 20 }}

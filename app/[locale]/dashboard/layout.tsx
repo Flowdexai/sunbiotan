@@ -16,6 +16,7 @@ import {
   LogOut,
   Menu,
   ChevronRight,
+  Contact,
 } from 'lucide-react';
 
 export default function DashboardLayout({
@@ -32,6 +33,7 @@ export default function DashboardLayout({
     { label: t('overview'), href: '/dashboard', icon: LayoutDashboard },
     { label: t('centers'), href: '/dashboard/centros', icon: MapPin },
     { label: t('applications'), href: '/dashboard/candidaturas', icon: Inbox },
+    { label: t('contacts'), href: '/dashboard/contactos', icon: Contact },
     { label: t('professionals'), href: '/dashboard/profissionais', icon: Users },
     { label: t('orders'), href: '/dashboard/encomendas', icon: ShoppingBag },
     { label: t('products'), href: '/dashboard/produtos', icon: Package },
