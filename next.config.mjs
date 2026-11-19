@@ -60,7 +60,8 @@ const CSP = [
   ["img-src 'self' data: blob:", supabase.http, ...GOOGLE_TAG, ...GOOGLE_MAPS, 'https://*.googleusercontent.com'].join(' '),
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' data: https://fonts.gstatic.com",
-  "media-src 'self'",
+  // Supabase: vídeos del bucket público "results" (página de resultados).
+  ["media-src 'self'", supabase.http].join(' '),
   [
     'frame-src',
     'https://drive.google.com',
@@ -113,6 +114,20 @@ function proHeaders() {
   return [...testTree, ...presentation];
 }
 
+/*
+ * Página de resultados (prueba). Misma base que RESULTS_BASE en
+ * lib/results/config.ts: si cambia en el swap, cambiar las dos.
+ * Todo el subárbol noindex/nofollow (`:path*` también cubre la base sola).
+ */
+const RESULTS_BASE = '/resultados-test';
+
+function resultsHeaders() {
+  return [`${RESULTS_BASE}/:path*`, `${LOCALE_PREFIX}${RESULTS_BASE}/:path*`].map((source) => ({
+    source,
+    headers: [NOINDEX],
+  }));
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
@@ -137,6 +152,7 @@ const nextConfig = {
         headers: SECURITY_HEADERS,
       },
       ...proHeaders(),
+      ...resultsHeaders(),
     ];
   },
 };
