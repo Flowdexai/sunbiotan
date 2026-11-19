@@ -19,7 +19,7 @@ import { CONTACT_PHONE } from '@/lib/contact';
 import { PRO_SESSION_MINUTES } from '@/lib/pro/config';
 import { ProNavbar } from './pro-navbar';
 import { PRO_VISIT_URL, trackWhatsappInterest } from './track';
-import { BG, EASE, PRIMARY_BUTTON, PhoneLink, Reveal, SectionHeader } from './ui';
+import { BG, CARD_HOVER, EASE, PRIMARY_BUTTON, PhoneLink, Reveal, SectionHeader } from './ui';
 
 interface Item { title: string; text: string }
 interface Column { name: string; cells: string[] }
@@ -35,10 +35,70 @@ export interface ProPresentationProps {
 
 const SYSTEM_BAR_ICONS = [Truck, ShieldCheck, GraduationCap] as const;
 
+/*
+ * DECORATIVO — líneas finas del hero de la presentación. Bloque autocontenido: para
+ * quitarlo basta con borrar este componente y su uso <HeroLines />.
+ * Líneas rectas de 1 px (non-scaling-stroke) en dorado sunbiotan-300 (currentColor),
+ * agrupadas a la derecha y en la esquina inferior izquierda; cada una se desvanece
+ * hacia el centro con su propio linearGradient (opacidad máx.: dos a 0.32–0.34, el resto
+ * 0.18–0.25; sin animación). En móvil solo quedan 3, en las franjas de padding.
+ * Coordenadas pegadas a los bordes para no cruzar el bloque de texto (h1 ≤ 896 px centrado)
+ * tampoco en anchos de 1024 px. Peor caso de contraste (texto sobre 950 + dorado al 35 %)
+ * verificado en el script.
+ */
+const HERO_LINES = [
+  // móvil + escritorio: esquina superior derecha (franja de la navbar / aire superior)
+  { id: 'a', x1: 1440, y1: 30, x2: 1000, y2: 120, o: 0.22, mobile: true },
+  // móvil + escritorio: esquina inferior izquierda, dos que se cruzan en la franja inferior
+  { id: 'b', x1: 0, y1: 800, x2: 560, y2: 730, o: 0.34, mobile: true },
+  { id: 'c', x1: 0, y1: 740, x2: 460, y2: 800, o: 0.18, mobile: true },
+  // solo escritorio: costado derecho, inclinaciones distintas y cruzadas
+  { id: 'd', x1: 1430, y1: 0, x2: 1290, y2: 800, o: 0.32, mobile: false },
+  { id: 'e', x1: 1440, y1: 520, x2: 1120, y2: 800, o: 0.25, mobile: false },
+  { id: 'f', x1: 0, y1: 470, x2: 330, y2: 800, o: 0.2, mobile: false },
+] as const;
+
+function HeroLines() {
+  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      className="absolute inset-0 z-0 h-full w-full pointer-events-none text-sunbiotan-300"
+      viewBox="0 0 1440 800"
+      preserveAspectRatio="none"
+      fill="none"
+    >
+      <defs>
+        {HERO_LINES.map((l) => (
+          // Del extremo exterior (opacidad máx.) al interior (0): se desvanece hacia el centro.
+          <linearGradient key={l.id} id={`${uid}-${l.id}`} gradientUnits="userSpaceOnUse" x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}>
+            <stop offset="0" stopColor="currentColor" stopOpacity={l.o} />
+            <stop offset="1" stopColor="currentColor" stopOpacity="0" />
+          </linearGradient>
+        ))}
+      </defs>
+      {HERO_LINES.map((l) => (
+        <line
+          key={l.id}
+          x1={l.x1}
+          y1={l.y1}
+          x2={l.x2}
+          y2={l.y2}
+          stroke={`url(#${uid}-${l.id})`}
+          strokeWidth={1}
+          vectorEffect="non-scaling-stroke"
+          className={l.mobile ? undefined : 'hidden md:block'}
+        />
+      ))}
+    </svg>
+  );
+}
+
 /** CTA de WhatsApp rastreado: el href real funciona aunque falle el beacon. */
 function WhatsappCta({ href, label, className = '' }: { href: string; label: string; className?: string }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" onClick={trackWhatsappInterest} className={`${PRIMARY_BUTTON} ${className}`}>
+    <a href={href} target="_blank" rel="noopener noreferrer" onClick={trackWhatsappInterest} className={`${PRIMARY_BUTTON} cursor-pointer ${className}`}>
       <FontAwesomeIcon icon={faWhatsapp} style={{ width: '18px', height: '18px' }} aria-hidden="true" />
       <span>{label}</span>
       <ArrowRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" strokeWidth={2.25} />
@@ -46,30 +106,49 @@ function WhatsappCta({ href, label, className = '' }: { href: string; label: str
   );
 }
 
-function BenefitCard({ item, index }: { item: Item; index: number }) {
+/**
+ * Tarjeta del tratamiento. Dos columnas: el número y una columna de contenido
+ * (título, texto desplegable y toggle). El toggle comparte la sangría del título
+ * por estructura y va empujado al fondo (mt-auto), así los "Ver mais" de una misma
+ * fila quedan a la misma altura también cuando una se despliega y la fila crece.
+ */
+function BenefitCard({ item, index, centered }: { item: Item; index: number; centered: boolean }) {
   const t = useTranslations('ProPresentation');
   const [open, setOpen] = useState(false);
   const panelId = useId();
   return (
-    <Reveal as="li" delay={index * 0.04} className="bg-white border border-sunbiotan-200 rounded-2xl">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-controls={panelId}
-        className="w-full flex items-start gap-4 text-left p-5 md:p-6"
-      >
-        <span className="font-display text-2xl leading-none text-sunbiotan-700 pt-1 w-8 shrink-0">{String(index + 1).padStart(2, '0')}</span>
-        <span className="flex-1 min-w-0">
-          <span className="block font-display text-xl md:text-2xl leading-snug text-sunbiotan-900">{item.title}</span>
-          <span className="mt-1 inline-flex items-center gap-1 text-xs tracking-[0.12em] uppercase font-medium text-sunbiotan-700">
+    <Reveal
+      as="li"
+      delay={index * 0.04}
+      className={`flex gap-4 bg-white border border-sunbiotan-200 rounded-2xl p-5 md:p-6 ${CARD_HOVER} ${
+        // Impar: la última va sola en su fila, centrada y con EXACTAMENTE el ancho de una
+        // columna. Ocupa las 2 columnas (2c + gap) y su ancho es 50 % − gap/2 = c, con el
+        // gap real de la grilla en md+ (md:gap-4 = 1rem → 0.5rem).
+        centered ? 'md:col-span-2 md:justify-self-center md:w-[calc(50%-0.5rem)]' : ''
+      }`}
+    >
+      <span aria-hidden="true" className="font-display text-2xl leading-none text-sunbiotan-700 pt-1 w-8 shrink-0">
+        {String(index + 1).padStart(2, '0')}
+      </span>
+      <div className="flex-1 min-w-0 flex flex-col">
+        <h3 className="font-display text-xl md:text-2xl leading-snug text-sunbiotan-900">{item.title}</h3>
+        <div id={panelId} hidden={!open} className="mt-3">
+          <p className="text-sm leading-relaxed text-sunbiotan-800">{item.text}</p>
+        </div>
+        <div className="mt-auto pt-3 flex">
+          {/* Área táctil de 44 px (py-3.5 + línea de 16 px) compensada con -my-3.5: no mueve el layout. */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls={panelId}
+            className="-my-3.5 inline-flex min-h-11 cursor-pointer items-center gap-1 py-3.5 rounded-sm text-xs leading-4 tracking-[0.12em] uppercase font-medium text-sunbiotan-700 hover:text-sunbiotan-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunbiotan-700"
+          >
             {open ? t('showLess') : t('showMore')}
-            <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
-          </span>
-        </span>
-      </button>
-      <div id={panelId} hidden={!open} className="px-5 md:px-6 pb-5 md:pb-6 -mt-1 pl-[4.25rem] md:pl-[4.5rem]">
-        <p className="text-sm leading-relaxed text-sunbiotan-800">{item.text}</p>
+            <span className="sr-only">: {item.title}</span>
+            <ChevronDown className={`h-3.5 w-3.5 transition-transform motion-reduce:transition-none ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </Reveal>
   );
@@ -92,7 +171,7 @@ function Comparison({ rows, columns, rowsLabel }: { rows: string[]; columns: Col
               aria-selected={tab === i}
               aria-controls={`${tabsId}-panel`}
               onClick={() => setTab(i)}
-              className={`px-2 py-2 rounded-full text-[12px] font-semibold tracking-wide transition-colors ${
+              className={`cursor-pointer px-2 py-2 rounded-full text-[12px] font-semibold tracking-wide transition-colors ${
                 tab === i ? 'bg-sunbiotan-300 text-sunbiotan-950' : 'text-sunbiotan-100 hover:text-sunbiotan-50'
               }`}
             >
@@ -175,7 +254,7 @@ function FaqItem({ item }: { item: Faq }) {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls={panelId}
-          className="w-full flex items-center justify-between gap-4 py-5 text-left font-display text-xl md:text-2xl text-sunbiotan-900"
+          className="w-full cursor-pointer flex items-center justify-between gap-4 py-5 text-left font-display text-xl md:text-2xl text-sunbiotan-900"
         >
           {item.q}
           <ChevronDown className={`h-5 w-5 shrink-0 text-sunbiotan-800 transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
@@ -212,38 +291,41 @@ export function ProPresentation({ firstName, whatsappUrl }: ProPresentationProps
       <ProNavbar whatsappUrl={whatsappUrl} />
 
       <main>
-        {/* 1. Hero — oscuro */}
+        {/* 1. Hero — oscuro plano (sin imagen ni trama) + líneas decorativas finas */}
         <section id="inicio" className={`relative overflow-hidden ${BG.dark}`}>
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-cover opacity-95"
-            style={{ backgroundImage: 'url(/images/hero-bg.jpg)', backgroundPosition: 'center 20%' }}
-          />
-          <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
-            <div className="absolute inset-0 bg-sunbiotan-950/72" />
-            <div className="absolute inset-0 bg-gradient-to-b from-sunbiotan-950/50 via-transparent to-sunbiotan-950/70" />
-          </div>
-          <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-32 pb-16 md:pt-44 md:pb-24 text-center">
-            <m.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: EASE }}>
-              <SectionEyebrow tone="dark" className="mb-5 [&_p]:text-sunbiotan-100">{t('heroEyebrow')}</SectionEyebrow>
-              <p className="font-display text-[clamp(1.6rem,4vw,2.4rem)] text-sunbiotan-300 mb-3">
+          <HeroLines />
+          {/*
+            La navbar pro es fixed (h-16 / md:h-20), así que el padding superior incluye su
+            altura más el aire real; el inferior es solo aire. Antes el pt "parecía" generoso
+            porque la navbar se comía 64–80 px y el bloque quedaba corrido hacia abajo.
+            pt-30 = 64 (navbar) + 56 de aire · md:pt-40 = 80 (navbar) + 80 de aire.
+            Aire visible: arriba 56 / 80 px, abajo 72 / 112 px.
+          */}
+          <div className="relative z-10 container mx-auto px-4 sm:px-6 pt-30 pb-18 md:pt-40 md:pb-28 text-center">
+            <m.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: EASE }}
+              className="flex flex-col items-center"
+            >
+              <SectionEyebrow tone="dark" className="mb-6 [&_p]:text-sunbiotan-100">{t('heroEyebrow')}</SectionEyebrow>
+              <p className="font-display text-[clamp(1.5rem,3.5vw,2.1rem)] leading-tight text-sunbiotan-300 mb-4">
                 {t('heroGreeting', { name: firstName })}
               </p>
-              <h1 className="font-display font-light leading-[1.02] tracking-tight text-[clamp(2.3rem,7vw,5.5rem)] text-sunbiotan-50 mb-6">
+              <h1 className="max-w-4xl font-display font-light leading-[1.08] tracking-tight text-balance text-[clamp(2rem,4.8vw,3.9rem)] text-sunbiotan-50 mb-6 md:mb-8">
                 {t('heroLead')} <em className="italic text-sunbiotan-300">{t('heroAccent')}</em>
               </h1>
-              <p className="text-base md:text-lg font-medium leading-relaxed text-sunbiotan-50 max-w-2xl mx-auto mb-8">
+              <p className="text-base md:text-lg font-medium leading-relaxed text-sunbiotan-50 max-w-2xl mb-10 md:mb-12">
                 {t('heroText', { minutes: PRO_SESSION_MINUTES })}
               </p>
-              <ul className="flex flex-col sm:flex-row flex-wrap justify-center gap-x-8 gap-y-3 mb-10">
+              <ul className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-x-8 gap-y-3 max-w-full">
                 {heroKeys.map((k) => (
-                  <li key={k} className="inline-flex items-center justify-center gap-2 text-sm tracking-[0.08em] uppercase font-medium text-sunbiotan-100">
-                    <Check className="h-4 w-4 text-sunbiotan-300" strokeWidth={2.25} aria-hidden="true" />
-                    {k}
+                  <li key={k} className="flex max-w-full items-center justify-center gap-2 text-sm tracking-[0.08em] uppercase font-medium text-sunbiotan-100">
+                    <Check className="h-4 w-4 shrink-0 text-sunbiotan-300" strokeWidth={2.25} aria-hidden="true" />
+                    <span className="min-w-0">{k}</span>
                   </li>
                 ))}
               </ul>
-              <WhatsappCta href={whatsappUrl} label={t('heroCta')} />
             </m.div>
           </div>
         </section>
@@ -252,8 +334,15 @@ export function ProPresentation({ firstName, whatsappUrl }: ProPresentationProps
         <section id="tratamento" className={`py-16 md:py-24 scroll-mt-16 md:scroll-mt-20 ${BG.cream}`}>
           <div className="container mx-auto px-4 sm:px-6">
             <SectionHeader tone="light" eyebrow={t('treatmentEyebrow')} lead={t('treatmentLead')} accent={t('treatmentAccent')} />
-            <ul className="grid md:grid-cols-2 gap-3 md:gap-4 max-w-5xl mx-auto items-start">
-              {benefits.map((item, i) => <BenefitCard key={item.title} item={item} index={i} />)}
+            <ul className="grid md:grid-cols-2 gap-3 md:gap-4 max-w-5xl mx-auto">
+              {benefits.map((item, i) => (
+                <BenefitCard
+                  key={item.title}
+                  item={item}
+                  index={i}
+                  centered={benefits.length % 2 === 1 && i === benefits.length - 1}
+                />
+              ))}
             </ul>
           </div>
         </section>
@@ -274,7 +363,7 @@ export function ProPresentation({ firstName, whatsappUrl }: ProPresentationProps
             <SectionHeader tone="light" eyebrow={t('systemEyebrow')} lead={t('systemLead')} accent={t('systemAccent')} />
             <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
               {system.map((item, i) => (
-                <Reveal as="li" key={item.title} delay={i * 0.05} className="bg-white border border-sunbiotan-200 rounded-2xl p-6">
+                <Reveal as="li" key={item.title} delay={i * 0.05} className={`flex flex-col bg-white border border-sunbiotan-200 rounded-2xl p-6 ${CARD_HOVER}`}>
                   <span className="block font-display text-3xl text-sunbiotan-700 mb-2">{String(i + 1).padStart(2, '0')}</span>
                   <h3 className="font-display text-2xl text-sunbiotan-900 mb-2">{item.title}</h3>
                   <p className="text-sm leading-relaxed text-sunbiotan-800">{item.text}</p>
@@ -345,8 +434,9 @@ export function ProPresentation({ firstName, whatsappUrl }: ProPresentationProps
             </Reveal>
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
               {profit.map((f, i) => (
-                <Reveal as="li" key={f.label} delay={i * 0.05} className="bg-white border border-sunbiotan-200 rounded-2xl p-6 text-center">
-                  <span className="block font-display text-[clamp(1.9rem,4vw,2.6rem)] leading-tight text-sunbiotan-900 mb-2">{f.value}</span>
+                <Reveal as="li" key={f.label} delay={i * 0.05} className={`flex flex-col bg-white border border-sunbiotan-200 rounded-2xl p-6 text-center ${CARD_HOVER}`}>
+                  {/* Desde lg el valor reserva 2 líneas (leading-tight = 1.25 → 2.5em) y las etiquetas quedan a la misma altura. */}
+                  <span className="flex items-center justify-center font-display text-[clamp(1.9rem,4vw,2.6rem)] leading-tight text-sunbiotan-900 mb-2 lg:min-h-[2.5em]">{f.value}</span>
                   <span className="block text-xs tracking-[0.1em] uppercase font-medium leading-snug text-sunbiotan-800">{f.label}</span>
                 </Reveal>
               ))}

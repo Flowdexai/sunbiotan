@@ -5,7 +5,7 @@ import { m } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-const VP = { once: false, amount: 0.3 };
+const VP = { once: true, amount: 0.3 };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 12, filter: 'blur(3px)' },

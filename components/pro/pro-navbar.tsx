@@ -33,7 +33,7 @@ export function ProNavbar({ whatsappUrl }: { whatsappUrl: string }) {
       target="_blank"
       rel="noopener noreferrer"
       onClick={() => { trackWhatsappInterest(); setOpen(false); }}
-      className={className}
+      className={`cursor-pointer ${className}`}
     >
       <FontAwesomeIcon icon={faWhatsapp} style={{ width: '15px', height: '15px' }} aria-hidden="true" />
       {t('navCta')}
@@ -62,16 +62,16 @@ export function ProNavbar({ whatsappUrl }: { whatsappUrl: string }) {
             </div>
 
             <div className="hidden lg:flex items-center gap-3">
-              <LocaleSwitcher />
+              <div className="flex [&_button]:cursor-pointer"><LocaleSwitcher /></div>
               {cta('inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#e8cf9c] to-sunbiotan-400 hover:from-[#f0dcae] hover:to-[#dcc395] text-sunbiotan-950 text-[11px] tracking-[0.16em] uppercase font-bold rounded-full transition-all duration-300 hover:scale-105')}
             </div>
 
             <div className="lg:hidden flex items-center gap-3">
-              <LocaleSwitcher variant="compact" />
+              <div className="flex [&_button]:cursor-pointer"><LocaleSwitcher variant="compact" /></div>
               <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
-                className="text-sunbiotan-50 hover:text-sunbiotan-300 transition-colors p-1"
+                className="cursor-pointer text-sunbiotan-50 hover:text-sunbiotan-300 transition-colors p-1"
                 aria-label={t('navMenu')}
                 aria-expanded={open}
                 aria-controls="pro-mobile-menu"

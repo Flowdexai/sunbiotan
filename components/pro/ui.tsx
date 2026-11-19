@@ -30,6 +30,16 @@ export const BG = {
   sandDeep: 'bg-sunbiotan-200',
 } as const;
 
+/**
+ * Hover de tarjeta compartido: borde dorado, elevación de 2 px y sombra suave en 200 ms.
+ * En Tailwind v4 `hover:` ya va envuelto en @media (hover: hover), así que en táctil no
+ * se aplica. Con prefers-reduced-motion no hay movimiento ni transición (solo borde y sombra).
+ * El borde dorado (500) funciona igual sobre tarjeta blanca o sobre fondos oscuros, y no
+ * cambia ningún color de texto.
+ */
+export const CARD_HOVER =
+  'transition-[translate,border-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-sunbiotan-500 hover:shadow-lg hover:shadow-sunbiotan-950/10 motion-reduce:transition-none motion-reduce:hover:translate-y-0';
+
 export type Tone = 'light' | 'dark';
 
 export function Reveal({

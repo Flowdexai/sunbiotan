@@ -11,7 +11,7 @@ import { Link } from '@/i18n/navigation';
 import { SectionEyebrow } from '@/components/ui/section-eyebrow';
 import { PRO_SESSION_MINUTES, type ProFlow } from '@/lib/pro/config';
 import { ProForm } from './pro-form';
-import { BG, EASE, PRIMARY_BUTTON, Reveal, SectionHeader } from './ui';
+import { BG, CARD_HOVER, EASE, PRIMARY_BUTTON, Reveal, SectionHeader } from './ui';
 
 const WHY_ICONS = [GraduationCap, Sparkles, Package, MapPin, Leaf, Handshake] as const;
 
@@ -92,7 +92,7 @@ export function ProLanding({ flow }: { flow: ProFlow }) {
             {why.map((item, i) => {
               const Icon = WHY_ICONS[i] ?? Sparkles;
               return (
-                <Reveal as="li" key={item.title} delay={i * 0.05} className="h-full bg-white border border-sunbiotan-200 rounded-2xl p-6 md:p-7">
+                <Reveal as="li" key={item.title} delay={i * 0.05} className={`h-full bg-white border border-sunbiotan-200 rounded-2xl p-6 md:p-7 ${CARD_HOVER}`}>
                     <Icon className="h-6 w-6 text-sunbiotan-700 mb-4" strokeWidth={1.5} aria-hidden="true" />
                     <h3 className="font-display text-2xl text-sunbiotan-900 mb-2">{item.title}</h3>
                     <p className="text-sm leading-relaxed text-sunbiotan-800">{item.text}</p>
@@ -109,7 +109,7 @@ export function ProLanding({ flow }: { flow: ProFlow }) {
           <SectionHeader tone="dark" eyebrow={t('howEyebrow')} lead={t('howLead')} accent={t('howAccent')} />
           <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
             {steps.map((step, i) => (
-              <Reveal as="li" key={step.title} delay={i * 0.06} className="h-full border border-sunbiotan-700 rounded-2xl p-6">
+              <Reveal as="li" key={step.title} delay={i * 0.06} className={`h-full border border-sunbiotan-700 rounded-2xl p-6 ${CARD_HOVER}`}>
                   <span className="block font-display text-4xl text-sunbiotan-400 mb-3">{String(i + 1).padStart(2, '0')}</span>
                   <h3 className="font-display text-2xl text-sunbiotan-50 mb-2">{step.title}</h3>
                   <p className="text-sm leading-relaxed text-sunbiotan-200">{step.text}</p>

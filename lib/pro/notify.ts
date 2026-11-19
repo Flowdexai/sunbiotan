@@ -139,7 +139,7 @@ export async function notifyProLead(lead: ProLeadForNotify): Promise<NotifyResul
     `Tel: ${lead.phone}`,
     `Email: ${lead.email}`,
     lead.website_or_instagram ? `${linkLabel}: ${lead.website_or_instagram}` : null,
-    `Idioma: ${lead.locale.toUpperCase()} · Novidades: ${marketing}`,
+    `Idioma: ${lead.locale.toUpperCase()}`,
     returning ? `Acessos: ${lead.access_count}` : null,
   ].filter((l) => l !== null).join('\n');
 

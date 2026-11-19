@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { m, useScroll, useTransform } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
@@ -29,10 +29,6 @@ const STAT_KEYS = ['stat1', 'stat2', 'stat3', 'stat4'] as const;
 export function Hero() {
   const t = useTranslations('Hero');
   const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-
-  // Content parallax only — the overlay keeps a fixed opacity so it never lightens on scroll.
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
 
   const scrollToNext = () =>
     window.scrollTo({ top: heroRef.current?.offsetHeight ?? window.innerHeight, behavior: 'smooth' });
@@ -75,10 +71,12 @@ export function Hero() {
         }}
       />
 
-      <m.div
-        style={{ y: contentY }}
-        className="relative z-10 w-full container mx-auto px-6 text-center pt-20 pb-8 md:pt-32 md:pb-16"
-      >
+      {/*
+        Static content (no scroll parallax): the indicators stay inside the hero and the
+        FormulaStrip below never appears to cover them. md:pb-16 (64px) keeps the indicators
+        clear of the scroll chevron (bottom-5 + 20px icon = 40px) at any viewport height.
+      */}
+      <div className="relative z-10 w-full container mx-auto px-6 text-center pt-20 pb-8 md:pt-32 md:pb-16">
         <m.div variants={containerVariants} initial="hidden" animate="show">
           <m.div variants={itemVariants} className="mb-2">
             <p className="font-display font-light text-[clamp(2rem,3vw,2rem)] tracking-[0.55em] uppercase text-sunbiotan-200/90">
@@ -152,7 +150,7 @@ export function Hero() {
             ))}
           </m.div>
         </m.div>
-      </m.div>
+      </div>
 
       <m.button
         onClick={scrollToNext}

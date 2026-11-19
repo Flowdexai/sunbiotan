@@ -121,12 +121,17 @@ const nextConfig = {
   },
   async headers() {
     return [
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-        ],
-      },
+      // Solo en producción: ahí los chunks llevan hash de contenido. En `next dev` los
+      // nombres de chunk no cambian con el código y un "immutable" deja al navegador con
+      // JS/CSS viejos (Next también lo advierte para rutas /_next/ con Cache-Control propio).
+      ...(process.env.NODE_ENV === 'production'
+        ? [
+            {
+              source: '/_next/static/:path*',
+              headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+            },
+          ]
+        : []),
       {
         source: '/:path*',
         headers: SECURITY_HEADERS,
