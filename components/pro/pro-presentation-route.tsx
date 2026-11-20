@@ -7,7 +7,7 @@ import { redirect } from '@/i18n/navigation';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { normalizeLocale } from '@/lib/auth/links';
 import { whatsappHref } from '@/lib/contact';
-import { proBase, type ProFlow } from '@/lib/pro/config';
+import { proBase, proPresentationOpenWithoutSession, type ProFlow } from '@/lib/pro/config';
 import { PRO_COOKIE, readProSession, sessionFlow } from '@/lib/pro/session';
 import { ProPresentation } from './pro-presentation';
 
@@ -40,12 +40,22 @@ export async function ProPresentationRoute({ flow, locale }: { flow: ProFlow; lo
   // Sin acceso → al formulario del mismo flow, con la línea "?acesso=1".
   const back = (): never => redirect({ href: `${proBase(flow)}?acesso=1#formulario`, locale });
 
+  // Prueba abierta (PRO_PRESENTATION_OPEN_TEST, temporal): sin sesión válida se muestra la
+  // presentación SIN lead — sin saludo, sin registrar visita ni clics y con el mensaje
+  // genérico de WhatsApp del sitio (WhatsApp.message) en el idioma de la página.
+  // Con el interruptor en false, o en live, se redirige como siempre.
+  const anonymous = async () => {
+    const tSite = await getTranslations({ locale: normalizeLocale(locale), namespace: 'WhatsApp' });
+    return <ProPresentation firstName={null} whatsappUrl={whatsappHref(tSite('message'))} />;
+  };
+  const noAccess = () => (proPresentationOpenWithoutSession(flow) ? anonymous() : back());
+
   const store = await cookies();
   const session = readProSession(store.get(PRO_COOKIE)?.value);
-  if (!session || sessionFlow(session) !== flow) return back();
+  if (!session || sessionFlow(session) !== flow) return noAccess();
 
   const lead = await loadLead(session.leadId);
-  if (!lead || lead.is_test !== session.isTest) return back();
+  if (!lead || lead.is_test !== session.isTest) return noAccess();
 
   // Mensaje de WhatsApp en el idioma del lead (no necesariamente el de la página).
   const tLead = await getTranslations({ locale: normalizeLocale(lead.locale), namespace: 'ProPresentation' });

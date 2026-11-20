@@ -23,7 +23,8 @@ const LABEL_KEYS = {
   faq: 'navFaq',
 } as const;
 
-export function ProNavbar({ whatsappUrl }: { whatsappUrl: string }) {
+/** `tracked` = hay lead: el clic del CTA se registra. Sin lead (prueba abierta) no se llama a la API. */
+export function ProNavbar({ whatsappUrl, tracked = true }: { whatsappUrl: string; tracked?: boolean }) {
   const t = useTranslations('ProPresentation');
   const [open, setOpen] = useState(false);
 
@@ -32,7 +33,7 @@ export function ProNavbar({ whatsappUrl }: { whatsappUrl: string }) {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => { trackWhatsappInterest(); setOpen(false); }}
+      onClick={() => { if (tracked) trackWhatsappInterest(); setOpen(false); }}
       className={`cursor-pointer ${className}`}
     >
       <FontAwesomeIcon icon={faWhatsapp} style={{ width: '15px', height: '15px' }} aria-hidden="true" />

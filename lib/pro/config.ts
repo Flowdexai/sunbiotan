@@ -17,6 +17,20 @@ export function proSessionMinutes(flow: ProFlow): number {
   return flow === 'test' ? PRO_SESSION_MINUTES_TEST : PRO_SESSION_MINUTES;
 }
 
+/**
+ * Temporal, solo fase de prueba. Con true, /profissionais-test/apresentacao se abre sin cookie.
+ * Poner en false para volver a proteger. No afecta al flow live.
+ */
+export const PRO_PRESENTATION_OPEN_TEST = true;
+
+/**
+ * ¿Se muestra la presentación (sin lead) cuando NO hay sesión válida? Solo en 'test' y con
+ * el interruptor en true; en cualquier otro caso se redirige al formulario como siempre.
+ */
+export function proPresentationOpenWithoutSession(flow: ProFlow, openTest: boolean = PRO_PRESENTATION_OPEN_TEST): boolean {
+  return flow === 'test' && openTest;
+}
+
 /** Versión de los textos de consentimiento que se guarda con cada lead. Cambiarla al editar los textos. */
 export const PRO_CONSENT_VERSION = '2026-11-18';
 

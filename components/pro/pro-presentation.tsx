@@ -27,9 +27,12 @@ interface Figure { value: string; label: string }
 interface Faq { q: string; a: string }
 
 export interface ProPresentationProps {
-  /** Primer nombre del lead, para el saludo. */
-  firstName: string;
-  /** wa.me con el mensaje prearmado en el idioma del lead. */
+  /**
+   * Primer nombre del lead, para el saludo. `null` = sin lead (flujo de prueba abierto,
+   * PRO_PRESENTATION_OPEN_TEST): sin saludo y sin registrar visita ni clics.
+   */
+  firstName: string | null;
+  /** wa.me con el mensaje prearmado (del lead, o el genérico del sitio si no hay lead). */
   whatsappUrl: string;
 }
 
@@ -96,9 +99,9 @@ function HeroLines() {
 }
 
 /** CTA de WhatsApp rastreado: el href real funciona aunque falle el beacon. */
-function WhatsappCta({ href, label, className = '' }: { href: string; label: string; className?: string }) {
+function WhatsappCta({ href, label, className = '', tracked = true }: { href: string; label: string; className?: string; tracked?: boolean }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" onClick={trackWhatsappInterest} className={`${PRIMARY_BUTTON} cursor-pointer ${className}`}>
+    <a href={href} target="_blank" rel="noopener noreferrer" onClick={tracked ? trackWhatsappInterest : undefined} className={`${PRIMARY_BUTTON} cursor-pointer ${className}`}>
       <FontAwesomeIcon icon={faWhatsapp} style={{ width: '18px', height: '18px' }} aria-hidden="true" />
       <span>{label}</span>
       <ArrowRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" strokeWidth={2.25} />
@@ -279,16 +282,18 @@ export function ProPresentation({ firstName, whatsappUrl }: ProPresentationProps
   const faq = t.raw('claims.faq') as Faq[];
 
   // Registro de la visita (una vez por montaje; el servidor descarta repeticiones < 5 min).
+  // Sin lead (prueba abierta) no se registra nada: ni visita ni clics.
+  const tracked = firstName !== null;
   const visited = useRef(false);
   useEffect(() => {
-    if (visited.current) return;
+    if (!tracked || visited.current) return;
     visited.current = true;
     void fetch(PRO_VISIT_URL, { method: 'POST', credentials: 'same-origin', keepalive: true }).catch(() => {});
-  }, []);
+  }, [tracked]);
 
   return (
     <>
-      <ProNavbar whatsappUrl={whatsappUrl} />
+      <ProNavbar whatsappUrl={whatsappUrl} tracked={tracked} />
 
       <main>
         {/* 1. Hero — oscuro plano (sin imagen ni trama) + líneas decorativas finas */}
@@ -309,9 +314,11 @@ export function ProPresentation({ firstName, whatsappUrl }: ProPresentationProps
               className="flex flex-col items-center"
             >
               <SectionEyebrow tone="dark" className="mb-6 [&_p]:text-sunbiotan-100">{t('heroEyebrow')}</SectionEyebrow>
-              <p className="font-display text-[clamp(1.5rem,3.5vw,2.1rem)] leading-tight text-sunbiotan-300 mb-4">
-                {t('heroGreeting', { name: firstName })}
-              </p>
+              {firstName !== null && (
+                <p className="font-display text-[clamp(1.5rem,3.5vw,2.1rem)] leading-tight text-sunbiotan-300 mb-4">
+                  {t('heroGreeting', { name: firstName })}
+                </p>
+              )}
               <h1 className="max-w-4xl font-display font-light leading-[1.08] tracking-tight text-balance text-[clamp(2rem,4.8vw,3.9rem)] text-sunbiotan-50 mb-6 md:mb-8">
                 {t('heroLead')} <em className="italic text-sunbiotan-300">{t('heroAccent')}</em>
               </h1>
@@ -472,7 +479,7 @@ export function ProPresentation({ firstName, whatsappUrl }: ProPresentationProps
               intro={t('closingText')}
             />
             <Reveal className="flex flex-col items-center gap-6">
-              <WhatsappCta href={whatsappUrl} label={t('closingCta')} />
+              <WhatsappCta href={whatsappUrl} label={t('closingCta')} tracked={tracked} />
               <p className="flex items-center gap-2 text-sm text-sunbiotan-200">
                 <Phone className="h-4 w-4 text-sunbiotan-300" strokeWidth={1.75} aria-hidden="true" />
                 {t('closingPhone')}:{' '}
