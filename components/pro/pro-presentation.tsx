@@ -4,7 +4,7 @@
 // claro (tratamento, sistema, rentabilidade, FAQ), nunca dos contiguos iguales.
 // Los claims viven en messages → ProPresentation.claims (fuera de la estructura).
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import { m } from 'framer-motion';
 import { ArrowRight, Check, ChevronDown, Phone, Play, Truck, ShieldCheck, GraduationCap } from 'lucide-react';
@@ -110,6 +110,28 @@ function WhatsappCta({ href, label, className = '', tracked = true }: { href: st
 }
 
 /**
+ * Panel desplegable que SIEMPRE está en el HTML del servidor (lectores externos ven el
+ * texto completo aunque esté cerrado). Cerrado: grid-rows 0fr + overflow-hidden, sin
+ * display:none, `hidden` ni render condicional; `inert` + aria-hidden para que no reciba
+ * foco ni lo lea un lector de pantalla. El espaciado va dentro del hijo para que cerrado
+ * mida 0. Con prefers-reduced-motion abre/cierra sin transición.
+ */
+function Collapsible({ id, open, children }: { id: string; open: boolean; children: ReactNode }) {
+  return (
+    <div
+      id={id}
+      inert={!open}
+      aria-hidden={!open}
+      className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+        open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+      }`}
+    >
+      <div className="min-h-0 overflow-hidden">{children}</div>
+    </div>
+  );
+}
+
+/**
  * Tarjeta del tratamiento. Dos columnas: el número y una columna de contenido
  * (título, texto desplegable y toggle). El toggle comparte la sangría del título
  * por estructura y va empujado al fondo (mt-auto), así los "Ver mais" de una misma
@@ -135,9 +157,9 @@ function BenefitCard({ item, index, centered }: { item: Item; index: number; cen
       </span>
       <div className="flex-1 min-w-0 flex flex-col">
         <h3 className="font-display text-xl md:text-2xl leading-snug text-sunbiotan-900">{item.title}</h3>
-        <div id={panelId} hidden={!open} className="mt-3">
-          <p className="text-sm leading-relaxed text-sunbiotan-800">{item.text}</p>
-        </div>
+        <Collapsible id={panelId} open={open}>
+          <p className="pt-3 text-sm leading-relaxed text-sunbiotan-800">{item.text}</p>
+        </Collapsible>
         <div className="mt-auto pt-3 flex">
           {/* Área táctil de 44 px (py-3.5 + línea de 16 px) compensada con -my-3.5: no mueve el layout. */}
           <button
@@ -263,9 +285,9 @@ function FaqItem({ item }: { item: Faq }) {
           <ChevronDown className={`h-5 w-5 shrink-0 text-sunbiotan-800 transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
         </button>
       </h3>
-      <div id={panelId} hidden={!open} className="pb-5">
-        <p className="text-sm md:text-base leading-relaxed text-sunbiotan-900">{item.a}</p>
-      </div>
+      <Collapsible id={panelId} open={open}>
+        <p className="pb-5 text-sm md:text-base leading-relaxed text-sunbiotan-900">{item.a}</p>
+      </Collapsible>
     </li>
   );
 }
